@@ -1,8 +1,8 @@
 //
-//  MetaWearViewController.h
-//  MetaWearAPI
+//  RootTableViewController.h
+//  MetaWearApp
 //
-//  Created by Laura Kassovic on 6/3/14.
+//  Created by Laura Kassovic on 7/9/14.
 //  Copyright (c) 2014 Laura Kassovic. All rights reserved.
 //
 //  IMPORTANT: Your use of this Software is limited to those specific rights granted under the terms of a
@@ -27,16 +27,30 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MetaWearAPI.h"
-#import "MetaWearDelegate.h"
 
-@interface MetaWearViewController : UIViewController <UIActionSheetDelegate, UITableViewDataSource, UITableViewDelegate, MetaWearDelegate>
+@class MetaWearViewController;
+@class FinderViewController;
+@class LedViewController;
+@class AccelerometerViewController;
+@class StatusViewController;
+@class DfuViewController;
 
-@property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) NSIndexPath *lastindex;
+@interface RootTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource> {
+    
+    MetaWearViewController *metaWearViewController;
+	FinderViewController *finderViewController;
+    LedViewController *ledViewController;
+    AccelerometerViewController *accelerometerViewController;
+    StatusViewController *statusViewController;
+    DfuViewController *dfuViewController;
+}
 
-@property (strong, nonatomic) MetaWearAPI *metawearAPI;
-
-@property (strong, nonatomic) NSMutableArray *metawearFound;
+@property (nonatomic, retain) MetaWearViewController *metaWearViewController;
+@property (nonatomic, retain) FinderViewController *finderViewController;
+@property (nonatomic, retain) LedViewController *ledViewController;
+@property (nonatomic, retain) AccelerometerViewController *accelerometerViewController;
+@property (nonatomic, retain) StatusViewController *statusViewController;
+@property (nonatomic, retain) DfuViewController *dfuViewController;
 
 @end
+

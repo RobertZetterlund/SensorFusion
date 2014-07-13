@@ -47,9 +47,12 @@
 
 @property (nonatomic, strong) GraphView *unfiltered;
 @property (nonatomic, strong) GraphView *filtered;
+
 @property (nonatomic, strong) UIButton *pause;
+
 @property (nonatomic, strong) UISegmentedControl *filterC;
 @property (nonatomic, strong) UISegmentedControl *standardC;
+
 @property (nonatomic, strong) UILabel *filterLabel;
 
 - (void)pauseOrResume:(id)sender;

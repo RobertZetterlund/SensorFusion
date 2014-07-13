@@ -27,9 +27,9 @@
 //
 
 #import "LedViewController.h"
-#import "AppDelegate.h"
 #import "RSBrightnessSlider.h"
 #import "RSOpacitySlider.h"
+#import "AppDelegate.h"
 
 @implementation LedViewController
 
@@ -59,7 +59,7 @@
         titleText.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:titleText];
         
-        UILabel *colorText = [[UILabel alloc] initWithFrame:CGRectMake(40, 400, 50, 30)];
+        UILabel *colorText = [[UILabel alloc] initWithFrame:CGRectMake(40, 350, 50, 30)];
         colorText.text = @"Color";
         [self.view addSubview:colorText];
         
@@ -69,7 +69,7 @@
                           action:@selector(turnOn)
                 forControlEvents:UIControlEventTouchUpInside];
         [self.onButton setTitle:@"On" forState:UIControlStateNormal];
-        self.onButton.frame = CGRectMake(20.0, 450.0, 60.0, 40.0);
+        self.onButton.frame = CGRectMake(20.0, 400.0, 60.0, 40.0);
         [self.view addSubview:self.onButton];
         
         self.offButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -77,7 +77,7 @@
                            action:@selector(turnOff)
                  forControlEvents:UIControlEventTouchUpInside];
         [self.offButton setTitle:@"Off" forState:UIControlStateNormal];
-        self.offButton.frame = CGRectMake(80.0, 450.0, 60.0, 40.0);
+        self.offButton.frame = CGRectMake(80.0, 400.0, 60.0, 40.0);
         [self.view addSubview:self.offButton];
         
         self.pulseButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -85,7 +85,7 @@
                              action:@selector(turnPulse)
                    forControlEvents:UIControlEventTouchUpInside];
         [self.pulseButton setTitle:@"Pulse" forState:UIControlStateNormal];
-        self.pulseButton.frame = CGRectMake(140.0, 450.0, 60.0, 40.0);
+        self.pulseButton.frame = CGRectMake(140.0, 400.0, 60.0, 40.0);
         [self.view addSubview:self.pulseButton];
 
     }
@@ -117,11 +117,10 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
-    self.metawearAPI = [MetaWearAPI alloc];
+    [super viewDidAppear:animated];    
+    self.metawearAPI = [[MetaWearAPI alloc] init];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.metawearAPI = appDelegate.metawearAPI;
-    
     self.metawearAPI.delegate = self;
 }
 
@@ -192,20 +191,18 @@
 
 - (void)turnOn
 {
-    UIColor *ledColor = [[UIColor alloc] initWithRed:self.colorR green:self.colorG blue:self.colorB alpha:1.0];
-    [self.metawearAPI setColorLED:ledColor];
-    [self.metawearAPI toggleOnLEDwithOptions:0];
+    [self.metawearAPI setLEDModewithColorChannel:0x00 onIntensity:15 offIntensity:1 riseTime:1000 fallTime:1000 onTime:1000 period:4000 offset:0 repeatCount:3];
+    [self.metawearAPI toggleOnLEDwithOptions:1];
 }
 
 - (void)turnOff
 {
-    [self.metawearAPI toggleOffLED];
+    [self.metawearAPI toggleOffLEDwithOptions:1];
 }
 
 - (void)turnPulse
 {
-    UIColor *ledColor = [[UIColor alloc] initWithRed:self.colorR green:self.colorG blue:self.colorB alpha:1.0];
-    [self.metawearAPI setColorLED:ledColor];
+    [self.metawearAPI setLEDModewithColorChannel:0x01 onIntensity:15 offIntensity:1 riseTime:1000 fallTime:1000 onTime:1000 period:4000 offset:0 repeatCount:3];
     [self.metawearAPI toggleOnLEDwithOptions:1];
 }
 

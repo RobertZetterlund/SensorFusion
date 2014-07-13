@@ -31,7 +31,7 @@
 
 @implementation StatusViewController
 
-@synthesize metawearAPI, switchValue, tempValue, battValue;
+@synthesize metawearAPI, switchValue, tempValue, battValue, manuValue, serialValue;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,6 +39,9 @@
     if (self) {
         // Custom initialization
         self.title = @"Status";
+        
+        self.metawearAPI = [[MetaWearAPI alloc] init];
+        self.metawearAPI.delegate = self;
         
         self.view.backgroundColor = [UIColor whiteColor];
         
@@ -78,6 +81,32 @@
         self.battValue = [[UILabel alloc] initWithFrame:CGRectMake(200, 140.0, 280.0, 20.0)];
         self.battValue.text = @"";
         [self.view addSubview:self.battValue];
+        
+        //Device Info Manufacturer Name
+        UILabel *manuLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 160.0, 280.0, 20.0)];
+        manuLabel.text = @"Mnfr:";
+        [self.view addSubview:manuLabel];
+        
+        self.manuValue = [[UILabel alloc] initWithFrame:CGRectMake(200, 160.0, 280.0, 20.0)];
+        self.manuValue.text = @"";
+        [self.view addSubview:self.manuValue];
+        
+        UILabel *serialLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 180.0, 280.0, 20.0)];
+        serialLabel.text = @"Serial#:";
+        [self.view addSubview:serialLabel];
+        
+        self.serialValue = [[UILabel alloc] initWithFrame:CGRectMake(200, 180.0, 280.0, 20.0)];
+        self.serialValue.text = @"";
+        [self.view addSubview:self.serialValue];
+    
+        UILabel *firmLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 200.0, 280.0, 20.0)];
+        firmLabel.text = @"Firm Rev:";
+        [self.view addSubview:firmLabel];
+        
+        self.firmValue = [[UILabel alloc] initWithFrame:CGRectMake(200, 200.0, 280.0, 20.0)];
+        self.firmValue.text = @"";
+        [self.view addSubview:self.firmValue];
+    
     }
     return self;
 }
@@ -91,20 +120,22 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.metawearAPI = [MetaWearAPI alloc];
+    self.metawearAPI = [[MetaWearAPI alloc] init];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.metawearAPI = appDelegate.metawearAPI;
+    self.metawearAPI.delegate = self;
     
-    self.metawearAPI.delegate = self;[self.metawearAPI getSwitchStatewithOptions:1];
-    [self.metawearAPI enableTemperatureReadwithOptions:0];
+    [self.metawearAPI getSwitchStatewithOptions:1];
+    [self.metawearAPI enableTemperatureRead];
     [self.metawearAPI readBatteryLife];
+    [self.metawearAPI readDeviceInfo];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     if ((self.metawearAPI.d.p != NULL) && [self.metawearAPI.d.p isConnected]) {
-        [self.metawearAPI getSwitchStatewithOptions:0];
+        [self.metawearAPI getSwitchStatewithOptions:0x01];
     }
 }
 
@@ -135,14 +166,27 @@
     [self.switchValue setText:[NSString stringWithFormat:@"%d",data.state]];
 }
 
-- (void) retrieveTemperatureSuccess: (Temperature *)data
+- (void) retrieveTemperatureSuccess:(Temperature *)data
 {
-    [self.tempValue setText:[NSString stringWithFormat:@"%f C",data.temperature]];
+    [self.tempValue setText:[NSString stringWithFormat:@"%f C",data.temperatureValue]];
 }
 
 - (void) retrieveBatteryInfoSuccess: (Battery *)data
 {
     [self.battValue setText:[NSString stringWithFormat:@"%d %%",data.batteryLife]];
+}
+
+-(void) retrieveDeviceInfoSuccess:(DeviceInfo *)data
+{
+    if (data.serialNumber.length > 0) {
+        [self.serialValue setText:data.serialNumber];
+    }
+    if (data.manufacturerName.length > 0) {
+        [self.manuValue setText:data.manufacturerName];
+    }
+    if (data.firmwareRev.length > 0) {
+        [self.firmValue setText:data.firmwareRev];
+    }
 }
 
 @end

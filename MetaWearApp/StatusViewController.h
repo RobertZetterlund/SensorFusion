@@ -37,5 +37,9 @@
 @property (strong, nonatomic) UILabel *switchValue;
 @property (strong, nonatomic) UILabel *tempValue;
 @property (strong, nonatomic) UILabel *battValue;
+@property (strong, nonatomic) UILabel *deviceValue;
+@property (strong, nonatomic) UILabel *manuValue;
+@property (strong, nonatomic) UILabel *serialValue;
+@property (strong, nonatomic) UILabel *firmValue;
 
 @end

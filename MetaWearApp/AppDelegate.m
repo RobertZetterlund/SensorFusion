@@ -30,26 +30,19 @@
 
 @implementation AppDelegate
 
-@synthesize metawearAPI;
+@synthesize metawearAPI, rootViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    self.rootViewController = [[RootTableViewController alloc] init];
     
-    // instantiate the view controllers:
-    self.metawearViewController = [[MetaWearViewController alloc] initWithNibName:nil bundle:nil];
-    self.finderViewController= [[FinderViewController alloc] initWithNibName:nil bundle:nil];
-    self.ledViewController= [[LedViewController alloc] initWithNibName:nil bundle:nil];
-    self.accViewController = [[AccelerometerViewController alloc] initWithNibName:nil bundle:nil];
-    self.statusViewController = [[StatusViewController alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *rootNav = [[UINavigationController alloc] initWithRootViewController:self.rootViewController];
     
-    self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects: self.metawearViewController, self.finderViewController, self.ledViewController, self.accViewController, self.statusViewController, nil];
+    [self.window setRootViewController:rootNav];
     
-    self.window.rootViewController = self.tabBarController;
-    
-    // make the application window key and visible:
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 							

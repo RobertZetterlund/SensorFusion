@@ -57,6 +57,14 @@
 		ABE6CFA01940CD6600941696 /* BitmapRotationManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE6CF9A1940CD6600941696 /* BitmapRotationManipulator.m */; };
 		ABE6CFA11940CD6600941696 /* BitmapScaleManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE6CF9C1940CD6600941696 /* BitmapScaleManipulator.m */; };
 		ABE6CFA41940CD7200941696 /* UIImage+ANImageBitmapRep.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE6CFA31940CD7200941696 /* UIImage+ANImageBitmapRep.m */; };
+		ABFC0F14196E1FE800749E47 /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFC0F13196E1FE800749E47 /* RootTableViewController.m */; };
+		ABFC0F17196E369700749E47 /* DfuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFC0F16196E369700749E47 /* DfuViewController.m */; };
+		ABFC0F1D196E379500749E47 /* DFUController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFC0F1A196E379500749E47 /* DFUController.m */; };
+		ABFC0F1E196E379500749E47 /* DFUTargetAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFC0F1C196E379500749E47 /* DFUTargetAdapter.m */; };
+		ABFC0F23196E382200749E47 /* AppInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFC0F20196E382200749E47 /* AppInfoCell.m */; };
+		ABFC0F24196E382200749E47 /* DeviceInformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFC0F22196E382200749E47 /* DeviceInformationCell.m */; };
+		ABFC0F26196E414800749E47 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFC0F25196E414800749E47 /* CoreBluetooth.framework */; };
+		ABFC0F28196E4C4000749E47 /* emetawear.bin in Resources */ = {isa = PBXBuildFile; fileRef = ABFC0F27196E4C4000749E47 /* emetawear.bin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,12 +106,12 @@
 		AB8554041940C90A007AE023 /* StatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusViewController.m; sourceTree = "<group>"; };
 		AB8554051940C90A007AE023 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AB8554061940C90A007AE023 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		ABE6CEF31940CA1C00941696 /* BLEDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLEDevice.h; path = MetaWearApp/MetaWearAPI/BLEDevice.h; sourceTree = "<group>"; };
-		ABE6CEF41940CA1C00941696 /* BLEUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLEUtility.h; path = MetaWearApp/MetaWearAPI/BLEUtility.h; sourceTree = "<group>"; };
+		ABB0948C19630BBC00BDE8ED /* BLEDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLEDevice.h; path = MetaWearApp/MetaWearAPI/BLEDevice.h; sourceTree = "<group>"; };
+		ABB0948D19630BBC00BDE8ED /* BLEUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLEUtility.h; path = MetaWearApp/MetaWearAPI/BLEUtility.h; sourceTree = "<group>"; };
+		ABB0948E19630BBC00BDE8ED /* Sensors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sensors.h; path = MetaWearApp/MetaWearAPI/Sensors.h; sourceTree = "<group>"; };
 		ABE6CEF51940CA1C00941696 /* libMetaWearAPI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMetaWearAPI.a; path = MetaWearApp/MetaWearAPI/libMetaWearAPI.a; sourceTree = "<group>"; };
 		ABE6CEF61940CA1C00941696 /* MetaWearAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MetaWearAPI.h; path = MetaWearApp/MetaWearAPI/MetaWearAPI.h; sourceTree = "<group>"; };
 		ABE6CEF71940CA1C00941696 /* MetaWearDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MetaWearDelegate.h; path = MetaWearApp/MetaWearAPI/MetaWearDelegate.h; sourceTree = "<group>"; };
-		ABE6CEF81940CA1C00941696 /* Sensors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sensors.h; path = MetaWearApp/MetaWearAPI/Sensors.h; sourceTree = "<group>"; };
 		ABE6CEFE1940CAC000941696 /* close_range.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = close_range.png; path = Images/close_range.png; sourceTree = "<group>"; };
 		ABE6CEFF1940CAC000941696 /* close1_range.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = close1_range.png; path = Images/close1_range.png; sourceTree = "<group>"; };
 		ABE6CF001940CAC000941696 /* close2_range.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = close2_range.png; path = Images/close2_range.png; sourceTree = "<group>"; };
@@ -159,6 +167,20 @@
 		ABE6CF9C1940CD6600941696 /* BitmapScaleManipulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BitmapScaleManipulator.m; path = ColorPicker/BitmapScaleManipulator.m; sourceTree = "<group>"; };
 		ABE6CFA21940CD7200941696 /* UIImage+ANImageBitmapRep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ANImageBitmapRep.h"; path = "ColorPicker/UIImage+ANImageBitmapRep.h"; sourceTree = "<group>"; };
 		ABE6CFA31940CD7200941696 /* UIImage+ANImageBitmapRep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ANImageBitmapRep.m"; path = "ColorPicker/UIImage+ANImageBitmapRep.m"; sourceTree = "<group>"; };
+		ABFC0F12196E1FE800749E47 /* RootTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTableViewController.h; sourceTree = "<group>"; };
+		ABFC0F13196E1FE800749E47 /* RootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTableViewController.m; sourceTree = "<group>"; };
+		ABFC0F15196E369700749E47 /* DfuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DfuViewController.h; sourceTree = "<group>"; };
+		ABFC0F16196E369700749E47 /* DfuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DfuViewController.m; sourceTree = "<group>"; };
+		ABFC0F19196E379500749E47 /* DFUController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFUController.h; sourceTree = "<group>"; };
+		ABFC0F1A196E379500749E47 /* DFUController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFUController.m; sourceTree = "<group>"; };
+		ABFC0F1B196E379500749E47 /* DFUTargetAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFUTargetAdapter.h; sourceTree = "<group>"; };
+		ABFC0F1C196E379500749E47 /* DFUTargetAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFUTargetAdapter.m; sourceTree = "<group>"; };
+		ABFC0F1F196E382200749E47 /* AppInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInfoCell.h; sourceTree = "<group>"; };
+		ABFC0F20196E382200749E47 /* AppInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppInfoCell.m; sourceTree = "<group>"; };
+		ABFC0F21196E382200749E47 /* DeviceInformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInformationCell.h; sourceTree = "<group>"; };
+		ABFC0F22196E382200749E47 /* DeviceInformationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInformationCell.m; sourceTree = "<group>"; };
+		ABFC0F25196E414800749E47 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		ABFC0F27196E4C4000749E47 /* emetawear.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = emetawear.bin; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,9 +188,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABFC0F26196E414800749E47 /* CoreBluetooth.framework in Frameworks */,
+				ABE6CEF91940CA1C00941696 /* libMetaWearAPI.a in Frameworks */,
 				AB8553C61940C86B007AE023 /* CoreGraphics.framework in Frameworks */,
 				AB8553C81940C86B007AE023 /* UIKit.framework in Frameworks */,
-				ABE6CEF91940CA1C00941696 /* libMetaWearAPI.a in Frameworks */,
 				AB8553C41940C86B007AE023 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				AB85540D1940C926007AE023 /* MetaWearAPI */,
+				ABFC0F18196E378000749E47 /* DFU */,
 				AB8553C91940C86B007AE023 /* MetaWearApp */,
 				AB8553EB1940C86B007AE023 /* MetaWearAppTests */,
 				AB8553C21940C86B007AE023 /* Frameworks */,
@@ -209,6 +233,7 @@
 		AB8553C21940C86B007AE023 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ABFC0F25196E414800749E47 /* CoreBluetooth.framework */,
 				AB8553C31940C86B007AE023 /* Foundation.framework */,
 				AB8553C51940C86B007AE023 /* CoreGraphics.framework */,
 				AB8553C71940C86B007AE023 /* UIKit.framework */,
@@ -222,6 +247,8 @@
 			children = (
 				AB8554051940C90A007AE023 /* AppDelegate.h */,
 				AB8554061940C90A007AE023 /* AppDelegate.m */,
+				ABFC0F12196E1FE800749E47 /* RootTableViewController.h */,
+				ABFC0F13196E1FE800749E47 /* RootTableViewController.m */,
 				AB8553FB1940C90A007AE023 /* MetaWearViewController.h */,
 				AB8553FC1940C90A007AE023 /* MetaWearViewController.m */,
 				AB8553FD1940C90A007AE023 /* FinderViewController.h */,
@@ -232,6 +259,8 @@
 				AB8554021940C90A007AE023 /* AccelerometerViewController.m */,
 				AB8554031940C90A007AE023 /* StatusViewController.h */,
 				AB8554041940C90A007AE023 /* StatusViewController.m */,
+				ABFC0F15196E369700749E47 /* DfuViewController.h */,
+				ABFC0F16196E369700749E47 /* DfuViewController.m */,
 				AB8553D51940C86B007AE023 /* Main_iPhone.storyboard */,
 				AB8553D81940C86B007AE023 /* Main_iPad.storyboard */,
 				AB8553DE1940C86B007AE023 /* Images.xcassets */,
@@ -285,9 +314,9 @@
 		ABE6CEFA1940CA1F00941696 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
-				ABE6CEF31940CA1C00941696 /* BLEDevice.h */,
-				ABE6CEF41940CA1C00941696 /* BLEUtility.h */,
-				ABE6CEF81940CA1C00941696 /* Sensors.h */,
+				ABB0948C19630BBC00BDE8ED /* BLEDevice.h */,
+				ABB0948D19630BBC00BDE8ED /* BLEUtility.h */,
+				ABB0948E19630BBC00BDE8ED /* Sensors.h */,
 			);
 			name = Bluetooth;
 			sourceTree = "<group>";
@@ -417,6 +446,22 @@
 			name = Manipulators;
 			sourceTree = "<group>";
 		};
+		ABFC0F18196E378000749E47 /* DFU */ = {
+			isa = PBXGroup;
+			children = (
+				ABFC0F27196E4C4000749E47 /* emetawear.bin */,
+				ABFC0F1F196E382200749E47 /* AppInfoCell.h */,
+				ABFC0F20196E382200749E47 /* AppInfoCell.m */,
+				ABFC0F21196E382200749E47 /* DeviceInformationCell.h */,
+				ABFC0F22196E382200749E47 /* DeviceInformationCell.m */,
+				ABFC0F19196E379500749E47 /* DFUController.h */,
+				ABFC0F1A196E379500749E47 /* DFUController.m */,
+				ABFC0F1B196E379500749E47 /* DFUTargetAdapter.h */,
+				ABFC0F1C196E379500749E47 /* DFUTargetAdapter.m */,
+			);
+			name = DFU;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -501,6 +546,7 @@
 				AB8553D71940C86B007AE023 /* Main_iPhone.storyboard in Resources */,
 				ABE6CF051940CAC000941696 /* close2_range.png in Resources */,
 				AB8553CE1940C86B007AE023 /* InfoPlist.strings in Resources */,
+				ABFC0F28196E4C4000749E47 /* emetawear.bin in Resources */,
 				ABE6CF041940CAC000941696 /* close1_range.png in Resources */,
 				ABE6CF031940CAC000941696 /* close_range.png in Resources */,
 			);
@@ -525,6 +571,8 @@
 				ABE6CF531940CC2200941696 /* BGRSLoupeLayer.m in Sources */,
 				ABE6CF551940CC2200941696 /* RSColorPickerState.m in Sources */,
 				ABE6CF651940CC9400941696 /* BitmapContextRep.m in Sources */,
+				ABFC0F24196E382200749E47 /* DeviceInformationCell.m in Sources */,
+				ABFC0F1E196E379500749E47 /* DFUTargetAdapter.m in Sources */,
 				ABE6CF811940CD1B00941696 /* CGContextCreator.m in Sources */,
 				ABE6CF0D1940CB2200941696 /* AccelerometerFilter.m in Sources */,
 				ABE6CFA01940CD6600941696 /* BitmapRotationManipulator.m in Sources */,
@@ -532,11 +580,13 @@
 				ABE6CF571940CC2200941696 /* RSGenerateOperation.m in Sources */,
 				ABE6CFA41940CD7200941696 /* UIImage+ANImageBitmapRep.m in Sources */,
 				ABE6CF331940CB9300941696 /* TestColorViewController.m in Sources */,
+				ABFC0F1D196E379500749E47 /* DFUController.m in Sources */,
 				ABE6CF641940CC9400941696 /* ANImageBitmapRep.m in Sources */,
 				AB8554081940C90A007AE023 /* FinderViewController.m in Sources */,
 				ABE6CF0E1940CB2200941696 /* GraphView.m in Sources */,
 				ABE6CF581940CC2200941696 /* RSSelectionLayer.m in Sources */,
 				ABE6CFA11940CD6600941696 /* BitmapScaleManipulator.m in Sources */,
+				ABFC0F17196E369700749E47 /* DfuViewController.m in Sources */,
 				ABE6CF741940CCE900941696 /* NSImage+ANImageBitmapRep.m in Sources */,
 				AB8554091940C90A007AE023 /* LedViewController.m in Sources */,
 				ABE6CF541940CC2200941696 /* RSColorFunctions.m in Sources */,
@@ -547,11 +597,13 @@
 				ABE6CF9D1940CD6600941696 /* BitmapContextManipulator.m in Sources */,
 				ABE6CF751940CCE900941696 /* OSCommonImage.m in Sources */,
 				ABE6CF321940CB9300941696 /* RSOpacitySlider.m in Sources */,
+				ABFC0F23196E382200749E47 /* AppInfoCell.m in Sources */,
 				ABE6CF561940CC2200941696 /* RSColorPickerView.m in Sources */,
 				ABE6CF821940CD1B00941696 /* CGImageContainer.m in Sources */,
 				ABE6CF9F1940CD6600941696 /* BitmapDrawManipulator.m in Sources */,
 				ABE6CF2E1940CB9300941696 /* RSBrightnessSlider.m in Sources */,
 				AB85540C1940C90A007AE023 /* AppDelegate.m in Sources */,
+				ABFC0F14196E1FE800749E47 /* RootTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

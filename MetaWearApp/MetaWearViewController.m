@@ -45,6 +45,8 @@
         
         self.title = @"Connect";
         
+        self.metawearFound = [[NSMutableArray alloc] init];
+        
         self.view.backgroundColor = [UIColor whiteColor];
         
         CGRect navBarFrame = CGRectMake(0, 20, self.view.frame.size.width, 44.0);
@@ -55,9 +57,7 @@
         navItem.title = @"Connect";
         [navBar setBackgroundColor:[UIColor whiteColor]];
         
-        navItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Refresh" style:UIBarButtonItemStylePlain target:self action:@selector(refreshAction:)];
-        
-        navItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Disconnect" style:UIBarButtonItemStylePlain target:self action:@selector(disconnectAction:)];
+        navItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Disconnect" style:UIBarButtonItemStylePlain target:self action:@selector(disconnectRefreshAction)];
         
         [navBar pushNavigationItem:navItem animated:false];
         [self.view addSubview:navBar];
@@ -78,13 +78,15 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.metawearAPI startScan:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     self.metawearAPI.delegate = self;
+    
+    CBUUID *mw =[CBUUID UUIDWithString:@"326A9000-85CB-9195-D9DD-464CFBBAE75A"];
+    [self.metawearAPI startScan:mw];
 }
 
 - (void)didReceiveMemoryWarning
@@ -204,19 +206,14 @@
 
 #pragma  mark - User Action
 
-- (IBAction)refreshAction:(id)sender
+- (void)disconnectRefreshAction
 {
+    [self.metawearAPI disconnectDevice];
     [self.metawearAPI stopScan];
     [self.metawearFound removeAllObjects];
     [self.tableView reloadData];
-    [self.metawearAPI startScan:nil];
-}
-
-- (IBAction)disconnectAction:(id)sender
-{
-    [self.metawearAPI disconnectDevice];
-    //[self.metawearFound removeAllObjects];
-    [self.metawearAPI stopScan];
+    CBUUID *mw =[CBUUID UUIDWithString:@"326A9000-85CB-9195-D9DD-464CFBBAE75A"];
+    [self.metawearAPI startScan:mw];
 }
 
 #pragma  mark - MetaWear API Delegates
@@ -225,7 +222,7 @@
 {
     [self.metawearFound removeAllObjects];
     [self.metawearFound addObjectsFromArray:metawear];
-    if ([self.metawearFound count] > 4) {
+    if ([self.metawearFound count] > 5) {
         [self.metawearAPI stopScan];
     }
     [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];

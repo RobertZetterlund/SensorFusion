@@ -41,6 +41,9 @@
         // Custom initialization
         self.title = @"Finder";
         
+        self.metawearAPI = [[MetaWearAPI alloc] init];
+        self.metawearAPI.delegate = self;
+        
         self.view.backgroundColor = [UIColor whiteColor];
         
         CGRect navBarFrame = CGRectMake(0, 20, self.view.frame.size.width, 44.0);
@@ -100,12 +103,10 @@
     [super viewDidAppear:animated];
     
 	// Do any additional setup after loading the view.
-    
-    self.metawearAPI = [MetaWearAPI alloc];
+    self.metawearAPI = [[MetaWearAPI alloc] init];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.metawearAPI = appDelegate.metawearAPI;
-    
-    self.metawearAPI.delegate = self;
+    self.metawearAPI.delegate = self;;
     
     if ((self.metawearAPI.d.p != NULL) && [self.metawearAPI.d.p isConnected]) {
         [self.reminder setText:@"Searching for MetaWear"];

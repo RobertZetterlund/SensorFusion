@@ -216,5 +216,31 @@
  */
 - (void) retrieveDeviceInfoSuccess: (DeviceInfo *)data;
 
+/**
+ Callback anytime Neopixel info request fails
+ @param NSError error type
+ @returns none
+ */
+- (void) retrieveNeopixelValueFailed: (NSError *)error;
+/**
+ Callback anytime Neopixel info is requested
+ @param Neopixel data
+ @returns none
+ */
+- (void) retrieveNeopixelValueSuccess: (Neopixel *)data;
+
+/**
+ Callback anytime Beacon info request fails
+ @param NSError error type
+ @returns none
+ */
+- (void) retrieveBeaconValueFailed: (NSError *)error;
+/**
+ Callback anytime Beacon info is requested
+ @param Beacon data
+ @returns none
+ */
+- (void) retrieveBeaconValueSuccess: (Beacon *)data;
+
 @end
 

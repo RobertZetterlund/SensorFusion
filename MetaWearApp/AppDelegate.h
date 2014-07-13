@@ -29,11 +29,7 @@
 #import <UIKit/UIKit.h>
 #import "MetaWearAPI.h"
 #import "MetaWearDelegate.h"
-#import "MetaWearViewController.h"
-#import "FinderViewController.h"
-#import "LedViewController.h"
-#import "AccelerometerViewController.h"
-#import "StatusViewController.h"
+#import "RootTableViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 {
@@ -41,13 +37,8 @@
 }
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) UITabBarController *tabBarController;
 
-@property (strong, nonatomic) MetaWearViewController *metawearViewController;
-@property (strong, nonatomic) FinderViewController *finderViewController;
-@property (strong, nonatomic) LedViewController *ledViewController;
-@property (strong, nonatomic) AccelerometerViewController *accViewController;
-@property (strong, nonatomic) StatusViewController *statusViewController;
+@property (strong, nonatomic) RootTableViewController *rootViewController;
 
 @property (strong, nonatomic) MetaWearAPI *metawearAPI;
 

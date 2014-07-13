@@ -30,7 +30,7 @@
 
 #define MW_BASE_LONG_UUID @"326A0000-85CB-9195-D9DD-464CFBBAE75A"
 
-/// Class for BLEUtility functions
+/// Class for BLEUtility Functions
 @interface BLEUtility : NSObject
 
 /**
