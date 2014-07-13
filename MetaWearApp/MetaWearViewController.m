@@ -49,7 +49,7 @@
         
         self.view.backgroundColor = [UIColor whiteColor];
         
-        CGRect navBarFrame = CGRectMake(0, 20, self.view.frame.size.width, 44.0);
+        /*CGRect navBarFrame = CGRectMake(0, 20, self.view.frame.size.width, 44.0);
         UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:navBarFrame];
         navBar.backgroundColor = [UIColor whiteColor];
         navBar.barTintColor = [UIColor whiteColor];
@@ -57,12 +57,10 @@
         navItem.title = @"Connect";
         [navBar setBackgroundColor:[UIColor whiteColor]];
         
-        navItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Disconnect" style:UIBarButtonItemStylePlain target:self action:@selector(disconnectRefreshAction)];
-        
         [navBar pushNavigationItem:navItem animated:false];
-        [self.view addSubview:navBar];
+        [self.view addSubview:navBar];*/
         
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(15, 70, self.view.frame.size.width-30, self.view.frame.size.height-154) style:UITableViewStylePlain];
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(15, 0, self.view.frame.size.width-30, self.view.frame.size.height-154) style:UITableViewStylePlain];
         self.tableView.layer.borderColor = [UIColor clearColor].CGColor;
         self.tableView.layer.backgroundColor = [UIColor clearColor].CGColor;
         self.tableView.layer.borderWidth = 2.0;
@@ -78,6 +76,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Disconnect" style:UIBarButtonItemStylePlain target:self action:@selector(disconnectRefreshAction)];
 }
 
 - (void)viewDidAppear:(BOOL)animated
