@@ -106,6 +106,12 @@
         self.firmValue = [[UILabel alloc] initWithFrame:CGRectMake(200, 200.0, 280.0, 20.0)];
         self.firmValue.text = @"";
         [self.view addSubview:self.firmValue];
+        
+        UIButton *hapticonButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        hapticonButton.frame = CGRectMake(20, 240.0, 50.0, 20.0);
+        [hapticonButton addTarget:self action:@selector(turnOn) forControlEvents:UIControlEventTouchUpInside];
+        [hapticonButton setTitle:@"Toggle Haptic Pin" forState:UIControlStateNormal];
+        [self.view addSubview:hapticonButton];
     
     }
     return self;
@@ -143,6 +149,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)turnOn
+{
+    [self.metawearAPI toggleOnHapticwithDutyCycle:254 pulseWidth:1000];
 }
 
 #pragma  mark - MetaWear API Delegates
