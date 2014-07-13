@@ -746,6 +746,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/MetaWearApp/MetaWearAPI",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

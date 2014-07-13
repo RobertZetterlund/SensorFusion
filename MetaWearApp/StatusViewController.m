@@ -108,10 +108,22 @@
         [self.view addSubview:self.firmValue];
         
         UIButton *hapticonButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        hapticonButton.frame = CGRectMake(20, 240.0, 50.0, 20.0);
-        [hapticonButton addTarget:self action:@selector(turnOn) forControlEvents:UIControlEventTouchUpInside];
+        hapticonButton.frame = CGRectMake(20, 240.0, 150.0, 20.0);
+        [hapticonButton addTarget:self action:@selector(turnOnHaptic) forControlEvents:UIControlEventTouchUpInside];
         [hapticonButton setTitle:@"Toggle Haptic Pin" forState:UIControlStateNormal];
         [self.view addSubview:hapticonButton];
+        
+        UIButton *buzzerButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        buzzerButton.frame = CGRectMake(20, 280.0, 150.0, 20.0);
+        [buzzerButton addTarget:self action:@selector(turnOnBuzzer) forControlEvents:UIControlEventTouchUpInside];
+        [buzzerButton setTitle:@"Toggle Buzzer Pin" forState:UIControlStateNormal];
+        [self.view addSubview:buzzerButton];
+        
+        UIButton *resetButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        resetButton.frame = CGRectMake(20, 320.0, 150.0, 20.0);
+        [resetButton addTarget:self action:@selector(resetDevice) forControlEvents:UIControlEventTouchUpInside];
+        [resetButton setTitle:@"Reset Device" forState:UIControlStateNormal];
+        [self.view addSubview:resetButton];
     
     }
     return self;
@@ -151,9 +163,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)turnOn
+- (void)turnOnHaptic
 {
     [self.metawearAPI toggleOnHapticwithDutyCycle:254 pulseWidth:1000];
+}
+
+- (void)turnOnBuzzer
+{
+    [self.metawearAPI toggleOnBuzzerwithPulseWidth:1000];
+}
+
+- (void)resetDevice
+{
+    [self.metawearAPI resetDevice];
 }
 
 #pragma  mark - MetaWear API Delegates

@@ -55,6 +55,8 @@
 @property (strong,nonatomic) Neopixel *neopixel; /**< Neopixel class */
 @property (strong,nonatomic) Beacon *beacon; /**< Beacon class */
 
+@property (nonatomic) int count;
+
 ///// Scanning MetaWear API calls /////
 
 /** 
