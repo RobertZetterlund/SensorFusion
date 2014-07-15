@@ -85,7 +85,7 @@
     self.metawearAPI.delegate = self;
     
     CBUUID *mw =[CBUUID UUIDWithString:@"326A9000-85CB-9195-D9DD-464CFBBAE75A"];
-    [self.metawearAPI startScan:mw];
+    [self.metawearAPI beginScan:mw];
 }
 
 - (void)didReceiveMemoryWarning
@@ -212,7 +212,7 @@
     [self.metawearFound removeAllObjects];
     [self.tableView reloadData];
     CBUUID *mw =[CBUUID UUIDWithString:@"326A9000-85CB-9195-D9DD-464CFBBAE75A"];
-    [self.metawearAPI startScan:mw];
+    [self.metawearAPI beginScan:mw];
 }
 
 #pragma  mark - MetaWear API Delegates

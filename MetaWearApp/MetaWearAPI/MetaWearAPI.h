@@ -60,11 +60,11 @@
 ///// Scanning MetaWear API calls /////
 
 /** 
- Start Scanning for MetaWear devices. This will trigger the MetaWear delegate callback devicesFound()
+ Begin Scanning for MetaWear devices. This will trigger the MetaWear delegate callback devicesFound()
  @param CBUUID scanUUID, UUID of the device, can be nil (16 bytes or 1 byte)
  @returns none
  */
-- (void)startScan:(CBUUID *)scanUUID;
+- (void)beginScan:(CBUUID *)scanUUID;
 
 /**
  Stop Scanning for MetaWear devices
@@ -99,7 +99,7 @@
 
 /**
  Get the current state of the switch/button. This will trigger the MetaWear delegate callback retrieveSwitchValue()
- @param int mode, mode to set notification state (0: stop notify, 1: start notify, else: read) (1 byte)
+ @param int mode, mode to set notification state (0: stop notify, 1: start notify, 2/else: read once) (1 byte)
  @returns none
  */
 - (void)getSwitchStatewithOptions:(int)mode;
@@ -160,7 +160,7 @@
 
 /**
  Turn on the accelerometer. This will trigger the MetaWear delegate callback retrieveAccelerometerData()
- @param int mode, mode to set notification state (1: notify, nil/0/else: read) (1 byte)
+ @param int mode, mode to set notification state (0: notify, 1/else: read once) (1 byte)
  @returns none
  */
 - (void)enableXYZMotionwithOptions:(int)mode;
@@ -175,7 +175,7 @@
 ///// Temperature API calls /////
 
 /**
- Get the temperature. This will trigger the MetaWear delegate callback retrieveTemperature()
+ Read the temperature. This will trigger the MetaWear delegate callback retrieveTemperature()
  @returns none
  */
 - (void)enableTemperatureRead;
