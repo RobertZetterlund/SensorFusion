@@ -165,7 +165,7 @@
 /// Class for Haptic Service
 @interface Haptic : NSObject
 
-@property (nonatomic) int enable; /**< iBeacon mode enable; 0: Disable, 1: Enable */
+@property (nonatomic) int enable; /**< haptic driver enable; 0: Disable, 1: Enable */
 @property (nonatomic) int dutyCycle; /**< duty cycle; 0-248 */
 @property (nonatomic) int pulseWidth; /**< pulse width in ms; little endian */
 -(int) calcEnable:(NSData *)data;
@@ -177,7 +177,7 @@
 /// Class for Buzzer Service
 @interface Buzzer : NSObject
 
-@property (nonatomic) int enable; /**< iBeacon mode enable; 0: Disable, 1: Enable */
+@property (nonatomic) int enable; /**< buzzer driver enable; 0: Disable, 1: Enable */
 -(int) calcEnable:(NSData *)data;
 
 

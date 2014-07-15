@@ -37,6 +37,8 @@
     // Override point for customization after application launch.
     self.rootViewController = [[RootTableViewController alloc] init];
     
+    self.metawearAPI = [[MetaWearAPI alloc] init];
+    
     UINavigationController *rootNav = [[UINavigationController alloc] initWithRootViewController:self.rootViewController];
     
     [self.window setRootViewController:rootNav];

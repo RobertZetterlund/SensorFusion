@@ -60,7 +60,7 @@
         self.unfiltered = [[GraphView alloc] initWithFrame:CGRectMake(0, 100.0, 320.0, 112.0)];
         [self.view addSubview:self.unfiltered];
         
-        self.lpfLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 225.0, 280.0, 20.0)];
+        /*self.lpfLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 225.0, 280.0, 20.0)];
         self.lpfLabel.text = @"Lowpass Filter";
         [self.view addSubview:self.lpfLabel];
         
@@ -83,7 +83,7 @@
         
         self.pause = [[UIButton alloc] initWithFrame:CGRectMake(20, 600.0, 280.0, 21.0)];
         [self.pause addTarget:self action:@selector(pauseOrResume:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:self.pause];
+        [self.view addSubview:self.pause];*/
     }
     return self;
 }
@@ -223,6 +223,13 @@
 -(void) disconnectionSuccessForDevice:(CBPeripheral *)device
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Disconnected" message:@"Disconnection Success" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alert show];
+}
+
+-(void) disconnectionFailed:(NSError *)error ForDevice:(CBPeripheral *)device
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Disconnected" message:@"Disconnection Failure" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     [alert show];
 }

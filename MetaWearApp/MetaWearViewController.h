@@ -39,4 +39,6 @@
 
 @property (strong, nonatomic) NSMutableArray *metawearFound;
 
+@property (strong, nonatomic) CBPeripheral *savedMetaWear;
+
 @end

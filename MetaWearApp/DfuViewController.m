@@ -40,7 +40,7 @@
         self.progressView.frame = CGRectMake(20, 44, 240, 2);
         [self.view addSubview:self.progressView];
         
-        NSURL *firmwareURL = [[NSBundle mainBundle] URLForResource:@"emetawear" withExtension:@"bin"];
+        NSURL *firmwareURL = [[NSBundle mainBundle] URLForResource:@"metawear" withExtension:@"bin"];
         [self.dfuController setFirmwareURL:firmwareURL];
     }
     return self;

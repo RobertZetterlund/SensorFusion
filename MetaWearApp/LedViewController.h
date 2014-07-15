@@ -51,9 +51,10 @@
 
 @property UILabel *rgbLabel;
 
-@property (nonatomic, retain) UIButton *onButton;
+@property (nonatomic, retain) UIButton *rButton;
+@property (nonatomic, retain) UIButton *gButton;
+@property (nonatomic, retain) UIButton *bButton;
 @property (nonatomic, retain) UIButton *offButton;
-@property (nonatomic, retain) UIButton *pulseButton;
 
 @property (strong, nonatomic) MetaWearAPI *metawearAPI;
 

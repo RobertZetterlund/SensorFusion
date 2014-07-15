@@ -108,19 +108,31 @@
         [self.view addSubview:self.firmValue];
         
         UIButton *hapticonButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        hapticonButton.frame = CGRectMake(20, 240.0, 150.0, 20.0);
+        hapticonButton.frame = CGRectMake(20, 240.0, 200.0, 20.0);
         [hapticonButton addTarget:self action:@selector(turnOnHaptic) forControlEvents:UIControlEventTouchUpInside];
         [hapticonButton setTitle:@"Toggle Haptic Pin" forState:UIControlStateNormal];
         [self.view addSubview:hapticonButton];
         
         UIButton *buzzerButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        buzzerButton.frame = CGRectMake(20, 280.0, 150.0, 20.0);
+        buzzerButton.frame = CGRectMake(20, 280.0, 200.0, 20.0);
         [buzzerButton addTarget:self action:@selector(turnOnBuzzer) forControlEvents:UIControlEventTouchUpInside];
         [buzzerButton setTitle:@"Toggle Buzzer Pin" forState:UIControlStateNormal];
         [self.view addSubview:buzzerButton];
         
+        UIButton *gpioOnButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        gpioOnButton.frame = CGRectMake(20, 320.0, 200.0, 20.0);
+        [gpioOnButton addTarget:self action:@selector(turnOnGPIO) forControlEvents:UIControlEventTouchUpInside];
+        [gpioOnButton setTitle:@"State 1 for GPIO pin 0" forState:UIControlStateNormal];
+        [self.view addSubview:gpioOnButton];
+        
+        UIButton *gpioOffButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        gpioOffButton.frame = CGRectMake(20, 360.0, 200.0, 20.0);
+        [gpioOffButton addTarget:self action:@selector(turnOnGPIO) forControlEvents:UIControlEventTouchUpInside];
+        [gpioOffButton setTitle:@"State 0 for GPIO pin 0" forState:UIControlStateNormal];
+        [self.view addSubview:gpioOffButton];
+        
         UIButton *resetButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        resetButton.frame = CGRectMake(20, 320.0, 150.0, 20.0);
+        resetButton.frame = CGRectMake(20, 400.0, 200.0, 20.0);
         [resetButton addTarget:self action:@selector(resetDevice) forControlEvents:UIControlEventTouchUpInside];
         [resetButton setTitle:@"Reset Device" forState:UIControlStateNormal];
         [self.view addSubview:resetButton];
@@ -173,26 +185,22 @@
     [self.metawearAPI toggleOnBuzzerwithPulseWidth:1000];
 }
 
+- (void)turnOnGPIO
+{
+    [self.metawearAPI setDigitalPin:0];
+}
+
+- (void)turnOffGPIO
+{
+    [self.metawearAPI clearDigitalPin:0];
+}
+
 - (void)resetDevice
 {
     [self.metawearAPI resetDevice];
 }
 
 #pragma  mark - MetaWear API Delegates
-
--(void) connectionFailed:(NSError *)error ForDevice:(CBPeripheral *)device
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Disconnected" message:@"Connection Failed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    
-    [alert show];
-}
-
--(void) disconnectionSuccessForDevice:(CBPeripheral *)device
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Disconnected" message:@"Disconnection Success" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    
-    [alert show];
-}
 
 -(void) retrieveSwitchValueSuccess: (Switch *)data
 {
@@ -220,6 +228,27 @@
     if (data.firmwareRev.length > 0) {
         [self.firmValue setText:data.firmwareRev];
     }
+}
+
+-(void) connectionFailed:(NSError *)error ForDevice:(CBPeripheral *)device
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Disconnected" message:@"Connection Failed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alert show];
+}
+
+-(void) disconnectionSuccessForDevice:(CBPeripheral *)device
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Disconnected" message:@"Disconnection Success" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alert show];
+}
+
+-(void) disconnectionFailed:(NSError *)error ForDevice:(CBPeripheral *)device
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Disconnected" message:@"Disconnection Failure" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alert show];
 }
 
 @end

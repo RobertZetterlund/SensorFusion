@@ -106,7 +106,7 @@
     self.metawearAPI = [[MetaWearAPI alloc] init];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.metawearAPI = appDelegate.metawearAPI;
-    self.metawearAPI.delegate = self;;
+    self.metawearAPI.delegate = self;
     
     if ((self.metawearAPI.d.p != NULL) && [self.metawearAPI.d.p isConnected]) {
         [self.reminder setText:@"Searching for MetaWear"];

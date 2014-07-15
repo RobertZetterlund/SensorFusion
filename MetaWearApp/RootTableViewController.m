@@ -33,15 +33,16 @@
 #import "AccelerometerViewController.h"
 #import "StatusViewController.h"
 #import "DfuViewController.h"
+#import "BeaconViewController.h"
 
 @implementation RootTableViewController
 
-@synthesize metaWearViewController, finderViewController, ledViewController, accelerometerViewController, statusViewController, dfuViewController;
+@synthesize metaWearViewController, finderViewController, ledViewController, accelerometerViewController, statusViewController, dfuViewController, beaconViewController;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.title = @"MetaWear Menu";
+	self.title = @"MetaWear Device Menu";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
 }
@@ -60,7 +61,7 @@
 - (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 6;
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -84,9 +85,11 @@
     } else if (indexPath.row == 3) {
         cell.textLabel.text = @"Accelerometer Mode";
     } else if (indexPath.row == 4) {
-        cell.textLabel.text = @"Status Mode";
-    } else {
-        cell.textLabel.text = @"DFU Mode";
+        cell.textLabel.text = @"General Mode";
+    } else if (indexPath.row == 5) {
+        cell.textLabel.text = @"iBeacon Mode";
+    } else if (indexPath.row == 6) {
+        cell.textLabel.text = @"DFU (OAD Updates) Mode";
     }
     return cell;
 }
@@ -117,6 +120,10 @@
         [[self navigationController] pushViewController:self.statusViewController animated:YES];
     }
     if (row == 5) {
+        self.beaconViewController = [[BeaconViewController alloc] initWithNibName:nil bundle:nil];
+        [[self navigationController] pushViewController:self.beaconViewController animated:YES];
+    }
+    if (row == 6) {
         self.dfuViewController = [[DfuViewController alloc] initWithNibName:nil bundle:nil];
         [[self navigationController] pushViewController:self.dfuViewController animated:YES];
     }

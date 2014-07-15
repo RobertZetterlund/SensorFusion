@@ -34,6 +34,7 @@
 @class AccelerometerViewController;
 @class StatusViewController;
 @class DfuViewController;
+@class BeaconViewController;
 
 @interface RootTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource> {
     
@@ -43,6 +44,7 @@
     AccelerometerViewController *accelerometerViewController;
     StatusViewController *statusViewController;
     DfuViewController *dfuViewController;
+    BeaconViewController *beaconViewController;
 }
 
 @property (nonatomic, retain) MetaWearViewController *metaWearViewController;
@@ -51,6 +53,7 @@
 @property (nonatomic, retain) AccelerometerViewController *accelerometerViewController;
 @property (nonatomic, retain) StatusViewController *statusViewController;
 @property (nonatomic, retain) DfuViewController *dfuViewController;
+@property (nonatomic, retain) BeaconViewController *beaconViewController;
 
 @end
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB6D5C291975140E0046AA25 /* metawear.bin in Resources */ = {isa = PBXBuildFile; fileRef = AB6D5C281975140E0046AA25 /* metawear.bin */; };
+		AB6D5C2C197514B70046AA25 /* BeaconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6D5C2B197514B70046AA25 /* BeaconViewController.m */; };
 		AB8553C41940C86B007AE023 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8553C31940C86B007AE023 /* Foundation.framework */; };
 		AB8553C61940C86B007AE023 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8553C51940C86B007AE023 /* CoreGraphics.framework */; };
 		AB8553C81940C86B007AE023 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8553C71940C86B007AE023 /* UIKit.framework */; };
@@ -64,7 +66,6 @@
 		ABFC0F14196E1FE800749E47 /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFC0F13196E1FE800749E47 /* RootTableViewController.m */; };
 		ABFC0F17196E369700749E47 /* DfuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFC0F16196E369700749E47 /* DfuViewController.m */; };
 		ABFC0F26196E414800749E47 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFC0F25196E414800749E47 /* CoreBluetooth.framework */; };
-		ABFC0F28196E4C4000749E47 /* emetawear.bin in Resources */ = {isa = PBXBuildFile; fileRef = ABFC0F27196E4C4000749E47 /* emetawear.bin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AB6D5C281975140E0046AA25 /* metawear.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = metawear.bin; sourceTree = "<group>"; };
+		AB6D5C2A197514B70046AA25 /* BeaconViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconViewController.h; sourceTree = "<group>"; };
+		AB6D5C2B197514B70046AA25 /* BeaconViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconViewController.m; sourceTree = "<group>"; };
 		AB8553C01940C86B007AE023 /* MetaWearApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetaWearApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB8553C31940C86B007AE023 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AB8553C51940C86B007AE023 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -180,7 +184,6 @@
 		ABFC0F15196E369700749E47 /* DfuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DfuViewController.h; sourceTree = "<group>"; };
 		ABFC0F16196E369700749E47 /* DfuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DfuViewController.m; sourceTree = "<group>"; };
 		ABFC0F25196E414800749E47 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		ABFC0F27196E4C4000749E47 /* emetawear.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = emetawear.bin; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +262,8 @@
 				AB8554021940C90A007AE023 /* AccelerometerViewController.m */,
 				AB8554031940C90A007AE023 /* StatusViewController.h */,
 				AB8554041940C90A007AE023 /* StatusViewController.m */,
+				AB6D5C2A197514B70046AA25 /* BeaconViewController.h */,
+				AB6D5C2B197514B70046AA25 /* BeaconViewController.m */,
 				ABFC0F15196E369700749E47 /* DfuViewController.h */,
 				ABFC0F16196E369700749E47 /* DfuViewController.m */,
 				AB8553D51940C86B007AE023 /* Main_iPhone.storyboard */,
@@ -457,7 +462,7 @@
 				ABD6B2D41974C08E00398A48 /* DFUController.m */,
 				ABD6B2D51974C08E00398A48 /* DFUTargetAdapter.h */,
 				ABD6B2D61974C08E00398A48 /* DFUTargetAdapter.m */,
-				ABFC0F27196E4C4000749E47 /* emetawear.bin */,
+				AB6D5C281975140E0046AA25 /* metawear.bin */,
 			);
 			name = DFU;
 			sourceTree = "<group>";
@@ -543,10 +548,10 @@
 				AB8553DF1940C86B007AE023 /* Images.xcassets in Resources */,
 				ABE6CF071940CAC000941696 /* close4_range.png in Resources */,
 				ABE6CF2F1940CB9300941696 /* RSColorPicker-Info.plist in Resources */,
+				AB6D5C291975140E0046AA25 /* metawear.bin in Resources */,
 				AB8553D71940C86B007AE023 /* Main_iPhone.storyboard in Resources */,
 				ABE6CF051940CAC000941696 /* close2_range.png in Resources */,
 				AB8553CE1940C86B007AE023 /* InfoPlist.strings in Resources */,
-				ABFC0F28196E4C4000749E47 /* emetawear.bin in Resources */,
 				ABE6CF041940CAC000941696 /* close1_range.png in Resources */,
 				ABE6CF031940CAC000941696 /* close_range.png in Resources */,
 			);
@@ -595,6 +600,7 @@
 				AB85540A1940C90A007AE023 /* AccelerometerViewController.m in Sources */,
 				AB85540B1940C90A007AE023 /* StatusViewController.m in Sources */,
 				AB8553D01940C86B007AE023 /* main.m in Sources */,
+				AB6D5C2C197514B70046AA25 /* BeaconViewController.m in Sources */,
 				ABE6CF9D1940CD6600941696 /* BitmapContextManipulator.m in Sources */,
 				ABE6CF751940CCE900941696 /* OSCommonImage.m in Sources */,
 				ABE6CF321940CB9300941696 /* RSOpacitySlider.m in Sources */,

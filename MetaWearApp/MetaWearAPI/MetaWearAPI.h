@@ -67,11 +67,11 @@
 - (void)beginScan:(CBUUID *)scanUUID;
 
 /**
- Stop Scanning for MetaWear devices
+ End Scanning for MetaWear devices
  @param none
  @returns none
  */
-- (void)stopScan;
+- (void)endScan;
 
 /**
  Connect to MetaWear board chosen. This will trigger the MetaWear delegate callback connectionForDevice()
@@ -176,6 +176,7 @@
 
 /**
  Read the temperature. This will trigger the MetaWear delegate callback retrieveTemperature()
+ @param none
  @returns none
  */
 - (void)enableTemperatureRead;

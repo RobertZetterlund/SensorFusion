@@ -32,35 +32,23 @@
 @implementation MetaWearViewController
 
 @synthesize tableView, lastindex; 
-@synthesize metawearFound, metawearAPI;
+@synthesize metawearFound, metawearAPI, savedMetaWear;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.metawearAPI = [[MetaWearAPI alloc] init];
-        self.metawearAPI.delegate = self;
         self.metawearFound = [[NSMutableArray alloc] init];
-        
+
         self.title = @"Connect";
-        
-        self.metawearFound = [[NSMutableArray alloc] init];
         
         self.view.backgroundColor = [UIColor whiteColor];
         
-        /*CGRect navBarFrame = CGRectMake(0, 20, self.view.frame.size.width, 44.0);
-        UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:navBarFrame];
-        navBar.backgroundColor = [UIColor whiteColor];
-        navBar.barTintColor = [UIColor whiteColor];
-        UINavigationItem *navItem = [UINavigationItem alloc];
-        navItem.title = @"Connect";
-        [navBar setBackgroundColor:[UIColor whiteColor]];
+        UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"Disconnect" style:UIBarButtonItemStylePlain target:self action:@selector(disconnectRefreshAction)];
+        self.navigationItem.rightBarButtonItem = anotherButton;
         
-        [navBar pushNavigationItem:navItem animated:false];
-        [self.view addSubview:navBar];*/
-        
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(15, 0, self.view.frame.size.width-30, self.view.frame.size.height-154) style:UITableViewStylePlain];
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(20, 0, self.view.frame.size.width-40, self.view.frame.size.height) style:UITableViewStyleGrouped];
         self.tableView.layer.borderColor = [UIColor clearColor].CGColor;
         self.tableView.layer.backgroundColor = [UIColor clearColor].CGColor;
         self.tableView.layer.borderWidth = 2.0;
@@ -76,16 +64,25 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Disconnect" style:UIBarButtonItemStylePlain target:self action:@selector(disconnectRefreshAction)];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.metawearAPI = [[MetaWearAPI alloc] init];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.metawearAPI = appDelegate.metawearAPI;
     self.metawearAPI.delegate = self;
     
     CBUUID *mw =[CBUUID UUIDWithString:@"326A9000-85CB-9195-D9DD-464CFBBAE75A"];
     [self.metawearAPI beginScan:mw];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.metawearAPI = self.metawearAPI;
 }
 
 - (void)didReceiveMemoryWarning
@@ -118,7 +115,7 @@
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = [UIColor blackColor];
     cell.detailTextLabel.textColor = [UIColor grayColor];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",CFUUIDCreateString(nil, p.UUID)];
+    cell.detailTextLabel.text = p.identifier.UUIDString;
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     return cell;
@@ -144,7 +141,6 @@
     [headerview addSubview:label];
     
     return headerview;
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -169,7 +165,6 @@
     footerview.backgroundColor = [UIColor clearColor];
     
     return footerview;
-    
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -181,7 +176,7 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.metawearAPI stopScan];
+    [self.metawearAPI endScan];
     
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
@@ -191,6 +186,7 @@
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         appDelegate.metawearAPI = self.metawearAPI;
         
+        self.savedMetaWear = p;
         [self.metawearAPI connectToDevice:p];
         
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -207,10 +203,14 @@
 
 - (void)disconnectRefreshAction
 {
+    [self.metawearAPI endScan];
+    
     [self.metawearAPI disconnectDevice];
-    [self.metawearAPI stopScan];
+    
     [self.metawearFound removeAllObjects];
+    
     [self.tableView reloadData];
+    
     CBUUID *mw =[CBUUID UUIDWithString:@"326A9000-85CB-9195-D9DD-464CFBBAE75A"];
     [self.metawearAPI beginScan:mw];
 }
@@ -222,21 +222,29 @@
     [self.metawearFound removeAllObjects];
     [self.metawearFound addObjectsFromArray:metawear];
     if ([self.metawearFound count] > 5) {
-        [self.metawearAPI stopScan];
+        [self.metawearAPI endScan];
     }
     [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
 -(void) connectionFailed:(NSError *)error ForDevice:(CBPeripheral *)device
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Disconnected" message:@"Connection Failed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    
-    [alert show];
+
+    [self.metawearAPI connectToDevice:self.savedMetaWear];
+    CBUUID *mw =[CBUUID UUIDWithString:@"326A9000-85CB-9195-D9DD-464CFBBAE75A"];
+    [self.metawearAPI beginScan:mw];
 }
 
 -(void) disconnectionSuccessForDevice:(CBPeripheral *)device
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Disconnected" message:@"Disconnection Success" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alert show];
+}
+
+-(void) disconnectionFailed:(NSError *)error ForDevice:(CBPeripheral *)device
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Disconnected" message:@"Disconnection Failure" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     [alert show];
 }

@@ -34,7 +34,7 @@
 @implementation LedViewController
 
 @synthesize metawearAPI, colorR, colorB, colorG;
-@synthesize onButton, offButton, pulseButton;
+@synthesize rButton, gButton, bButton, offButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,43 +50,50 @@
         navBar.backgroundColor = [UIColor whiteColor];
         navBar.barTintColor = [UIColor whiteColor];
         UINavigationItem *navItem = [UINavigationItem alloc];
-        navItem.title = @"Led";
+        navItem.title = @"LED";
         [navBar setBackgroundColor:[UIColor whiteColor]];
         [navBar pushNavigationItem:navItem animated:false];
         [self.view addSubview:navBar];
         
-        UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(60, 40, self.view.frame.size.width-120, 20)];
+        /*UILabel *titleText = [[UILabel alloc] initWithFrame:CGRectMake(60, 40, self.view.frame.size.width-120, 20)];
         titleText.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:titleText];
         
         UILabel *colorText = [[UILabel alloc] initWithFrame:CGRectMake(40, 350, 50, 30)];
         colorText.text = @"Color";
-        [self.view addSubview:colorText];
+        [self.view addSubview:colorText];*/
         
-        self.view.backgroundColor = [UIColor whiteColor];
-        self.onButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [self.onButton addTarget:self
-                          action:@selector(turnOn)
+        self.rButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [self.rButton addTarget:self
+                          action:@selector(turnOnRed)
                 forControlEvents:UIControlEventTouchUpInside];
-        [self.onButton setTitle:@"On" forState:UIControlStateNormal];
-        self.onButton.frame = CGRectMake(20.0, 400.0, 60.0, 40.0);
-        [self.view addSubview:self.onButton];
+        [self.rButton setTitle:@"LED On Green" forState:UIControlStateNormal];
+        self.rButton.frame = CGRectMake(20.0, 100.0, 100.0, 40.0);
+        [self.view addSubview:self.rButton];
+        
+        self.gButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [self.gButton addTarget:self
+                         action:@selector(turnOnGreen)
+               forControlEvents:UIControlEventTouchUpInside];
+        [self.gButton setTitle:@"LED On Red" forState:UIControlStateNormal];
+        self.gButton.frame = CGRectMake(20.0, 200.0, 100.0, 40.0);
+        [self.view addSubview:self.gButton];
+        
+        self.bButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [self.bButton addTarget:self
+                             action:@selector(turnOnBlue)
+                   forControlEvents:UIControlEventTouchUpInside];
+        [self.bButton setTitle:@"LED On Blue" forState:UIControlStateNormal];
+        self.bButton.frame = CGRectMake(20.0, 300.0, 100.0, 40.0);
+        [self.view addSubview:self.bButton];
         
         self.offButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [self.offButton addTarget:self
                            action:@selector(turnOff)
                  forControlEvents:UIControlEventTouchUpInside];
-        [self.offButton setTitle:@"Off" forState:UIControlStateNormal];
-        self.offButton.frame = CGRectMake(80.0, 400.0, 60.0, 40.0);
+        [self.offButton setTitle:@"LED Off" forState:UIControlStateNormal];
+        self.offButton.frame = CGRectMake(20.0, 400.0, 100.0, 40.0);
         [self.view addSubview:self.offButton];
-        
-        self.pulseButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [self.pulseButton addTarget:self
-                             action:@selector(turnPulse)
-                   forControlEvents:UIControlEventTouchUpInside];
-        [self.pulseButton setTitle:@"Pulse" forState:UIControlStateNormal];
-        self.pulseButton.frame = CGRectMake(140.0, 400.0, 60.0, 40.0);
-        [self.view addSubview:self.pulseButton];
 
     }
     return self;
@@ -98,21 +105,21 @@
     // Do any additional setup after loading the view.
     
     // View that displays color picker (needs to be square)
-    _colorPicker = [[RSColorPickerView alloc] initWithFrame:CGRectMake(20.0, 80.0, 280.0, 280.0)];
+    //_colorPicker = [[RSColorPickerView alloc] initWithFrame:CGRectMake(20.0, 80.0, 280.0, 280.0)];
     
     // Set the selection color - useful to present when the user had picked a color previously
-    [_colorPicker setSelectionColor:RSRandomColorOpaque(YES)];
+    //[_colorPicker setSelectionColor:RSRandomColorOpaque(YES)];
     
     // Set the delegate to receive events
-    [_colorPicker setDelegate:self];
+    //[_colorPicker setDelegate:self];
     
-    [self.view addSubview:_colorPicker];
+    //[self.view addSubview:_colorPicker];
     
     // View that shows selected color
-    UILabel *colorText = [[UILabel alloc] initWithFrame:CGRectMake(160, 20, 50, 30)];
-    colorText.text = @"Color";
-    _colorPatch = [[UIView alloc] initWithFrame:CGRectMake(160, 400.0, 150, 30.0)];
-    [self.view addSubview:_colorPatch];
+    //UILabel *colorText = [[UILabel alloc] initWithFrame:CGRectMake(160, 20, 50, 30)];
+    //colorText.text = @"Color";
+    //_colorPatch = [[UIView alloc] initWithFrame:CGRectMake(160, 400.0, 150, 30.0)];
+    //[self.view addSubview:_colorPatch];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -189,9 +196,21 @@
 
 #pragma  mark - MetaWear API Delegates
 
-- (void)turnOn
+- (void)turnOnRed
 {
     [self.metawearAPI setLEDModewithColorChannel:0x00 onIntensity:15 offIntensity:1 riseTime:1000 fallTime:1000 onTime:1000 period:4000 offset:0 repeatCount:3];
+    [self.metawearAPI toggleOnLEDwithOptions:1];
+}
+
+- (void)turnOnGreen
+{
+    [self.metawearAPI setLEDModewithColorChannel:0x01 onIntensity:15 offIntensity:1 riseTime:1000 fallTime:1000 onTime:1000 period:4000 offset:0 repeatCount:3];
+    [self.metawearAPI toggleOnLEDwithOptions:1];
+}
+
+- (void)turnOnBlue
+{
+    [self.metawearAPI setLEDModewithColorChannel:0x02 onIntensity:15 offIntensity:1 riseTime:1000 fallTime:1000 onTime:1000 period:4000 offset:0 repeatCount:3];
     [self.metawearAPI toggleOnLEDwithOptions:1];
 }
 
@@ -199,13 +218,6 @@
 {
     [self.metawearAPI toggleOffLEDwithOptions:1];
 }
-
-- (void)turnPulse
-{
-    [self.metawearAPI setLEDModewithColorChannel:0x01 onIntensity:15 offIntensity:1 riseTime:1000 fallTime:1000 onTime:1000 period:4000 offset:0 repeatCount:3];
-    [self.metawearAPI toggleOnLEDwithOptions:1];
-}
-
 
 -(void) connectionFailed:(NSError *)error ForDevice:(CBPeripheral *)device
 {
@@ -217,6 +229,13 @@
 -(void) disconnectionSuccessForDevice:(CBPeripheral *)device
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Disconnected" message:@"Disconnection Success" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alert show];
+}
+
+-(void) disconnectionFailed:(NSError *)error ForDevice:(CBPeripheral *)device
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Disconnected" message:@"Disconnection Failure" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     [alert show];
 }
