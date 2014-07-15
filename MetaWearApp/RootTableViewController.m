@@ -61,7 +61,7 @@
 - (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 7;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -88,9 +88,10 @@
         cell.textLabel.text = @"General Mode";
     } else if (indexPath.row == 5) {
         cell.textLabel.text = @"iBeacon Mode";
-    } else if (indexPath.row == 6) {
-        cell.textLabel.text = @"DFU (OAD Updates) Mode";
-    }
+    } //else if (indexPath.row == 6) {
+        //cell.textLabel.text = @"DFU (OAD Updates) Mode";
+    //}
+    
     return cell;
 }
 
@@ -124,8 +125,8 @@
         [[self navigationController] pushViewController:self.beaconViewController animated:YES];
     }
     if (row == 6) {
-        self.dfuViewController = [[DfuViewController alloc] initWithNibName:nil bundle:nil];
-        [[self navigationController] pushViewController:self.dfuViewController animated:YES];
+        //self.dfuViewController = [[DfuViewController alloc] initWithNibName:nil bundle:nil];
+        //[[self navigationController] pushViewController:self.dfuViewController animated:YES];
     }
 }
 

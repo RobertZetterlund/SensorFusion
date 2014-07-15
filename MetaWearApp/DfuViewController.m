@@ -24,17 +24,37 @@
         
         self.title = @"DFU";
         
+        CGRect navBarFrame = CGRectMake(0, 20, self.view.frame.size.width, 44.0);
+        UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:navBarFrame];
+        navBar.backgroundColor = [UIColor whiteColor];
+        navBar.barTintColor = [UIColor whiteColor];
+        UINavigationItem *navItem = [UINavigationItem alloc];
+        navItem.title = @"DFU";
+        [navBar setBackgroundColor:[UIColor whiteColor]];
+        [navBar pushNavigationItem:navItem animated:false];
+        [self.view addSubview:navBar];
+        
         self.dfuController = [[DFUController alloc] init];
         
         self.appNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 30, 170, 21)];
+        [self.view addSubview:self.appNameLabel];
+        
         self.appSizeLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 60, 151, 21)];
+        [self.view addSubview:self.appSizeLabel];
+        
         self.targetNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 30, 145, 21)];
+        [self.view addSubview:self.targetNameLabel];
+        
         self.targetStatusLabel = [[UILabel alloc]initWithFrame:CGRectMake(90, 60, 151, 21)];
+        [self.view addSubview:self.targetStatusLabel];
+        
         self.progressLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 54, 60, 21)];
+        [self.view addSubview:self.progressLabel];
         
         self.uploadButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 79, 120, 30)];
         self.uploadButton.titleLabel.text = @"Upload";
         [self.uploadButton addTarget:self action:@selector(uploadButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.uploadButton];
         
         self.progressView = [[UIProgressView alloc] init];
         self.progressView.frame = CGRectMake(20, 44, 240, 2);
