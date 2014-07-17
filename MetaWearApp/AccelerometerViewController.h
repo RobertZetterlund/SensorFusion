@@ -42,8 +42,8 @@
 	BOOL isPaused, useAdaptive;
 }
 
-@property (nonatomic, strong) UILabel *accLabel;
-@property (nonatomic, strong) UILabel *lpfLabel;
+@property (nonatomic, strong) UILabel *unfilteredLabel;
+@property (nonatomic, strong) UILabel *filteredLabel;
 
 @property (nonatomic, strong) GraphView *unfiltered;
 @property (nonatomic, strong) GraphView *filtered;
@@ -51,9 +51,7 @@
 @property (nonatomic, strong) UIButton *pause;
 
 @property (nonatomic, strong) UISegmentedControl *filterC;
-@property (nonatomic, strong) UISegmentedControl *standardC;
-
-@property (nonatomic, strong) UILabel *filterLabel;
+@property (nonatomic, strong) UISegmentedControl *filterTypeC;
 
 - (void)pauseOrResume:(id)sender;
 - (void)filterSelect:(id)sender;

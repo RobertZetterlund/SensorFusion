@@ -31,8 +31,8 @@
 
 @implementation AccelerometerViewController
 
-@synthesize unfiltered, filtered, pause, filterLabel;
-@synthesize accLabel, lpfLabel, metawearAPI, filterC, standardC;
+@synthesize unfiltered, filtered, pause;
+@synthesize unfilteredLabel, filteredLabel, metawearAPI, filterC, filterTypeC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,20 +53,23 @@
         [navBar pushNavigationItem:navItem animated:false];
         [self.view addSubview:navBar];
         
-        self.accLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 75.0, 280.0, 20.0)];
-        self.accLabel.text = @"Accelerometer Data";
-        [self.view addSubview:self.accLabel];
+        // Add graph for unfiltered data
+        self.unfilteredLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 75.0, 280.0, 20.0)];
+        self.unfilteredLabel.text = @"Unfiltered Data";
+        [self.view addSubview:self.unfilteredLabel];
         
         self.unfiltered = [[GraphView alloc] initWithFrame:CGRectMake(0, 100.0, 320.0, 112.0)];
         [self.view addSubview:self.unfiltered];
         
-        /*self.lpfLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 225.0, 280.0, 20.0)];
-        self.lpfLabel.text = @"Lowpass Filter";
-        [self.view addSubview:self.lpfLabel];
+        // Add graph for filtered data. Dynamic based on buttons.
+        self.filteredLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 225.0, 280.0, 20.0)];
+        self.filteredLabel.text = @"Adaptive Highpass Filter";
+        [self.view addSubview:self.filteredLabel];
         
         self.filtered = [[GraphView alloc] initWithFrame:CGRectMake(0, 250.0, 320.0, 112.0)];
         [self.view addSubview:self.filtered];
         
+        // Control for low or high pass filter
         NSArray *itemfArray = [NSArray arrayWithObjects: @"Low Pass", @"High Pass", nil];
         self.filterC = [[UISegmentedControl alloc] initWithItems:itemfArray];
         self.filterC.frame = CGRectMake(20, 380.0, 280.0, 30.0);
@@ -74,16 +77,20 @@
         [self.filterC addTarget:self action:@selector(filterSelect:) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview:self.filterC];
         
+        // Control for standard or adaptive filter
         NSArray *itemsArray = [NSArray arrayWithObjects: @"Standard", @"Adaptive", nil];
-        self.standardC = [[UISegmentedControl alloc] initWithItems:itemsArray];
-        self.standardC.frame = CGRectMake(20, 425.0, 280.0, 30.0);
-        self.standardC.selectedSegmentIndex = 1;
-        [self.standardC addTarget:self action:@selector(adaptiveSelect:) forControlEvents:UIControlEventValueChanged];
-        [self.view addSubview:self.standardC];
+        self.filterTypeC = [[UISegmentedControl alloc] initWithItems:itemsArray];
+        self.filterTypeC.frame = CGRectMake(20, 425.0, 280.0, 30.0);
+        self.filterTypeC.selectedSegmentIndex = 1;
+        [self.filterTypeC addTarget:self action:@selector(adaptiveSelect:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview:self.filterTypeC];
         
-        self.pause = [[UIButton alloc] initWithFrame:CGRectMake(20, 600.0, 280.0, 21.0)];
+        self.pause = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.pause.frame = CGRectMake(20, 475.0, 280, 30.0);
+        [self.pause setTitle:kLocalizedPause forState:UIControlStateNormal];
+        [self.pause setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [self.pause addTarget:self action:@selector(pauseOrResume:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:self.pause];*/
+        [self.view addSubview:self.pause];
     }
     return self;
 }
@@ -99,8 +106,8 @@
 	[super viewDidLoad];
     
 	isPaused = NO;
-	useAdaptive = NO;
-	[self changeFilter:[LowpassFilter class]];
+	useAdaptive = YES;
+	[self changeFilter:[HighpassFilter class]];
 	
 	[unfiltered setIsAccessibilityElement:YES];
 	[unfiltered setAccessibilityLabel:NSLocalizedString(@"unfilteredGraph", @"")];
@@ -142,7 +149,7 @@
 		// Set the adaptive flag
 		filter.adaptive = useAdaptive;
 		// And update the filterLabel with the new filter name.
-		filterLabel.text = filter.name;
+		filteredLabel.text = filter.name;
 	}
 }
 
@@ -152,11 +159,13 @@
 	{
 		// If we're paused, then resume and set the title to "Pause"
 		isPaused = NO;
+        [self.pause setTitle:kLocalizedPause forState:UIControlStateNormal];
 	}
 	else
 	{
 		// If we are not paused, then pause and set the title to "Resume"
 		isPaused = YES;
+        [self.pause setTitle:kLocalizedResume forState:UIControlStateNormal];
 	}
 	
 	// Inform accessibility clients that the pause/resume button has changed.
@@ -186,7 +195,7 @@
 	useAdaptive = [sender selectedSegmentIndex] == 1;
 	// and update our filter and filterLabel
 	filter.adaptive = useAdaptive;
-	filterLabel.text = filter.name;
+	filteredLabel.text = filter.name;
 	
 	// Inform accessibility clients that the adaptive selection has changed.
 	UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);

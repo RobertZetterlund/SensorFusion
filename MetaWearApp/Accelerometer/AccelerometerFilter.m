@@ -107,7 +107,7 @@ double Clamp(double v, double min, double max)
 	return self;
 }
 
-- (void)addAcceleration:(UIAcceleration *)accel
+- (void)addAcceleration:(Accelerometer *)accel
 {
 	double alpha = filterConstant;
 	
@@ -147,7 +147,7 @@ double Clamp(double v, double min, double max)
 	return self;
 }
 
-- (void)addAcceleration:(UIAcceleration *)accel
+- (void)addAcceleration:(Accelerometer *)accel
 {
 	double alpha = filterConstant;
 	
