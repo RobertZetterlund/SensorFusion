@@ -9,6 +9,16 @@
 /* Begin PBXBuildFile section */
 		AB6D5C291975140E0046AA25 /* metawear.bin in Resources */ = {isa = PBXBuildFile; fileRef = AB6D5C281975140E0046AA25 /* metawear.bin */; };
 		AB6D5C2C197514B70046AA25 /* BeaconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6D5C2B197514B70046AA25 /* BeaconViewController.m */; };
+		AB6D5C2F1976058B0046AA25 /* DFUBootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6D5C2E1976058B0046AA25 /* DFUBootViewController.m */; };
+		AB6D5C32197610050046AA25 /* 2-BARS.png in Resources */ = {isa = PBXBuildFile; fileRef = AB6D5C30197610050046AA25 /* 2-BARS.png */; };
+		AB6D5C33197610050046AA25 /* 2-BARS@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB6D5C31197610050046AA25 /* 2-BARS@2x.png */; };
+		AB6D5C361976100F0046AA25 /* 3-BARS.png in Resources */ = {isa = PBXBuildFile; fileRef = AB6D5C341976100F0046AA25 /* 3-BARS.png */; };
+		AB6D5C371976100F0046AA25 /* 3-BARS@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB6D5C351976100F0046AA25 /* 3-BARS@2x.png */; };
+		AB6D5C3A197610180046AA25 /* 1-BAR.png in Resources */ = {isa = PBXBuildFile; fileRef = AB6D5C38197610180046AA25 /* 1-BAR.png */; };
+		AB6D5C3B197610180046AA25 /* 1-BAR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB6D5C39197610180046AA25 /* 1-BAR@2x.png */; };
+		AB6D5C3E197610210046AA25 /* 0-BARS.png in Resources */ = {isa = PBXBuildFile; fileRef = AB6D5C3C197610210046AA25 /* 0-BARS.png */; };
+		AB6D5C3F197610210046AA25 /* 0-BARS@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB6D5C3D197610210046AA25 /* 0-BARS@2x.png */; };
+		AB6D5C42197611950046AA25 /* DFUUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6D5C41197611950046AA25 /* DFUUploadViewController.m */; };
 		AB8553C41940C86B007AE023 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8553C31940C86B007AE023 /* Foundation.framework */; };
 		AB8553C61940C86B007AE023 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8553C51940C86B007AE023 /* CoreGraphics.framework */; };
 		AB8553C81940C86B007AE023 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8553C71940C86B007AE023 /* UIKit.framework */; };
@@ -28,8 +38,6 @@
 		AB85540A1940C90A007AE023 /* AccelerometerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB8554021940C90A007AE023 /* AccelerometerViewController.m */; };
 		AB85540B1940C90A007AE023 /* StatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB8554041940C90A007AE023 /* StatusViewController.m */; };
 		AB85540C1940C90A007AE023 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB8554061940C90A007AE023 /* AppDelegate.m */; };
-		ABD6B2D71974C08E00398A48 /* AppInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD6B2D01974C08E00398A48 /* AppInfoCell.m */; };
-		ABD6B2D81974C08E00398A48 /* DeviceInformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD6B2D21974C08E00398A48 /* DeviceInformationCell.m */; };
 		ABD6B2D91974C08E00398A48 /* DFUController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD6B2D41974C08E00398A48 /* DFUController.m */; };
 		ABD6B2DA1974C08E00398A48 /* DFUTargetAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD6B2D61974C08E00398A48 /* DFUTargetAdapter.m */; };
 		ABE6CEF91940CA1C00941696 /* libMetaWearAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE6CEF51940CA1C00941696 /* libMetaWearAPI.a */; };
@@ -64,7 +72,6 @@
 		ABE6CFA11940CD6600941696 /* BitmapScaleManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE6CF9C1940CD6600941696 /* BitmapScaleManipulator.m */; };
 		ABE6CFA41940CD7200941696 /* UIImage+ANImageBitmapRep.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE6CFA31940CD7200941696 /* UIImage+ANImageBitmapRep.m */; };
 		ABFC0F14196E1FE800749E47 /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFC0F13196E1FE800749E47 /* RootTableViewController.m */; };
-		ABFC0F17196E369700749E47 /* DfuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFC0F16196E369700749E47 /* DfuViewController.m */; };
 		ABFC0F26196E414800749E47 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFC0F25196E414800749E47 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +89,18 @@
 		AB6D5C281975140E0046AA25 /* metawear.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = metawear.bin; sourceTree = "<group>"; };
 		AB6D5C2A197514B70046AA25 /* BeaconViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconViewController.h; sourceTree = "<group>"; };
 		AB6D5C2B197514B70046AA25 /* BeaconViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconViewController.m; sourceTree = "<group>"; };
+		AB6D5C2D1976058B0046AA25 /* DFUBootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFUBootViewController.h; sourceTree = "<group>"; };
+		AB6D5C2E1976058B0046AA25 /* DFUBootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFUBootViewController.m; sourceTree = "<group>"; };
+		AB6D5C30197610050046AA25 /* 2-BARS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-BARS.png"; sourceTree = "<group>"; };
+		AB6D5C31197610050046AA25 /* 2-BARS@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2-BARS@2x.png"; sourceTree = "<group>"; };
+		AB6D5C341976100F0046AA25 /* 3-BARS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-BARS.png"; sourceTree = "<group>"; };
+		AB6D5C351976100F0046AA25 /* 3-BARS@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3-BARS@2x.png"; sourceTree = "<group>"; };
+		AB6D5C38197610180046AA25 /* 1-BAR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-BAR.png"; sourceTree = "<group>"; };
+		AB6D5C39197610180046AA25 /* 1-BAR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-BAR@2x.png"; sourceTree = "<group>"; };
+		AB6D5C3C197610210046AA25 /* 0-BARS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0-BARS.png"; sourceTree = "<group>"; };
+		AB6D5C3D197610210046AA25 /* 0-BARS@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0-BARS@2x.png"; sourceTree = "<group>"; };
+		AB6D5C40197611950046AA25 /* DFUUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFUUploadViewController.h; sourceTree = "<group>"; };
+		AB6D5C41197611950046AA25 /* DFUUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFUUploadViewController.m; sourceTree = "<group>"; };
 		AB8553C01940C86B007AE023 /* MetaWearApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetaWearApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB8553C31940C86B007AE023 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AB8553C51940C86B007AE023 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -113,10 +132,6 @@
 		ABB0948C19630BBC00BDE8ED /* BLEDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLEDevice.h; path = MetaWearApp/MetaWearAPI/BLEDevice.h; sourceTree = "<group>"; };
 		ABB0948D19630BBC00BDE8ED /* BLEUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLEUtility.h; path = MetaWearApp/MetaWearAPI/BLEUtility.h; sourceTree = "<group>"; };
 		ABB0948E19630BBC00BDE8ED /* Sensors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sensors.h; path = MetaWearApp/MetaWearAPI/Sensors.h; sourceTree = "<group>"; };
-		ABD6B2CF1974C08E00398A48 /* AppInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppInfoCell.h; path = MetaWearApp/AppInfoCell.h; sourceTree = "<group>"; };
-		ABD6B2D01974C08E00398A48 /* AppInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppInfoCell.m; path = MetaWearApp/AppInfoCell.m; sourceTree = "<group>"; };
-		ABD6B2D11974C08E00398A48 /* DeviceInformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceInformationCell.h; path = MetaWearApp/DeviceInformationCell.h; sourceTree = "<group>"; };
-		ABD6B2D21974C08E00398A48 /* DeviceInformationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceInformationCell.m; path = MetaWearApp/DeviceInformationCell.m; sourceTree = "<group>"; };
 		ABD6B2D31974C08E00398A48 /* DFUController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DFUController.h; path = MetaWearApp/DFUController.h; sourceTree = "<group>"; };
 		ABD6B2D41974C08E00398A48 /* DFUController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DFUController.m; path = MetaWearApp/DFUController.m; sourceTree = "<group>"; };
 		ABD6B2D51974C08E00398A48 /* DFUTargetAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DFUTargetAdapter.h; path = MetaWearApp/DFUTargetAdapter.h; sourceTree = "<group>"; };
@@ -181,8 +196,6 @@
 		ABE6CFA31940CD7200941696 /* UIImage+ANImageBitmapRep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ANImageBitmapRep.m"; path = "ColorPicker/UIImage+ANImageBitmapRep.m"; sourceTree = "<group>"; };
 		ABFC0F12196E1FE800749E47 /* RootTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTableViewController.h; sourceTree = "<group>"; };
 		ABFC0F13196E1FE800749E47 /* RootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTableViewController.m; sourceTree = "<group>"; };
-		ABFC0F15196E369700749E47 /* DfuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DfuViewController.h; sourceTree = "<group>"; };
-		ABFC0F16196E369700749E47 /* DfuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DfuViewController.m; sourceTree = "<group>"; };
 		ABFC0F25196E414800749E47 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -264,8 +277,10 @@
 				AB8554041940C90A007AE023 /* StatusViewController.m */,
 				AB6D5C2A197514B70046AA25 /* BeaconViewController.h */,
 				AB6D5C2B197514B70046AA25 /* BeaconViewController.m */,
-				ABFC0F15196E369700749E47 /* DfuViewController.h */,
-				ABFC0F16196E369700749E47 /* DfuViewController.m */,
+				AB6D5C2D1976058B0046AA25 /* DFUBootViewController.h */,
+				AB6D5C2E1976058B0046AA25 /* DFUBootViewController.m */,
+				AB6D5C40197611950046AA25 /* DFUUploadViewController.h */,
+				AB6D5C41197611950046AA25 /* DFUUploadViewController.m */,
 				AB8553D51940C86B007AE023 /* Main_iPhone.storyboard */,
 				AB8553D81940C86B007AE023 /* Main_iPad.storyboard */,
 				AB8553DE1940C86B007AE023 /* Images.xcassets */,
@@ -454,10 +469,14 @@
 		ABFC0F18196E378000749E47 /* DFU */ = {
 			isa = PBXGroup;
 			children = (
-				ABD6B2CF1974C08E00398A48 /* AppInfoCell.h */,
-				ABD6B2D01974C08E00398A48 /* AppInfoCell.m */,
-				ABD6B2D11974C08E00398A48 /* DeviceInformationCell.h */,
-				ABD6B2D21974C08E00398A48 /* DeviceInformationCell.m */,
+				AB6D5C3C197610210046AA25 /* 0-BARS.png */,
+				AB6D5C3D197610210046AA25 /* 0-BARS@2x.png */,
+				AB6D5C38197610180046AA25 /* 1-BAR.png */,
+				AB6D5C39197610180046AA25 /* 1-BAR@2x.png */,
+				AB6D5C30197610050046AA25 /* 2-BARS.png */,
+				AB6D5C31197610050046AA25 /* 2-BARS@2x.png */,
+				AB6D5C341976100F0046AA25 /* 3-BARS.png */,
+				AB6D5C351976100F0046AA25 /* 3-BARS@2x.png */,
 				ABD6B2D31974C08E00398A48 /* DFUController.h */,
 				ABD6B2D41974C08E00398A48 /* DFUController.m */,
 				ABD6B2D51974C08E00398A48 /* DFUTargetAdapter.h */,
@@ -544,16 +563,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABE6CF061940CAC000941696 /* close3_range.png in Resources */,
+				AB6D5C361976100F0046AA25 /* 3-BARS.png in Resources */,
 				AB8553DA1940C86B007AE023 /* Main_iPad.storyboard in Resources */,
+				AB6D5C3B197610180046AA25 /* 1-BAR@2x.png in Resources */,
+				AB6D5C3E197610210046AA25 /* 0-BARS.png in Resources */,
 				AB8553DF1940C86B007AE023 /* Images.xcassets in Resources */,
 				ABE6CF071940CAC000941696 /* close4_range.png in Resources */,
+				AB6D5C3F197610210046AA25 /* 0-BARS@2x.png in Resources */,
 				ABE6CF2F1940CB9300941696 /* RSColorPicker-Info.plist in Resources */,
 				AB6D5C291975140E0046AA25 /* metawear.bin in Resources */,
 				AB8553D71940C86B007AE023 /* Main_iPhone.storyboard in Resources */,
+				AB6D5C33197610050046AA25 /* 2-BARS@2x.png in Resources */,
 				ABE6CF051940CAC000941696 /* close2_range.png in Resources */,
+				AB6D5C371976100F0046AA25 /* 3-BARS@2x.png in Resources */,
+				AB6D5C32197610050046AA25 /* 2-BARS.png in Resources */,
 				AB8553CE1940C86B007AE023 /* InfoPlist.strings in Resources */,
 				ABE6CF041940CAC000941696 /* close1_range.png in Resources */,
 				ABE6CF031940CAC000941696 /* close_range.png in Resources */,
+				AB6D5C3A197610180046AA25 /* 1-BAR.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,8 +606,8 @@
 				ABE6CF811940CD1B00941696 /* CGContextCreator.m in Sources */,
 				ABE6CF0D1940CB2200941696 /* AccelerometerFilter.m in Sources */,
 				ABE6CFA01940CD6600941696 /* BitmapRotationManipulator.m in Sources */,
-				ABD6B2D71974C08E00398A48 /* AppInfoCell.m in Sources */,
 				ABE6CF311940CB9300941696 /* RSColorPickerAppDelegate.m in Sources */,
+				AB6D5C2F1976058B0046AA25 /* DFUBootViewController.m in Sources */,
 				ABE6CF571940CC2200941696 /* RSGenerateOperation.m in Sources */,
 				ABE6CFA41940CD7200941696 /* UIImage+ANImageBitmapRep.m in Sources */,
 				ABE6CF331940CB9300941696 /* TestColorViewController.m in Sources */,
@@ -590,18 +617,17 @@
 				ABE6CF0E1940CB2200941696 /* GraphView.m in Sources */,
 				ABE6CF581940CC2200941696 /* RSSelectionLayer.m in Sources */,
 				ABE6CFA11940CD6600941696 /* BitmapScaleManipulator.m in Sources */,
-				ABFC0F17196E369700749E47 /* DfuViewController.m in Sources */,
 				ABD6B2D91974C08E00398A48 /* DFUController.m in Sources */,
 				ABE6CF741940CCE900941696 /* NSImage+ANImageBitmapRep.m in Sources */,
 				AB8554091940C90A007AE023 /* LedViewController.m in Sources */,
 				ABE6CF541940CC2200941696 /* RSColorFunctions.m in Sources */,
-				ABD6B2D81974C08E00398A48 /* DeviceInformationCell.m in Sources */,
 				ABE6CF9E1940CD6600941696 /* BitmapCropManipulator.m in Sources */,
 				AB85540A1940C90A007AE023 /* AccelerometerViewController.m in Sources */,
 				AB85540B1940C90A007AE023 /* StatusViewController.m in Sources */,
 				AB8553D01940C86B007AE023 /* main.m in Sources */,
 				AB6D5C2C197514B70046AA25 /* BeaconViewController.m in Sources */,
 				ABE6CF9D1940CD6600941696 /* BitmapContextManipulator.m in Sources */,
+				AB6D5C42197611950046AA25 /* DFUUploadViewController.m in Sources */,
 				ABE6CF751940CCE900941696 /* OSCommonImage.m in Sources */,
 				ABE6CF321940CB9300941696 /* RSOpacitySlider.m in Sources */,
 				ABE6CF561940CC2200941696 /* RSColorPickerView.m in Sources */,
@@ -683,7 +709,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Laura Kassovic (Y8X3927EVV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Laura Kassovic (Y8X3927EVV)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -701,6 +728,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "8B47ACFD-9190-41E7-972D-D49CAFC2E48D";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -722,7 +750,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Laura Kassovic (Y8X3927EVV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Laura Kassovic (Y8X3927EVV)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -733,6 +762,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PROVISIONING_PROFILE = "8B47ACFD-9190-41E7-972D-D49CAFC2E48D";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -744,6 +774,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Laura Kassovic (Y8X3927EVV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Laura Kassovic (Y8X3927EVV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MetaWearApp/MetaWearApp-Prefix.pch";
 				INFOPLIST_FILE = "MetaWearApp/MetaWearApp-Info.plist";
@@ -754,6 +786,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8B47ACFD-9190-41E7-972D-D49CAFC2E48D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -763,6 +796,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Laura Kassovic (Y8X3927EVV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Laura Kassovic (Y8X3927EVV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MetaWearApp/MetaWearApp-Prefix.pch";
 				INFOPLIST_FILE = "MetaWearApp/MetaWearApp-Info.plist";
@@ -772,6 +807,7 @@
 					"$(PROJECT_DIR)/MetaWearApp/MetaWearAPI",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8B47ACFD-9190-41E7-972D-D49CAFC2E48D";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

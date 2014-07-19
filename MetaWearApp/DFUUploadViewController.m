@@ -1,28 +1,25 @@
 //
-//  DfuViewController.m
+//  DFUUploadViewController.m
 //  MetaWearApp
 //
-//  Created by Laura Kassovic on 7/9/14.
+//  Created by Laura Kassovic on 7/15/14.
 //  Copyright (c) 2014 Laura Kassovic. All rights reserved.
 //
 
-#import "DfuViewController.h"
-#import "AppInfoCell.h"
-#import "DeviceInformationCell.h"
-#import "AppDelegate.h"
+#import "DFUUploadViewController.h"
 
-@implementation DfuViewController
+@implementation DFUUploadViewController
 
-@synthesize dfuController, progressView, isTransferring, appSizeLabel, appNameLabel, targetStatusLabel, targetNameLabel, progressLabel, uploadButton, metawearAPI;
+@synthesize appSizeLabel, appNameLabel, targetStatusLabel, targetNameLabel, progressLabel, uploadButton, progressView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.view.backgroundColor = [UIColor whiteColor];
-        
         self.title = @"DFU";
+        
+        self.view.backgroundColor = [UIColor whiteColor];
         
         CGRect navBarFrame = CGRectMake(0, 20, self.view.frame.size.width, 44.0);
         UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:navBarFrame];
@@ -34,34 +31,36 @@
         [navBar pushNavigationItem:navItem animated:false];
         [self.view addSubview:navBar];
         
-        self.dfuController = [[DFUController alloc] init];
-        
-        self.appNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 30, 170, 21)];
+        self.appNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, 100, 20)];
+        self.appNameLabel.text = @"";
         [self.view addSubview:self.appNameLabel];
         
-        self.appSizeLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 60, 151, 21)];
+        self.appSizeLabel = [[UILabel alloc] initWithFrame:CGRectMake(150, 90, 100, 20)];
+        self.appSizeLabel.text = @"";
         [self.view addSubview:self.appSizeLabel];
         
-        self.targetNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 30, 145, 21)];
+        self.targetNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 120, 100, 20)];
+        self.targetNameLabel.text = @"";
         [self.view addSubview:self.targetNameLabel];
         
-        self.targetStatusLabel = [[UILabel alloc]initWithFrame:CGRectMake(90, 60, 151, 21)];
+        self.targetStatusLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 120, 100, 20)];
+        self.targetStatusLabel.text = @"";
         [self.view addSubview:self.targetStatusLabel];
         
-        self.progressLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 54, 60, 21)];
+        self.progressLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 160, 100, 20)];
+        self.progressLabel.text = @"";
         [self.view addSubview:self.progressLabel];
         
-        self.uploadButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 79, 120, 30)];
-        self.uploadButton.titleLabel.text = @"Upload";
+        self.uploadButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.uploadButton.frame = CGRectMake(20, 300, 280, 30.0);
+        [self.uploadButton setTitle:@"Upload" forState:UIControlStateNormal];
+        [self.uploadButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [self.uploadButton addTarget:self action:@selector(uploadButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.uploadButton];
         
-        self.progressView = [[UIProgressView alloc] init];
-        self.progressView.frame = CGRectMake(20, 44, 240, 2);
+        self.progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(10, 250, 240, 100)];
+        self.progressView.progress = 0;
         [self.view addSubview:self.progressView];
-        
-        NSURL *firmwareURL = [[NSBundle mainBundle] URLForResource:@"metawear" withExtension:@"bin"];
-        [self.dfuController setFirmwareURL:firmwareURL];
     }
     return self;
 }
@@ -69,15 +68,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    self.metawearAPI = [[MetaWearAPI alloc] init];
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.metawearAPI = appDelegate.metawearAPI;
-    self.metawearAPI.delegate = self;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -99,24 +89,19 @@
     self.isTransferring = NO;
 }
 
-- (void) didReceiveMemoryWarning
+- (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void) uploadButtonPressed
+- (void)uploadButtonPressed
 {
-    [self.metawearAPI jumpToBootloader];
-    
-    if (!self.isTransferring)
-    {
+    if (!self.isTransferring) {
         self.isTransferring = YES;
         [self.dfuController startTransfer];
         [self.uploadButton setTitle:@"Cancel" forState:UIControlStateNormal];
-    }
-    else
-    {
+    } else {
         self.isTransferring = NO;
         [self.dfuController cancelTransfer];
         [self.uploadButton setTitle:@"Upload" forState:UIControlStateNormal];
@@ -158,8 +143,7 @@
 
 - (void) didChangeState:(DFUControllerState)state
 {
-    if (state == IDLE)
-    {
+    if (state == IDLE) {
         self.uploadButton.enabled = YES;
     }
     self.targetStatusLabel.text = [self.dfuController stringFromState:state];
