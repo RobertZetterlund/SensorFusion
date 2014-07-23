@@ -1,4 +1,4 @@
-MetaWear-iOSSampleAPPDev
+Metawear-SampleiOSApp
 ========================
 
-Sample App private development
+Sample iOS App for MetaWear (www.mbientlab.com)
