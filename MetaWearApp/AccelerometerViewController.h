@@ -39,7 +39,9 @@
 @interface AccelerometerViewController : UIViewController <MetaWearDelegate>
 {
 	AccelerometerFilter *filter;
-	BOOL isPaused, useAdaptive;
+	BOOL isRecording, useAdaptive;
+    NSMutableArray *accDataArray;
+    NSDate *dataStartTime;
 }
 
 @property (nonatomic, strong) UILabel *unfilteredLabel;
@@ -55,14 +57,15 @@
 @property (nonatomic, strong) UISegmentedControl *filterC;
 @property (nonatomic, strong) UISegmentedControl *filterTypeC;
 
+@property (strong, nonatomic) MetaWearAPI *metawearAPI;
+
 - (void)pauseOrResume:(id)sender;
 - (void)filterSelect:(id)sender;
 - (void)adaptiveSelect:(id)sender;
+- (NSString *)processAccData:(id)sender;
 
 // Sets up a new filter. Since the filter's class matters and not a particular instance
 // we just pass in the class and -changeFilter: will setup the proper filter.
 - (void)changeFilter:(Class)filterClass;
-
-@property (strong, nonatomic) MetaWearAPI *metawearAPI;
 
 @end

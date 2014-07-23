@@ -73,6 +73,7 @@
 		ABFC0F14196E1FE800749E47 /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFC0F13196E1FE800749E47 /* RootTableViewController.m */; };
 		ABFC0F26196E414800749E47 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFC0F25196E414800749E47 /* CoreBluetooth.framework */; };
 		D0907BAC197F3B30000C499B /* DataLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D0907BAB197F3B30000C499B /* DataLogger.m */; };
+		D0907BAF197F602C000C499B /* MBLAccelerometerData.m in Sources */ = {isa = PBXBuildFile; fileRef = D0907BAE197F602C000C499B /* MBLAccelerometerData.m */; };
 		D0BF7223197E0276006AEE66 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BF7222197E0276006AEE66 /* StartViewController.m */; };
 		D0BF7225197E3FBE006AEE66 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0BF7224197E3FBE006AEE66 /* Images.xcassets */; };
 /* End PBXBuildFile section */
@@ -200,6 +201,8 @@
 		ABFC0F25196E414800749E47 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D0907BAA197F3B30000C499B /* DataLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataLogger.h; sourceTree = SOURCE_ROOT; };
 		D0907BAB197F3B30000C499B /* DataLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataLogger.m; sourceTree = SOURCE_ROOT; };
+		D0907BAD197F602C000C499B /* MBLAccelerometerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBLAccelerometerData.h; sourceTree = "<group>"; };
+		D0907BAE197F602C000C499B /* MBLAccelerometerData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLAccelerometerData.m; sourceTree = "<group>"; };
 		D0BF7221197E0276006AEE66 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		D0BF7222197E0276006AEE66 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		D0BF7224197E3FBE006AEE66 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -287,6 +290,8 @@
 				AB8554001940C90A007AE023 /* LedViewController.m */,
 				AB8553D81940C86B007AE023 /* Main_iPad.storyboard */,
 				AB8553D51940C86B007AE023 /* Main_iPhone.storyboard */,
+				D0907BAD197F602C000C499B /* MBLAccelerometerData.h */,
+				D0907BAE197F602C000C499B /* MBLAccelerometerData.m */,
 				AB8553FB1940C90A007AE023 /* MetaWearViewController.h */,
 				AB8553FC1940C90A007AE023 /* MetaWearViewController.m */,
 				ABFC0F12196E1FE800749E47 /* RootTableViewController.h */,
@@ -621,6 +626,7 @@
 				ABE6CFA01940CD6600941696 /* BitmapRotationManipulator.m in Sources */,
 				ABE6CF311940CB9300941696 /* RSColorPickerAppDelegate.m in Sources */,
 				AB6D5C2F1976058B0046AA25 /* DFUBootViewController.m in Sources */,
+				D0907BAF197F602C000C499B /* MBLAccelerometerData.m in Sources */,
 				ABE6CF571940CC2200941696 /* RSGenerateOperation.m in Sources */,
 				ABE6CFA41940CD7200941696 /* UIImage+ANImageBitmapRep.m in Sources */,
 				ABE6CF331940CB9300941696 /* TestColorViewController.m in Sources */,

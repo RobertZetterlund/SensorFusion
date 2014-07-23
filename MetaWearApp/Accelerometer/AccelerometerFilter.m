@@ -52,7 +52,6 @@
 @implementation AccelerometerFilter
 
 @synthesize x, y, z, adaptive;
-//@synthesize adaptive;
 
 - (void)addAcceleration:(Accelerometer *)accel
 {

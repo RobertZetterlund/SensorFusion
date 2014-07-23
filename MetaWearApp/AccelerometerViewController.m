@@ -27,12 +27,14 @@
 //
 
 #import "AccelerometerViewController.h"
+#import "MBLAccelerometerData.h"
 #import "AppDelegate.h"
 
 @implementation AccelerometerViewController
 
 @synthesize unfiltered, filtered, recordData, sendData;
 @synthesize unfilteredLabel, filteredLabel, metawearAPI, filterC, filterTypeC;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -89,7 +91,7 @@
         self.recordData.frame = CGRectMake(20, 475.0, 140, 30.0);
         [self.recordData setTitle:kLocalizedStart forState:UIControlStateNormal];
         self.recordData.titleLabel.font = [UIFont systemFontOfSize:18];
-        [self.recordData addTarget:self action:@selector(pauseOrResume:) forControlEvents:UIControlEventTouchUpInside];
+        [self.recordData addTarget:self action:@selector(startOrStopRecording:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.recordData];
         
         self.sendData = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -102,19 +104,22 @@
     return self;
 }
 
-- (void)pauseOrResume:(id)sender
+- (void)startOrStopRecording:(id)sender
 {
-	if (isPaused)
+	if (isRecording)
 	{
-		// If we're paused, then resume and set the title to "Pause"
-		isPaused = NO;
-        [self.recordData setTitle:kLocalizedStop forState:UIControlStateNormal];
+		// If we're currently recording, then stop recording and set the title to "Start Recording"
+        isRecording = NO;
+        NSString *accDataString = [self processAccData];
+        [self.recordData setTitle:kLocalizedStart forState:UIControlStateNormal];
 	}
 	else
 	{
-		// If we are not paused, then pause and set the title to "Resume"
-		isPaused = YES;
-        [self.recordData setTitle:kLocalizedStart forState:UIControlStateNormal];
+		// If we are not recording, set the title to "Stop Recording" then start recording
+        [self.recordData setTitle:kLocalizedStop forState:UIControlStateNormal];
+        accDataArray = [[NSMutableArray alloc] initWithCapacity:1000];
+        dataStartTime = [NSDate date];
+        isRecording = YES;
 	}
 	
 	// Inform accessibility clients that the pause/resume button has changed.
@@ -136,7 +141,7 @@
 {
 	[super viewDidLoad];
     
-	isPaused = NO;
+	isRecording = NO;
 	useAdaptive = YES;
 	[self changeFilter:[HighpassFilter class]];
 	
@@ -213,16 +218,37 @@
 	UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
 }
 
+- (NSString *)processAccData
+{
+    NSString *AccelerometerString = @"";
+    for (MBLAccelerometerData *dataElement in accDataArray)
+    {
+        AccelerometerString = [AccelerometerString stringByAppendingFormat:@"%f,%f,%f,%f\n", dataElement.accDataInterval,
+                               dataElement.x,
+                               dataElement.y,
+                               dataElement.z];
+    }
+    return AccelerometerString;
+}
 #pragma  mark - MetaWear API Delegates
 
 - (void) retrieveAccelerometerDataSuccess:(Accelerometer *)data
 {
 	// Update the accelerometer graph view
-	if (!isPaused)
+	if (isRecording)
 	{
+        // Send both unfiltered and filtered data to graphs
 		[filter addAcceleration:data];
 		[unfiltered addX:data.x y:data.y z:data.z];
 		[filtered addX:filter.x y:filter.y z:filter.z];
+        
+        // Add filtered data to data array for saving
+        MBLAccelerometerData *accData = [[MBLAccelerometerData alloc] init];
+        accData.x = filter.x;
+        accData.y = filter.y;
+        accData.z = filter.z;
+        accData.accDataInterval = [dataStartTime timeIntervalSinceNow];
+        [accDataArray addObject:accData];
 	}
 }
 

@@ -71,13 +71,9 @@
 - (void) stopLoggingMotionDataAndSave;
 
 // Setters
-- (void) setLogAttitudeData:(bool)newValue;
-- (void) setLogGravityData:(bool)newValue;
-- (void) setLogMagneticFieldData:(bool)newValue;
-- (void) setLogRotationRateData:(bool)newValue;
 - (void) setLogUserAccelerationData:(bool)newValue;
-- (void) setLogRawGyroscopeData:(bool)newValue;
 - (void) setLogRawAccelerometerData:(bool)newValue;
+- (void) setLogRawGyroscopeData:(bool)newValue;
 
 
 @end
