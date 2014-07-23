@@ -31,6 +31,9 @@
 #import "MetaWearDelegate.h"
 #import "GraphView.h"
 #import "AccelerometerFilter.h"
+#import <Foundation/Foundation.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 #define kUpdateFrequency	60.0
 #define kLocalizedStop		NSLocalizedString(@"Stop Recording","stop taking samples")
@@ -41,6 +44,7 @@
 	AccelerometerFilter *filter;
 	BOOL isRecording, useAdaptive;
     NSMutableArray *accDataArray;
+    NSString *accDataString;
     NSDate *dataStartTime;
 }
 
@@ -62,7 +66,8 @@
 - (void)pauseOrResume:(id)sender;
 - (void)filterSelect:(id)sender;
 - (void)adaptiveSelect:(id)sender;
-- (NSString *)processAccData:(id)sender;
+- (NSString *)processAccData;
+- (NSString *)saveDatatoDisk:(NSString *)data;
 
 // Sets up a new filter. Since the filter's class matters and not a particular instance
 // we just pass in the class and -changeFilter: will setup the proper filter.

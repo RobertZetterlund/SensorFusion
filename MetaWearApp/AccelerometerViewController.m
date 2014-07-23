@@ -109,9 +109,10 @@
 	if (isRecording)
 	{
 		// If we're currently recording, then stop recording and set the title to "Start Recording"
-        isRecording = NO;
-        NSString *accDataString = [self processAccData];
         [self.recordData setTitle:kLocalizedStart forState:UIControlStateNormal];
+        isRecording = NO;
+        accDataString = [self processAccData];
+        [self saveDatatoDisk:accDataString];
 	}
 	else
 	{
@@ -128,6 +129,56 @@
 
 - (void)sendDataPressed:(id)sender
 {
+    NSString *filePath = [self saveDatatoDisk:accDataString];
+    [self mailMe:filePath];
+}
+
+- (NSString *)saveDatatoDisk:(NSString *)dataString
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterLongStyle];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    
+    // Some filesystems hate colons
+    NSString *dateString = [[dateFormatter stringFromDate:[NSDate date]] stringByReplacingOccurrencesOfString:@":" withString:@"_"];
+    // I hate spaces
+    dateString = [dateString stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    // Nobody can stand forward slashes
+    dateString = [dateString stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"userAcceleration_%@.txt", dateString, nil]];
+    [dataString writeToFile:fullPath
+                              atomically:NO
+                                encoding:NSStringEncodingConversionAllowLossy
+                                   error:nil];
+    
+    return fullPath;
+}
+
+- (void)mailMe:(NSString *)filePath
+{
+    
+    // recipient address
+    NSString *email = @"ysuo@nullbounds.com";
+    NSMutableArray *toRecipient = [[NSMutableArray alloc]initWithObjects:nil];
+    [toRecipient addObject:email];
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    
+    // attachment
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    [mc addAttachmentData:data mimeType:@"text/plain" fileName:@"AccData.txt"];
+    
+    // subject
+    [mc setSubject:@"Accelerometer Data"];
+    
+    // message
+    [mc setMessageBody:@"The data is attached in a text file." isHTML:NO];
+    
+    [mc setToRecipients:toRecipient];
+    [self presentViewController:mc animated:YES completion:NULL];
     
 }
 
