@@ -72,7 +72,6 @@
 		ABE6CFA41940CD7200941696 /* UIImage+ANImageBitmapRep.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE6CFA31940CD7200941696 /* UIImage+ANImageBitmapRep.m */; };
 		ABFC0F14196E1FE800749E47 /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFC0F13196E1FE800749E47 /* RootTableViewController.m */; };
 		ABFC0F26196E414800749E47 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFC0F25196E414800749E47 /* CoreBluetooth.framework */; };
-		D0907BAC197F3B30000C499B /* DataLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D0907BAB197F3B30000C499B /* DataLogger.m */; };
 		D0907BAF197F602C000C499B /* MBLAccelerometerData.m in Sources */ = {isa = PBXBuildFile; fileRef = D0907BAE197F602C000C499B /* MBLAccelerometerData.m */; };
 		D0BF7223197E0276006AEE66 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BF7222197E0276006AEE66 /* StartViewController.m */; };
 		D0BF7225197E3FBE006AEE66 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0BF7224197E3FBE006AEE66 /* Images.xcassets */; };
@@ -199,8 +198,6 @@
 		ABFC0F12196E1FE800749E47 /* RootTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTableViewController.h; sourceTree = "<group>"; };
 		ABFC0F13196E1FE800749E47 /* RootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTableViewController.m; sourceTree = "<group>"; };
 		ABFC0F25196E414800749E47 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		D0907BAA197F3B30000C499B /* DataLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataLogger.h; sourceTree = SOURCE_ROOT; };
-		D0907BAB197F3B30000C499B /* DataLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataLogger.m; sourceTree = SOURCE_ROOT; };
 		D0907BAD197F602C000C499B /* MBLAccelerometerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBLAccelerometerData.h; sourceTree = "<group>"; };
 		D0907BAE197F602C000C499B /* MBLAccelerometerData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLAccelerometerData.m; sourceTree = "<group>"; };
 		D0BF7221197E0276006AEE66 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
@@ -276,8 +273,6 @@
 				AB8554061940C90A007AE023 /* AppDelegate.m */,
 				AB6D5C2A197514B70046AA25 /* BeaconViewController.h */,
 				AB6D5C2B197514B70046AA25 /* BeaconViewController.m */,
-				D0907BAA197F3B30000C499B /* DataLogger.h */,
-				D0907BAB197F3B30000C499B /* DataLogger.m */,
 				AB6D5C2D1976058B0046AA25 /* DFUBootViewController.h */,
 				AB6D5C2E1976058B0046AA25 /* DFUBootViewController.m */,
 				AB6D5C40197611950046AA25 /* DFUUploadViewController.h */,
@@ -635,7 +630,6 @@
 				AB8554081940C90A007AE023 /* FinderViewController.m in Sources */,
 				D0BF7223197E0276006AEE66 /* StartViewController.m in Sources */,
 				ABE6CF0E1940CB2200941696 /* GraphView.m in Sources */,
-				D0907BAC197F3B30000C499B /* DataLogger.m in Sources */,
 				ABE6CF581940CC2200941696 /* RSSelectionLayer.m in Sources */,
 				ABE6CFA11940CD6600941696 /* BitmapScaleManipulator.m in Sources */,
 				ABD6B2D91974C08E00398A48 /* DFUController.m in Sources */,

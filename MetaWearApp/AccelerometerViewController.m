@@ -161,25 +161,32 @@
 {
     
     // recipient address
-    NSString *email = @"ysuo@nullbounds.com";
+    NSString *email = @"your@email.com";
     NSMutableArray *toRecipient = [[NSMutableArray alloc]initWithObjects:nil];
     [toRecipient addObject:email];
-    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
-    mc.mailComposeDelegate = self;
+    MFMailComposeViewController *emailController = [[MFMailComposeViewController alloc] init];
+    emailController.mailComposeDelegate = self;
     
     // attachment
     NSData *data = [NSData dataWithContentsOfFile:filePath];
-    [mc addAttachmentData:data mimeType:@"text/plain" fileName:@"AccData.txt"];
+    [emailController addAttachmentData:data mimeType:@"text/plain" fileName:@"AccData.txt"];
     
     // subject
-    [mc setSubject:@"Accelerometer Data"];
+    [emailController setSubject:@"Accelerometer Data"];
     
     // message
-    [mc setMessageBody:@"The data is attached in a text file." isHTML:NO];
+    [emailController setMessageBody:@"The data is attached in a text file." isHTML:NO];
     
-    [mc setToRecipients:toRecipient];
-    [self presentViewController:mc animated:YES completion:NULL];
+    [emailController setToRecipients:toRecipient];
+    [self presentViewController:emailController animated:YES completion:NULL];
     
+}
+
+-(void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+    [self dismissModalViewControllerAnimated:YES];
+    
+    NSLog (@"mail finished"); // NEVER REACHES THIS POINT.
 }
 
 - (void)didReceiveMemoryWarning
