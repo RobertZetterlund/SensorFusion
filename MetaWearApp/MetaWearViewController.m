@@ -150,10 +150,11 @@
 
 -(NSString *) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    
     if (section == 0) {
         NSLog(@"%d",(int)self.metawearFound.count);
         if (self.metawearFound.count >= 1 )return [NSString stringWithFormat:@"%d MetaWear(s) Found",(int)self.metawearFound.count];
-        else return [NSString stringWithFormat:@"No MetaWear Found"];
+        else return [NSString stringWithFormat:@"Looking for MetaWear..."];
     }
     
     return @"";
@@ -244,7 +245,7 @@
 
 -(void) disconnectionFailed:(NSError *)error ForDevice:(CBPeripheral *)device
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Disconnected" message:@"Disconnection Failure" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Disconnection Failure" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     [alert show];
 }

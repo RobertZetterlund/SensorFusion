@@ -39,12 +39,9 @@
 
 @synthesize metaWearViewController, finderViewController, ledViewController, accelerometerViewController, statusViewController, dfuViewController, beaconViewController;
 
-- (void)viewDidLoad
+ - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.title = @"MetaWear Device Menu";
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

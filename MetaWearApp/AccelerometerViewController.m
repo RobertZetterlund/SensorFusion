@@ -31,7 +31,7 @@
 
 @implementation AccelerometerViewController
 
-@synthesize unfiltered, filtered, pause;
+@synthesize unfiltered, filtered, recordData, sendData;
 @synthesize unfilteredLabel, filteredLabel, metawearAPI, filterC, filterTypeC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -80,19 +80,50 @@
         // Control for standard or adaptive filter
         NSArray *itemsArray = [NSArray arrayWithObjects: @"Standard", @"Adaptive", nil];
         self.filterTypeC = [[UISegmentedControl alloc] initWithItems:itemsArray];
-        self.filterTypeC.frame = CGRectMake(20, 425.0, 280.0, 30.0);
+        self.filterTypeC.frame = CGRectMake(20, 420.0, 280.0, 30.0);
         self.filterTypeC.selectedSegmentIndex = 1;
         [self.filterTypeC addTarget:self action:@selector(adaptiveSelect:) forControlEvents:UIControlEventValueChanged];
         [self.view addSubview:self.filterTypeC];
         
-        self.pause = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        self.pause.frame = CGRectMake(20, 475.0, 280, 30.0);
-        [self.pause setTitle:kLocalizedPause forState:UIControlStateNormal];
-        [self.pause setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        [self.pause addTarget:self action:@selector(pauseOrResume:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:self.pause];
+        self.recordData = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.recordData.frame = CGRectMake(20, 475.0, 140, 30.0);
+        [self.recordData setTitle:kLocalizedStart forState:UIControlStateNormal];
+        self.recordData.titleLabel.font = [UIFont systemFontOfSize:18];
+        [self.recordData addTarget:self action:@selector(pauseOrResume:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.recordData];
+        
+        self.sendData = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.sendData.frame = CGRectMake(160, 475.0, 140, 30.0);
+        [self.sendData setTitle:@"Send Data" forState:UIControlStateNormal];
+        self.sendData.titleLabel.font = [UIFont systemFontOfSize:18];
+        [self.sendData addTarget:self action:@selector(sendDataPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.sendData];
     }
     return self;
+}
+
+- (void)pauseOrResume:(id)sender
+{
+	if (isPaused)
+	{
+		// If we're paused, then resume and set the title to "Pause"
+		isPaused = NO;
+        [self.recordData setTitle:kLocalizedStop forState:UIControlStateNormal];
+	}
+	else
+	{
+		// If we are not paused, then pause and set the title to "Resume"
+		isPaused = YES;
+        [self.recordData setTitle:kLocalizedStart forState:UIControlStateNormal];
+	}
+	
+	// Inform accessibility clients that the pause/resume button has changed.
+	UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
+}
+
+- (void)sendDataPressed:(id)sender
+{
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -151,25 +182,6 @@
 		// And update the filterLabel with the new filter name.
 		filteredLabel.text = filter.name;
 	}
-}
-
-- (void)pauseOrResume:(id)sender
-{
-	if (isPaused)
-	{
-		// If we're paused, then resume and set the title to "Pause"
-		isPaused = NO;
-        [self.pause setTitle:kLocalizedPause forState:UIControlStateNormal];
-	}
-	else
-	{
-		// If we are not paused, then pause and set the title to "Resume"
-		isPaused = YES;
-        [self.pause setTitle:kLocalizedResume forState:UIControlStateNormal];
-	}
-	
-	// Inform accessibility clients that the pause/resume button has changed.
-	UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification, nil);
 }
 
 - (void)filterSelect:(id)sender
@@ -238,7 +250,7 @@
 
 -(void) disconnectionFailed:(NSError *)error ForDevice:(CBPeripheral *)device
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Device Disconnected" message:@"Disconnection Failure" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Disconnection Failure" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     [alert show];
 }

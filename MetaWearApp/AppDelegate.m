@@ -28,26 +28,34 @@
 
 #import "AppDelegate.h"
 
+@interface AppDelegate ()
+@property (strong, nonatomic) UIStoryboard *storyboard;
+@property (strong, nonatomic) UIViewController *initialController;
+@property (strong, nonatomic) UINavigationController *navigationController;
+
+@end
+
 @implementation AppDelegate
 
-@synthesize metawearAPI, rootViewController;
+@synthesize metawearAPI;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    self.rootViewController = [[RootTableViewController alloc] init];
-    
     self.metawearAPI = [[MetaWearAPI alloc] init];
     
-    UINavigationController *rootNav = [[UINavigationController alloc] initWithRootViewController:self.rootViewController];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:[NSBundle mainBundle]];
+    self.initialController = [self.storyboard instantiateInitialViewController];
+    self.window.rootViewController = self.initialController;
     
-    [self.window setRootViewController:rootNav];
-    
+    // If we want to add a screen before nav controller, we can use the commented out code below.
+    //self.navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"RootNavigationController"];
+    //[self.initialController presentViewController:self.navigationController animated:NO completion:nil];
+
     [self.window makeKeyAndVisible];
-    
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

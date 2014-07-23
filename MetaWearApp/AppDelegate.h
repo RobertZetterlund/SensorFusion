@@ -29,7 +29,6 @@
 #import <UIKit/UIKit.h>
 #import "MetaWearAPI.h"
 #import "MetaWearDelegate.h"
-#import "RootTableViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 {
@@ -38,7 +37,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) RootTableViewController *rootViewController;
 
 @property (strong, nonatomic) MetaWearAPI *metawearAPI;
 

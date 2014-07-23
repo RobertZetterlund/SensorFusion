@@ -33,8 +33,8 @@
 #import "AccelerometerFilter.h"
 
 #define kUpdateFrequency	60.0
-#define kLocalizedPause		NSLocalizedString(@"Pause","pause taking samples")
-#define kLocalizedResume	NSLocalizedString(@"Resume","resume taking samples")
+#define kLocalizedStop		NSLocalizedString(@"Stop Recording","stop taking samples")
+#define kLocalizedStart	NSLocalizedString(@"Start Recording","start taking samples")
 
 @interface AccelerometerViewController : UIViewController <MetaWearDelegate>
 {
@@ -48,7 +48,9 @@
 @property (nonatomic, strong) GraphView *unfiltered;
 @property (nonatomic, strong) GraphView *filtered;
 
-@property (nonatomic, strong) UIButton *pause;
+@property (nonatomic, strong) UIButton *recordData;
+@property (nonatomic, strong) UIButton *sendData;
+
 
 @property (nonatomic, strong) UISegmentedControl *filterC;
 @property (nonatomic, strong) UISegmentedControl *filterTypeC;
