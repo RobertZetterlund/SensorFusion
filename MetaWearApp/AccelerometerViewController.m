@@ -144,9 +144,9 @@
     
     // Some filesystems hate colons
     NSString *dateString = [[dateFormatter stringFromDate:[NSDate date]] stringByReplacingOccurrencesOfString:@":" withString:@"_"];
-    // I hate spaces
+    // I hate spaces in dates
     dateString = [dateString stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-    // Nobody can stand forward slashes
+    // OS hates forward slashes
     dateString = [dateString stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
     NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"userAcceleration_%@.txt", dateString, nil]];
     [dataString writeToFile:fullPath
@@ -159,6 +159,17 @@
 
 - (void)mailMe:(NSString *)filePath
 {
+    // Get current Time/Date
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterLongStyle];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    
+    // Some filesystems hate colons
+    NSString *dateString = [[dateFormatter stringFromDate:[NSDate date]] stringByReplacingOccurrencesOfString:@":" withString:@"_"];
+    // I hate spaces in dates
+    dateString = [dateString stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    // OS hates forward slashes
+    dateString = [dateString stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
     
     // recipient address
     NSString *email = @"your@email.com";
@@ -172,7 +183,8 @@
     [emailController addAttachmentData:data mimeType:@"text/plain" fileName:@"AccData.txt"];
     
     // subject
-    [emailController setSubject:@"Accelerometer Data"];
+    NSString *subject = [NSString stringWithFormat:@"Accelerometer Data %@.txt", dateString, nil];
+    [emailController setSubject:subject];
     
     // message
     [emailController setMessageBody:@"The data is attached in a text file." isHTML:NO];
