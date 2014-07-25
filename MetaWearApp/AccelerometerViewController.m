@@ -290,10 +290,10 @@
 
 - (NSString *)processAccData
 {
-    NSString *AccelerometerString = @"";
+    NSMutableString *AccelerometerString = [[NSMutableString alloc] init];
     for (MBLAccelerometerData *dataElement in accDataArray)
     {
-        AccelerometerString = [AccelerometerString stringByAppendingFormat:@"%f,%f,%f,%f\n", dataElement.accDataInterval,
+        [AccelerometerString appendFormat:@"%f,%f,%f,%f\n", dataElement.accDataInterval,
                                dataElement.x,
                                dataElement.y,
                                dataElement.z];
