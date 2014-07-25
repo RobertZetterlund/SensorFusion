@@ -306,10 +306,12 @@
     NSMutableString *AccelerometerString = [[NSMutableString alloc] init];
     for (MBLAccelerometerData *dataElement in accDataArray)
     {
-        [AccelerometerString appendFormat:@"%f,%f,%f,%f\n", dataElement.accDataInterval,
-                               dataElement.x,
-                               dataElement.y,
-                               dataElement.z];
+        @autoreleasepool {
+            [AccelerometerString appendFormat:@"%f,%f,%f,%f\n", dataElement.accDataInterval,
+             dataElement.x,
+             dataElement.y,
+             dataElement.z];
+        }
     }
     return AccelerometerString;
 }
