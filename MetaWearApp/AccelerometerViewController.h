@@ -43,6 +43,7 @@
 {
 	AccelerometerFilter *filter;
 	BOOL isRecording, useAdaptive;
+    NSString *filterType; //This is only used for logging the filter used
     NSMutableArray *accDataArray;
     NSString *accDataString;
     NSDate *dataStartTime;
@@ -51,15 +52,15 @@
 @property (nonatomic, strong) UILabel *unfilteredLabel;
 @property (nonatomic, strong) UILabel *filteredLabel;
 
-@property (nonatomic, strong) GraphView *unfiltered;
-@property (nonatomic, strong) GraphView *filtered;
+@property (nonatomic, strong) GraphView *unfilteredGraph;
+@property (nonatomic, strong) GraphView *filteredGraph;
 
 @property (nonatomic, strong) UIButton *recordData;
 @property (nonatomic, strong) UIButton *sendData;
 
 
-@property (nonatomic, strong) UISegmentedControl *filterC;
-@property (nonatomic, strong) UISegmentedControl *filterTypeC;
+@property (nonatomic, strong) UISegmentedControl *filterControl;
+@property (nonatomic, strong) UISegmentedControl *filterTypeControl;
 
 @property (strong, nonatomic) MetaWearAPI *metawearAPI;
 

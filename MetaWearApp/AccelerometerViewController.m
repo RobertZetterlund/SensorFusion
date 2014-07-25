@@ -32,8 +32,8 @@
 
 @implementation AccelerometerViewController
 
-@synthesize unfiltered, filtered, recordData, sendData;
-@synthesize unfilteredLabel, filteredLabel, metawearAPI, filterC, filterTypeC;
+@synthesize unfilteredGraph, filteredGraph, recordData, sendData;
+@synthesize unfilteredLabel, filteredLabel, metawearAPI, filterControl, filterTypeControl;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -60,32 +60,32 @@
         self.unfilteredLabel.text = @"Unfiltered Data";
         [self.view addSubview:self.unfilteredLabel];
         
-        self.unfiltered = [[GraphView alloc] initWithFrame:CGRectMake(0, 100.0, 320.0, 112.0)];
-        [self.view addSubview:self.unfiltered];
+        self.unfilteredGraph = [[GraphView alloc] initWithFrame:CGRectMake(0, 100.0, 320.0, 112.0)];
+        [self.view addSubview:self.unfilteredGraph];
         
         // Add graph for filtered data. Dynamic based on buttons.
         self.filteredLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 225.0, 280.0, 20.0)];
         self.filteredLabel.text = @"Adaptive Highpass Filter";
         [self.view addSubview:self.filteredLabel];
         
-        self.filtered = [[GraphView alloc] initWithFrame:CGRectMake(0, 250.0, 320.0, 112.0)];
-        [self.view addSubview:self.filtered];
+        self.filteredGraph = [[GraphView alloc] initWithFrame:CGRectMake(0, 250.0, 320.0, 112.0)];
+        [self.view addSubview:self.filteredGraph];
         
         // Control for low or high pass filter
         NSArray *itemfArray = [NSArray arrayWithObjects: @"Low Pass", @"High Pass", nil];
-        self.filterC = [[UISegmentedControl alloc] initWithItems:itemfArray];
-        self.filterC.frame = CGRectMake(20, 380.0, 280.0, 30.0);
-        self.filterC.selectedSegmentIndex = 1;
-        [self.filterC addTarget:self action:@selector(filterSelect:) forControlEvents:UIControlEventValueChanged];
-        [self.view addSubview:self.filterC];
+        self.filterControl = [[UISegmentedControl alloc] initWithItems:itemfArray];
+        self.filterControl.frame = CGRectMake(20, 380.0, 280.0, 30.0);
+        self.filterControl.selectedSegmentIndex = 1;
+        [self.filterControl addTarget:self action:@selector(filterSelect:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview:self.filterControl];
         
         // Control for standard or adaptive filter
         NSArray *itemsArray = [NSArray arrayWithObjects: @"Standard", @"Adaptive", nil];
-        self.filterTypeC = [[UISegmentedControl alloc] initWithItems:itemsArray];
-        self.filterTypeC.frame = CGRectMake(20, 420.0, 280.0, 30.0);
-        self.filterTypeC.selectedSegmentIndex = 1;
-        [self.filterTypeC addTarget:self action:@selector(adaptiveSelect:) forControlEvents:UIControlEventValueChanged];
-        [self.view addSubview:self.filterTypeC];
+        self.filterTypeControl = [[UISegmentedControl alloc] initWithItems:itemsArray];
+        self.filterTypeControl.frame = CGRectMake(20, 420.0, 280.0, 30.0);
+        self.filterTypeControl.selectedSegmentIndex = 1;
+        [self.filterTypeControl addTarget:self action:@selector(adaptiveSelect:) forControlEvents:UIControlEventValueChanged];
+        [self.view addSubview:self.filterTypeControl];
         
         self.recordData = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         self.recordData.frame = CGRectMake(20, 475.0, 140, 30.0);
@@ -180,14 +180,23 @@
     
     // attachment
     NSData *data = [NSData dataWithContentsOfFile:filePath];
-    [emailController addAttachmentData:data mimeType:@"text/plain" fileName:@"AccData.txt"];
+    NSString *name = [NSString stringWithFormat:@"AccData_%@.txt", dateString, nil];
+    [emailController addAttachmentData:data mimeType:@"text/plain" fileName:name];
     
     // subject
     NSString *subject = [NSString stringWithFormat:@"Accelerometer Data %@.txt", dateString, nil];
     [emailController setSubject:subject];
     
     // message
-    [emailController setMessageBody:@"The data is attached in a text file." isHTML:NO];
+    NSString *adaptiveString;
+    if(useAdaptive)
+        adaptiveString = @"adaptive";
+    else
+        adaptiveString = @"standard";
+    
+    NSString *messageBody = [NSString stringWithFormat:@"The data was recorded with a %@ %@ filter on %@.", filterType, adaptiveString, dateString,nil];
+    [emailController setMessageBody:messageBody isHTML:NO];
+    
     
     [emailController setToRecipients:toRecipient];
     [self presentViewController:emailController animated:YES completion:NULL];
@@ -196,7 +205,7 @@
 
 -(void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
     
     NSLog (@"mail finished"); // NEVER REACHES THIS POINT.
 }
@@ -213,13 +222,15 @@
     
 	isRecording = NO;
 	useAdaptive = YES;
-	[self changeFilter:[HighpassFilter class]];
-	
-	[unfiltered setIsAccessibilityElement:YES];
-	[unfiltered setAccessibilityLabel:NSLocalizedString(@"unfilteredGraph", @"")];
     
-	[filtered setIsAccessibilityElement:YES];
-	[filtered setAccessibilityLabel:NSLocalizedString(@"filteredGraph", @"")];
+	[self changeFilter:[HighpassFilter class]];
+	filterType = @"high pass";
+    
+	[unfilteredGraph setIsAccessibilityElement:YES];
+	[unfilteredGraph setAccessibilityLabel:NSLocalizedString(@"unfilteredGraph", @"")];
+    
+	[filteredGraph setIsAccessibilityElement:YES];
+	[filteredGraph setAccessibilityLabel:NSLocalizedString(@"filteredGraph", @"")];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -265,11 +276,13 @@
 	{
 		// Index 0 of the segment selects the lowpass filter
 		[self changeFilter:[LowpassFilter class]];
+        filterType = @"low pass"; // This is only used for logging purposes later.
 	}
 	else
 	{
 		// Index 1 of the segment selects the highpass filter
 		[self changeFilter:[HighpassFilter class]];
+        filterType = @"high pass"; // This is only used for logging purposes later.
 	}
     
 	// Inform accessibility clients that the filter has changed.
@@ -309,8 +322,8 @@
 	{
         // Send both unfiltered and filtered data to graphs
 		[filter addAcceleration:data];
-		[unfiltered addX:data.x y:data.y z:data.z];
-		[filtered addX:filter.x y:filter.y z:filter.z];
+		[unfilteredGraph addX:data.x y:data.y z:data.z];
+		[filteredGraph addX:filter.x y:filter.y z:filter.z];
         
         // Add filtered data to data array for saving
         MBLAccelerometerData *accData = [[MBLAccelerometerData alloc] init];
