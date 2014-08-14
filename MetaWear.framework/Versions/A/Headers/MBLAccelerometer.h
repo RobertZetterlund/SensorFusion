@@ -96,7 +96,9 @@ typedef enum {
  block each time a new reading shows up.  Please set any configuration properties
  before calling this method, setting properties after this call will have no effect
  until startAccelerometerUpdatesWithHandler: is called again.
- @param MBLAccelerometerHandler handler, Callback to handle each time a new reading is taken
+ @param MBLAccelerometerHandler handler, Callback to handle each time a new reading is taken, 
+ it has the signature: (MBLAccelerometerData *acceleration, NSError *error), where the acceleration
+ object contains the x, y, and z acceleration data in g's and a time interval since data collection began
  @returns none
  */
 - (void)startAccelerometerUpdatesWithHandler:(MBLAccelerometerHandler)handler;
