@@ -342,7 +342,7 @@
     for (MBLAccelerometerData *dataElement in self.accDataArray)
     {
         @autoreleasepool {
-            [AccelerometerString appendFormat:@"%f,%f,%f,%f\n", dataElement.accDataInterval,
+            [AccelerometerString appendFormat:@"%f,%f,%f,%f\n", dataElement.intervalSinceCaptureBegan,
              dataElement.x,
              dataElement.y,
              dataElement.z];

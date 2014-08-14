@@ -13,10 +13,10 @@
 /**
  Time since data collection began
  */
-@property (nonatomic) NSTimeInterval accDataInterval;
+@property (nonatomic, readonly) NSTimeInterval intervalSinceCaptureBegan;
 /**
  Acceleration along each axis in G's
  */
-@property (nonatomic) double x, y, z;
+@property (nonatomic, readonly) double x, y, z;
 
 @end
