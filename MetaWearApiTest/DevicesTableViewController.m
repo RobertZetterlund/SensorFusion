@@ -13,73 +13,39 @@
 @interface DevicesTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *devices;
+@property (nonatomic) BOOL isScanning;
 
 @end
 
 @implementation DevicesTableViewController
 
-UILabel *messageLabel;
-
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidLoad
 {
-    [super viewWillAppear:animated];
+    [super viewDidLoad];
     
-    MBLMetaWearManager *manager = [MBLMetaWearManager sharedManager];
-    [manager startScanForMetaWearsWithHandler:^(NSArray *array) {
-        self.devices = [array mutableCopy];
-        [self.devices sortUsingComparator:^NSComparisonResult(MBLMetaWear *dev1, MBLMetaWear *dev2) {
-            return [dev1.peripheral.RSSI compare:dev2.peripheral.RSSI];
-        }];
-        [self.tableView reloadData];
-    }];
+    [self setScanning:YES];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)setScanning:(BOOL)on
 {
-    [super viewWillDisappear:animated];
-    
-    [[MBLMetaWearManager sharedManager] stopScanForMetaWears];
-    [self.devices removeAllObjects];
-    [self.tableView reloadData];
+    self.isScanning = on;
+    if (on) {
+        [[MBLMetaWearManager sharedManager] startScanForMetaWearsWithHandler:^(NSArray *array) {
+            self.devices = [array mutableCopy];
+            [self.devices sortUsingComparator:^NSComparisonResult(MBLMetaWear *dev1, MBLMetaWear *dev2) {
+                return [dev1.peripheral.RSSI compare:dev2.peripheral.RSSI];
+            }];
+            [self.tableView reloadData];
+        }];
+    } else {
+        [[MBLMetaWearManager sharedManager] stopScanForMetaWears];
+        [self.tableView reloadData];
+    }
 }
 
 - (IBAction)scanningSwitchPressed:(UISwitch *)sender
 {
-    if (sender.on) {
-        NSLog(@"ON");
-    } else {
-        
-    }
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    if (self.devices.count) {
-        
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        [messageLabel setHidden:TRUE];
-        return 1;
-        
-    } else {
-        
-        // Display a message when the table is empty
-        [messageLabel setHidden:FALSE];
-        messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-        
-        messageLabel.text = @"No MetaWears found...";
-        messageLabel.textColor = [UIColor blackColor];
-        messageLabel.numberOfLines = 0;
-        messageLabel.textAlignment = NSTextAlignmentCenter;
-        messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
-        [messageLabel sizeToFit];
-        
-        self.tableView.backgroundView = messageLabel;
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        return 0;
-    }
+    [self setScanning:sender.on];
 }
 
 #pragma mark - Table view data source
@@ -99,7 +65,7 @@ UILabel *messageLabel;
     
     UILabel *uuid = (UILabel *)[cell viewWithTag:2];
     uuid.text = cur.peripheral.identifier.UUIDString;
-
+    
     UILabel *rssi = (UILabel *)[cell viewWithTag:3];
     rssi.text = [cur.discoveryTimeRSSI stringValue];
     
@@ -117,6 +83,16 @@ UILabel *messageLabel;
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return @"Devices";
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    if (self.isScanning) {
+        UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        activity.center = CGPointMake(95, 40);
+        [activity startAnimating];
+        [view addSubview:activity];
+    }
 }
 
 #pragma mark - Navigation
