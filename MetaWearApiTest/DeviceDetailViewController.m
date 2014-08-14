@@ -45,12 +45,24 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *firmwareUpdateLabel;
 
+@property (strong, nonatomic) UIView *grayScreen;
+
 @property (strong, nonatomic) NSString *accDataString;
 @property (strong, nonatomic) NSMutableArray *accDataArray;
 
 @end
 
 @implementation DeviceDetailViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.grayScreen = [[UIView alloc] initWithFrame:CGRectMake(0, 120, self.view.frame.size.width, self.view.frame.size.height - 120)];
+    self.grayScreen.backgroundColor = [UIColor grayColor];
+    self.grayScreen.alpha = 0.4;
+    [self.view addSubview:self.grayScreen];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -61,14 +73,20 @@
     [self.stopAccelerometer setEnabled:FALSE];
 }
 
+- (void)setConnected:(BOOL)on
+{
+    [self.connectionSwitch setOn:on animated:YES];
+    [self.grayScreen setHidden:on];
+}
+
 - (void)connectDevice:(BOOL)on
 {
     if (on) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Connecting...";
         [[MBLMetaWearManager sharedManager] connectMetaWear:self.device withHandler:^(NSError *error) {
-            [self.connectionSwitch setOn:(error == nil) animated:YES];
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [self setConnected:(error == nil)];
                 hud.mode = MBProgressHUDModeText;
                 if (error) {
                     hud.labelText = error.localizedDescription;
@@ -83,8 +101,8 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Disconnecting...";
         [[MBLMetaWearManager sharedManager] cancelMetaWearConnection:self.device withHandler:^(NSError *error) {
-            [self.connectionSwitch setOn:NO animated:YES];
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [self setConnected:NO];
                 hud.mode = MBProgressHUDModeText;
                 if (error) {
                     hud.labelText = error.localizedDescription;
@@ -188,14 +206,14 @@
 - (IBAction)resetDevicePressed:(id)sender
 {
     // Resetting causes a disconnection
-    [self.connectionSwitch setOn:NO animated:YES];
+    [self setConnected:NO];
     [self.device resetDevice];
 }
 
 - (IBAction)checkForFirmwareUpdatesPressed:(id)sender
 {
     [self.device checkForFirmwareUpdateWithHandler:^(BOOL isTrue, NSError *error) {
-        self.firmwareUpdateLabel.text = isTrue ? @"YES" : @"NO";
+        self.firmwareUpdateLabel.text = isTrue ? @"TODO" : @"TODO";
     }];
 }
 
@@ -207,7 +225,7 @@
     hud.labelText = @"Updating...";
 
     // Updating firmware causes a disconnection
-    [self.connectionSwitch setOn:NO animated:YES];
+    [self setConnected:NO];
     
     [self.device updateFirmwareWithHandler:^(NSError *error) {
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
