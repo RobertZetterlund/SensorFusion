@@ -45,13 +45,12 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *firmwareUpdateLabel;
 
+@property (strong, nonatomic) NSString *accDataString;
+@property (strong, nonatomic) NSMutableArray *accDataArray;
+
 @end
 
 @implementation DeviceDetailViewController
-
-NSString *accDataString;
-NSMutableArray *accDataArray;
-NSDate *dataStartTime;
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -118,18 +117,15 @@ NSDate *dataStartTime;
 - (IBAction)flashGreenLEDPressed:(id)sender
 {
     [self.device.led flashLEDColor:[UIColor greenColor] withIntensity:0.25];
-
 }
 
 - (IBAction)turnOnRedLEDPressed:(id)sender
 {
     [self.device.led setLEDColor:[UIColor redColor] withIntensity:0.25];
-
 }
 - (IBAction)flashRedLEDPressed:(id)sender
 {
     [self.device.led flashLEDColor:[UIColor redColor] withIntensity:0.25];
-
 }
 
 - (IBAction)turnOnBlueLEDPressed:(id)sender
@@ -290,7 +286,6 @@ NSDate *dataStartTime;
         self.accelerometerGraph.fullScale = 8;
     }
     
-    
     self.device.accelerometer.fullScaleRange = (int)self.accelerometerScale.selectedSegmentIndex;
     self.device.accelerometer.sampleFrequency = (int)self.sampleFrequency.selectedSegmentIndex;
     self.device.accelerometer.highPassFilter = self.highPassFilterSwitch.on;
@@ -304,18 +299,12 @@ NSDate *dataStartTime;
     [self.stopAccelerometer setEnabled:TRUE];
     
     // These variables are used for data recording
-    dataStartTime = [NSDate date];
-    accDataArray = [[NSMutableArray alloc] initWithCapacity:1000];
+    self.accDataArray = [[NSMutableArray alloc] initWithCapacity:1000];
     
     [self.device.accelerometer startAccelerometerUpdatesWithHandler:^(MBLAccelerometerData *acceleration, NSError *error) {
         [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
         // Add filtered data to data array for saving
-        MBLAccelerometerData *accData = [[MBLAccelerometerData alloc] init];
-        accData.x = acceleration.x;
-        accData.y = acceleration.y;
-        accData.z = acceleration.z;
-        accData.accDataInterval = [dataStartTime timeIntervalSinceNow];
-        [accDataArray addObject:accData];
+        [self.accDataArray addObject:acceleration];
     }];
 }
 
@@ -326,13 +315,13 @@ NSDate *dataStartTime;
     [self.startAccelerometer setEnabled:TRUE];
     [self.stopAccelerometer setEnabled:FALSE];
     
-    accDataString = [self processAccData];
+    self.accDataString = [self processAccData];
 }
 
 - (NSString *)processAccData
 {
     NSMutableString *AccelerometerString = [[NSMutableString alloc] init];
-    for (MBLAccelerometerData *dataElement in accDataArray)
+    for (MBLAccelerometerData *dataElement in self.accDataArray)
     {
         @autoreleasepool {
             [AccelerometerString appendFormat:@"%f,%f,%f,%f\n", dataElement.accDataInterval,
@@ -370,12 +359,17 @@ NSDate *dataStartTime;
 
 - (IBAction)sendDataPressed:(id)sender
 {
-    NSString *filePath = [self saveDatatoDisk:accDataString];
+    NSString *filePath = [self saveDatatoDisk:self.accDataString];
     [self mailMe:filePath];
 }
 
 - (void)mailMe:(NSString *)filePath
 {
+    if (![MFMailComposeViewController canSendMail]) {
+        [[[UIAlertView alloc] initWithTitle:@"Mail Error" message:@"This device does not have an email account setup" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+        return;
+    }
+
     // Get current Time/Date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeStyle:NSDateFormatterLongStyle];
