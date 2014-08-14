@@ -321,7 +321,7 @@
     
     [self.device.accelerometer startAccelerometerUpdatesWithHandler:^(MBLAccelerometerData *acceleration, NSError *error) {
         [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
-        // Add filtered data to data array for saving
+        // Add data to data array for saving
         [self.accDataArray addObject:acceleration];
     }];
 }
