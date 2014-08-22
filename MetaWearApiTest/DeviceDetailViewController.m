@@ -213,7 +213,7 @@
 - (IBAction)checkForFirmwareUpdatesPressed:(id)sender
 {
     [self.device checkForFirmwareUpdateWithHandler:^(BOOL isTrue, NSError *error) {
-        self.firmwareUpdateLabel.text = isTrue ? @"TODO" : @"TODO";
+        self.firmwareUpdateLabel.text = isTrue ? @"Avaliable!" : @"Up To Date";
     }];
 }
 
