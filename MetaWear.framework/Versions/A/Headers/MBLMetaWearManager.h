@@ -36,6 +36,18 @@
  */
 - (void)startScanForMetaWearsWithHandler:(MBLArrayHandler)handler;
 /**
+ Begin scanning for MetaWear devices with the option to filter duplicate devices or not.
+ This will invoke the provided block each time a new device shows up if filter == YES or
+ each time a new advertising packet is found if filter == NO. This continues until 
+ stopScanForMetaWears is called.
+ @param BOOL duplicates, YES: only callback when a new device is found, NO: callback each time
+ @param MBLArrayHandler handler, Callback to handle each time a new device is found
+ a new advertising packet is found
+ @returns none
+ */
+- (void)startScanForMetaWearsAllowDuplicates:(BOOL)duplicates handler:(MBLArrayHandler)handler;
+
+/**
  Stop scanning for MetaWear devices, this will release all handlers given to
  startManagerStateUpdatesWithHandler:
  @returns none

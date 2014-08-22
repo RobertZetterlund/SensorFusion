@@ -30,12 +30,14 @@
 {
     self.isScanning = on;
     if (on) {
-        [[MBLMetaWearManager sharedManager] startScanForMetaWearsWithHandler:^(NSArray *array) {
+        [[MBLMetaWearManager sharedManager] startScanForMetaWearsAllowDuplicates:YES handler:^(NSArray *array) {
             self.devices = [array mutableCopy];
             [self.devices sortUsingComparator:^NSComparisonResult(MBLMetaWear *dev1, MBLMetaWear *dev2) {
                 return [dev1.peripheral.RSSI compare:dev2.peripheral.RSSI];
             }];
-            [self.tableView reloadData];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [self.tableView reloadData];
+            }];
         }];
     } else {
         [[MBLMetaWearManager sharedManager] stopScanForMetaWears];

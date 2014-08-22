@@ -63,7 +63,7 @@
 /** 
  Stored value of signal strength at discovery time 
  */
-@property (nonatomic, strong, readonly) NSNumber *discoveryTimeRSSI;
+@property (nonatomic, strong) NSNumber *discoveryTimeRSSI;
 
 // *** Sensors ***
 @property (nonatomic, strong, readonly) MBLMechanicalSwitch *mechanicalSwitch;
