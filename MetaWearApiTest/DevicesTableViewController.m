@@ -12,8 +12,10 @@
 
 @interface DevicesTableViewController ()
 
-@property (nonatomic, strong) NSMutableArray *devices;
-@property (nonatomic) BOOL isScanning;
+@property (nonatomic, strong) NSArray *devices;
+@property (strong, nonatomic) UIActivityIndicatorView *activity;
+
+@property (weak, nonatomic) IBOutlet UISwitch *scanningSwitch;
 
 @end
 
@@ -23,25 +25,36 @@
 {
     [super viewDidLoad];
     
-    [self setScanning:YES];
+    self.activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activity.center = CGPointMake(95, 90);
+    [self.tableView addSubview:self.activity];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self setScanning:self.scanningSwitch.on];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [self setScanning:NO];
 }
 
 - (void)setScanning:(BOOL)on
 {
-    self.isScanning = on;
     if (on) {
+        [self.activity startAnimating];
         [[MBLMetaWearManager sharedManager] startScanForMetaWearsAllowDuplicates:YES handler:^(NSArray *array) {
-            self.devices = [array mutableCopy];
-            [self.devices sortUsingComparator:^NSComparisonResult(MBLMetaWear *dev1, MBLMetaWear *dev2) {
-                return [dev1.peripheral.RSSI compare:dev2.peripheral.RSSI];
-            }];
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [self.tableView reloadData];
-            }];
+            self.devices = array;
+            [self.tableView reloadData];
         }];
     } else {
+        [self.activity stopAnimating];
         [[MBLMetaWearManager sharedManager] stopScanForMetaWears];
-        [self.tableView reloadData];
     }
 }
 
@@ -85,16 +98,6 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return @"Devices";
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
-{
-    if (self.isScanning) {
-        UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        activity.center = CGPointMake(95, 40);
-        [activity startAnimating];
-        [view addSubview:activity];
-    }
 }
 
 #pragma mark - Navigation

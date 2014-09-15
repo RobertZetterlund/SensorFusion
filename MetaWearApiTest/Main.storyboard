@@ -127,6 +127,7 @@
                     <navigationItem key="navigationItem" title="Devices" id="qQr-oR-aFB"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="scanningSwitch" destination="M85-Ro-D6U" id="ToJ-Jy-VZY"/>
                         <segue destination="cmV-QT-OnK" kind="push" identifier="DeviceDetails" id="f7o-am-8l3"/>
                     </connections>
                 </tableViewController>

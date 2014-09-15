@@ -85,33 +85,29 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Connecting...";
         [[MBLMetaWearManager sharedManager] connectMetaWear:self.device withHandler:^(NSError *error) {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [self setConnected:(error == nil)];
-                hud.mode = MBProgressHUDModeText;
-                if (error) {
-                    hud.labelText = error.localizedDescription;
-                    [hud hide:YES afterDelay:2];
-                } else {
-                    hud.labelText = @"Connected!";
-                    [hud hide:YES afterDelay:0.5];
-                }
-            }];
+            [self setConnected:(error == nil)];
+            hud.mode = MBProgressHUDModeText;
+            if (error) {
+                hud.labelText = error.localizedDescription;
+                [hud hide:YES afterDelay:2];
+            } else {
+                hud.labelText = @"Connected!";
+                [hud hide:YES afterDelay:0.5];
+            }
         }];
     } else {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Disconnecting...";
         [[MBLMetaWearManager sharedManager] cancelMetaWearConnection:self.device withHandler:^(NSError *error) {
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [self setConnected:NO];
-                hud.mode = MBProgressHUDModeText;
-                if (error) {
-                    hud.labelText = error.localizedDescription;
-                    [hud hide:YES afterDelay:2];
-                } else {
-                    hud.labelText = @"Disconnected!";
-                    [hud hide:YES afterDelay:0.5];
-                }
-            }];
+            [self setConnected:NO];
+            hud.mode = MBProgressHUDModeText;
+            if (error) {
+                hud.labelText = error.localizedDescription;
+                [hud hide:YES afterDelay:2];
+            } else {
+                hud.labelText = @"Disconnected!";
+                [hud hide:YES afterDelay:0.5];
+            }
         }];
     }
 }
@@ -228,15 +224,13 @@
     [self setConnected:NO];
     
     [self.device updateFirmwareWithHandler:^(NSError *error) {
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            if (error) {
-                hud.labelText = error.localizedDescription;
-                NSLog(@"Firmware update error: %@", error.localizedDescription);
-            } else {
-                hud.labelText = @"Success!";
-            }
-            [hud hide:YES afterDelay:2.5];
-        }];
+        if (error) {
+            hud.labelText = error.localizedDescription;
+            NSLog(@"Firmware update error: %@", error.localizedDescription);
+        } else {
+            hud.labelText = @"Success!";
+        }
+        [hud hide:YES afterDelay:2.5];
     } progressHandler:^(float number, NSError *error) {
         hud.progress = number;
     }];
