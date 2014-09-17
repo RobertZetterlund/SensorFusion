@@ -1,8 +1,8 @@
 /**
- * MBLTemperature.h
+ * MBLDataProcessor.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 8/1/14.
+ * Created by Stephen Schiffli on 9/15/14.
  * Copyright 2014 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
@@ -33,17 +33,9 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <Foundation/Foundation.h>
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLModule.h>
 
-@class MBLMetaWear;
-
-@interface MBLTemperature : MBLModule
-
-/**
- Query the current temperature of the device in degrees C
- */
-- (void)readTemperatureWithHandler:(MBLDecimalNumberHandler)handler;
+@interface MBLDataProcessor : MBLModule
 
 @end
