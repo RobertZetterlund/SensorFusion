@@ -33,7 +33,6 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <MetaWear/MBLConstants.h>
 
@@ -45,10 +44,33 @@
 @class MBLHapticBuzzer;
 @class MBLiBeacon;
 @class MBLNeopixel;
-@class MBLEvent;
-@class MBLDataProcessor;
 
 @interface MBLMetaWear : NSObject <CBPeripheralDelegate>
+
+// *** On device sensors ***
+@property (nonatomic, strong, readonly) MBLMechanicalSwitch *mechanicalSwitch;
+@property (nonatomic, strong, readonly) MBLLED *led;
+@property (nonatomic, strong, readonly) MBLTemperature *temperature;
+@property (nonatomic, strong, readonly) MBLAccelerometer *accelerometer;
+@property (nonatomic, strong, readonly) MBLGPIO *gpio;
+@property (nonatomic, strong, readonly) MBLHapticBuzzer *hapticBuzzer;
+@property (nonatomic, strong, readonly) MBLiBeacon *iBeacon;
+@property (nonatomic, strong, readonly) MBLNeopixel *neopixel;
+
+/**
+ Represents the current connection state of the MetaWear.
+ */
+@property (nonatomic, readonly) CBPeripheralState state;
+/**
+ iOS generated unique identifier for this device.  Note this is a per app identifier,
+ so one MetaWear device will always have the same identifier within a single app, but
+ different identifiers in different accross apps
+ */
+@property (nonatomic, strong, readonly) NSUUID *identifier;
+/**
+ Stored value of signal strength at discovery time
+ */
+@property (nonatomic, strong) NSNumber *discoveryTimeRSSI;
 
 /**
  Query the current RSSI
@@ -64,7 +86,7 @@
 - (void)readDeviceInfoWithHandler:(MBLDeviceInfoHandler)handler;
 
 /**
- Perform a software reset of the device
+ Perform a software reset of the device, note this will cause the device to disconnect
  */
 - (void)resetDevice;
 
@@ -72,38 +94,20 @@
  See if this device is running the most up to date firmware
  */
 - (void)checkForFirmwareUpdateWithHandler:(MBLBoolHandler)handler;
+
 /**
- Updates the device to the latest firmware.  Executes the progressHandler
- periodically with the progress (0.0 - 1.0), progressHandler will get called
- with 1.0 before handler is called.  handler will be passed a nil NSError* if
- update was successful and non-nil NSError* otherwise.
+ Updates the device to the latest firmware, or re-installs the latest firmware.
+ Please make sure the device is charged at 50% or above to prevent errors.
+ Executes the progressHandler periodically with the firmware image uploading
+ progress (0.0 - 1.0), once it's called with 1.0, you can still expect another 5
+ seconds while we wait for the device to install the firmware and reboot.  After
+ the reboot, handler will be called and passed an NSError object if the update
+ failed or nil if the update was successful.
  @param MBLErrorHandler handler, Callback once update is complete
  @param MBLFloatHandler progressHandler, Periodically called while firmware upload is in progress
  @returns none
  */
 - (void)updateFirmwareWithHandler:(MBLErrorHandler)handler
                   progressHandler:(MBLFloatHandler)progressHandler;
-
-
-/** 
- Pointer the underlying CoreBluetooth object 
- */
-@property (nonatomic, strong, readonly) CBPeripheral *peripheral;
-/** 
- Stored value of signal strength at discovery time 
- */
-@property (nonatomic, strong) NSNumber *discoveryTimeRSSI;
-
-// *** Sensors ***
-@property (nonatomic, strong, readonly) MBLMechanicalSwitch *mechanicalSwitch;
-@property (nonatomic, strong, readonly) MBLLED *led;
-@property (nonatomic, strong, readonly) MBLTemperature *temperature;
-@property (nonatomic, strong, readonly) MBLAccelerometer *accelerometer;
-@property (nonatomic, strong, readonly) MBLGPIO *gpio;
-@property (nonatomic, strong, readonly) MBLHapticBuzzer *hapticBuzzer;
-@property (nonatomic, strong, readonly) MBLiBeacon *iBeacon;
-@property (nonatomic, strong, readonly) MBLNeopixel *neopixel;
-@property (nonatomic, strong, readonly) MBLEvent *event;
-@property (nonatomic, strong, readonly) MBLDataProcessor *dataProcessor;
 
 @end

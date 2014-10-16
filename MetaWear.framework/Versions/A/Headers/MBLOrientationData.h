@@ -1,8 +1,8 @@
 /**
- * MBLHapticBuzzer.h
+ * MBLOrientationData.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 8/2/14.
+ * Created by Stephen Schiffli on 10/15/14.
  * Copyright 2014 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
@@ -33,25 +33,15 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <MetaWear/MBLConstants.h>
+#import <MetaWear/MBLLogEntry.h>
 
-@interface MBLHapticBuzzer : NSObject
+typedef enum {
+    MBLAccelerometerOrientationPortrait = 0,
+    MBLAccelerometerOrientationPortraitUpsideDown = 1,
+    MBLAccelerometerOrientationLandscapeRight = 2,
+    MBLAccelerometerOrientationLandscapeLeft = 3
+} MBLAccelerometerOrientation;
 
-/**
- Turn on Haptic Driver.
- @param uint8_t dcycle, Duty cycle (0-248), relative strength of buzz
- @param uint16_t pwidth, Duration of buzz in mSec
- @param MBLVoidHandler completion, callback when the buzz is complete
- @returns none
- */
-- (void)startHapticWithDutyCycle:(uint8_t)dcycle pulseWidth:(uint16_t)pwidth completion:(MBLVoidHandler)completion;
-
-/**
- Turn on Buzzer Driver.
- @param uint16_t pwidth, Duration of buzz in mSec
- @param MBLVoidHandler completion, callback when the buzz is complete
- @returns none
- */
-- (void)startBuzzerWithPulseWidth:(uint16_t)pwidth completion:(MBLVoidHandler)completion;
-
+@interface MBLOrientationData : MBLLogEntry
+@property (nonatomic) MBLAccelerometerOrientation orientation;
 @end

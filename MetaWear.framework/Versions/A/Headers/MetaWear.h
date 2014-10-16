@@ -33,18 +33,20 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <MetaWear/MBLMetaWearManager.h>
-#import <MetaWear/MBLMetaWear.h>
+#import <MetaWear/MBLAccelerometer.h>
+#import <MetaWear/MBLAccelerometerData.h>
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLDeviceInfo.h>
-
-#import <MetaWear/MBLMechanicalSwitch.h>
-#import <MetaWear/MBLAccelerometer.h>
-#import <MetaWear/MBLTemperature.h>
-#import <MetaWear/MBLLED.h>
+#import <MetaWear/MBLEvent.h>
 #import <MetaWear/MBLGPIO.h>
 #import <MetaWear/MBLHapticBuzzer.h>
 #import <MetaWear/MBLiBeacon.h>
+#import <MetaWear/MBLLED.h>
+#import <MetaWear/MBLLogEntry.h>
+#import <MetaWear/MBLMechanicalSwitch.h>
+#import <MetaWear/MBLMetaWear.h>
+#import <MetaWear/MBLMetaWearManager.h>
 #import <MetaWear/MBLNeopixel.h>
-#import <MetaWear/MBLEvent.h>
-#import <MetaWear/MBLDataProcessor.h>
+#import <MetaWear/MBLOrientationData.h>
+#import <MetaWear/MBLTemperature.h>
+#import <MetaWear/MBLTemperatureData.h>

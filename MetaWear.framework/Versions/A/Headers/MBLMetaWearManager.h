@@ -33,7 +33,6 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <Foundation/Foundation.h>
 #import <MetaWear/MBLMetaWear.h>
 #import <MetaWear/MBLConstants.h>
 
@@ -47,20 +46,27 @@
 + (instancetype)sharedManager;
 
 /**
- Sets the queue for which all callbacks will occur on.  Setting this cancels all ongoing scans,
- so typically this would be set once upfront.  Defaults to the main queue.
- @param dispatch_queue_t queue, The dispatch queue on which the events will be dispatched.
+ Sets the queue for which all callbacks will occur on.  Defaults to the main queue.
+ @param NSOperationQueue queue, The queue on which the events will be dispatched.
  @returns none
  */
-- (void)setCallbackQueue:(dispatch_queue_t)queue;
+- (void)setCallbackQueue:(NSOperationQueue *)queue;
 
 /**
  Subscribe to upates to in the internal bluetooth manager state, this is useful
  for displaying errors if the user happens to turn off bluetooth radio in settings
- @param MBLCentralManagerStateHandler handler, Callback to handle each time a new device is found
+ @param MBLCentralManagerStateHandler handler, Callback to handle each the state changes
  @returns none
  */
 - (void)startManagerStateUpdatesWithHandler:(MBLCentralManagerStateHandler)handler;
+
+
+/**
+ Returns a list of known MetaWear's by their identifiers.
+ @param NSArray identifiers, A list of peripheral identifiers (represented by NSUUID objects)
+ @returns NSArray, A list of MBLMetaWear objects the manager was able to match
+ */
+- (NSArray *)retrieveMetaWearsWithIdentifiers:(NSArray *)identifiers;
 
 /**
  Begin scanning for MetaWear devices. This will invoke the provided block each time a
@@ -73,8 +79,10 @@
 /**
  Begin scanning for MetaWear devices with the option to filter duplicate devices or not.
  This will invoke the provided block each time a new device shows up if filter == YES or
- each time a new advertising packet is found if filter == NO. This continues until 
- stopScanForMetaWears is called.
+ each time a new advertising packet is found if filter == NO (may be many times per second).
+ This can be useful in specific situations, such as making a connection based on a 
+ MetaWear's RSSI, but may have an adverse affect on battery-life and application performance,
+ so use wisely.  This continues until stopScanForMetaWears is called.
  @param BOOL duplicates, YES: only callback when a new device is found, NO: callback each time
  @param MBLArrayHandler handler, Callback to handle each time a new device is found
  a new advertising packet is found
@@ -89,22 +97,43 @@
  */
 - (void)stopScanForMetaWears;
 
-/**
- Connect to the given MetaWear board. Once connection is complete, the provided block 
- will be invoked.  If the NSError pointer provided to the block is not null then the 
- connection failed, otherwise success
- @param MBLMetaWear device, MetaWear device to connect to
- @param MBLErrorHandler handler, Callback once connection is complete
- @returns none
- */
-- (void)connectMetaWear:(MBLMetaWear *)device withHandler:(MBLErrorHandler)handler;
 
 /**
- Disconnect from the given MetaWear board.
- @param MBLMetaWear device, MetaWear device to disconnect from
- @param MBLErrorHandler handler, Callback once disconnection is complete
+ Connect to the given MetaWear board. If a connection is successfully acquired the
+ the connectionHandler block will be invoked.  If the connection failed or a
+ disconnection happens later for any reason then the disconnectionHandler block
+ is invoked.
+ @param MBLMetaWear device, MetaWear device to connect to
+ @param MBLVoidHandler connectionHandler, Callback once connection is complete
+ @param MBLErrorHandler disconnectionHandler, Callback if connection fails or when
+ it disconnects for any reason, an NSError will be provided if the disconnection is
+ unexpected
  @returns none
  */
-- (void)cancelMetaWearConnection:(MBLMetaWear *)device withHandler:(MBLErrorHandler)handler;
+- (void)connectMetaWear:(MBLMetaWear *)device
+      connectionHandler:(MBLVoidHandler)connectionHandler
+   disconnectionHandler:(MBLErrorHandler)disconnectionHandler;
+
+/**
+ Disconnect from the given MetaWear board.  You will recieve a callback on the
+ disconnectionHandler passed into connectMetaWear:connectionHandler:disconnectionHandler:
+ once disconnection is complete
+ @param MBLMetaWear device, MetaWear device to disconnect from
+ @returns none
+ */
+- (void)cancelMetaWearConnection:(MBLMetaWear *)device;
+
+
+
+/**
+ * @deprecated use connectMetaWear:connectionHandler:disconnectionHandler: instead
+ * @see connectMetaWear:connectionHandler:disconnectionHandler:
+ */
+- (void)connectMetaWear:(MBLMetaWear *)device withHandler:(MBLErrorHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use connectMetaWear:connectionHandler:disconnectionHandler: instead");
+/**
+ * @deprecated use cancelMetaWearConnection: instead
+ * @see cancelMetaWearConnection:
+ */
+- (void)cancelMetaWearConnection:(MBLMetaWear *)device withHandler:(MBLErrorHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use cancelMetaWearConnection: instead");
 
 @end

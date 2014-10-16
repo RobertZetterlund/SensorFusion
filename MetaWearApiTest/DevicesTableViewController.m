@@ -102,14 +102,18 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     MBLMetaWear *cur = self.devices[indexPath.row];
     
-    UILabel *name = (UILabel *)[cell viewWithTag:1];
-    name.text = cur.peripheral.name;
+    UILabel *uuid = (UILabel *)[cell viewWithTag:1];
+    uuid.text = cur.identifier.UUIDString;
     
-    UILabel *uuid = (UILabel *)[cell viewWithTag:2];
-    uuid.text = cur.peripheral.identifier.UUIDString;
-    
-    UILabel *rssi = (UILabel *)[cell viewWithTag:3];
+    UILabel *rssi = (UILabel *)[cell viewWithTag:2];
     rssi.text = [cur.discoveryTimeRSSI stringValue];
+    
+    UILabel *connected = (UILabel *)[cell viewWithTag:3];
+    if (cur.state == CBPeripheralStateConnected) {
+        [connected setHidden:NO];
+    } else {
+        [connected setHidden:YES];
+    }
     
     return cell;
 }

@@ -33,11 +33,20 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <Foundation/Foundation.h>
 #import <MetaWear/MBLConstants.h>
-#import <MetaWear/MBLModule.h>
 
-@interface MBLGPIO : MBLModule
+typedef enum {
+    MBLPinConfigurationPullup = 0,
+    MBLPinConfigurationPulldown = 1,
+    MBLPinConfigurationNopull = 2
+} MBLPinConfiguration;
+
+typedef enum {
+    MBLAnalogReadModeFixed = 0,
+    MBLAnalogReadModeSupplyRatio = 1
+} MBLAnalogReadMode;
+
+@interface MBLGPIO : NSObject
 
 /**
  Set a digital output GPIO Pin to a 1 or 0.
@@ -50,24 +59,48 @@
 /**
  Set input GPIO pin type.
  @param uint8_t pinNumber, number of the pin
- @param uint8_t type, option type (0: pullup, 1: pulldown, 2/else: nopull)
+ @param MBLPinConfiguration type, pin configuration type
  @returns none
  */
-- (void)configurePin:(uint8_t)pinNumber withOptions:(uint8_t)type;
+- (void)configurePin:(uint8_t)pinNumber type:(MBLPinConfiguration)type;
 
 /**
  Read Analog value of GPIO Pin.
  @param uint8_t pinNumber, number of the pin
- @param uint8_t option, option type (0: use internal Vref, 1/else: use supply voltage ratio)
+ @param MBLAnalogReadMode mode, MBLAnalogReadModeFixed gives a reading in actual volts,
+ when MBLAnalogReadModeSupplyRatio is used, the numbers comes back [0, 1.0] where 0 indicates
+ then input is equal to ground, and 1.0 indicates the input is equal to the supply voltage
+ @param MBLDecimalNumberHandler handler, Callback once read is complete
  @returns none
  */
-- (void)readAnalogPin:(uint8_t)pinNumber usingOptions:(uint8_t)option withHandler:(MBLDecimalNumberHandler)handler;
+- (void)readAnalogPin:(uint8_t)pinNumber mode:(MBLAnalogReadMode)mode handler:(MBLDecimalNumberHandler)handler;
 
 /**
  Read Digital value of GPIO Pin.
  @param uint8_t pinNumber, number of the pin
+ @param MBLBoolHandler handler, Callback once read is complete
  @returns none
  */
-- (void)readDigitalPin:(uint8_t)pinNumber withHander:(MBLBoolHandler)handler;
+- (void)readDigitalPin:(uint8_t)pinNumber handler:(MBLBoolHandler)handler;
+
+
+
+/**
+ * @deprecated use configurePin:type: instead
+ * @see configurePin:type:
+ */
+- (void)configurePin:(uint8_t)pinNumber withOptions:(uint8_t)type DEPRECATED_MSG_ATTRIBUTE("Use configurePin:type: instead");
+
+/**
+ * @deprecated use readDigitalPin:handler: instead
+ * @see readDigitalPin:handler:
+ */
+- (void)readDigitalPin:(uint8_t)pinNumber withHander:(MBLBoolHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use readDigitalPin:handler: instead");
+
+/**
+ * @deprecated use readAnalogPin:mode:handler: instead
+ * @see readAnalogPin:mode:handler:
+ */
+- (void)readAnalogPin:(uint8_t)pinNumber usingOptions:(uint8_t)option withHandler:(MBLDecimalNumberHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use readAnalogPin:mode:handler: instead");
 
 @end

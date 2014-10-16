@@ -73,6 +73,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *firmwareUpdateLabel;
 
 @property (strong, nonatomic) UIView *grayScreen;
+@property (strong, nonatomic) MBProgressHUD *hud;
 
 @property (strong, nonatomic) NSString *accDataString;
 @property (strong, nonatomic) NSMutableArray *accDataArray;
@@ -89,15 +90,17 @@
     self.grayScreen.backgroundColor = [UIColor grayColor];
     self.grayScreen.alpha = 0.4;
     [self.view addSubview:self.grayScreen];
+    
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.hud];
+    
+    [self.stopAccelerometer setEnabled:FALSE];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     [self connectDevice:YES];
-    
-    [self.stopAccelerometer setEnabled:FALSE];
 }
 
 - (void)setConnected:(BOOL)on
@@ -109,33 +112,30 @@
 - (void)connectDevice:(BOOL)on
 {
     if (on) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.labelText = @"Connecting...";
-        [[MBLMetaWearManager sharedManager] connectMetaWear:self.device withHandler:^(NSError *error) {
-            [self setConnected:(error == nil)];
-            hud.mode = MBProgressHUDModeText;
+        self.hud.labelText = @"Connecting...";
+        self.hud.mode = MBProgressHUDModeIndeterminate;
+        [self.hud show:YES];
+        [[MBLMetaWearManager sharedManager] connectMetaWear:self.device connectionHandler:^{
+            [self setConnected:YES];
+            self.hud.mode = MBProgressHUDModeText;
+            self.hud.labelText = @"Connected!";
+            [self.hud hide:YES afterDelay:0.5];
+        } disconnectionHandler:^(NSError *error) {
+            [self setConnected:NO];
+            self.hud.mode = MBProgressHUDModeText;
             if (error) {
-                hud.labelText = error.localizedDescription;
-                [hud hide:YES afterDelay:2];
+                self.hud.labelText = error.localizedDescription;
+                [self.hud hide:YES afterDelay:2];
             } else {
-                hud.labelText = @"Connected!";
-                [hud hide:YES afterDelay:0.5];
+                self.hud.labelText = @"Disconnected!";
+                [self.hud hide:YES afterDelay:0.5];
             }
         }];
     } else {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.labelText = @"Disconnecting...";
-        [[MBLMetaWearManager sharedManager] cancelMetaWearConnection:self.device withHandler:^(NSError *error) {
-            [self setConnected:NO];
-            hud.mode = MBProgressHUDModeText;
-            if (error) {
-                hud.labelText = error.localizedDescription;
-                [hud hide:YES afterDelay:2];
-            } else {
-                hud.labelText = @"Disconnected!";
-                [hud hide:YES afterDelay:0.5];
-            }
-        }];
+        self.hud.labelText = @"Disconnecting...";
+        self.hud.mode = MBProgressHUDModeIndeterminate;
+        [self.hud show:YES];
+        [[MBLMetaWearManager sharedManager] cancelMetaWearConnection:self.device];
     }
 }
 
@@ -192,14 +192,14 @@
 
 - (IBAction)startSwitchNotifyPressed:(id)sender
 {
-    [self.device.mechanicalSwitch startSwitchUpdatesWithHandler:^(BOOL isPressed, NSError *error) {
-        self.mechanicalSwitchLabel.text = isPressed ? @"Down" : @"Up";
+    [self.device.mechanicalSwitch.switchUpdateEvent startNotificationsWithHandler:^(NSNumber *isPressed, NSError *error) {
+        self.mechanicalSwitchLabel.text = isPressed.boolValue ? @"Down" : @"Up";
     }];
 }
 
 - (IBAction)StopSwitchNotifyPressed:(id)sender
 {
-    [self.device.mechanicalSwitch stopSwitchUpdates];
+    [self.device.mechanicalSwitch.switchUpdateEvent stopNotifications];
 }
 
 - (IBAction)readBatteryPressed:(id)sender
@@ -228,8 +228,10 @@
 
 - (IBAction)resetDevicePressed:(id)sender
 {
-    // Resetting causes a disconnection
-    [self setConnected:NO];
+    self.hud.labelText = @"Resetting...";
+    self.hud.mode = MBProgressHUDModeIndeterminate;
+    [self.hud show:YES];
+    
     [self.device resetDevice];
 }
 
@@ -246,11 +248,9 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
     hud.labelText = @"Updating...";
-
-    // Updating firmware causes a disconnection
-    [self setConnected:NO];
     
     [self.device updateFirmwareWithHandler:^(NSError *error) {
+        hud.mode = MBProgressHUDModeText;
         if (error) {
             hud.labelText = error.localizedDescription;
             NSLog(@"Firmware update error: %@", error.localizedDescription);
@@ -260,6 +260,10 @@
         [hud hide:YES afterDelay:2.5];
     } progressHandler:^(float number, NSError *error) {
         hud.progress = number;
+        if (number == 1.0) {
+            hud.mode = MBProgressHUDModeIndeterminate;
+            hud.labelText = @"Resetting...";
+        }
     }];
 }
 
@@ -284,15 +288,15 @@
 
 - (IBAction)setPullUpPressed:(id)sender
 {
-    [self.device.gpio configurePin:self.gpioPinSelector.selectedSegmentIndex withOptions:0];
+    [self.device.gpio configurePin:self.gpioPinSelector.selectedSegmentIndex type:MBLPinConfigurationPullup];
 }
 - (IBAction)setPullDownPressed:(id)sender
 {
-    [self.device.gpio configurePin:self.gpioPinSelector.selectedSegmentIndex withOptions:1];
+    [self.device.gpio configurePin:self.gpioPinSelector.selectedSegmentIndex type:MBLPinConfigurationPulldown];
 }
 - (IBAction)setNoPullPressed:(id)sender
 {
-    [self.device.gpio configurePin:self.gpioPinSelector.selectedSegmentIndex withOptions:2];
+    [self.device.gpio configurePin:self.gpioPinSelector.selectedSegmentIndex type:MBLPinConfigurationNopull];
 }
 - (IBAction)setPinPressed:(id)sender
 {
@@ -304,13 +308,13 @@
 }
 - (IBAction)readDigitalPressed:(id)sender
 {
-    [self.device.gpio readDigitalPin:self.gpioPinSelector.selectedSegmentIndex withHander:^(BOOL isTrue, NSError *error) {
+    [self.device.gpio readDigitalPin:self.gpioPinSelector.selectedSegmentIndex handler:^(BOOL isTrue, NSError *error) {
         self.gpioPinDigitalValue.text = isTrue ? @"1" : @"0";
     }];
 }
 - (IBAction)readAnalogPressed:(id)sender
 {
-    [self.device.gpio readAnalogPin:self.gpioPinSelector.selectedSegmentIndex usingOptions:0 withHandler:^(NSDecimalNumber *number, NSError *error) {
+    [self.device.gpio readAnalogPin:self.gpioPinSelector.selectedSegmentIndex mode:MBLAnalogReadModeFixed handler:^(NSDecimalNumber *number, NSError *error) {
         self.gpioPinAnalogValue.text = [number stringValue];
     }];
 }
@@ -340,7 +344,7 @@
     // These variables are used for data recording
     self.accDataArray = [[NSMutableArray alloc] initWithCapacity:1000];
     
-    [self.device.accelerometer startAccelerometerUpdatesWithHandler:^(MBLAccelerometerData *acceleration, NSError *error) {
+    [self.device.accelerometer.dataReadyEvent startNotificationsWithHandler:^(MBLAccelerometerData *acceleration, NSError *error) {
         [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
         // Add data to data array for saving
         [self.accDataArray addObject:acceleration];
@@ -349,7 +353,7 @@
 
 - (IBAction)stopAccelerationPressed:(id)sender
 {
-    [self.device.accelerometer stopAccelerometerUpdates];
+    [self.device.accelerometer.dataReadyEvent stopNotifications];
     
     [self.startAccelerometer setEnabled:TRUE];
     [self.stopAccelerometer setEnabled:FALSE];

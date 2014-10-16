@@ -34,9 +34,8 @@
  */
 
 #import <MetaWear/MBLConstants.h>
-#import <MetaWear/MBLModule.h>
 
-@interface MBLiBeacon : MBLModule
+@interface MBLiBeacon : NSObject
 
 /**
  The iBeacon UUID being broadcast, the default is the MetaWear Service UUID
@@ -60,14 +59,15 @@
  */
 @property (nonatomic) uint8_t powerTX;
 /**
- Advertisement frequency in ms, default is 500 ms
+ Advertisement frequency in ms, default is 100 ms
  */
 @property (nonatomic) uint16_t frequency;
 
 /**
  Change iBeacon state to on or off. Please set any configuration properties
  before calling this method, setting properties after this call will have
- no effect until setBeaconOn: is called again.
+ no effect until setBeaconOn: is called again.  Please note, that the
+ beacon is only visible if there are no active connections to the MetaWear
  @param BOOL on, YES turns iBeacon on, NO, turns iBeacon off
  @returns none
  */

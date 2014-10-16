@@ -33,17 +33,55 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <Foundation/Foundation.h>
 #import <MetaWear/MBLConstants.h>
-#import <MetaWear/MBLModule.h>
+#import <MetaWear/MBLEvent.h>
 
 @class MBLMetaWear;
 
-@interface MBLTemperature : MBLModule
+@interface MBLTemperature : NSObject
 
 /**
- Query the current temperature of the device in degrees C
+ Sampling period for temperature readings in mSec
+ */
+@property (nonatomic) uint16_t samplePeriod;
+/**
+ changeEvents occur when the temprature changes by this delta
+ */
+@property (nonatomic) float delta;
+/**
+ thresholdEvents occur when the temprature rises above or falls below this threshold
+ */
+@property (nonatomic) float upperThreshold;
+/**
+ thresholdEvents occur when the temprature rises above or falls below this threshold
+ */
+@property (nonatomic) float lowerThreshold;
+
+
+/**
+ Perform a one time read of the current device temperature in degrees C
  */
 - (void)readTemperatureWithHandler:(MBLDecimalNumberHandler)handler;
+
+/**
+ Event representing a new temperature data sample. This event will
+ occur every samplePeriod milliseconds. Event callbacks will be provided an
+ NSDecimalNumber object.
+ */
+@property (nonatomic, strong, readonly) MBLEvent *dataReadyEvent;
+
+/**
+ Event representing a temperature change by delta degrees. The temperature
+ is checked against the delta every samplePeriod milliseconds.  Event callbacks
+ will be provided an NSDecimalNumber object.
+ */
+@property (nonatomic, strong, readonly) MBLEvent *changeEvent;
+
+/**
+ Event representing a temperature threshold crossing. The temperature
+ is checked against the threshold every samplePeriod milliseconds.  Event 
+ callbacks will be provided an NSDecimalNumber object.
+ */
+@property (nonatomic, strong, readonly) MBLEvent *thresholdEvent;
 
 @end

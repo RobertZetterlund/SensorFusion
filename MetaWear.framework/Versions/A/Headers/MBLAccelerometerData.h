@@ -33,21 +33,21 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <Foundation/Foundation.h>
+#import <MetaWear/MBLLogEntry.h>
 
-@interface MBLAccelerometerData : NSObject
+@interface MBLAccelerometerData : MBLLogEntry
 
 /**
  Time since data collection began
  */
-@property (nonatomic, readonly) NSTimeInterval intervalSinceCaptureBegan;
+@property (nonatomic, readonly) NSTimeInterval intervalSinceCaptureBegan DEPRECATED_MSG_ATTRIBUTE("Use timestamp property instead");
 /**
  Acceleration along each axis in G's
  */
-@property (nonatomic, readonly) double x, y, z;
+@property (nonatomic, readonly) float x, y, z;
 /**
  RMS value of x, y, and z
  */
-@property (nonatomic, readonly) double RMS;
+@property (nonatomic, readonly) float RMS;
 
 @end

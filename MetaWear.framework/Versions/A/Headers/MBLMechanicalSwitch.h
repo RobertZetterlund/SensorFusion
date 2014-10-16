@@ -33,11 +33,10 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <Foundation/Foundation.h>
 #import <MetaWear/MBLConstants.h>
-#import <MetaWear/MBLModule.h>
+#import <MetaWear/MBLEvent.h>
 
-@interface MBLMechanicalSwitch : MBLModule
+@interface MBLMechanicalSwitch : NSObject
 
 /**
  Perform a single read of the switch state, then handler will be
@@ -48,19 +47,22 @@
 - (void)readSwitchStateWithHandler:(MBLSwitchStateHandler)handler;
 
 /**
- Start receiving updates when the mechanical switch state changes.  The provided
- blocked will be invoked each time a state change occurs.  Call stopSwitchUpdates:
- to release the block and stop recieving notifications
- @param MBLSwitchStateHandler handler, will be called once switch value is read
- @returns none
+ Event representing a change in the push button state (pressed/depressed).
+ Event callbacks will be provided an NSNumber object, were a bool value of
+ YES means pressed, and NO means released.
  */
-- (void)startSwitchUpdatesWithHandler:(MBLSwitchStateHandler)handler;
-/**
- Stop receiving switch state updates.
- will stop being called
- @param none
- @returns none
- */
-- (void)stopSwitchUpdates;
+@property (nonatomic, strong, readonly) MBLEvent *switchUpdateEvent;
 
+
+
+/**
+ * @deprecated use [switchUpdateEvent startNotificationsWithHandler] instead
+ * @see [switchUpdateEvent startNotificationsWithHandler]
+ */
+- (void)startSwitchUpdatesWithHandler:(MBLSwitchStateHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [switchUpdateEvent startNotificationsWithHandler] instead");
+/**
+ * @deprecated use [switchUpdateEvent stopNotifications] instead
+ * @see [switchUpdateEvent stopNotifications]
+ */
+- (void)stopSwitchUpdates DEPRECATED_MSG_ATTRIBUTE("Use [switchUpdateEvent stopNotifications] instead");
 @end

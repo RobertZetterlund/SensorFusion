@@ -34,61 +34,104 @@
  */
 
 #import <MetaWear/MBLConstants.h>
-#import <MetaWear/MBLModule.h>
+#import <UIKit/UIKit.h>
 
-@interface MBLNeopixel : MBLModule
+typedef enum {
+    MBLColorOrderingRGB = 0,
+    MBLColorOrderingRBG = 1,
+    MBLColorOrderingGRB = 2,
+    MBLColorOrderingGBR = 3
+} MBLColorOrdering;
+
+typedef enum {
+    MBLStrandSpeedSlow = 0,
+    MBLStrandSpeedFast = 1
+} MBLStrandSpeed;
+
+typedef enum {
+    MBLRotationDirectionTowardsBoard = 0,
+    MBLRotationDirectionAwayFromBoard = 1
+} MBLRotationDirection;
+
+@interface MBLNeopixel : NSObject
 
 /**
- Initialize the Neopixel thread.
- @param uint8_t index, strand index
- @param uint8_t color, color order and speed
- @param uint8_t pin, I/O pin
- @param uint8_t length, strand length
- @returns none
+ Initialize memory on the MetaWear board for a NeoPixel strand
+ @param uint8_t index, Strand number (id) to initialize, can be in the range [0, 2]
+ @param MBLColorOrdering color, Color ordering format
+ @param MBLStrandSpeed speed, Operating speed
+ @param uint8_t pin, GPIO pin the strand is connected to
+ @param uint8_t length, Number of pixels to initialize
  */
-- (void)initializeStrandAtIndex:(uint8_t)index withColor:(uint8_t)color pin:(uint8_t)pin andLength:(uint8_t)length;
+- (void)initializeStrandAtIndex:(uint8_t)index color:(MBLColorOrdering)color speed:(MBLStrandSpeed)speed pin:(uint8_t)pin length:(uint8_t)length;
 
 /**
  Hold Neopixel strand.
- @param uint8_t index, strand index
- @param BOOL enable, hold enable
+ @param uint8_t index, Strand number, can be in the range [0, 2]
+ @param BOOL enable, Hold enable
  @returns none
  */
 - (void)holdStrandAtIndex:(uint8_t)index withEnable:(BOOL)enable;
 
 /**
  Clear Neopixel strand.
- @param uint8_t start, start index
- @param uint8_t end, stop index
+ @param uint8_t index, Strand number, can be in the range [0, 2]
+ @param uint8_t start, Pixel index to start clearing from
+ @param uint8_t end, Pixel index to clear to, inclusive
  @returns none
  */
-- (void)clearStrandwithStartIndex:(uint8_t)start endIndex:(uint8_t)end;
+- (void)clearStrandAtIndex:(uint8_t)index startPixel:(uint8_t)start endPixel:(uint8_t)end;
 
 /**
  Set Pixel at strand index.
- @param uint8_t index, strand index
- @param uint8_t red, TODO
- @param uint8_t green, TODO
- @param uint8_t blue, TODO
+ @param uint8_t index, Strand number, can be in the range [0, 2]
+ @param uint8_t pixel, Pixel index to be set
+ @param UIColor color, Color the LED will be set to
  @returns none
  */
-- (void)setPixelAtIndex:(uint8_t)index withRed:(uint8_t)red Green:(uint8_t)green andBlue:(uint8_t)blue;
+- (void)setPixelAtIndex:(uint8_t)index pixel:(uint8_t)pixel color:(UIColor *)color;
 
 /**
  Rotate strand at index.
- @param uint8_t index, strand index
- @param uint8_t flag, increment flag
- @param uint8_t repeat, rotate repeat
- @param uint16_t delay, delay in ms
+ @param uint8_t index, Strand number, can be in the range [0, 2]
+ @param MBLRotationDirection direction, Rotation direction
+ @param uint8_t repetitions, Number of times to repeat the rotation. Use 0xFF to rotate indefinitely, 0 to terminate
+ @param uint16_t period, Amount of time, in milliseconds, between rotations
  @returns none
  */
-- (void)rotateStrandAtIndex:(uint8_t)index withIncFlag:(uint8_t)flag rotateRepeat:(uint8_t)repeat andDelay:(uint16_t)delay;
+- (void)rotateStrandAtIndex:(uint8_t)index direction:(MBLRotationDirection)direction repetitions:(uint8_t)repetitions period:(uint16_t)period;
 
 /**
  Deinitialize strand at index.
- @param uint8_t index, strand index
+ @param uint8_t index, Strand number, can be in the range [0, 2]
  @returns none
  */
 - (void)deinitializeStrandAtIndex:(uint8_t)index;
+
+
+
+/**
+ * @deprecated use initializeStrandAtIndex:color:speed:pin:length: instead
+ * @see initializeStrandAtIndex:color:speed:pin:length:
+ */
+- (void)initializeStrandAtIndex:(uint8_t)index withColor:(uint8_t)color pin:(uint8_t)pin andLength:(uint8_t)length DEPRECATED_MSG_ATTRIBUTE("Use initializeStrandAtIndex:color:speed:pin:length: instead");
+
+/**
+ * @deprecated use clearStrandAtIndex:startPixel:endPixel: instead
+ * @see clearStrandAtIndex:startPixel:endPixel:
+ */
+- (void)clearStrandwithStartIndex:(uint8_t)start endIndex:(uint8_t)end DEPRECATED_MSG_ATTRIBUTE("Use clearStrandAtIndex:startPixel:endPixel: instead");
+
+/**
+ * @deprecated use setPixelAtIndex:pixel:color: instead
+ * @see setPixelAtIndex:pixel:color:
+ */
+- (void)setPixelAtIndex:(uint8_t)index withRed:(uint8_t)red Green:(uint8_t)green andBlue:(uint8_t)blue DEPRECATED_MSG_ATTRIBUTE("Use setPixelAtIndex:pixel:color: instead");
+
+/**
+ * @deprecated use rotateStrandAtIndex:direction:repetitions:period: instead
+ * @see rotateStrandAtIndex:direction:repetitions:period:
+ */
+- (void)rotateStrandAtIndex:(uint8_t)index withIncFlag:(uint8_t)flag rotateRepeat:(uint8_t)repeat andDelay:(uint16_t)delay DEPRECATED_MSG_ATTRIBUTE("Use rotateStrandAtIndex:direction:repetitions:period: instead");
 
 @end

@@ -42,12 +42,15 @@
 typedef void (^MBLVoidHandler)();
 typedef void (^MBLErrorHandler)(NSError *error);
 typedef void (^MBLDataHandler)(NSData *data, NSError *error);
+typedef void (^MBLObjectHandler)(id obj, NSError *error);
 typedef void (^MBLArrayHandler)(NSArray *array);
+typedef void (^MBLArrayErrorHandler)(NSArray *array, NSError *error);
 typedef void (^MBLCentralManagerStateHandler)(CBCentralManagerState state);
 typedef void (^MBLPeripheralStateHandler)(CBPeripheralState state);
 typedef void (^MBLAccelerometerHandler)(MBLAccelerometerData *acceleration, NSError *error);
 typedef void (^MBLDeviceInfoHandler)(MBLDeviceInfo *deviceInfo, NSError *error);
 typedef void (^MBLDecimalNumberHandler)(NSDecimalNumber *number, NSError *error);
+typedef void (^MBLThresholdHandler)(NSDecimalNumber *number, BOOL isRising, NSError *error);
 typedef void (^MBLNumberHandler)(NSNumber *number, NSError *error);
 typedef void (^MBLSwitchStateHandler)(BOOL isPressed, NSError *error);
 typedef void (^MBLBoolHandler)(BOOL isTrue, NSError *error);
@@ -62,3 +65,12 @@ extern NSInteger const kMBLErrorUnexpectedServices;
 
 /*! @abstract 101: Unexpected number of bluetooth characteristics */
 extern NSInteger const kMBLErrorUnexpectedCharacteristics;
+
+/*! @abstract 102: Couldn't connect to firmware updater */
+extern NSInteger const kMBLErrorNoFirmwareUpdater;
+
+/*! @abstract 103: MetaWear object not recognized by MetaWearManager */
+extern NSInteger const kMBLErrorInvalidMetaWearObject;
+
+/*! @abstract 104: MetaWear not charged enough for firmware update */
+extern NSInteger const kMBLErrorInsufficientCharge;

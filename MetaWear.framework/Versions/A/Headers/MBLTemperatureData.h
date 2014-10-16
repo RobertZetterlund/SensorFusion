@@ -1,8 +1,8 @@
 /**
- * MBLDataProcessor.h
+ * MBLTemperatureData.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 9/15/14.
+ * Created by Stephen Schiffli on 10/15/14.
  * Copyright 2014 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
@@ -33,9 +33,8 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <MetaWear/MBLConstants.h>
-#import <MetaWear/MBLModule.h>
+#import <MetaWear/MBLLogEntry.h>
 
-@interface MBLDataProcessor : MBLModule
-
+@interface MBLTemperatureData : MBLLogEntry
+@property (nonatomic, readonly) float temperature;
 @end

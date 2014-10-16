@@ -33,7 +33,6 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <MetaWear/MBLModule.h>
 #import <UIKit/UIKit.h>
 
 typedef enum {
@@ -42,7 +41,7 @@ typedef enum {
     MBLLEDColorChannelBlue = 2
 } MBLLEDColorChannel;
 
-@interface MBLLED : MBLModule
+@interface MBLLED : NSObject
 
 /**
  Display a specific color on the LED

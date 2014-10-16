@@ -33,10 +33,10 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <Foundation/Foundation.h>
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLAccelerometerData.h>
-#import <MetaWear/MBLModule.h>
+#import <MetaWear/MBLOrientationData.h>
+#import <MetaWear/MBLEvent.h>
 
 @class MBLMetaWear;
 
@@ -71,8 +71,20 @@ typedef enum {
     MBLAccelerometerPowerSchemeLowerPower = 3,
 } MBLAccelerometerPowerScheme;
 
-@interface MBLAccelerometer : MBLModule
+typedef enum {
+    MBLAccelerometerAxisX = 0,
+    MBLAccelerometerAxisY = 1,
+    MBLAccelerometerAxisZ = 2
+} MBLAccelerometerAxis;
 
+typedef enum {
+    MBLAccelerometerTapTypeSingle,
+    MBLAccelerometerTapTypeDouble,
+    MBLAccelerometerTapTypeBoth
+} MBLAccelerometerTapType;
+
+
+@interface MBLAccelerometer : NSObject
 /**
  Maximum acceleration the accelerometer can report
  */
@@ -82,8 +94,7 @@ typedef enum {
  */
 @property (nonatomic) BOOL highPassFilter;
 /**
- Data rate selection; 0: 800Hz, 1: 400Hz, 2: 200 Hz, 3: 100 Hz, 4: 50 Hz,
- 5: 12.5 Hz, 6: 6.25 Hz, 7: 1.56 Hz
+ Data rate selection
  */
 @property (nonatomic) MBLAccelerometerSampleFrequency sampleFrequency;
 /**
@@ -105,7 +116,7 @@ typedef enum {
 @property (nonatomic) MBLAccelerometerPowerScheme activePowerScheme;
 
 /** Configures the Auto-WAKE sample frequency when the device is in 
- SLEEP Mode; 0: 50 Hz, 1: 12.5 Hz, 2: 6.25 Hz, 3: 1.56 Hz 
+ SLEEP Mode
  */
 @property (nonatomic) MBLAccelerometerSleepSampleFrequency sleepSampleFrequency;
 /**
@@ -117,25 +128,51 @@ typedef enum {
  */
 @property (nonatomic) BOOL autoSleep;
 
+/**
+ Select the axis used for tap detection
+ */
+@property (nonatomic) MBLAccelerometerAxis tapDetectionAxis;
+/**
+ Select the type of taps to be registered. When MBLAccelerometerTapModeBoth is used,
+ you will get two events on a double tap, one for the single and one for the double.
+ */
+@property (nonatomic) MBLAccelerometerTapType tapType;
+
 
 /**
- Turn on the accelerometer and start receiving updates. This will invoke the provided
- block each time a new reading shows up.  Please set any configuration properties
- before calling this method, setting properties after this call will have no effect
- until startAccelerometerUpdatesWithHandler: is called again.
- @param MBLAccelerometerHandler handler, Callback to handle each time a new reading is taken, 
- it has the signature: (MBLAccelerometerData *acceleration, NSError *error), where the acceleration
- object contains the x, y, and z acceleration data in g's and a time interval since data collection began
- @returns none
+ Event representing a new accelerometer data sample. This event will
+ occur at sampleFrequency. Event callbacks will be provided an 
+ MBLAccelerometerData object.
  */
-- (void)startAccelerometerUpdatesWithHandler:(MBLAccelerometerHandler)handler;
+@property (nonatomic, strong, readonly) MBLEvent *dataReadyEvent;
+/**
+ Event representing a tap (single, double, or both based on tapType) on the tapDetectionAxis
+ */
+@property (nonatomic, strong, readonly) MBLEvent *tapEvent;
+/**
+ Event representing an orientation change
+ */
+@property (nonatomic, strong, readonly) MBLEvent *orientationEvent;
+/**
+ Event representing free fall, event occurs every 100mSec while the device is in free fall
+ */
+@property (nonatomic, strong, readonly) MBLEvent *freeFallEvent;
+/**
+ Event representing a shake
+ */
+@property (nonatomic, strong, readonly) MBLEvent *shakeEvent;
+
+
 
 /**
- Turn off the accelerometer and stop receiving updates.
- will stop being called
- @param none
- @returns none
+ * @deprecated use [dataReadyEvent startNotificationsWithHandler] instead
+ * @see [dataReadyEvent startNotificationsWithHandler]
  */
-- (void)stopAccelerometerUpdates;
+- (void)startAccelerometerUpdatesWithHandler:(MBLAccelerometerHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [dataReadyEvent startNotificationsWithHandler] instead");
+/**
+ * @deprecated use [dataReadyEvent stopNotifications] instead
+ * @see [dataReadyEvent stopNotifications]
+ */
+- (void)stopAccelerometerUpdates DEPRECATED_MSG_ATTRIBUTE("Use [dataReadyEvent stopNotifications] instead");
 
 @end
