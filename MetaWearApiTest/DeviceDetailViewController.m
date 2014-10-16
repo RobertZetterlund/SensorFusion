@@ -271,9 +271,7 @@
 {
     uint8_t dcycle = [self.hapticDutyCycle.text intValue];
     uint16_t pwidth = [self.hapticPulseWidth.text intValue];
-    [self.device.hapticBuzzer startHapticWithDutyCycle:dcycle pulseWidth:pwidth completion:^{
-        [self.device.hapticBuzzer startHapticWithDutyCycle:dcycle pulseWidth:pwidth completion:nil];
-    }];
+    [self.device.hapticBuzzer startHapticWithDutyCycle:dcycle pulseWidth:pwidth completion:nil];
 }
 
 - (IBAction)startiBeaconPressed:(id)sender
