@@ -95,6 +95,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self.device addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:nil];
     [self connectDevice:YES];
 }
 
@@ -102,11 +104,20 @@
 {
     [super viewWillDisappear:animated];
     
+    [self.device removeObserver:self forKeyPath:@"state"];
+
     if (self.accelerometerRunning) {
         [self stopAccelerationPressed:nil];
     }
     if (self.switchRunning) {
         [self StopSwitchNotifyPressed:nil];
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (self.device.state == CBPeripheralStateDisconnected) {
+        [self setConnected:NO];
     }
 }
 
