@@ -73,11 +73,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *firmwareUpdateLabel;
 
 @property (strong, nonatomic) UIView *grayScreen;
-@property (strong, nonatomic) MBProgressHUD *hud;
-
-@property (strong, nonatomic) NSString *accDataString;
-@property (strong, nonatomic) NSMutableArray *accDataArray;
-
+@property (strong, nonatomic) NSMutableArray *accelerometerDataArray;
+@property (nonatomic) BOOL accelerometerRunning;
+@property (nonatomic) BOOL switchRunning;
 @end
 
 @implementation DeviceDetailViewController
@@ -91,9 +89,6 @@
     self.grayScreen.alpha = 0.4;
     [self.view addSubview:self.grayScreen];
     
-    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:self.hud];
-    
     [self.stopAccelerometer setEnabled:FALSE];
 }
 
@@ -101,6 +96,18 @@
 {
     [super viewWillAppear:animated];
     [self connectDevice:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if (self.accelerometerRunning) {
+        [self stopAccelerationPressed:nil];
+    }
+    if (self.switchRunning) {
+        [self StopSwitchNotifyPressed:nil];
+    }
 }
 
 - (void)setConnected:(BOOL)on
@@ -111,31 +118,33 @@
 
 - (void)connectDevice:(BOOL)on
 {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if (on) {
-        self.hud.labelText = @"Connecting...";
-        self.hud.mode = MBProgressHUDModeIndeterminate;
-        [self.hud show:YES];
-        [[MBLMetaWearManager sharedManager] connectMetaWear:self.device connectionHandler:^{
-            [self setConnected:YES];
-            self.hud.mode = MBProgressHUDModeText;
-            self.hud.labelText = @"Connected!";
-            [self.hud hide:YES afterDelay:0.5];
-        } disconnectionHandler:^(NSError *error) {
-            [self setConnected:NO];
-            self.hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"Connecting...";
+        [self.device connecWithHandler:^(NSError *error) {
+            [self setConnected:(error == nil)];
+            hud.mode = MBProgressHUDModeText;
             if (error) {
-                self.hud.labelText = error.localizedDescription;
-                [self.hud hide:YES afterDelay:2];
+                hud.labelText = error.localizedDescription;
+                [hud hide:YES afterDelay:2];
             } else {
-                self.hud.labelText = @"Disconnected!";
-                [self.hud hide:YES afterDelay:0.5];
+                hud.labelText = @"Connected!";
+                [hud hide:YES afterDelay:0.5];
             }
         }];
     } else {
-        self.hud.labelText = @"Disconnecting...";
-        self.hud.mode = MBProgressHUDModeIndeterminate;
-        [self.hud show:YES];
-        [[MBLMetaWearManager sharedManager] cancelMetaWearConnection:self.device];
+        hud.labelText = @"Disconnecting...";
+        [self.device disconnectWithHandler:^(NSError *error) {
+            [self setConnected:NO];
+            hud.mode = MBProgressHUDModeText;
+            if (error) {
+                hud.labelText = error.localizedDescription;
+                [hud hide:YES afterDelay:2];
+            } else {
+                hud.labelText = @"Disconnected!";
+                [hud hide:YES afterDelay:0.5];
+            }
+        }];
     }
 }
 
@@ -192,6 +201,7 @@
 
 - (IBAction)startSwitchNotifyPressed:(id)sender
 {
+    self.switchRunning = YES;
     [self.device.mechanicalSwitch.switchUpdateEvent startNotificationsWithHandler:^(NSNumber *isPressed, NSError *error) {
         self.mechanicalSwitchLabel.text = isPressed.boolValue ? @"Down" : @"Up";
     }];
@@ -199,6 +209,7 @@
 
 - (IBAction)StopSwitchNotifyPressed:(id)sender
 {
+    self.switchRunning = NO;
     [self.device.mechanicalSwitch.switchUpdateEvent stopNotifications];
 }
 
@@ -218,20 +229,16 @@
 
 - (IBAction)readDeviceInfoPressed:(id)sender
 {
-    [self.device readDeviceInfoWithHandler:^(MBLDeviceInfo *deviceInfo, NSError *error) {
-        self.mfgNameLabel.text = deviceInfo.manufacturerName;
-        self.serialNumLabel.text = deviceInfo.serialNumber;
-        self.hwRevLabel.text = deviceInfo.hardwareRevision;
-        self.fwRevLabel.text = deviceInfo.firmwareRevision;
-    }];
+    self.mfgNameLabel.text = self.device.deviceInfo.manufacturerName;
+    self.serialNumLabel.text = self.device.deviceInfo.serialNumber;
+    self.hwRevLabel.text = self.device.deviceInfo.hardwareRevision;
+    self.fwRevLabel.text = self.device.deviceInfo.firmwareRevision;
 }
 
 - (IBAction)resetDevicePressed:(id)sender
 {
-    self.hud.labelText = @"Resetting...";
-    self.hud.mode = MBProgressHUDModeIndeterminate;
-    [self.hud show:YES];
-    
+    // Resetting causes a disconnection
+    [self setConnected:NO];
     [self.device resetDevice];
 }
 
@@ -338,73 +345,42 @@
    
     [self.startAccelerometer setEnabled:FALSE];
     [self.stopAccelerometer setEnabled:TRUE];
-    
+    self.accelerometerRunning = YES;
     // These variables are used for data recording
-    self.accDataArray = [[NSMutableArray alloc] initWithCapacity:1000];
+    self.accelerometerDataArray = [[NSMutableArray alloc] initWithCapacity:1000];
     
     [self.device.accelerometer.dataReadyEvent startNotificationsWithHandler:^(MBLAccelerometerData *acceleration, NSError *error) {
         [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
         // Add data to data array for saving
-        [self.accDataArray addObject:acceleration];
+        [self.accelerometerDataArray addObject:acceleration];
     }];
 }
 
 - (IBAction)stopAccelerationPressed:(id)sender
 {
     [self.device.accelerometer.dataReadyEvent stopNotifications];
-    
+    self.accelerometerRunning = NO;
+
     [self.startAccelerometer setEnabled:TRUE];
     [self.stopAccelerometer setEnabled:FALSE];
-    
-    self.accDataString = [self processAccData];
-}
-
-- (NSString *)processAccData
-{
-    NSMutableString *AccelerometerString = [[NSMutableString alloc] init];
-    for (MBLAccelerometerData *dataElement in self.accDataArray)
-    {
-        @autoreleasepool {
-            [AccelerometerString appendFormat:@"%f,%f,%f,%f\n", dataElement.intervalSinceCaptureBegan,
-             dataElement.x,
-             dataElement.y,
-             dataElement.z];
-        }
-    }
-    return AccelerometerString;
-}
-
-- (NSString *)saveDatatoDisk:(NSString *)dataString
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeStyle:NSDateFormatterLongStyle];
-    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-    
-    // Some filesystems hate colons
-    NSString *dateString = [[dateFormatter stringFromDate:[NSDate date]] stringByReplacingOccurrencesOfString:@":" withString:@"_"];
-    // I hate spaces in dates
-    dateString = [dateString stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-    // OS hates forward slashes
-    dateString = [dateString stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
-    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"userAcceleration_%@.txt", dateString, nil]];
-    [dataString writeToFile:fullPath
-                 atomically:NO
-                   encoding:NSStringEncodingConversionAllowLossy
-                      error:nil];
-    
-    return fullPath;
 }
 
 - (IBAction)sendDataPressed:(id)sender
 {
-    NSString *filePath = [self saveDatatoDisk:self.accDataString];
-    [self mailMe:filePath];
+    NSMutableData *accelerometerData = [NSMutableData data];
+    for (MBLAccelerometerData *dataElement in self.accelerometerDataArray) {
+        @autoreleasepool {
+            [accelerometerData appendData:[[NSString stringWithFormat:@"%f,%f,%f,%f\n",
+                                            dataElement.intervalSinceCaptureBegan,
+                                            dataElement.x,
+                                            dataElement.y,
+                                            dataElement.z] dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+    }
+    [self sendMail:accelerometerData];
 }
 
-- (void)mailMe:(NSString *)filePath
+- (void)sendMail:(NSData *)attachment
 {
     if (![MFMailComposeViewController canSendMail]) {
         [[[UIAlertView alloc] initWithTitle:@"Mail Error" message:@"This device does not have an email account setup" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
@@ -423,37 +399,26 @@
     // OS hates forward slashes
     dateString = [dateString stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
     
-    // recipient address
-    NSString *email = @"your@email.com";
-    NSMutableArray *toRecipient = [[NSMutableArray alloc]initWithObjects:nil];
-    [toRecipient addObject:email];
     MFMailComposeViewController *emailController = [[MFMailComposeViewController alloc] init];
     emailController.mailComposeDelegate = self;
     
     // attachment
-    NSData *data = [NSData dataWithContentsOfFile:filePath];
     NSString *name = [NSString stringWithFormat:@"AccData_%@.txt", dateString, nil];
-    [emailController addAttachmentData:data mimeType:@"text/plain" fileName:name];
+    [emailController addAttachmentData:attachment mimeType:@"text/plain" fileName:name];
     
     // subject
     NSString *subject = [NSString stringWithFormat:@"Accelerometer Data %@.txt", dateString, nil];
     [emailController setSubject:subject];
     
-    
     NSString *messageBody = [NSString stringWithFormat:@"The data was recorded on %@.", dateString,nil];
     [emailController setMessageBody:messageBody isHTML:NO];
     
-    
-    [emailController setToRecipients:toRecipient];
     [self presentViewController:emailController animated:YES completion:NULL];
-    
 }
 
 -(void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-    
-    NSLog (@"mail finished"); // NEVER REACHES THIS POINT.
 }
 
 @end

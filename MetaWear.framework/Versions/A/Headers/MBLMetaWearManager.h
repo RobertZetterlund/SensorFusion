@@ -53,20 +53,12 @@
 - (void)setCallbackQueue:(NSOperationQueue *)queue;
 
 /**
- Subscribe to upates to in the internal bluetooth manager state, this is useful
- for displaying errors if the user happens to turn off bluetooth radio in settings
- @param MBLCentralManagerStateHandler handler, Callback to handle each the state changes
+ Returns a list of saved MetaWear objects, you add to this list by calling rememberDevice
+ on an MBLMetaWear object.
+ @param MBLArrayHandler handler, Callback to deliever list remembered MBLMetaWear objects
  @returns none
  */
-- (void)startManagerStateUpdatesWithHandler:(MBLCentralManagerStateHandler)handler;
-
-
-/**
- Returns a list of known MetaWear's by their identifiers.
- @param NSArray identifiers, A list of peripheral identifiers (represented by NSUUID objects)
- @returns NSArray, A list of MBLMetaWear objects the manager was able to match
- */
-- (NSArray *)retrieveMetaWearsWithIdentifiers:(NSArray *)identifiers;
+- (void)retrieveSavedMetaWearsWithHandler:(MBLArrayHandler)handler;
 
 /**
  Begin scanning for MetaWear devices. This will invoke the provided block each time a
@@ -96,33 +88,6 @@
  @returns none
  */
 - (void)stopScanForMetaWears;
-
-
-/**
- Connect to the given MetaWear board. If a connection is successfully acquired the
- the connectionHandler block will be invoked.  If the connection failed or a
- disconnection happens later for any reason then the disconnectionHandler block
- is invoked.
- @param MBLMetaWear device, MetaWear device to connect to
- @param MBLVoidHandler connectionHandler, Callback once connection is complete
- @param MBLErrorHandler disconnectionHandler, Callback if connection fails or when
- it disconnects for any reason, an NSError will be provided if the disconnection is
- unexpected
- @returns none
- */
-- (void)connectMetaWear:(MBLMetaWear *)device
-      connectionHandler:(MBLVoidHandler)connectionHandler
-   disconnectionHandler:(MBLErrorHandler)disconnectionHandler;
-
-/**
- Disconnect from the given MetaWear board.  You will recieve a callback on the
- disconnectionHandler passed into connectMetaWear:connectionHandler:disconnectionHandler:
- once disconnection is complete
- @param MBLMetaWear device, MetaWear device to disconnect from
- @returns none
- */
-- (void)cancelMetaWearConnection:(MBLMetaWear *)device;
-
 
 
 /**

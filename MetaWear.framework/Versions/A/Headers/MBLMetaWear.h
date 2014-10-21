@@ -47,7 +47,9 @@
 
 @interface MBLMetaWear : NSObject <CBPeripheralDelegate>
 
-// *** On device sensors ***
+/**
+ List of all MetaWear modules avaliable for use
+ */
 @property (nonatomic, strong, readonly) MBLMechanicalSwitch *mechanicalSwitch;
 @property (nonatomic, strong, readonly) MBLLED *led;
 @property (nonatomic, strong, readonly) MBLTemperature *temperature;
@@ -58,19 +60,51 @@
 @property (nonatomic, strong, readonly) MBLNeopixel *neopixel;
 
 /**
- Represents the current connection state of the MetaWear.
+ Current connection state of this MetaWear
  */
 @property (nonatomic, readonly) CBPeripheralState state;
 /**
- iOS generated unique identifier for this device.  Note this is a per app identifier,
- so one MetaWear device will always have the same identifier within a single app, but
- different identifiers in different accross apps
+ iOS generated unique identifier for this MetaWear
  */
 @property (nonatomic, strong, readonly) NSUUID *identifier;
 /**
  Stored value of signal strength at discovery time
  */
 @property (nonatomic, strong) NSNumber *discoveryTimeRSSI;
+
+/**
+ Information about the device, only valid after a successful connection
+ */
+@property (nonatomic, strong, readonly) MBLDeviceInfo *deviceInfo;
+
+/**
+ Connect/reconnect to the MetaWear board. Once connection is complete, the provided block
+ will be invoked.  If the NSError provided to the block is null then the connection
+ succeeded, otherwise failure (see error for details)
+ @param MBLErrorHandler handler, Callback once connection is complete
+ @returns none
+ */
+- (void)connecWithHandler:(MBLErrorHandler)handler;
+
+/**
+ Disconnect from the MetaWear board.
+ @param MBLErrorHandler handler, Callback once disconnection is complete
+ @returns none
+ */
+- (void)disconnectWithHandler:(MBLErrorHandler)handler;
+
+/**
+ Remember this MetaWear, it will be saved to disk and retrievable
+ through [[MBLMetaWearManager sharedManager] retrieveSavedMetaWears]
+ */
+- (void)rememberDevice;
+
+/**
+ Forget this MetaWear, it will no longer be retrievable
+ through [[MBLMetaWearManager sharedManager] retrieveSavedMetaWears]
+ */
+- (void)forgetDevice;
+
 
 /**
  Query the current RSSI
@@ -81,9 +115,11 @@
  */
 - (void)readBatteryLifeWithHandler:(MBLNumberHandler)handler;
 /**
- Query information about the device
+ * @deprecated use deviceInfo property instead
+ * @see deviceInfo
  */
-- (void)readDeviceInfoWithHandler:(MBLDeviceInfoHandler)handler;
+- (void)readDeviceInfoWithHandler:(MBLDeviceInfoHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use deviceInfo property instead");
+
 
 /**
  Perform a software reset of the device, note this will cause the device to disconnect
