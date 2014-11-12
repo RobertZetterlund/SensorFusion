@@ -35,6 +35,7 @@
 
 #import <MetaWear/MBLLogEntry.h>
 
+NS_UNAVAILABLE // Please use MBLNumericData instead
 @interface MBLTemperatureData : MBLLogEntry
-@property (nonatomic, readonly) float temperature;
+@property (nonatomic, readonly) float temperature NS_UNAVAILABLE;
 @end

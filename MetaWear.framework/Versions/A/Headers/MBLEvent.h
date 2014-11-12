@@ -34,6 +34,7 @@
  */
 
 #import <MetaWear/MBLConstants.h>
+#import <MetaWear/MBLRegister.h>
 
 typedef enum {
     MBLComparisonOperationEqual = 0,
@@ -55,17 +56,41 @@ typedef enum {
     see programCommandsToRunOnEvent: and eraseCommandsToRunOnEvent.
  3) Log the event in the MetaWear's flash storage, see startLogging, stopLogging, and 
     downloadLogAndStopLogging:handler:progressHandler:
+ 4) Process/filter the output of the event.  This is accomplished by creating a new event
+    which represents the output of the filter.  See summationOfEvent and
+    periodicSampleOfEvent:periodInMsec.
  
- Consider the switch update event, mechanicalSwitch.switchUpdateEvent, if you call
- startNotificationsWithHandler: and keep a live connection to the MetaWear, any time 
- you press or release the switch you will get a callback to the provided block.
+ Examples - Consider the switch update event, mechanicalSwitch.switchUpdateEvent.
+ 
+ Notifications:
+ If you call startNotificationsWithHandler: and keep a live connection to the MetaWear,
+ any time you press or release the switch you will get a callback to the provided block.
+ 
+ Logging:
  If you call startLogging, then anytime you press or release the button, an entry will 
  be created in the log which can be download later using downloadLogAndStopLogging:handler:progressHandler:.
+ 
+ Commands:
  If you want the device to buzz when you press the switch then you would call programCommandsToRunOnEvent:
  and call [device.hapticBuzzer startHapticWithDutyCycle:248 pulseWidth:500 completion:nil] in the
  provided block.
+ 
+ Processing:
+ If you want to log a running count of pushbutton events, you could do the following,
+ MBLEvent *event = [mechanicalSwitch.switchUpdateEvent summationOfEvent];
+ [event startLogging];
+ ...
+ [event downloadLogAndStopLogging:YES/NO handler:{...} progressHandler:{...}];
+ 
+ IMPORTANT: Calling summationOfEvent or any other filter function returns a freshly created
+ MBLEvent object which you must retain for later use.  This is different from the MBLEvent
+ properties on the various modules which internally save the MBLEvent object and always return
+ the same pointer through the property.
+ Also, since all MBLEvent's are invalidated on disconnect, you need a way to restore your
+ custom event on reconnect.  This is where the NSString identifier comes in, you can call
+ retrieveEventWithIdentifier: on the freshly connected MBLMetaWear object to get your event back.
  */
-@interface MBLEvent : NSObject
+@interface MBLEvent : MBLRegister
 
 /**
  Start receiving callbacks when this event occurs. The type of the
@@ -125,5 +150,32 @@ typedef enum {
  See if this event is currently being logged
  */
 - (BOOL)isLogging;
+
+
+/**
+ Create a new event that accumulates the output data of the current event.
+ @returns MBLEvent, New event representing accumulated output
+ */
+- (MBLEvent *)summationOfEvent;
+/**
+ Create a new event that accumulates the output data of the current event.
+ @param NSString identifier, Identifier used for restoration after reconnect, see retrieveEventWithIdentifier:
+ @returns MBLEvent, New event representing accumulated output
+ */
+- (MBLEvent *)summationOfEventWithIdentifier:(NSString *)identifier;
+
+/**
+ Create a new event that occurs at most once every period milliseconds.
+ @param uint32_t periodInMsec, Sample period in msec
+ @returns MBLEvent, New event representing periodically sampled output
+ */
+- (MBLEvent *)periodicSampleOfEvent:(uint32_t)periodInMsec;
+/**
+ Create a new event that occurs at most once every period milliseconds.
+ @param uint32_t periodInMsec, Sample period in msec
+ @param NSString identifier, Identifier used for restoration after reconnect, see retrieveEventWithIdentifier:
+ @returns MBLEvent, New event representing periodically sampled output
+ */
+- (MBLEvent *)periodicSampleOfEvent:(uint32_t)periodInMsec identifier:(NSString *)identifier;
 
 @end

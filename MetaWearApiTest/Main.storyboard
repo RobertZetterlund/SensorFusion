@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cmc-k5-3Lq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cmc-k5-3Lq">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -231,12 +231,12 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Active power scheme:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rg2-Lg-Vf7">
-                                                <rect key="frame" x="22" y="1438" width="143" height="21"/>
+                                                <rect key="frame" x="22" y="1499" width="143" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Active power scheme:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gUm-ix-sCC">
-                                                <rect key="frame" x="22" y="1596" width="143" height="21"/>
+                                                <rect key="frame" x="22" y="1657" width="143" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -246,7 +246,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sleep sample frequency:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41O-hi-ACw">
-                                                <rect key="frame" x="22" y="1543" width="160" height="21"/>
+                                                <rect key="frame" x="22" y="1604" width="160" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -482,7 +482,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0s-Ae-HoJ">
-                                                <rect key="frame" x="20" y="1694" width="108" height="30"/>
+                                                <rect key="frame" x="20" y="1755" width="108" height="30"/>
                                                 <state key="normal" title="Start Recording">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -491,7 +491,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ski-pS-qcg">
-                                                <rect key="frame" x="192" y="1694" width="108" height="30"/>
+                                                <rect key="frame" x="192" y="1755" width="108" height="30"/>
                                                 <state key="normal" title="Stop Recording">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -500,7 +500,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KLt-4f-BeD" customClass="APLGraphView">
-                                                <rect key="frame" x="0.0" y="1726" width="320" height="112"/>
+                                                <rect key="frame" x="0.0" y="1787" width="320" height="112"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="High Pass Filter:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWY-Sh-lXT">
@@ -512,15 +512,15 @@
                                                 <rect key="frame" x="252" y="1366" width="51" height="31"/>
                                             </switch>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="z7L-Af-YBm">
-                                                <rect key="frame" x="252" y="1405" width="51" height="31"/>
+                                                <rect key="frame" x="252" y="1466" width="51" height="31"/>
                                             </switch>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Low Noise Mode:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxZ-6E-KQy">
-                                                <rect key="frame" x="22" y="1410" width="135" height="21"/>
+                                                <rect key="frame" x="22" y="1471" width="135" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4BA-Id-rHz">
-                                                <rect key="frame" x="22" y="1460" width="279" height="29"/>
+                                                <rect key="frame" x="22" y="1521" width="279" height="29"/>
                                                 <segments>
                                                     <segment title="Normal"/>
                                                     <segment title="LP/LN"/>
@@ -529,7 +529,7 @@
                                                 </segments>
                                             </segmentedControl>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f7Q-gQ-AYs">
-                                                <rect key="frame" x="22" y="1616" width="279" height="29"/>
+                                                <rect key="frame" x="22" y="1677" width="279" height="29"/>
                                                 <segments>
                                                     <segment title="Normal"/>
                                                     <segment title="LP/LN"/>
@@ -538,10 +538,10 @@
                                                 </segments>
                                             </segmentedControl>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xAw-mX-n43">
-                                                <rect key="frame" x="252" y="1509" width="51" height="31"/>
+                                                <rect key="frame" x="252" y="1570" width="51" height="31"/>
                                             </switch>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Auto Sleep:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ao-CQ-jaY">
-                                                <rect key="frame" x="21" y="1504" width="89" height="21"/>
+                                                <rect key="frame" x="21" y="1565" width="89" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -559,7 +559,7 @@
                                                 </segments>
                                             </segmentedControl>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="D3d-Nr-Tkw">
-                                                <rect key="frame" x="22" y="1562" width="279" height="29"/>
+                                                <rect key="frame" x="22" y="1623" width="279" height="29"/>
                                                 <segments>
                                                     <segment title="50"/>
                                                     <segment title="12.5"/>
@@ -595,13 +595,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Accelerometer Data:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VdU-oz-wx4">
-                                                <rect key="frame" x="82" y="1665" width="157" height="21"/>
+                                                <rect key="frame" x="82" y="1726" width="157" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxc-cf-OxZ">
-                                                <rect key="frame" x="21" y="1846" width="280" height="40"/>
+                                                <rect key="frame" x="21" y="1907" width="280" height="40"/>
                                                 <state key="normal" title="Email Data">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -690,6 +690,20 @@
                                                     <action selector="updateFirmware:" destination="cmV-QT-OnK" eventType="touchUpInside" id="phe-Xe-W1O"/>
                                                 </connections>
                                             </button>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2Dz-V6-osR">
+                                                <rect key="frame" x="21" y="1423" width="280" height="29"/>
+                                                <segments>
+                                                    <segment title="0 (High)"/>
+                                                    <segment title="1"/>
+                                                    <segment title="2"/>
+                                                    <segment title="3 (Low)"/>
+                                                </segments>
+                                            </segmentedControl>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HPF cutoff freq" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dk-4e-XWj">
+                                                <rect key="frame" x="22" y="1400" width="143" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <constraints>
@@ -733,6 +747,7 @@
                         <outlet property="hapticDutyCycle" destination="mWA-Xx-lkv" id="hn6-rJ-NLY"/>
                         <outlet property="hapticPulseWidth" destination="7qc-Ie-aci" id="vKK-ji-5UT"/>
                         <outlet property="highPassFilterSwitch" destination="ikj-FS-Tf3" id="5MO-vX-g5U"/>
+                        <outlet property="hpfCutoffFreq" destination="2Dz-V6-osR" id="SQe-gt-VHC"/>
                         <outlet property="hwRevLabel" destination="r02-mp-MP4" id="8vl-qm-Ez1"/>
                         <outlet property="lowNoiseSwitch" destination="z7L-Af-YBm" id="uvf-0I-5kr"/>
                         <outlet property="mechanicalSwitchLabel" destination="3Nk-xe-wNY" id="c8T-HK-QVn"/>

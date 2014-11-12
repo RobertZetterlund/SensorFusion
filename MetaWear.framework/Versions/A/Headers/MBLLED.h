@@ -34,6 +34,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <MetaWear/MBLModule.h>
 
 typedef enum {
     MBLLEDColorChannelGreen = 0,
@@ -41,7 +42,7 @@ typedef enum {
     MBLLEDColorChannelBlue = 2
 } MBLLEDColorChannel;
 
-@interface MBLLED : NSObject
+@interface MBLLED : MBLModule
 
 /**
  Display a specific color on the LED

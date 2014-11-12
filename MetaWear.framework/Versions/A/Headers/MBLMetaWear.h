@@ -44,6 +44,7 @@
 @class MBLHapticBuzzer;
 @class MBLiBeacon;
 @class MBLNeopixel;
+@class MBLEvent;
 
 @interface MBLMetaWear : NSObject <CBPeripheralDelegate>
 
@@ -84,8 +85,8 @@
  @param MBLErrorHandler handler, Callback once connection is complete
  @returns none
  */
-- (void)connecWithHandler:(MBLErrorHandler)handler;
-
+- (void)connectWithHandler:(MBLErrorHandler)handler;
+- (void)connecWithHandler:(MBLErrorHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use connectWithHandler: instead");
 /**
  Disconnect from the MetaWear board.
  @param MBLErrorHandler handler, Callback once disconnection is complete
@@ -98,13 +99,18 @@
  through [[MBLMetaWearManager sharedManager] retrieveSavedMetaWears]
  */
 - (void)rememberDevice;
-
 /**
  Forget this MetaWear, it will no longer be retrievable
  through [[MBLMetaWearManager sharedManager] retrieveSavedMetaWears]
  */
 - (void)forgetDevice;
 
+/**
+ Attempt to retrieve an MBLEvent created with the given identifier
+ @see MBLEvent
+ @param NSString identifier, Identifer passed in creation of MBLEvent
+ */
+- (MBLEvent *)retrieveEventWithIdentifier:(NSString *)identifier;
 
 /**
  Query the current RSSI

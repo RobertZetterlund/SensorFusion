@@ -45,6 +45,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *accelerometerScale;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sampleFrequency;
 @property (weak, nonatomic) IBOutlet UISwitch *highPassFilterSwitch;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *hpfCutoffFreq;
 @property (weak, nonatomic) IBOutlet UISwitch *lowNoiseSwitch;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *activePowerScheme;
 @property (weak, nonatomic) IBOutlet UISwitch *autoSleepSwitch;
@@ -132,7 +133,7 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if (on) {
         hud.labelText = @"Connecting...";
-        [self.device connecWithHandler:^(NSError *error) {
+        [self.device connectWithHandler:^(NSError *error) {
             [self setConnected:(error == nil)];
             hud.mode = MBProgressHUDModeText;
             if (error) {
@@ -304,33 +305,40 @@
 
 - (IBAction)setPullUpPressed:(id)sender
 {
-    [self.device.gpio configurePin:self.gpioPinSelector.selectedSegmentIndex type:MBLPinConfigurationPullup];
+    MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
+    [pin configureType:MBLPinConfigurationPullup];
 }
 - (IBAction)setPullDownPressed:(id)sender
 {
-    [self.device.gpio configurePin:self.gpioPinSelector.selectedSegmentIndex type:MBLPinConfigurationPulldown];
+    MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
+    [pin configureType:MBLPinConfigurationPulldown];
 }
 - (IBAction)setNoPullPressed:(id)sender
 {
-    [self.device.gpio configurePin:self.gpioPinSelector.selectedSegmentIndex type:MBLPinConfigurationNopull];
+    MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
+    [pin configureType:MBLPinConfigurationNopull];
 }
 - (IBAction)setPinPressed:(id)sender
 {
-    [self.device.gpio setPin:self.gpioPinSelector.selectedSegmentIndex toDigitalValue:YES];
+    MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
+    [pin setToDigitalValue:YES];
 }
 - (IBAction)clearPinPressed:(id)sender
 {
-    [self.device.gpio setPin:self.gpioPinSelector.selectedSegmentIndex toDigitalValue:NO];
+    MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
+    [pin setToDigitalValue:NO];
 }
 - (IBAction)readDigitalPressed:(id)sender
 {
-    [self.device.gpio readDigitalPin:self.gpioPinSelector.selectedSegmentIndex handler:^(BOOL isTrue, NSError *error) {
+    MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
+    [pin readDigitalValueWithHandler:^(BOOL isTrue, NSError *error) {
         self.gpioPinDigitalValue.text = isTrue ? @"1" : @"0";
     }];
 }
 - (IBAction)readAnalogPressed:(id)sender
 {
-    [self.device.gpio readAnalogPin:self.gpioPinSelector.selectedSegmentIndex mode:MBLAnalogReadModeFixed handler:^(NSDecimalNumber *number, NSError *error) {
+    MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
+    [pin readAnalogValueUsingMode:MBLAnalogReadModeFixed handler:^(NSDecimalNumber *number, NSError *error) {
         self.gpioPinAnalogValue.text = [number stringValue];
     }];
 }
@@ -348,11 +356,12 @@
     self.device.accelerometer.fullScaleRange = (int)self.accelerometerScale.selectedSegmentIndex;
     self.device.accelerometer.sampleFrequency = (int)self.sampleFrequency.selectedSegmentIndex;
     self.device.accelerometer.highPassFilter = self.highPassFilterSwitch.on;
-    self.device.accelerometer.lowNoise = self.highPassFilterSwitch.on;
+    self.device.accelerometer.filterCutoffFreq = self.hpfCutoffFreq.selectedSegmentIndex;
+    self.device.accelerometer.lowNoise = self.lowNoiseSwitch.on;
     self.device.accelerometer.activePowerScheme = (int)self.activePowerScheme.selectedSegmentIndex;
     self.device.accelerometer.autoSleep = self.autoSleepSwitch.on;
     self.device.accelerometer.sleepSampleFrequency = (int)self.sleepSampleFrequency.selectedSegmentIndex;
-    self.device.accelerometer.activePowerScheme = (int)self.activePowerScheme.selectedSegmentIndex;
+    self.device.accelerometer.sleepPowerScheme = (int)self.sleepPowerScheme.selectedSegmentIndex;
    
     [self.startAccelerometer setEnabled:FALSE];
     [self.stopAccelerometer setEnabled:TRUE];
@@ -382,7 +391,7 @@
     for (MBLAccelerometerData *dataElement in self.accelerometerDataArray) {
         @autoreleasepool {
             [accelerometerData appendData:[[NSString stringWithFormat:@"%f,%f,%f,%f\n",
-                                            dataElement.intervalSinceCaptureBegan,
+                                            dataElement.timestamp.timeIntervalSince1970,
                                             dataElement.x,
                                             dataElement.y,
                                             dataElement.z] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -421,8 +430,17 @@
     NSString *subject = [NSString stringWithFormat:@"Accelerometer Data %@.txt", dateString, nil];
     [emailController setSubject:subject];
     
-    NSString *messageBody = [NSString stringWithFormat:@"The data was recorded on %@.", dateString,nil];
-    [emailController setMessageBody:messageBody isHTML:NO];
+    NSMutableString *body = [[NSMutableString alloc] initWithFormat:@"The data was recorded on %@.\n", dateString];
+    [body appendString:[NSString stringWithFormat:@"Scale = %d\n", (int)self.accelerometerScale.selectedSegmentIndex]];
+    [body appendString:[NSString stringWithFormat:@"Freq = %d\n", (int)self.sampleFrequency.selectedSegmentIndex]];
+    [body appendString:[NSString stringWithFormat:@"HPF On = %d\n", (int)self.highPassFilterSwitch.on]];
+    [body appendString:[NSString stringWithFormat:@"HPF Cutoff = %d\n", (int)self.hpfCutoffFreq.selectedSegmentIndex]];
+    [body appendString:[NSString stringWithFormat:@"LowNoise On = %d\n", self.lowNoiseSwitch.on]];
+    [body appendString:[NSString stringWithFormat:@"Active Power Scheme = %d\n", (int)self.activePowerScheme.selectedSegmentIndex]];
+    [body appendString:[NSString stringWithFormat:@"Auto Sleep On = %d\n", self.autoSleepSwitch.on]];
+    [body appendString:[NSString stringWithFormat:@"SleepFreq = %d\n", (int)self.sleepSampleFrequency.selectedSegmentIndex]];
+    [body appendString:[NSString stringWithFormat:@"Sleep Power Scheme = %d\n", (int)self.sleepPowerScheme.selectedSegmentIndex]];
+    [emailController setMessageBody:body isHTML:NO];
     
     [self presentViewController:emailController animated:YES completion:NULL];
 }

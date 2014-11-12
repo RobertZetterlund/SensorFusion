@@ -34,6 +34,7 @@
  */
 
 #import <MetaWear/MBLConstants.h>
+#import <MetaWear/MBLModule.h>
 #import <UIKit/UIKit.h>
 
 typedef enum {
@@ -53,7 +54,7 @@ typedef enum {
     MBLRotationDirectionAwayFromBoard = 1
 } MBLRotationDirection;
 
-@interface MBLNeopixel : NSObject
+@interface MBLNeopixel : MBLModule
 
 /**
  Initialize memory on the MetaWear board for a NeoPixel strand

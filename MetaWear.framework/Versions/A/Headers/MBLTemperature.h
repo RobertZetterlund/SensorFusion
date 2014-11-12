@@ -35,10 +35,21 @@
 
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLEvent.h>
+#import <MetaWear/MBLModule.h>
 
 @class MBLMetaWear;
 
-@interface MBLTemperature : NSObject
+typedef enum {
+    MBLTemperatureSourceInternal,
+    MBLTemperatureSourceThermistor
+} MBLTemperatureSource;
+
+typedef enum {
+    MBLTemperatureUnitCelsius,
+    MBLTemperatureUnitFahrenheit
+} MBLTemperatureUnit;
+
+@interface MBLTemperature : MBLModule
 
 /**
  Sampling period for temperature readings in mSec
@@ -57,9 +68,29 @@
  */
 @property (nonatomic) float lowerThreshold;
 
+/**
+ Choose where temperature readings are taken from, note that MBLTemperatureSourceThermistor
+ requires installing an external thermistor and setting the thermistorReadPin
+ and thermistorEnablePin properties
+ */
+@property (nonatomic) MBLTemperatureSource source;
+/**
+ Thermistor output pin number
+ */
+@property (nonatomic) uint8_t thermistorReadPin;
+/**
+ Thermistor enable pin number
+ */
+@property (nonatomic) uint8_t thermistorEnablePin;
 
 /**
- Perform a one time read of the current device temperature in degrees C
+ Choose between celsius and fahrenheit
+ */
+@property (nonatomic) MBLTemperatureUnit units;
+
+
+/**
+ Perform a one time read of the current device temperature
  */
 - (void)readTemperatureWithHandler:(MBLDecimalNumberHandler)handler;
 

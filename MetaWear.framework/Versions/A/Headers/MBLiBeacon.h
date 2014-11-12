@@ -34,8 +34,21 @@
  */
 
 #import <MetaWear/MBLConstants.h>
+#import <MetaWear/MBLModule.h>
 
-@interface MBLiBeacon : NSObject
+typedef enum {
+    MBLiBeaconTransmitPower4dBm,
+    MBLiBeaconTransmitPower0dBm,
+    MBLiBeaconTransmitPowerMinus4dBm,
+    MBLiBeaconTransmitPowerMinus8dBm,
+    MBLiBeaconTransmitPowerMinus12dBm,
+    MBLiBeaconTransmitPowerMinus16dBm,
+    MBLiBeaconTransmitPowerMinus20dBm,
+    MBLiBeaconTransmitPowerMinus30dBm,
+    MBLiBeaconTransmitPowerMinus40dBm
+} MBLiBeaconTransmitPower;
+
+@interface MBLiBeacon : MBLModule
 
 /**
  The iBeacon UUID being broadcast, the default is the MetaWear Service UUID
@@ -51,26 +64,44 @@
 @property (nonatomic) uint16_t minor;
 
 /**
- Calibrated RX power, default is -55 dBm
+ Calibrated RX power in dBm. This represents the approximate RSSI value seen 
+ by the reciever when 1 meter away from the iBeacon, default is -55 dBm.
+ Valid range is [-10, -127].
  */
-@property (nonatomic) uint8_t powerRX;
+@property (nonatomic) int8_t calibratedReceiverPower;
 /**
- TX power, default is 0 dBm
+ iBeacon transmit power.  Setting a smaller (lower dBm) value will result in 
+ a smaller beacon discovery radius, default is MBLiBeaconTransmitPower0dBm.
+ You should adjust calibratedReceiverPower when changing transmitPower.
  */
-@property (nonatomic) uint8_t powerTX;
+@property (nonatomic) MBLiBeaconTransmitPower transmitPower;
+
 /**
- Advertisement frequency in ms, default is 100 ms
+ Advertisement frequency in ms, default is 100 ms.
+ Valid range is [20, 10,240]
  */
 @property (nonatomic) uint16_t frequency;
 
 /**
  Change iBeacon state to on or off. Please set any configuration properties
  before calling this method, setting properties after this call will have
- no effect until setBeaconOn: is called again.  Please note, that the
- beacon is only visible if there are no active connections to the MetaWear
+ no effect until setBeaconOn: is called again.  
+ IMPORTANT: Please note, that the beacon is only visible after you disconnect
  @param BOOL on, YES turns iBeacon on, NO, turns iBeacon off
  @returns none
  */
 - (void)setBeaconOn:(BOOL)on;
+
+
+/**
+ * @deprecated use calibratedReceiverPower instead
+ * @see calibratedReceiverPower
+ */
+@property (nonatomic) uint8_t powerRX DEPRECATED_MSG_ATTRIBUTE("Use calibratedReceiverPower instead");
+/**
+ * @deprecated use transmitPower instead
+ * @see transmitPower
+ */
+@property (nonatomic) uint8_t powerTX DEPRECATED_MSG_ATTRIBUTE("Use transmitPower instead");
 
 @end

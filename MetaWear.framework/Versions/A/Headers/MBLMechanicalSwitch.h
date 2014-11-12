@@ -35,8 +35,9 @@
 
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLEvent.h>
+#import <MetaWear/MBLModule.h>
 
-@interface MBLMechanicalSwitch : NSObject
+@interface MBLMechanicalSwitch : MBLModule
 
 /**
  Perform a single read of the switch state, then handler will be

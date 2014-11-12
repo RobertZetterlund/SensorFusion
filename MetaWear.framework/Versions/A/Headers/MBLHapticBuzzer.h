@@ -34,8 +34,9 @@
  */
 
 #import <MetaWear/MBLConstants.h>
+#import <MetaWear/MBLModule.h>
 
-@interface MBLHapticBuzzer : NSObject
+@interface MBLHapticBuzzer : MBLModule
 
 /**
  Turn on Haptic Driver.

@@ -37,6 +37,7 @@
 #import <MetaWear/MBLAccelerometerData.h>
 #import <MetaWear/MBLOrientationData.h>
 #import <MetaWear/MBLEvent.h>
+#import <MetaWear/MBLModule.h>
 
 @class MBLMetaWear;
 
@@ -83,8 +84,7 @@ typedef enum {
     MBLAccelerometerTapTypeBoth
 } MBLAccelerometerTapType;
 
-
-@interface MBLAccelerometer : NSObject
+@interface MBLAccelerometer : MBLModule
 /**
  Maximum acceleration the accelerometer can report
  */
@@ -93,6 +93,10 @@ typedef enum {
  High-pass filter enable; YES: Output data high-pass filtered, NO: No filter
  */
 @property (nonatomic) BOOL highPassFilter;
+/**
+ HPF Cutoff frequency selection (0 is highest freq, 3 is lowest freq)
+ */
+@property (nonatomic) uint8_t filterCutoffFreq;
 /**
  Data rate selection
  */
@@ -145,6 +149,10 @@ typedef enum {
  MBLAccelerometerData object.
  */
 @property (nonatomic, strong, readonly) MBLEvent *dataReadyEvent;
+/**
+ Event representing a new accelerometer data sample, but filtered down to just an RMS value.
+ */
+@property (nonatomic, strong, readonly) MBLEvent *rmsDataReadyEvent;
 /**
  Event representing a tap (single, double, or both based on tapType) on the tapDetectionAxis
  */
