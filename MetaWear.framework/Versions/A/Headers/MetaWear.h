@@ -35,6 +35,7 @@
 
 #import <MetaWear/MBLAccelerometer.h>
 #import <MetaWear/MBLAccelerometerData.h>
+#import <MetaWear/MBLANCS.h>
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLDeviceInfo.h>
 #import <MetaWear/MBLEvent.h>

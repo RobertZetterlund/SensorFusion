@@ -482,8 +482,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0s-Ae-HoJ">
-                                                <rect key="frame" x="20" y="1755" width="108" height="30"/>
-                                                <state key="normal" title="Start Recording">
+                                                <rect key="frame" x="20" y="1755" width="107" height="30"/>
+                                                <state key="normal" title="Start Streaming">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -491,17 +491,21 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ski-pS-qcg">
-                                                <rect key="frame" x="192" y="1755" width="108" height="30"/>
-                                                <state key="normal" title="Stop Recording">
+                                                <rect key="frame" x="192" y="1755" width="107" height="30"/>
+                                                <state key="normal" title="Stop Streaming">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="stopAccelerationPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="bSb-rJ-STo"/>
                                                 </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KLt-4f-BeD" customClass="APLGraphView">
-                                                <rect key="frame" x="0.0" y="1787" width="320" height="112"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KLt-4f-BeD" customClass="APLGraphView">
+                                                <rect key="frame" x="0.0" y="1831" width="320" height="112"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="320" id="10J-QY-D6T"/>
+                                                    <constraint firstAttribute="height" constant="112" id="XVb-BA-Yrx"/>
+                                                </constraints>
                                             </view>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="High Pass Filter:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWY-Sh-lXT">
                                                 <rect key="frame" x="22" y="1371" width="126" height="21"/>
@@ -600,15 +604,6 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxc-cf-OxZ">
-                                                <rect key="frame" x="21" y="1907" width="280" height="40"/>
-                                                <state key="normal" title="Email Data">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="sendDataPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="Q1U-Gw-Y8Y"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqM-Jn-92n">
                                                 <rect key="frame" x="20" y="58" width="91" height="30"/>
                                                 <state key="normal" title="Reset Device">
@@ -704,10 +699,39 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ik-my-L7Y">
+                                                <rect key="frame" x="20" y="1793" width="93" height="30"/>
+                                                <state key="normal" title="Start Logging">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="startAccelerometerLog:" destination="cmV-QT-OnK" eventType="touchUpInside" id="5NF-Zy-ATh"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4LC-49-0i8">
+                                                <rect key="frame" x="206" y="1793" width="93" height="30"/>
+                                                <state key="normal" title="Stop Logging">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="stopAccelerometerLog:" destination="cmV-QT-OnK" eventType="touchUpInside" id="c7Y-ye-6Vd"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxc-cf-OxZ">
+                                                <rect key="frame" x="20" y="1951" width="280" height="40"/>
+                                                <state key="normal" title="Email Data">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="sendDataPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="Q1U-Gw-Y8Y"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="320" id="5hM-aa-CyA"/>
+                                            <constraint firstItem="KLt-4f-BeD" firstAttribute="top" secondItem="o7r-ne-fbR" secondAttribute="top" constant="1831" id="Hf3-d5-NKg"/>
+                                            <constraint firstItem="KLt-4f-BeD" firstAttribute="leading" secondItem="o7r-ne-fbR" secondAttribute="leading" id="eZH-4v-IPD"/>
                                             <constraint firstAttribute="height" constant="2000" id="zFK-bJ-BwM"/>
                                         </constraints>
                                     </view>
@@ -759,7 +783,9 @@
                         <outlet property="sleepPowerScheme" destination="f7Q-gQ-AYs" id="sGh-I3-GrU"/>
                         <outlet property="sleepSampleFrequency" destination="D3d-Nr-Tkw" id="fH8-uB-Abf"/>
                         <outlet property="startAccelerometer" destination="g0s-Ae-HoJ" id="3aW-uz-xl1"/>
+                        <outlet property="startLog" destination="0Ik-my-L7Y" id="YpQ-Ns-5Vb"/>
                         <outlet property="stopAccelerometer" destination="ski-pS-qcg" id="fFp-i2-nMc"/>
+                        <outlet property="stopLog" destination="4LC-49-0i8" id="Zvg-Sj-92q"/>
                         <outlet property="tempratureLabel" destination="yZC-2Q-P5a" id="Mx0-fZ-HmW"/>
                     </connections>
                 </viewController>

@@ -65,6 +65,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *startAccelerometer;
 @property (weak, nonatomic) IBOutlet UIButton *stopAccelerometer;
+@property (weak, nonatomic) IBOutlet UIButton *startLog;
+@property (weak, nonatomic) IBOutlet UIButton *stopLog;
 
 @property (weak, nonatomic) IBOutlet UILabel *mfgNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *serialNumLabel;
@@ -74,7 +76,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *firmwareUpdateLabel;
 
 @property (strong, nonatomic) UIView *grayScreen;
-@property (strong, nonatomic) NSMutableArray *accelerometerDataArray;
+@property (strong, nonatomic) NSArray *accelerometerDataArray;
 @property (nonatomic) BOOL accelerometerRunning;
 @property (nonatomic) BOOL switchRunning;
 @end
@@ -90,7 +92,8 @@
     self.grayScreen.alpha = 0.4;
     [self.view addSubview:self.grayScreen];
     
-    [self.stopAccelerometer setEnabled:FALSE];
+    [self.stopAccelerometer setEnabled:NO];
+    [self.stopLog setEnabled:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -363,16 +366,19 @@
     self.device.accelerometer.sleepSampleFrequency = (int)self.sleepSampleFrequency.selectedSegmentIndex;
     self.device.accelerometer.sleepPowerScheme = (int)self.sleepPowerScheme.selectedSegmentIndex;
    
-    [self.startAccelerometer setEnabled:FALSE];
-    [self.stopAccelerometer setEnabled:TRUE];
+    [self.startAccelerometer setEnabled:NO];
+    [self.stopAccelerometer setEnabled:YES];
+    [self.startLog setEnabled:NO];
+    [self.stopLog setEnabled:NO];
     self.accelerometerRunning = YES;
     // These variables are used for data recording
-    self.accelerometerDataArray = [[NSMutableArray alloc] initWithCapacity:1000];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:1000];
+    self.accelerometerDataArray = array;
     
     [self.device.accelerometer.dataReadyEvent startNotificationsWithHandler:^(MBLAccelerometerData *acceleration, NSError *error) {
         [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
         // Add data to data array for saving
-        [self.accelerometerDataArray addObject:acceleration];
+        [array addObject:acceleration];
     }];
 }
 
@@ -381,9 +387,61 @@
     [self.device.accelerometer.dataReadyEvent stopNotifications];
     self.accelerometerRunning = NO;
 
-    [self.startAccelerometer setEnabled:TRUE];
-    [self.stopAccelerometer setEnabled:FALSE];
+    [self.startAccelerometer setEnabled:YES];
+    [self.stopAccelerometer setEnabled:NO];
+    [self.startLog setEnabled:YES];
 }
+
+- (IBAction)startAccelerometerLog:(id)sender
+{
+    if (self.accelerometerScale.selectedSegmentIndex == 0) {
+        self.accelerometerGraph.fullScale = 2;
+    } else if (self.accelerometerScale.selectedSegmentIndex == 1) {
+        self.accelerometerGraph.fullScale = 4;
+    } else {
+        self.accelerometerGraph.fullScale = 8;
+    }
+    
+    self.device.accelerometer.fullScaleRange = (int)self.accelerometerScale.selectedSegmentIndex;
+    self.device.accelerometer.sampleFrequency = (int)self.sampleFrequency.selectedSegmentIndex;
+    self.device.accelerometer.highPassFilter = self.highPassFilterSwitch.on;
+    self.device.accelerometer.filterCutoffFreq = self.hpfCutoffFreq.selectedSegmentIndex;
+    self.device.accelerometer.lowNoise = self.lowNoiseSwitch.on;
+    self.device.accelerometer.activePowerScheme = (int)self.activePowerScheme.selectedSegmentIndex;
+    self.device.accelerometer.autoSleep = self.autoSleepSwitch.on;
+    self.device.accelerometer.sleepSampleFrequency = (int)self.sleepSampleFrequency.selectedSegmentIndex;
+    self.device.accelerometer.sleepPowerScheme = (int)self.sleepPowerScheme.selectedSegmentIndex;
+    
+    [self.startLog setEnabled:NO];
+    [self.stopLog setEnabled:YES];
+    [self.startAccelerometer setEnabled:NO];
+    [self.stopAccelerometer setEnabled:NO];
+    
+    [self.device.accelerometer.dataReadyEvent startLogging];
+}
+
+- (IBAction)stopAccelerometerLog:(id)sender
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+    hud.labelText = @"Downloading...";
+    
+    [self.device.accelerometer.dataReadyEvent downloadLogAndStopLogging:YES handler:^(NSArray *array, NSError *error) {
+        [hud hide:YES];
+        if (!error) {
+            self.accelerometerDataArray = array;
+            for (MBLAccelerometerData *acceleration in array) {
+                [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
+            }
+        }
+    } progressHandler:^(float number, NSError *error) {
+        hud.progress = number;
+    }];
+    [self.stopLog setEnabled:NO];
+    [self.startLog setEnabled:YES];
+    [self.startAccelerometer setEnabled:YES];
+}
+
 
 - (IBAction)sendDataPressed:(id)sender
 {
