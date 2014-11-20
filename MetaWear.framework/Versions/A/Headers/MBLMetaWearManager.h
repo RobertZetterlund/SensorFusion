@@ -90,6 +90,27 @@
 - (void)stopScanForMetaWears;
 
 
+
+/**
+ This function is intended for recovery mode only if a MetaWear gets stuck in the bootloader
+ which may happen if a firmware update gets an unexpected error.
+ NOTE: You can only call updateFirmwareWithHandler:progressHandler: on the MBLMetaWear objects
+ in the array
+ NOTE: This will cancel any current MetaWear scans
+ @param BOOL duplicates, YES: only callback when a new device is found, NO: callback each time
+ a new advertising packet is found
+ @param MBLArrayHandler handler, Callback to handle each time a new device is found
+ @returns none
+ */
+- (void)startScanForMetaBootsAllowDuplicates:(BOOL)duplicates handler:(MBLArrayHandler)handler;
+
+/**
+ Stop scanning for MetaBoot devices, this will release all handlers given to
+ startScanForMetaBootsAllowDuplicates:
+ @returns none
+ */
+- (void)stopScanForMetaBoots;
+
 /**
  * @deprecated use connectMetaWear:connectionHandler:disconnectionHandler: instead
  * @see connectMetaWear:connectionHandler:disconnectionHandler:

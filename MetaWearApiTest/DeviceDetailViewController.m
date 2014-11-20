@@ -122,6 +122,7 @@
 {
     if (self.device.state == CBPeripheralStateDisconnected) {
         [self setConnected:NO];
+        [self.scrollView scrollRectToVisible:CGRectMake(0, 0, 10, 10) animated:YES];
     }
 }
 
@@ -171,7 +172,8 @@
 - (IBAction)readTempraturePressed:(id)sender
 {
     [self.device.temperature readTemperatureWithHandler:^(NSDecimalNumber *temp, NSError *error) {
-        self.tempratureLabel.text = [temp stringValue];
+        NSString *suffix = self.device.temperature.units == MBLTemperatureUnitCelsius ? @"°C" : @"°F";
+        self.tempratureLabel.text = [[temp stringValue] stringByAppendingString:suffix];
     }];
 }
 
@@ -274,17 +276,24 @@
     [self.device updateFirmwareWithHandler:^(NSError *error) {
         hud.mode = MBProgressHUDModeText;
         if (error) {
-            hud.labelText = error.localizedDescription;
             NSLog(@"Firmware update error: %@", error.localizedDescription);
+            [[[UIAlertView alloc] initWithTitle:@"Update Error"
+                                        message:[@"Please re-connect and try again, if you can't connect, try MetaBoot Mode to recover.\nError: " stringByAppendingString:error.localizedDescription]
+                                       delegate:nil
+                              cancelButtonTitle:@"Okay"
+                              otherButtonTitles:nil] show];
+            [hud hide:YES];
         } else {
             hud.labelText = @"Success!";
+            [hud hide:YES afterDelay:2.0];
         }
-        [hud hide:YES afterDelay:2.5];
     } progressHandler:^(float number, NSError *error) {
-        hud.progress = number;
-        if (number == 1.0) {
-            hud.mode = MBProgressHUDModeIndeterminate;
-            hud.labelText = @"Resetting...";
+        if (number != hud.progress) {
+            hud.progress = number;
+            if (number == 1.0) {
+                hud.mode = MBProgressHUDModeIndeterminate;
+                hud.labelText = @"Resetting...";
+            }
         }
     }];
 }
@@ -342,7 +351,7 @@
 {
     MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
     [pin readAnalogValueUsingMode:MBLAnalogReadModeFixed handler:^(NSDecimalNumber *number, NSError *error) {
-        self.gpioPinAnalogValue.text = [number stringValue];
+        self.gpioPinAnalogValue.text = [NSString stringWithFormat:@"%.3fV", number.doubleValue];
     }];
 }
 

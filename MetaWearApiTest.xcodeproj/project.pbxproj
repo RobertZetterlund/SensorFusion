@@ -12,7 +12,7 @@
 		402D420F198843BE0011ADB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402D420E198843BE0011ADB1 /* Foundation.framework */; };
 		402D4211198843BE0011ADB1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402D4210198843BE0011ADB1 /* CoreGraphics.framework */; };
 		402D4213198843BE0011ADB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402D4212198843BE0011ADB1 /* UIKit.framework */; };
-		4044685B1A1C2884000DB136 /* MetaWear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4044685A1A1C2884000DB136 /* MetaWear.framework */; };
+		404468971A1E892C000DB136 /* MetaWear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 404468961A1E892C000DB136 /* MetaWear.framework */; };
 		40A68479199BD2420054F49D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A68478199BD2420054F49D /* MBProgressHUD.m */; };
 		40A6847C199BD25F0054F49D /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A6847B199BD25F0054F49D /* StartViewController.m */; };
 		40D97BF619897CB400F55A09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D97BF119897CB400F55A09 /* AppDelegate.m */; };
@@ -33,7 +33,7 @@
 		402D420E198843BE0011ADB1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		402D4210198843BE0011ADB1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		402D4212198843BE0011ADB1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		4044685A1A1C2884000DB136 /* MetaWear.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MetaWear.framework; sourceTree = "<group>"; };
+		404468961A1E892C000DB136 /* MetaWear.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MetaWear.framework; sourceTree = "<group>"; };
 		40A68477199BD2420054F49D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
 		40A68478199BD2420054F49D /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		40A6847A199BD25F0054F49D /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartViewController.h; path = MetaWearApiTest/StartViewController.h; sourceTree = "<group>"; };
@@ -57,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4044685B1A1C2884000DB136 /* MetaWear.framework in Frameworks */,
+				404468971A1E892C000DB136 /* MetaWear.framework in Frameworks */,
 				402D4211198843BE0011ADB1 /* CoreGraphics.framework in Frameworks */,
 				402D4213198843BE0011ADB1 /* UIKit.framework in Frameworks */,
 				402D420F198843BE0011ADB1 /* Foundation.framework in Frameworks */,
@@ -101,7 +101,7 @@
 		402D420D198843BE0011ADB1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4044685A1A1C2884000DB136 /* MetaWear.framework */,
+				404468961A1E892C000DB136 /* MetaWear.framework */,
 				402D420E198843BE0011ADB1 /* Foundation.framework */,
 				402D4210198843BE0011ADB1 /* CoreGraphics.framework */,
 				402D4212198843BE0011ADB1 /* UIKit.framework */,

@@ -35,15 +35,15 @@
 
 #import "DevicesTableViewController.h"
 #import "DeviceDetailViewController.h"
+#import "MBProgressHUD.h"
 #import <MetaWear/MetaWear.h>
 
 @interface DevicesTableViewController ()
-
 @property (nonatomic, strong) NSArray *devices;
 @property (strong, nonatomic) UIActivityIndicatorView *activity;
 
 @property (weak, nonatomic) IBOutlet UISwitch *scanningSwitch;
-
+@property (weak, nonatomic) IBOutlet UISwitch *metaBootSwitch;
 @end
 
 @implementation DevicesTableViewController
@@ -53,7 +53,7 @@
     [super viewDidLoad];
     
     self.activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.activity.center = CGPointMake(95, 90);
+    self.activity.center = CGPointMake(95, 138);
     [self.tableView addSubview:self.activity];
 }
 
@@ -75,19 +75,45 @@
 {
     if (on) {
         [self.activity startAnimating];
-        [[MBLMetaWearManager sharedManager] startScanForMetaWearsAllowDuplicates:YES handler:^(NSArray *array) {
-            self.devices = array;
-            [self.tableView reloadData];
-        }];
+        if (self.metaBootSwitch.on) {
+            [[MBLMetaWearManager sharedManager] startScanForMetaBootsAllowDuplicates:YES handler:^(NSArray *array) {
+                self.devices = array;
+                [self.tableView reloadData];
+            }];
+        } else {
+            [[MBLMetaWearManager sharedManager] startScanForMetaWearsAllowDuplicates:YES handler:^(NSArray *array) {
+                self.devices = array;
+                [self.tableView reloadData];
+            }];
+        }
     } else {
         [self.activity stopAnimating];
-        [[MBLMetaWearManager sharedManager] stopScanForMetaWears];
+        if (self.metaBootSwitch.on) {
+            [[MBLMetaWearManager sharedManager] stopScanForMetaBoots];
+        } else {
+            [[MBLMetaWearManager sharedManager] stopScanForMetaWears];
+        }
     }
 }
 
 - (IBAction)scanningSwitchPressed:(UISwitch *)sender
 {
     [self setScanning:sender.on];
+}
+
+- (IBAction)metaBootSwitchPressed:(id)sender
+{
+    if (self.metaBootSwitch.on) {
+        [[MBLMetaWearManager sharedManager] stopScanForMetaWears];
+    } else {
+        [[MBLMetaWearManager sharedManager] stopScanForMetaBoots];
+    }
+    // Wait a split second for any final callbacks to fire before starting up scanning again
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.devices = nil;
+        [self.tableView reloadData];
+        [self setScanning:self.scanningSwitch.on];
+    });
 }
 
 #pragma mark - Table view data source
@@ -99,7 +125,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    NSString *identifier = self.metaBootSwitch.on ? @"MetaBootCell" : @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     MBLMetaWear *cur = self.devices[indexPath.row];
     
     UILabel *uuid = (UILabel *)[cell viewWithTag:1];
@@ -123,7 +150,40 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     MBLMetaWear *selected = self.devices[indexPath.row];
-    [self performSegueWithIdentifier:@"DeviceDetails" sender:selected];
+    if (self.metaBootSwitch.on) {
+        [self.scanningSwitch setOn:NO animated:YES];
+        [self.metaBootSwitch setOn:NO animated:YES];
+        [self metaBootSwitchPressed:self.metaBootSwitch];
+        // Pause the screen while update is going on
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+        hud.labelText = @"Updating...";
+        [selected updateFirmwareWithHandler:^(NSError *error) {
+            hud.mode = MBProgressHUDModeText;
+            if (error) {
+                NSLog(@"Firmware update error: %@", error.localizedDescription);
+                [[[UIAlertView alloc] initWithTitle:@"Update Error"
+                                            message:[@"Please re-connect and try again, if you can't connect, try MetaBoot Mode to recover.\nError: " stringByAppendingString:error.localizedDescription]
+                                           delegate:nil
+                                  cancelButtonTitle:@"Okay"
+                                  otherButtonTitles:nil] show];
+                [hud hide:YES];
+            } else {
+                hud.labelText = @"Success!";
+                [hud hide:YES afterDelay:2.0];
+            }
+        } progressHandler:^(float number, NSError *error) {
+            if (number != hud.progress) {
+                hud.progress = number;
+                if (number == 1.0) {
+                    hud.mode = MBProgressHUDModeIndeterminate;
+                    hud.labelText = @"Resetting...";
+                }
+            }
+        }];
+    } else {
+        [self performSegueWithIdentifier:@"DeviceDetails" sender:selected];
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

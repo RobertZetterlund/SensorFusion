@@ -56,6 +56,8 @@ typedef void (^MBLNumberHandler)(NSNumber *number, NSError *error);
 typedef void (^MBLSwitchStateHandler)(BOOL isPressed, NSError *error);
 typedef void (^MBLBoolHandler)(BOOL isTrue, NSError *error);
 typedef void (^MBLFloatHandler)(float number, NSError *error);
+typedef void (^MBLStringHandler)(NSString *string);
+typedef void (^MBLUrlHandler)(NSURL *url, NSError *error);
 
 #pragma mark - Errors
 
