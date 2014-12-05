@@ -40,7 +40,6 @@
 @class MBLANCSEvent;
 
 typedef NS_OPTIONS(uint16_t, MBLANCSCategoryID) {
-    MBLANCSCategoryIDNone               = 0,
     MBLANCSCategoryIDOther              = 1 << 0,
     MBLANCSCategoryIDIncomingCall       = 1 << 1,
     MBLANCSCategoryIDMissedCall         = 1 << 2,
@@ -53,25 +52,23 @@ typedef NS_OPTIONS(uint16_t, MBLANCSCategoryID) {
     MBLANCSCategoryIDBusinessAndFinance = 1 << 9,
     MBLANCSCategoryIDLocation           = 1 << 10,
     MBLANCSCategoryIDEntertainment      = 1 << 11,
-    MBLANCSCategoryIDAll                = 0xFFFF
+    MBLANCSCategoryIDAny                = 0xFFFF
 };
 
 typedef NS_OPTIONS(uint8_t, MBLANCSEventID) {
-    MBLANCSEventIDNone                 = 0,
     MBLANCSEventIDNotificationAdded    = 1 << 0,
     MBLANCSEventIDNotificationModified = 1 << 1,
     MBLANCSEventIDNotificationRemoved  = 1 << 2,
-    MBLANCSEventIDAll                  = 0xFF
+    MBLANCSEventIDAny                  = 0xFF
 };
 
 typedef NS_OPTIONS(uint8_t, MBLANCSEventFlag) {
-    MBLANCSEventFlagNone           = 0,
     MBLANCSEventFlagSilent         = 1 << 0,
     MBLANCSEventFlagImportant      = 1 << 1,
     MBLANCSEventFlagPreExisting    = 1 << 2,
     MBLANCSEventFlagPositiveAction = 1 << 3,
     MBLANCSEventFlagNegativeAction = 1 << 4,
-    MBLANCSEventFlagAll            = 0xFF
+    MBLANCSEventFlagAny            = 0
 };
 
 typedef NS_ENUM(uint8_t, MBLANCSNotificationAttributeID) {

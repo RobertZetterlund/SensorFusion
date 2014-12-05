@@ -385,7 +385,8 @@
     self.accelerometerDataArray = array;
     
     [self.device.accelerometer.dataReadyEvent startNotificationsWithHandler:^(MBLAccelerometerData *acceleration, NSError *error) {
-        [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
+        NSLog(@"%@", acceleration);
+        [self.accelerometerGraph addX:(float)acceleration.x / 1000.0 y:(float)acceleration.y / 1000.0 z:(float)acceleration.z / 1000.0];
         // Add data to data array for saving
         [array addObject:acceleration];
     }];
@@ -440,7 +441,7 @@
         if (!error) {
             self.accelerometerDataArray = array;
             for (MBLAccelerometerData *acceleration in array) {
-                [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
+                [self.accelerometerGraph addX:(float)acceleration.x / 1000.0 y:(float)acceleration.y / 1000.0 z:(float)acceleration.z / 1000.0];
             }
         }
     } progressHandler:^(float number, NSError *error) {
@@ -457,7 +458,7 @@
     NSMutableData *accelerometerData = [NSMutableData data];
     for (MBLAccelerometerData *dataElement in self.accelerometerDataArray) {
         @autoreleasepool {
-            [accelerometerData appendData:[[NSString stringWithFormat:@"%f,%f,%f,%f\n",
+            [accelerometerData appendData:[[NSString stringWithFormat:@"%f,%d,%d,%d\n",
                                             dataElement.timestamp.timeIntervalSince1970,
                                             dataElement.x,
                                             dataElement.y,

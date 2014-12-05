@@ -42,12 +42,12 @@
  */
 @property (nonatomic, readonly) NSTimeInterval intervalSinceCaptureBegan DEPRECATED_MSG_ATTRIBUTE("Use timestamp property instead");
 /**
- Acceleration along each axis in G's
+ Acceleration along each axis in mili-G's
  */
-@property (nonatomic, readonly) float x, y, z;
+@property (nonatomic, readonly) int x, y, z;
 /**
- RMS value of x, y, and z
+ RMS value of x, y, and z in mili-G's
  */
-@property (nonatomic, readonly) float RMS;
+@property (nonatomic, readonly) int RMS;
 
 @end
