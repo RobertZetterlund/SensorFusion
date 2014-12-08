@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cmc-k5-3Lq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cmc-k5-3Lq">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -188,14 +188,14 @@
                         <viewControllerLayoutGuide type="bottom" id="IGR-ES-IAs"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1up-10-IZJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="2000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="2500"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="nmR-7B-m1v">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="2000"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="2500"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o7r-ne-fbR">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="2000"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="2500"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Connected to device:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQS-om-W7f">
                                                 <rect key="frame" x="20" y="20" width="223" height="31"/>
@@ -773,13 +773,137 @@
                                                     <action selector="sendDataPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="Q1U-Gw-Y8Y"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMT-Wq-3VG">
+                                                <rect key="frame" x="20" y="2103" width="132" height="30"/>
+                                                <state key="normal" title="Start Tap Detection">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="startTapPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="8f1-OB-7EB"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap Detection:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CW8-In-5EQ">
+                                                <rect key="frame" x="21" y="1997" width="111" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap detection axis:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ug5-8m-hnh">
+                                                <rect key="frame" x="22" y="2029" width="123" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DRD-z0-e11">
+                                                <rect key="frame" x="151" y="2026" width="149" height="29"/>
+                                                <segments>
+                                                    <segment title="X"/>
+                                                    <segment title="Y"/>
+                                                    <segment title="Z"/>
+                                                </segments>
+                                            </segmentedControl>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap detection type:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQH-er-4a7">
+                                                <rect key="frame" x="22" y="2065" width="124" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="r21-TG-f1a">
+                                                <rect key="frame" x="151" y="2062" width="149" height="29"/>
+                                                <segments>
+                                                    <segment title="Single"/>
+                                                    <segment title="Double"/>
+                                                    <segment title="Both"/>
+                                                </segments>
+                                            </segmentedControl>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3e0-R4-1tt">
+                                                <rect key="frame" x="20" y="2141" width="132" height="30"/>
+                                                <state key="normal" title="Stop Tap Detection">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="stopTapPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="dq9-oA-Ckg"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap Count: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBN-SU-FpV">
+                                                <rect key="frame" x="167" y="2127" width="134" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axo-wK-Xoe">
+                                                <rect key="frame" x="20" y="2213" width="151" height="30"/>
+                                                <state key="normal" title="Start Shake Detection">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="startShakePressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="gKy-FB-yF8"/>
+                                                    <action selector="startTapPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="JPR-jp-OGt"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D2h-cw-cOS">
+                                                <rect key="frame" x="20" y="2251" width="150" height="30"/>
+                                                <state key="normal" title="Stop Shake Detection">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="stopShakePressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="9Ws-XY-RzA"/>
+                                                    <action selector="stopTapPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="Jrq-g0-vGx"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shakes: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e11-ds-hDJ">
+                                                <rect key="frame" x="185" y="2237" width="114" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="caH-41-sJd">
+                                                <rect key="frame" x="20" y="2327" width="183" height="30"/>
+                                                <state key="normal" title="Start Orientation Detection">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="startOrientationPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="pQi-20-z5c"/>
+                                                    <action selector="startShakePressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="nK3-7S-BAN"/>
+                                                    <action selector="startTapPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="Rp1-6J-cSK"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTC-jD-mzB">
+                                                <rect key="frame" x="20" y="2365" width="183" height="30"/>
+                                                <state key="normal" title="Stop Orientation Detection">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="stopOrientationPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="iIx-uL-U4Q"/>
+                                                    <action selector="stopShakePressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="FNU-YF-bwB"/>
+                                                    <action selector="stopTapPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="fsQ-vm-K33"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shake Detection:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRG-sU-Lcp">
+                                                <rect key="frame" x="20" y="2184" width="132" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Orientation Detection:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Zu-T5-ZSK">
+                                                <rect key="frame" x="20" y="2298" width="168" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXXXXXXXXXXXXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5E-c8-4HS">
+                                                <rect key="frame" x="21" y="2403" width="280" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="320" id="5hM-aa-CyA"/>
                                             <constraint firstItem="KLt-4f-BeD" firstAttribute="top" secondItem="o7r-ne-fbR" secondAttribute="top" constant="1831" id="Hf3-d5-NKg"/>
                                             <constraint firstItem="KLt-4f-BeD" firstAttribute="leading" secondItem="o7r-ne-fbR" secondAttribute="leading" id="eZH-4v-IPD"/>
-                                            <constraint firstAttribute="height" constant="2000" id="zFK-bJ-BwM"/>
+                                            <constraint firstAttribute="height" constant="2500" id="zFK-bJ-BwM"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -802,7 +926,7 @@
                     <navigationItem key="navigationItem" title="MetaWear" id="NgP-kn-ICf"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="2000"/>
+                    <size key="freeformSize" width="320" height="2500"/>
                     <connections>
                         <outlet property="accelerometerGraph" destination="KLt-4f-BeD" id="fHu-9B-Yv3"/>
                         <outlet property="accelerometerScale" destination="oeh-Oe-vsA" id="vBh-GU-x7L"/>
@@ -823,16 +947,21 @@
                         <outlet property="lowNoiseSwitch" destination="z7L-Af-YBm" id="uvf-0I-5kr"/>
                         <outlet property="mechanicalSwitchLabel" destination="3Nk-xe-wNY" id="c8T-HK-QVn"/>
                         <outlet property="mfgNameLabel" destination="wmN-Ah-U14" id="cUf-W8-h3L"/>
+                        <outlet property="orientationLabel" destination="k5E-c8-4HS" id="fkH-A5-h3Q"/>
                         <outlet property="rssiLevelLabel" destination="V4h-Ke-VK5" id="v8r-si-LdK"/>
                         <outlet property="sampleFrequency" destination="l7I-Yr-l6k" id="ace-L0-sKg"/>
                         <outlet property="scrollView" destination="nmR-7B-m1v" id="BMZ-Hi-Pcn"/>
                         <outlet property="serialNumLabel" destination="Dy5-nZ-9wV" id="Ez1-wl-vuI"/>
+                        <outlet property="shakeLabel" destination="e11-ds-hDJ" id="bQV-Mk-Ilr"/>
                         <outlet property="sleepPowerScheme" destination="f7Q-gQ-AYs" id="sGh-I3-GrU"/>
                         <outlet property="sleepSampleFrequency" destination="D3d-Nr-Tkw" id="fH8-uB-Abf"/>
                         <outlet property="startAccelerometer" destination="g0s-Ae-HoJ" id="3aW-uz-xl1"/>
                         <outlet property="startLog" destination="0Ik-my-L7Y" id="YpQ-Ns-5Vb"/>
                         <outlet property="stopAccelerometer" destination="ski-pS-qcg" id="fFp-i2-nMc"/>
                         <outlet property="stopLog" destination="4LC-49-0i8" id="Zvg-Sj-92q"/>
+                        <outlet property="tapDetectionAxis" destination="DRD-z0-e11" id="KBj-Rj-WNh"/>
+                        <outlet property="tapDetectionType" destination="r21-TG-f1a" id="w9v-c1-Lhx"/>
+                        <outlet property="tapLabel" destination="cBN-SU-FpV" id="sQT-3Q-ITZ"/>
                         <outlet property="tempratureLabel" destination="yZC-2Q-P5a" id="Mx0-fZ-HmW"/>
                     </connections>
                 </viewController>

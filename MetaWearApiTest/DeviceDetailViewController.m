@@ -51,8 +51,15 @@
 @property (weak, nonatomic) IBOutlet UISwitch *autoSleepSwitch;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sleepSampleFrequency;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sleepPowerScheme;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *tapDetectionAxis;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *tapDetectionType;
 
 @property (weak, nonatomic) IBOutlet APLGraphView *accelerometerGraph;
+@property (weak, nonatomic) IBOutlet UILabel *tapLabel;
+@property (nonatomic) int tapCount;
+@property (weak, nonatomic) IBOutlet UILabel *shakeLabel;
+@property (nonatomic) int shakeCount;
+@property (weak, nonatomic) IBOutlet UILabel *orientationLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *mechanicalSwitchLabel;
 @property (weak, nonatomic) IBOutlet UILabel *batteryLevelLabel;
@@ -355,7 +362,7 @@
     }];
 }
 
-- (IBAction)startAccelerationPressed:(id)sender
+- (void)updateAccelerometerSettings
 {
     if (self.accelerometerScale.selectedSegmentIndex == 0) {
         self.accelerometerGraph.fullScale = 2;
@@ -374,7 +381,14 @@
     self.device.accelerometer.autoSleep = self.autoSleepSwitch.on;
     self.device.accelerometer.sleepSampleFrequency = (int)self.sleepSampleFrequency.selectedSegmentIndex;
     self.device.accelerometer.sleepPowerScheme = (int)self.sleepPowerScheme.selectedSegmentIndex;
-   
+    self.device.accelerometer.tapDetectionAxis = (int)self.tapDetectionAxis.selectedSegmentIndex;
+    self.device.accelerometer.tapType = (int)self.tapDetectionType.selectedSegmentIndex;
+}
+
+- (IBAction)startAccelerationPressed:(id)sender
+{
+    [self updateAccelerometerSettings];
+    
     [self.startAccelerometer setEnabled:NO];
     [self.stopAccelerometer setEnabled:YES];
     [self.startLog setEnabled:NO];
@@ -404,23 +418,7 @@
 
 - (IBAction)startAccelerometerLog:(id)sender
 {
-    if (self.accelerometerScale.selectedSegmentIndex == 0) {
-        self.accelerometerGraph.fullScale = 2;
-    } else if (self.accelerometerScale.selectedSegmentIndex == 1) {
-        self.accelerometerGraph.fullScale = 4;
-    } else {
-        self.accelerometerGraph.fullScale = 8;
-    }
-    
-    self.device.accelerometer.fullScaleRange = (int)self.accelerometerScale.selectedSegmentIndex;
-    self.device.accelerometer.sampleFrequency = (int)self.sampleFrequency.selectedSegmentIndex;
-    self.device.accelerometer.highPassFilter = self.highPassFilterSwitch.on;
-    self.device.accelerometer.filterCutoffFreq = self.hpfCutoffFreq.selectedSegmentIndex;
-    self.device.accelerometer.lowNoise = self.lowNoiseSwitch.on;
-    self.device.accelerometer.activePowerScheme = (int)self.activePowerScheme.selectedSegmentIndex;
-    self.device.accelerometer.autoSleep = self.autoSleepSwitch.on;
-    self.device.accelerometer.sleepSampleFrequency = (int)self.sleepSampleFrequency.selectedSegmentIndex;
-    self.device.accelerometer.sleepPowerScheme = (int)self.sleepPowerScheme.selectedSegmentIndex;
+    [self updateAccelerometerSettings];
     
     [self.startLog setEnabled:NO];
     [self.stopLog setEnabled:YES];
@@ -516,6 +514,65 @@
 -(void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)startTapPressed:(id)sender
+{
+    [self updateAccelerometerSettings];
+
+    [self.device.accelerometer.tapEvent startNotificationsWithHandler:^(id obj, NSError *error) {
+        self.tapLabel.text = [NSString stringWithFormat:@"Tap Count: %d", ++self.tapCount];
+    }];
+}
+
+- (IBAction)stopTapPressed:(id)sender
+{
+    [self.device.accelerometer.tapEvent stopNotifications];
+    self.tapCount = 0;
+    self.tapLabel.text = @"Tap Count: 0";
+}
+
+- (IBAction)startShakePressed:(id)sender
+{
+    [self updateAccelerometerSettings];
+    
+    [self.device.accelerometer.shakeEvent startNotificationsWithHandler:^(id obj, NSError *error) {
+        self.shakeLabel.text = [NSString stringWithFormat:@"Shakes: %d", ++self.shakeCount];
+    }];
+}
+
+- (IBAction)stopShakePressed:(id)sender
+{
+    [self.device.accelerometer.shakeEvent stopNotifications];
+    self.shakeCount = 0;
+    self.shakeLabel.text = @"Shakes: 0";
+}
+
+- (IBAction)startOrientationPressed:(id)sender
+{
+    [self.device.accelerometer.orientationEvent startNotificationsWithHandler:^(id obj, NSError *error) {
+        MBLOrientationData *data = obj;
+        switch (data.orientation) {
+            case MBLAccelerometerOrientationPortrait:
+                self.orientationLabel.text = @"Portrait";
+                break;
+            case MBLAccelerometerOrientationPortraitUpsideDown:
+                self.orientationLabel.text = @"PortraitUpsideDown";
+                break;
+            case MBLAccelerometerOrientationLandscapeLeft:
+                self.orientationLabel.text = @"LandscapeLeft";
+                break;
+            case MBLAccelerometerOrientationLandscapeRight:
+                self.orientationLabel.text = @"LandscapeRight";
+                break;
+        }
+    }];
+}
+
+- (IBAction)stopOrientationPressed:(id)sender
+{
+    [self.device.accelerometer.orientationEvent stopNotifications];
+    self.orientationLabel.text = @"XXXXXXXXXXXXXX";
 }
 
 @end
