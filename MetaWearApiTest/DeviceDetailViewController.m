@@ -74,6 +74,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *stopAccelerometer;
 @property (weak, nonatomic) IBOutlet UIButton *startLog;
 @property (weak, nonatomic) IBOutlet UIButton *stopLog;
+@property (weak, nonatomic) IBOutlet UIButton *startTap;
+@property (weak, nonatomic) IBOutlet UIButton *stopTap;
+@property (weak, nonatomic) IBOutlet UIButton *startShake;
+@property (weak, nonatomic) IBOutlet UIButton *stopShake;
+@property (weak, nonatomic) IBOutlet UIButton *startOrientation;
+@property (weak, nonatomic) IBOutlet UIButton *stopOrientation;
 
 @property (weak, nonatomic) IBOutlet UILabel *mfgNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *serialNumLabel;
@@ -518,8 +524,10 @@
 
 - (IBAction)startTapPressed:(id)sender
 {
+    [self.startTap setEnabled:NO];
+    [self.stopTap setEnabled:YES];
+    
     [self updateAccelerometerSettings];
-
     [self.device.accelerometer.tapEvent startNotificationsWithHandler:^(id obj, NSError *error) {
         self.tapLabel.text = [NSString stringWithFormat:@"Tap Count: %d", ++self.tapCount];
     }];
@@ -527,6 +535,9 @@
 
 - (IBAction)stopTapPressed:(id)sender
 {
+    [self.startTap setEnabled:YES];
+    [self.stopTap setEnabled:NO];
+    
     [self.device.accelerometer.tapEvent stopNotifications];
     self.tapCount = 0;
     self.tapLabel.text = @"Tap Count: 0";
@@ -534,8 +545,10 @@
 
 - (IBAction)startShakePressed:(id)sender
 {
-    [self updateAccelerometerSettings];
+    [self.startShake setEnabled:NO];
+    [self.stopShake setEnabled:YES];
     
+    [self updateAccelerometerSettings];
     [self.device.accelerometer.shakeEvent startNotificationsWithHandler:^(id obj, NSError *error) {
         self.shakeLabel.text = [NSString stringWithFormat:@"Shakes: %d", ++self.shakeCount];
     }];
@@ -543,6 +556,9 @@
 
 - (IBAction)stopShakePressed:(id)sender
 {
+    [self.startShake setEnabled:YES];
+    [self.stopShake setEnabled:NO];
+    
     [self.device.accelerometer.shakeEvent stopNotifications];
     self.shakeCount = 0;
     self.shakeLabel.text = @"Shakes: 0";
@@ -550,6 +566,10 @@
 
 - (IBAction)startOrientationPressed:(id)sender
 {
+    [self.startOrientation setEnabled:NO];
+    [self.stopOrientation setEnabled:YES];
+    
+    [self updateAccelerometerSettings];
     [self.device.accelerometer.orientationEvent startNotificationsWithHandler:^(id obj, NSError *error) {
         MBLOrientationData *data = obj;
         switch (data.orientation) {
@@ -571,6 +591,9 @@
 
 - (IBAction)stopOrientationPressed:(id)sender
 {
+    [self.startOrientation setEnabled:YES];
+    [self.stopOrientation setEnabled:NO];
+    
     [self.device.accelerometer.orientationEvent stopNotifications];
     self.orientationLabel.text = @"XXXXXXXXXXXXXX";
 }

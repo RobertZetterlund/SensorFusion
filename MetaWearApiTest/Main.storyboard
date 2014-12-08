@@ -816,7 +816,7 @@
                                                     <segment title="Both"/>
                                                 </segments>
                                             </segmentedControl>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3e0-R4-1tt">
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3e0-R4-1tt">
                                                 <rect key="frame" x="20" y="2141" width="132" height="30"/>
                                                 <state key="normal" title="Stop Tap Detection">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -838,17 +838,15 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="startShakePressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="gKy-FB-yF8"/>
-                                                    <action selector="startTapPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="JPR-jp-OGt"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D2h-cw-cOS">
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D2h-cw-cOS">
                                                 <rect key="frame" x="20" y="2251" width="150" height="30"/>
                                                 <state key="normal" title="Stop Shake Detection">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="stopShakePressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="9Ws-XY-RzA"/>
-                                                    <action selector="stopTapPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="Jrq-g0-vGx"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shakes: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e11-ds-hDJ">
@@ -864,19 +862,15 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="startOrientationPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="pQi-20-z5c"/>
-                                                    <action selector="startShakePressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="nK3-7S-BAN"/>
-                                                    <action selector="startTapPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="Rp1-6J-cSK"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTC-jD-mzB">
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTC-jD-mzB">
                                                 <rect key="frame" x="20" y="2365" width="183" height="30"/>
                                                 <state key="normal" title="Stop Orientation Detection">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="stopOrientationPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="iIx-uL-U4Q"/>
-                                                    <action selector="stopShakePressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="FNU-YF-bwB"/>
-                                                    <action selector="stopTapPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="fsQ-vm-K33"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shake Detection:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRG-sU-Lcp">
@@ -957,8 +951,14 @@
                         <outlet property="sleepSampleFrequency" destination="D3d-Nr-Tkw" id="fH8-uB-Abf"/>
                         <outlet property="startAccelerometer" destination="g0s-Ae-HoJ" id="3aW-uz-xl1"/>
                         <outlet property="startLog" destination="0Ik-my-L7Y" id="YpQ-Ns-5Vb"/>
+                        <outlet property="startOrientation" destination="caH-41-sJd" id="SA2-a3-708"/>
+                        <outlet property="startShake" destination="axo-wK-Xoe" id="2GR-W2-oGR"/>
+                        <outlet property="startTap" destination="nMT-Wq-3VG" id="QzJ-LB-3OM"/>
                         <outlet property="stopAccelerometer" destination="ski-pS-qcg" id="fFp-i2-nMc"/>
                         <outlet property="stopLog" destination="4LC-49-0i8" id="Zvg-Sj-92q"/>
+                        <outlet property="stopOrientation" destination="sTC-jD-mzB" id="uff-4P-dEe"/>
+                        <outlet property="stopShake" destination="D2h-cw-cOS" id="AzC-Nv-3aI"/>
+                        <outlet property="stopTap" destination="3e0-R4-1tt" id="E8d-89-xbg"/>
                         <outlet property="tapDetectionAxis" destination="DRD-z0-e11" id="KBj-Rj-WNh"/>
                         <outlet property="tapDetectionType" destination="r21-TG-f1a" id="w9v-c1-Lhx"/>
                         <outlet property="tapLabel" destination="cBN-SU-FpV" id="sQT-3Q-ITZ"/>
