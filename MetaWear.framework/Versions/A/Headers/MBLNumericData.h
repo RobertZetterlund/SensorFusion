@@ -35,6 +35,9 @@
 
 #import <MetaWear/MBLLogEntry.h>
 
+/**
+ Generic base class for numeric data coming from the MetaWear log
+ */
 @interface MBLNumericData : MBLLogEntry
 @property (nonatomic, strong, readonly) NSNumber *value;
 @end

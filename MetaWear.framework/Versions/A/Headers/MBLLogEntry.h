@@ -35,6 +35,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ Generic base class for data coming from the MetaWear log
+ */
 @interface MBLLogEntry : NSObject
 @property (nonatomic, strong, readonly) NSDate *timestamp;
 @end

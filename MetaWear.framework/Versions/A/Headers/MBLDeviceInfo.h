@@ -35,11 +35,26 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ Container for a device revision data
+ */
 @interface MBLDeviceInfo : NSObject
 
-@property (nonatomic, strong) NSString *manufacturerName; /**< DeviceInfo Manufacturer Name string */
-@property (nonatomic, strong) NSString *serialNumber; /**< DeviceInfo Serial Number string */
-@property (nonatomic, strong) NSString *hardwareRevision; /**< DeviceInfo Hardware Revision string */
-@property (nonatomic, strong) NSString *firmwareRevision; /**< DeviceInfo Firmware Revision string */
+/**
+ Manufacturer Name string
+ */
+@property (nonatomic, strong) NSString *manufacturerName;
+/**
+Serial Number string
+ */
+@property (nonatomic, strong) NSString *serialNumber;
+/**
+ Hardware Revision string
+ */
+@property (nonatomic, strong) NSString *hardwareRevision;
+/**
+ Firmware Revision string
+ */
+@property (nonatomic, strong) NSString *firmwareRevision;
 
 @end

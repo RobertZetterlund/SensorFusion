@@ -35,6 +35,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ Base class for MetaWear registers
+ */
 @interface MBLRegister : NSObject
 
 @end

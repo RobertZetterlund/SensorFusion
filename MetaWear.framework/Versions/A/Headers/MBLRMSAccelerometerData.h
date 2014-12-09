@@ -35,6 +35,9 @@
 
 #import <MetaWear/MBLLogEntry.h>
 
+/**
+ Container for accelerometer RMS data
+ */
 @interface MBLRMSAccelerometerData : MBLLogEntry
 /**
  RMS value of x, y, and z in mili-G's

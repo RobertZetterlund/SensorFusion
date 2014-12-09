@@ -35,13 +35,16 @@
 
 #import <MetaWear/MBLLogEntry.h>
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLAccelerometerOrientation) {
     MBLAccelerometerOrientationPortrait = 0,
     MBLAccelerometerOrientationPortraitUpsideDown = 1,
     MBLAccelerometerOrientationLandscapeRight = 2,
     MBLAccelerometerOrientationLandscapeLeft = 3
-} MBLAccelerometerOrientation;
+};
 
+/**
+ Container for orientation data
+ */
 @interface MBLOrientationData : MBLLogEntry
 @property (nonatomic) MBLAccelerometerOrientation orientation;
 @end

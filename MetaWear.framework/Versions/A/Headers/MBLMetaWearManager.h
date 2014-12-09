@@ -36,90 +36,106 @@
 #import <MetaWear/MBLMetaWear.h>
 #import <MetaWear/MBLConstants.h>
 
-@interface MBLMetaWearManager : NSObject
 
 /**
- Access the single WetaWearManager object, note you should not create
- one of these objects on your own, only used the sharedManager
- @returns MBLMetaWearManager, Single manager object
+ The MBLMetaWearManager is responsible for the scanning and discovery of MBLMetaWear devices.
+ */
+@interface MBLMetaWearManager : NSObject
+
+///----------------------------------
+/// @name Getting the Shared Instance
+///----------------------------------
+
+/**
+ Access the shared MBLMetaWearManager object
+ @returns The shared manager object.
+ @warning You should not create an MBLMetaWearManager object, only used the sharedManager
  */
 + (instancetype)sharedManager;
 
+///----------------------------------
+/// @name Setting Callback Queue
+///----------------------------------
+
 /**
- Sets the queue for which all callbacks will occur on.  Defaults to the main queue.
- @param NSOperationQueue queue, The queue on which the events will be dispatched.
- @returns none
+ Sets the queue for which all callbacks on both the MBLMetaWearManager and 
+ MBLMetaWear will occur on.  Defaults to the main queue.
+ @param queue The queue on which the events will be dispatched.
  */
 - (void)setCallbackQueue:(NSOperationQueue *)queue;
 
-/**
- Returns a list of saved MetaWear objects, you add to this list by calling rememberDevice
- on an MBLMetaWear object.
- @param MBLArrayHandler handler, Callback to deliever list remembered MBLMetaWear objects
- @returns none
- */
-- (void)retrieveSavedMetaWearsWithHandler:(MBLArrayHandler)handler;
+///----------------------------------
+/// @name MetaWear Scanning and Finding
+///----------------------------------
 
 /**
  Begin scanning for MetaWear devices. This will invoke the provided block each time a
  new device shows up and passes an array of all discovered devices to the block.
  This continues until stopScanForMetaWears is called.
- @param MBLArrayHandler handler, Callback to handle each time a new device is found
- @returns none
+ @param handler Callback to handle each time a new device is found
+ @see startScanForMetaWearsAllowDuplicates:handler:
  */
 - (void)startScanForMetaWearsWithHandler:(MBLArrayHandler)handler;
 /**
  Begin scanning for MetaWear devices with the option to filter duplicate devices or not.
+ 
  This will invoke the provided block each time a new device shows up if filter == YES or
  each time a new advertising packet is found if filter == NO (may be many times per second).
  This can be useful in specific situations, such as making a connection based on a 
  MetaWear's RSSI, but may have an adverse affect on battery-life and application performance,
  so use wisely.  This continues until stopScanForMetaWears is called.
- @param BOOL duplicates, YES: only callback when a new device is found, NO: callback each time
- @param MBLArrayHandler handler, Callback to handle each time a new device is found
+ @param duplicates YES: only callback when a new device is found, NO: callback each time
+ @param handler Callback to handle each time a new device is found
  a new advertising packet is found
- @returns none
  */
 - (void)startScanForMetaWearsAllowDuplicates:(BOOL)duplicates handler:(MBLArrayHandler)handler;
 
 /**
  Stop scanning for MetaWear devices, this will release all handlers given to
- startManagerStateUpdatesWithHandler:
- @returns none
+ startScanForMetaWearsWithHandler: and startScanForMetaWearsAllowDuplicates:handler:
  */
 - (void)stopScanForMetaWears;
 
+/**
+ Returns a list of saved MetaWear objects, you add to this list by calling [MBLMetaWear rememberDevice]
+ @param handler Callback to deliever list remembered MBLMetaWear objects
+ */
+- (void)retrieveSavedMetaWearsWithHandler:(MBLArrayHandler)handler;
 
+///----------------------------------
+/// @name MetaBoot Recovery Scanning
+///----------------------------------
 
 /**
- This function is intended for recovery mode only if a MetaWear gets stuck in the bootloader
- which may happen if a firmware update gets an unexpected error.
- NOTE: You can only call updateFirmwareWithHandler:progressHandler: on the MBLMetaWear objects
- in the array
- NOTE: This will cancel any current MetaWear scans
- @param BOOL duplicates, YES: only callback when a new device is found, NO: callback each time
+ This function is intended for recovery mode only.  If a firmware update experiences an unexpected error,
+ the device may get stuck in the bootloader and thus won't show up in startScanForMetaWearsWithHandler:.
+ This function will start scanning for devices in bootloader mode
+ @param duplicates YES: only callback when a new device is found, NO: callback each time
  a new advertising packet is found
- @param MBLArrayHandler handler, Callback to handle each time a new device is found
- @returns none
+ @param handler Callback to handle each time a new device is found
+ @warning You can only call [MBLMetaWear updateFirmwareWithHandler:progressHandler:] on the `MBLMetaWear` objects
+ in the array
+ @warning This will cancel any current MetaWear scans
  */
 - (void)startScanForMetaBootsAllowDuplicates:(BOOL)duplicates handler:(MBLArrayHandler)handler;
 
 /**
  Stop scanning for MetaBoot devices, this will release all handlers given to
- startScanForMetaBootsAllowDuplicates:
- @returns none
+ startScanForMetaBootsAllowDuplicates:handler:
  */
 - (void)stopScanForMetaBoots;
 
+///----------------------------------
+/// @name Deprecated Functions
+///----------------------------------
+
 /**
- * @deprecated use connectMetaWear:connectionHandler:disconnectionHandler: instead
- * @see connectMetaWear:connectionHandler:disconnectionHandler:
+ * @deprecated Use [MBLMetaWear connectWithHandler:] instead
  */
-- (void)connectMetaWear:(MBLMetaWear *)device withHandler:(MBLErrorHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use connectMetaWear:connectionHandler:disconnectionHandler: instead");
+- (void)connectMetaWear:(MBLMetaWear *)device withHandler:(MBLErrorHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [MBLMetaWear connectWithHandler:] instead");
 /**
- * @deprecated use cancelMetaWearConnection: instead
- * @see cancelMetaWearConnection:
+ * @deprecated Use [MBLMetaWear disconnectWithHandler:] instead
  */
-- (void)cancelMetaWearConnection:(MBLMetaWear *)device withHandler:(MBLErrorHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use cancelMetaWearConnection: instead");
+- (void)cancelMetaWearConnection:(MBLMetaWear *)device withHandler:(MBLErrorHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [MBLMetaWear disconnectWithHandler:] instead");
 
 @end

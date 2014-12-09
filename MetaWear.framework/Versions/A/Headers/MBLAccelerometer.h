@@ -41,13 +41,13 @@
 
 @class MBLMetaWear;
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLAccelerometerRange) {
     MBLAccelerometerRange2G = 0,
     MBLAccelerometerRange4G = 1,
     MBLAccelerometerRange8G = 2
-} MBLAccelerometerRange;
+};
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLAccelerometerSampleFrequency) {
     MBLAccelerometerSampleFrequency800Hz = 0,
     MBLAccelerometerSampleFrequency400Hz = 1,
     MBLAccelerometerSampleFrequency200Hz = 2,
@@ -56,34 +56,37 @@ typedef enum {
     MBLAccelerometerSampleFrequency12_5Hz = 5,
     MBLAccelerometerSampleFrequency6_25Hz = 6,
     MBLAccelerometerSampleFrequency1_56Hz = 7
-} MBLAccelerometerSampleFrequency;
+};
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLAccelerometerSleepSampleFrequency) {
     MBLAccelerometerSleepSampleFrequency50Hz = 0,
     MBLAccelerometerSleepSampleFrequency12_5Hz = 1,
     MBLAccelerometerSleepSampleFrequency6_25Hz = 2,
     MBLAccelerometerSleepSampleFrequency1_56Hz = 3
-} MBLAccelerometerSleepSampleFrequency;
+};
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLAccelerometerPowerScheme) {
     MBLAccelerometerPowerSchemeNormal = 0,
     MBLAccelerometerPowerSchemeLowNoiseLowPower = 1,
     MBLAccelerometerPowerSchemeHighResolution = 2,
     MBLAccelerometerPowerSchemeLowerPower = 3,
-} MBLAccelerometerPowerScheme;
+};
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLAccelerometerAxis) {
     MBLAccelerometerAxisX = 0,
     MBLAccelerometerAxisY = 1,
     MBLAccelerometerAxisZ = 2
-} MBLAccelerometerAxis;
+};
 
-typedef enum {
-    MBLAccelerometerTapTypeSingle,
-    MBLAccelerometerTapTypeDouble,
-    MBLAccelerometerTapTypeBoth
-} MBLAccelerometerTapType;
+typedef NS_OPTIONS(uint8_t, MBLAccelerometerTapType) {
+    MBLAccelerometerTapTypeSingle = 0,
+    MBLAccelerometerTapTypeDouble = 1,
+    MBLAccelerometerTapTypeBoth = 2
+};
 
+/**
+ Interface to on-board accelerometer
+ */
 @interface MBLAccelerometer : MBLModule
 /**
  Maximum acceleration the accelerometer can report

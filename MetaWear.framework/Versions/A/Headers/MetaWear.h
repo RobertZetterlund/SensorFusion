@@ -1,5 +1,5 @@
 /**
- * MBLConstants.h
+ * MetaWear.h
  * MetaWear
  *
  * Created by Stephen Schiffli on 7/30/14.

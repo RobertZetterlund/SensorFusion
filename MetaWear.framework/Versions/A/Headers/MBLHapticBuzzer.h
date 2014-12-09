@@ -36,22 +36,23 @@
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLModule.h>
 
+/**
+ Interface to external haptic or buzzers
+ */
 @interface MBLHapticBuzzer : MBLModule
 
 /**
  Turn on Haptic Driver.
- @param uint8_t dcycle, Duty cycle (0-248), relative strength of buzz
- @param uint16_t pwidth, Duration of buzz in mSec
- @param MBLVoidHandler completion, callback when the buzz is complete
- @returns none
+ @param dcycle Duty cycle (0-248), relative strength of buzz
+ @param pwidth Duration of buzz in mSec
+ @param completion Callback when the buzz is complete
  */
 - (void)startHapticWithDutyCycle:(uint8_t)dcycle pulseWidth:(uint16_t)pwidth completion:(MBLVoidHandler)completion;
 
 /**
  Turn on Buzzer Driver.
- @param uint16_t pwidth, Duration of buzz in mSec
- @param MBLVoidHandler completion, callback when the buzz is complete
- @returns none
+ @param pwidth Duration of buzz in mSec
+ @param completion Callback when the buzz is complete
  */
 - (void)startBuzzerWithPulseWidth:(uint16_t)pwidth completion:(MBLVoidHandler)completion;
 

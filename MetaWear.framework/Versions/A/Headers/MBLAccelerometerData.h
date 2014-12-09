@@ -35,19 +35,32 @@
 
 #import <MetaWear/MBLLogEntry.h>
 
+/**
+ Container for a single accelerometer sensor reading
+ */
 @interface MBLAccelerometerData : MBLLogEntry
 
 /**
- Time since data collection began
+ Acceleration along X axis in mili-G's
  */
-@property (nonatomic, readonly) NSTimeInterval intervalSinceCaptureBegan DEPRECATED_MSG_ATTRIBUTE("Use timestamp property instead");
+@property (nonatomic, readonly) int x;
 /**
- Acceleration along each axis in mili-G's
+ Acceleration along Y axis in mili-G's
  */
-@property (nonatomic, readonly) int x, y, z;
+@property (nonatomic, readonly) int y;
+/**
+ Acceleration along Z axis in mili-G's
+ */
+@property (nonatomic, readonly) int z;
+
 /**
  RMS value of x, y, and z in mili-G's
  */
 @property (nonatomic, readonly) int RMS;
+
+/**
+ @deprecated Use timestamp property instead
+ */
+@property (nonatomic, readonly) NSTimeInterval intervalSinceCaptureBegan DEPRECATED_ATTRIBUTE;
 
 @end

@@ -37,75 +37,73 @@
 #import <MetaWear/MBLModule.h>
 #import <UIKit/UIKit.h>
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLColorOrdering) {
     MBLColorOrderingRGB = 0,
     MBLColorOrderingRBG = 1,
     MBLColorOrderingGRB = 2,
     MBLColorOrderingGBR = 3
-} MBLColorOrdering;
+};
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLStrandSpeed) {
     MBLStrandSpeedSlow = 0,
     MBLStrandSpeedFast = 1
-} MBLStrandSpeed;
+};
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLRotationDirection) {
     MBLRotationDirectionTowardsBoard = 0,
     MBLRotationDirectionAwayFromBoard = 1
-} MBLRotationDirection;
+};
 
+/**
+ Interface to external NeoPixel stands
+ */
 @interface MBLNeopixel : MBLModule
 
 /**
  Initialize memory on the MetaWear board for a NeoPixel strand
- @param uint8_t index, Strand number (id) to initialize, can be in the range [0, 2]
- @param MBLColorOrdering color, Color ordering format
- @param MBLStrandSpeed speed, Operating speed
- @param uint8_t pin, GPIO pin the strand is connected to
- @param uint8_t length, Number of pixels to initialize
+ @param index Strand number (id) to initialize, can be in the range [0, 2]
+ @param color Color ordering format
+ @param speed Operating speed
+ @param pin GPIO pin the strand is connected to
+ @param length Number of pixels to initialize
  */
 - (void)initializeStrandAtIndex:(uint8_t)index color:(MBLColorOrdering)color speed:(MBLStrandSpeed)speed pin:(uint8_t)pin length:(uint8_t)length;
 
 /**
  Hold Neopixel strand.
- @param uint8_t index, Strand number, can be in the range [0, 2]
- @param BOOL enable, Hold enable
- @returns none
+ @param index Strand number, can be in the range [0, 2]
+ @param enable Hold enable
  */
 - (void)holdStrandAtIndex:(uint8_t)index withEnable:(BOOL)enable;
 
 /**
  Clear Neopixel strand.
- @param uint8_t index, Strand number, can be in the range [0, 2]
- @param uint8_t start, Pixel index to start clearing from
- @param uint8_t end, Pixel index to clear to, inclusive
- @returns none
+ @param index Strand number, can be in the range [0, 2]
+ @param start Pixel index to start clearing from
+ @param end Pixel index to clear to, inclusive
  */
 - (void)clearStrandAtIndex:(uint8_t)index startPixel:(uint8_t)start endPixel:(uint8_t)end;
 
 /**
  Set Pixel at strand index.
- @param uint8_t index, Strand number, can be in the range [0, 2]
- @param uint8_t pixel, Pixel index to be set
- @param UIColor color, Color the LED will be set to
- @returns none
+ @param index Strand number, can be in the range [0, 2]
+ @param pixel Pixel index to be set
+ @param color Color the LED will be set to
  */
 - (void)setPixelAtIndex:(uint8_t)index pixel:(uint8_t)pixel color:(UIColor *)color;
 
 /**
  Rotate strand at index.
- @param uint8_t index, Strand number, can be in the range [0, 2]
- @param MBLRotationDirection direction, Rotation direction
- @param uint8_t repetitions, Number of times to repeat the rotation. Use 0xFF to rotate indefinitely, 0 to terminate
- @param uint16_t period, Amount of time, in milliseconds, between rotations
- @returns none
+ @param index Strand number, can be in the range [0, 2]
+ @param direction Rotation direction
+ @param repetitions Number of times to repeat the rotation. Use 0xFF to rotate indefinitely, 0 to terminate
+ @param period Amount of time, in milliseconds, between rotations
  */
 - (void)rotateStrandAtIndex:(uint8_t)index direction:(MBLRotationDirection)direction repetitions:(uint8_t)repetitions period:(uint16_t)period;
 
 /**
  Deinitialize strand at index.
- @param uint8_t index, Strand number, can be in the range [0, 2]
- @returns none
+ @param index Strand number, can be in the range [0, 2]
  */
 - (void)deinitializeStrandAtIndex:(uint8_t)index;
 

@@ -36,23 +36,26 @@
 #import <MetaWear/MBLConstants.h>
 @class MBLEvent;
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLPinConfiguration) {
     MBLPinConfigurationPullup = 0,
     MBLPinConfigurationPulldown = 1,
     MBLPinConfigurationNopull = 2
-} MBLPinConfiguration;
+};
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLAnalogReadMode) {
     MBLAnalogReadModeFixed = 0,
     MBLAnalogReadModeSupplyRatio = 1
-} MBLAnalogReadMode;
+};
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLPinChangeType) {
     MBLPinChangeTypeRising = 1,
     MBLPinChangeTypeFalling = 2,
     MBLPinChangeTypeAny = 3
-} MBLPinChangeType;
+};
 
+/**
+ Encapsulation of a single input/output pin
+ */
 @interface MBLGPIOPin : NSObject
 
 /**
@@ -69,32 +72,28 @@ typedef enum {
 
 /**
  Set a digital output GPIO Pin to a 1 or 0.
- @param BOOL on, YES sets pin to 1, NO clears pin to 0
- @returns none
+ @param on YES sets pin to 1, NO clears pin to 0
  */
 - (void)setToDigitalValue:(BOOL)on;
 
 /**
  Set input GPIO pin type.
- @param MBLPinConfiguration type, pin configuration type
- @returns none
+ @param type Pin configuration type
  */
 - (void)configureType:(MBLPinConfiguration)type;
 
 /**
  Read Analog value of GPIO Pin.
- @param MBLAnalogReadMode mode, MBLAnalogReadModeFixed gives a reading in actual volts,
+ @param mode MBLAnalogReadModeFixed gives a reading in actual volts,
  when MBLAnalogReadModeSupplyRatio is used, the numbers comes back [0, 1.0] where 0 indicates
  then input is equal to ground, and 1.0 indicates the input is equal to the supply voltage
- @param MBLDecimalNumberHandler handler, Callback once read is complete
- @returns none
+ @param handler Callback once read is complete
  */
 - (void)readAnalogValueUsingMode:(MBLAnalogReadMode)mode handler:(MBLDecimalNumberHandler)handler;
 
 /**
  Read Digital value of GPIO Pin.
- @param MBLBoolHandler handler, Callback once read is complete
- @returns none
+ @param handler Callback once read is complete
  */
 - (void)readDigitalValueWithHandler:(MBLBoolHandler)handler;
 

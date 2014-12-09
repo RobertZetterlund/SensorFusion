@@ -39,16 +39,19 @@
 
 @class MBLMetaWear;
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLTemperatureSource) {
     MBLTemperatureSourceInternal,
     MBLTemperatureSourceThermistor
-} MBLTemperatureSource;
+};
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLTemperatureUnit) {
     MBLTemperatureUnitCelsius,
     MBLTemperatureUnitFahrenheit
-} MBLTemperatureUnit;
+};
 
+/**
+ Interface to the on-chip and external thermistor temperature sensors
+ */
 @interface MBLTemperature : MBLModule
 
 /**
@@ -91,6 +94,7 @@ typedef enum {
 
 /**
  Perform a one time read of the current device temperature
+ @param handler Callback once temperature read is complete
  */
 - (void)readTemperatureWithHandler:(MBLDecimalNumberHandler)handler;
 

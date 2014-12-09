@@ -36,7 +36,7 @@
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLModule.h>
 
-typedef enum {
+typedef NS_OPTIONS(uint8_t, MBLiBeaconTransmitPower) {
     MBLiBeaconTransmitPower4dBm,
     MBLiBeaconTransmitPower0dBm,
     MBLiBeaconTransmitPowerMinus4dBm,
@@ -46,8 +46,11 @@ typedef enum {
     MBLiBeaconTransmitPowerMinus20dBm,
     MBLiBeaconTransmitPowerMinus30dBm,
     MBLiBeaconTransmitPowerMinus40dBm
-} MBLiBeaconTransmitPower;
+};
 
+/**
+ Interface to program the device to advertise as an iBeacon
+ */
 @interface MBLiBeacon : MBLModule
 
 /**
@@ -86,21 +89,18 @@ typedef enum {
  Change iBeacon state to on or off. Please set any configuration properties
  before calling this method, setting properties after this call will have
  no effect until setBeaconOn: is called again.  
- IMPORTANT: Please note, that the beacon is only visible after you disconnect
- @param BOOL on, YES turns iBeacon on, NO, turns iBeacon off
- @returns none
+ @warning The beacon will only be visible after you disconnect
+ @param on YES turns iBeacon on, NO, turns iBeacon off
  */
 - (void)setBeaconOn:(BOOL)on;
 
 
 /**
  * @deprecated use calibratedReceiverPower instead
- * @see calibratedReceiverPower
  */
 @property (nonatomic) uint8_t powerRX DEPRECATED_MSG_ATTRIBUTE("Use calibratedReceiverPower instead");
 /**
  * @deprecated use transmitPower instead
- * @see transmitPower
  */
 @property (nonatomic) uint8_t powerTX DEPRECATED_MSG_ATTRIBUTE("Use transmitPower instead");
 
