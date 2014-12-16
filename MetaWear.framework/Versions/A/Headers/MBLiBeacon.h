@@ -51,7 +51,7 @@ typedef NS_OPTIONS(uint8_t, MBLiBeaconTransmitPower) {
 /**
  Interface to program the device to advertise as an iBeacon
  */
-@interface MBLiBeacon : MBLModule
+@interface MBLiBeacon : MBLModule <NSCoding>
 
 /**
  The iBeacon UUID being broadcast, the default is the MetaWear Service UUID

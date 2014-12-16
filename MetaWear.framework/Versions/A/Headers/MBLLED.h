@@ -45,7 +45,7 @@ typedef NS_OPTIONS(uint8_t, MBLLEDColorChannel) {
 /**
  Interface to on-board LED
  */
-@interface MBLLED : MBLModule
+@interface MBLLED : MBLModule <NSCoding>
 
 /**
  Display a specific color on the LED
@@ -60,6 +60,14 @@ typedef NS_OPTIONS(uint8_t, MBLLEDColorChannel) {
  @param intensity Scale from 0-1.0 on how bright the LED should be
  */
 - (void)flashLEDColor:(UIColor *)color withIntensity:(CGFloat)intensity;
+
+/**
+ Flash a specific color on the LED
+ @param color Which color the LED should flash
+ @param intensity Scale from 0-1.0 on how bright the LED should be
+ @param numberOfFlashes Number of times LED will flash before turning off
+ */
+- (void)flashLEDColor:(UIColor *)color withIntensity:(CGFloat)intensity numberOfFlashes:(uint8_t)numberOfFlashes;
 
 /**
  Flash a specific color on the LED

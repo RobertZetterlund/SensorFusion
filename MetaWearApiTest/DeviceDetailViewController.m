@@ -134,8 +134,10 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (self.device.state == CBPeripheralStateDisconnected) {
-        [self setConnected:NO];
-        [self.scrollView scrollRectToVisible:CGRectMake(0, 0, 10, 10) animated:YES];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self setConnected:NO];
+            [self.scrollView scrollRectToVisible:CGRectMake(0, 0, 10, 10) animated:YES];
+        }];
     }
 }
 
@@ -232,8 +234,8 @@
 - (IBAction)startSwitchNotifyPressed:(id)sender
 {
     self.switchRunning = YES;
-    [self.device.mechanicalSwitch.switchUpdateEvent startNotificationsWithHandler:^(NSNumber *isPressed, NSError *error) {
-        self.mechanicalSwitchLabel.text = isPressed.boolValue ? @"Down" : @"Up";
+    [self.device.mechanicalSwitch.switchUpdateEvent startNotificationsWithHandler:^(MBLNumericData *isPressed, NSError *error) {
+        self.mechanicalSwitchLabel.text = isPressed.value.boolValue ? @"Down" : @"Up";
     }];
 }
 

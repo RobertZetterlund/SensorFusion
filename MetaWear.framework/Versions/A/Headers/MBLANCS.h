@@ -83,6 +83,46 @@ typedef NS_ENUM(uint8_t, MBLANCSNotificationAttributeID) {
     MBLANCSNotificationAttributeIDNone                = 0xFF
 };
 
-@interface MBLANCS : MBLModule
+@interface MBLANCS : MBLModule <NSCoding>
+
+/**
+ Event representing an ANCS event of one or more CategoryID's. Event callbacks will
+ be provided an MBLANCSEventData object.
+ */
+- (MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds;
+
+- (MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds identifier:(NSString *)identifier;
+
+
+/**
+ Event representing an ANCS event of a specific CategoryID, EventID, and EventFlags.
+ Event callbacks will be provided an MBLANCSEventData object.
+ */
+- (MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
+                          eventIds:(MBLANCSEventID)eventIds
+                        eventFlags:(MBLANCSEventFlag)eventFlags;
+
+- (MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
+                          eventIds:(MBLANCSEventID)eventIds
+                        eventFlags:(MBLANCSEventFlag)eventFlags
+                        identifier:(NSString *)identifier;
+
+
+/**
+ Event representing an ANCS event of a specific CategoryID, EventID, EventFlags, and Notification Attribute.
+ Event callbacks will be provided an MBLANCSEventData object.
+ */
+- (MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
+                          eventIds:(MBLANCSEventID)eventIds
+                        eventFlags:(MBLANCSEventFlag)eventFlags
+                       attributeId:(MBLANCSNotificationAttributeID)attributeId
+                     attributeData:(NSString *)attributeData;
+
+- (MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
+                          eventIds:(MBLANCSEventID)eventIds
+                        eventFlags:(MBLANCSEventFlag)eventFlags
+                       attributeId:(MBLANCSNotificationAttributeID)attributeId
+                     attributeData:(NSString *)attributeData
+                        identifier:(NSString *)identifier;
 
 @end

@@ -40,7 +40,7 @@
 /**
  Interface to on-board switch (pushbutton)
  */
-@interface MBLMechanicalSwitch : MBLModule
+@interface MBLMechanicalSwitch : MBLModule <NSCoding>
 
 /**
  Perform a single read of the switch state, then handler will be

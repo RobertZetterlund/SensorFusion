@@ -56,7 +56,7 @@ typedef NS_OPTIONS(uint8_t, MBLPinChangeType) {
 /**
  Encapsulation of a single input/output pin
  */
-@interface MBLGPIOPin : NSObject
+@interface MBLGPIOPin : NSObject <NSCoding>
 
 /**
  Set what pin state transitions trigger a changeEvent.

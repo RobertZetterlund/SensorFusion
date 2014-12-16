@@ -52,7 +52,7 @@ typedef NS_OPTIONS(uint8_t, MBLTemperatureUnit) {
 /**
  Interface to the on-chip and external thermistor temperature sensors
  */
-@interface MBLTemperature : MBLModule
+@interface MBLTemperature : MBLModule <NSCoding>
 
 /**
  Sampling period for temperature readings in mSec

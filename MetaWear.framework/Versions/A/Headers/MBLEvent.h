@@ -108,7 +108,7 @@ typedef NS_OPTIONS(uint8_t, MBLComparisonOperation) {
  custom event on reconnect.  This is where the NSString identifier comes in, you can call
  retrieveEventWithIdentifier: on the freshly connected MBLMetaWear object to get your event back.
  */
-@interface MBLEvent : MBLRegister
+@interface MBLEvent : MBLRegister <NSCoding>
 
 ///----------------------------------
 /// @name Notifications

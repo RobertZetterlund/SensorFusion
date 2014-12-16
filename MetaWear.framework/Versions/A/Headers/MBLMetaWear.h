@@ -56,7 +56,7 @@
  here via properties.  For example, all accelerometer functionality is contained in the 
  MBLAccelerometer class and is accessed using the accelerometer property
  */
-@interface MBLMetaWear : NSObject <CBPeripheralDelegate>
+@interface MBLMetaWear : NSObject <CBPeripheralDelegate, NSCoding>
 
 ///----------------------------------
 /// @name Sensor and Peripheral Accessors

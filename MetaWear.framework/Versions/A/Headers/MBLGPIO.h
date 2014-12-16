@@ -41,7 +41,7 @@
 /**
  Interface to on-board pins
  */
-@interface MBLGPIO : MBLModule
+@interface MBLGPIO : MBLModule <NSCoding>
 
 /**
  Array of MBLGPIOPin objects. The index corresponds to the pin number

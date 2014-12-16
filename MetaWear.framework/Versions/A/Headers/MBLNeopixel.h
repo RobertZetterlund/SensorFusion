@@ -57,7 +57,7 @@ typedef NS_OPTIONS(uint8_t, MBLRotationDirection) {
 /**
  Interface to external NeoPixel stands
  */
-@interface MBLNeopixel : MBLModule
+@interface MBLNeopixel : MBLModule <NSCoding>
 
 /**
  Initialize memory on the MetaWear board for a NeoPixel strand

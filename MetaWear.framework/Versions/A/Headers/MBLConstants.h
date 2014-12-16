@@ -42,7 +42,6 @@
 typedef void (^MBLVoidHandler)();
 typedef void (^MBLErrorHandler)(NSError *error);
 typedef void (^MBLDataHandler)(NSData *data, NSError *error);
-typedef id (^MBLDataFormatterHandler)(NSData *data, NSDate *date);
 typedef void (^MBLObjectHandler)(id obj, NSError *error);
 typedef void (^MBLArrayHandler)(NSArray *array);
 typedef void (^MBLArrayErrorHandler)(NSArray *array, NSError *error);

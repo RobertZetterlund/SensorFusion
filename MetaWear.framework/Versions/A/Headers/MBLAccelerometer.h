@@ -87,7 +87,7 @@ typedef NS_OPTIONS(uint8_t, MBLAccelerometerTapType) {
 /**
  Interface to on-board accelerometer
  */
-@interface MBLAccelerometer : MBLModule
+@interface MBLAccelerometer : MBLModule <NSCoding>
 /**
  Maximum acceleration the accelerometer can report
  */

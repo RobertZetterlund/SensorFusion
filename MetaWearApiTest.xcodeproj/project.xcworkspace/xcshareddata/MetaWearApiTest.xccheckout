@@ -10,6 +10,8 @@
 	<string>MetaWearApiTest</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>33BD130770F144DDA552D3D045088C35EC23D81C</key>
+		<string>github.com:mbientlab/MetaWear-iOSAPIDev.git</string>
 		<key>6DB51F38D34EDBBEB31298F89D22CD93DC9EE165</key>
 		<string>github.com:mbientlab/Metawear-SampleiOSApp.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>MetaWearApiTest.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>33BD130770F144DDA552D3D045088C35EC23D81C</key>
+		<string>../../../MetaWear-iOSAPIDev</string>
 		<key>6DB51F38D34EDBBEB31298F89D22CD93DC9EE165</key>
 		<string>../..</string>
 	</dict>
@@ -28,6 +32,14 @@
 	<string>6DB51F38D34EDBBEB31298F89D22CD93DC9EE165</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>33BD130770F144DDA552D3D045088C35EC23D81C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MetaWear-iOSAPIDev</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
