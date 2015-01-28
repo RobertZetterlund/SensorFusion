@@ -1,6 +1,6 @@
 //
 // MBProgressHUD.m
-// Version 0.8
+// Version 0.9
 // Created by Matej Bukovinski on 2.4.09.
 //
 
@@ -40,43 +40,21 @@
 		sizeWithFont:font constrainedToSize:maxSize lineBreakMode:mode] : CGSizeZero;
 #endif
 
+#ifndef kCFCoreFoundationVersionNumber_iOS_7_0
+	#define kCFCoreFoundationVersionNumber_iOS_7_0 847.20
+#endif
+
+#ifndef kCFCoreFoundationVersionNumber_iOS_8_0
+	#define kCFCoreFoundationVersionNumber_iOS_8_0 1129.15
+#endif
+
 
 static const CGFloat kPadding = 4.f;
 static const CGFloat kLabelFontSize = 16.f;
 static const CGFloat kDetailsLabelFontSize = 12.f;
 
 
-@interface MBProgressHUD ()
-
-- (void)setupLabels;
-- (void)registerForKVO;
-- (void)unregisterFromKVO;
-- (NSArray *)observableKeypaths;
-- (void)registerForNotifications;
-- (void)unregisterFromNotifications;
-- (void)updateUIForKeypath:(NSString *)keyPath;
-- (void)hideUsingAnimation:(BOOL)animated;
-- (void)showUsingAnimation:(BOOL)animated;
-- (void)done;
-- (void)updateIndicators;
-- (void)handleGraceTimer:(NSTimer *)theTimer;
-- (void)handleMinShowTimer:(NSTimer *)theTimer;
-- (void)setTransformForCurrentOrientation:(BOOL)animated;
-- (void)cleanUp;
-- (void)launchExecution;
-- (void)deviceOrientationDidChange:(NSNotification *)notification;
-- (void)hideDelayed:(NSNumber *)animated;
-
-@property (atomic, MB_STRONG) UIView *indicator;
-@property (atomic, MB_STRONG) NSTimer *graceTimer;
-@property (atomic, MB_STRONG) NSTimer *minShowTimer;
-@property (atomic, MB_STRONG) NSDate *showStarted;
-@property (atomic, assign) CGSize size;
-
-@end
-
-
-@implementation MBProgressHUD {
+@interface MBProgressHUD () {
 	BOOL useAnimation;
 	SEL methodForExecution;
 	id targetForExecution;
@@ -86,6 +64,17 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	BOOL isFinished;
 	CGAffineTransform rotationTransform;
 }
+
+@property (atomic, MB_STRONG) UIView *indicator;
+@property (atomic, MB_STRONG) NSTimer *graceTimer;
+@property (atomic, MB_STRONG) NSTimer *minShowTimer;
+@property (atomic, MB_STRONG) NSDate *showStarted;
+
+
+@end
+
+
+@implementation MBProgressHUD
 
 #pragma mark - Properties
 
@@ -117,6 +106,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 @synthesize detailsLabelText;
 @synthesize progress;
 @synthesize size;
+@synthesize activityIndicatorColor;
 #if NS_BLOCKS_AVAILABLE
 @synthesize completionBlock;
 #endif
@@ -186,6 +176,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		self.labelColor = [UIColor whiteColor];
 		self.detailsLabelFont = [UIFont boldSystemFontOfSize:kDetailsLabelFontSize];
 		self.detailsLabelColor = [UIColor whiteColor];
+		self.activityIndicatorColor = [UIColor whiteColor];
 		self.xOffset = 0.0f;
 		self.yOffset = 0.0f;
 		self.dimBackground = NO;
@@ -196,7 +187,8 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		self.removeFromSuperViewOnHide = NO;
 		self.minSize = CGSizeZero;
 		self.square = NO;
-		self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin 
+		self.contentMode = UIViewContentModeCenter;
+		self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin
 								| UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 
 		// Transparent background
@@ -306,9 +298,14 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 
 #pragma mark - View Hierrarchy
 
+- (BOOL)shouldPerformOrientationTransform {
+	BOOL isPreiOS8 = NSFoundationVersionNumber < kCFCoreFoundationVersionNumber_iOS_8_0;
+	// prior to iOS8 code needs to take care of rotation if it is being added to the window
+	return isPreiOS8 && [self.superview isKindOfClass:[UIWindow class]];
+}
+
 - (void)didMoveToSuperview {
-	// We need to take care of rotation ourselfs if we're adding the HUD to a window
-	if ([self.superview isKindOfClass:[UIWindow class]]) {
+	if ([self shouldPerformOrientationTransform]) {
 		[self setTransformForCurrentOrientation:NO];
 	}
 }
@@ -484,13 +481,18 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	BOOL isActivityIndicator = [indicator isKindOfClass:[UIActivityIndicatorView class]];
 	BOOL isRoundIndicator = [indicator isKindOfClass:[MBRoundProgressView class]];
 	
-	if (mode == MBProgressHUDModeIndeterminate &&  !isActivityIndicator) {
-		// Update to indeterminate indicator
-		[indicator removeFromSuperview];
-		self.indicator = MB_AUTORELEASE([[UIActivityIndicatorView alloc]
-										 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge]);
-		[(UIActivityIndicatorView *)indicator startAnimating];
-		[self addSubview:indicator];
+	if (mode == MBProgressHUDModeIndeterminate) {
+		if (!isActivityIndicator) {
+			// Update to indeterminate indicator
+			[indicator removeFromSuperview];
+			self.indicator = MB_AUTORELEASE([[UIActivityIndicatorView alloc]
+											 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge]);
+			[(UIActivityIndicatorView *)indicator startAnimating];
+			[self addSubview:indicator];
+		}
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+		[(UIActivityIndicatorView *)indicator setColor:self.activityIndicatorColor];
+#endif
 	}
 	else if (mode == MBProgressHUDModeDeterminateHorizontalBar) {
 		// Update to bar determinate indicator
@@ -523,6 +525,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 #pragma mark - Layout
 
 - (void)layoutSubviews {
+	[super layoutSubviews];
 	
 	// Entirely cover the parent view
 	UIView *parent = self.superview;
@@ -604,7 +607,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		totalSize.height = minSize.height;
 	}
 	
-	self.size = totalSize;
+	size = totalSize;
 }
 
 #pragma mark BG Drawing
@@ -675,7 +678,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 
 - (NSArray *)observableKeypaths {
 	return [NSArray arrayWithObjects:@"mode", @"customView", @"labelText", @"labelFont", @"labelColor",
-			@"detailsLabelText", @"detailsLabelFont", @"detailsLabelColor", @"progress", nil];
+			@"detailsLabelText", @"detailsLabelFont", @"detailsLabelColor", @"progress", @"activityIndicatorColor", nil];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -687,7 +690,8 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 }
 
 - (void)updateUIForKeypath:(NSString *)keyPath {
-	if ([keyPath isEqualToString:@"mode"] || [keyPath isEqualToString:@"customView"]) {
+	if ([keyPath isEqualToString:@"mode"] || [keyPath isEqualToString:@"customView"] ||
+		[keyPath isEqualToString:@"activityIndicatorColor"]) {
 		[self updateIndicators];
 	} else if ([keyPath isEqualToString:@"labelText"]) {
 		label.text = self.labelText;
@@ -715,19 +719,21 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 
 - (void)registerForNotifications {
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(deviceOrientationDidChange:) 
-			   name:UIDeviceOrientationDidChangeNotification object:nil];
+
+	[nc addObserver:self selector:@selector(statusBarOrientationDidChange:)
+			   name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
 
 - (void)unregisterFromNotifications {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+	[nc removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
 
-- (void)deviceOrientationDidChange:(NSNotification *)notification { 
+- (void)statusBarOrientationDidChange:(NSNotification *)notification {
 	UIView *superview = self.superview;
 	if (!superview) {
 		return;
-	} else if ([superview isKindOfClass:[UIWindow class]]) {
+	} else if ([self shouldPerformOrientationTransform]) {
 		[self setTransformForCurrentOrientation:YES];
 	} else {
 		self.frame = self.superview.bounds;
@@ -735,7 +741,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	}
 }
 
-- (void)setTransformForCurrentOrientation:(BOOL)animated {	
+- (void)setTransformForCurrentOrientation:(BOOL)animated {
 	// Stay in sync with the superview
 	if (self.superview) {
 		self.bounds = self.superview.bounds;
@@ -757,6 +763,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	
 	if (animated) {
 		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDuration:0.3];
 	}
 	[self setTransform:rotationTransform];
 	if (animated) {
@@ -808,10 +815,11 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	
 	if (_annular) {
 		// Draw background
-		CGFloat lineWidth = 5.f;
+		BOOL isPreiOS7 = NSFoundationVersionNumber < kCFCoreFoundationVersionNumber_iOS_7_0;
+		CGFloat lineWidth = isPreiOS7 ? 5.f : 2.f;
 		UIBezierPath *processBackgroundPath = [UIBezierPath bezierPath];
 		processBackgroundPath.lineWidth = lineWidth;
-		processBackgroundPath.lineCapStyle = kCGLineCapRound;
+		processBackgroundPath.lineCapStyle = kCGLineCapButt;
 		CGPoint center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
 		CGFloat radius = (self.bounds.size.width - lineWidth)/2;
 		CGFloat startAngle = - ((float)M_PI / 2); // 90 degrees
@@ -821,7 +829,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 		[processBackgroundPath stroke];
 		// Draw progress
 		UIBezierPath *processPath = [UIBezierPath bezierPath];
-		processPath.lineCapStyle = kCGLineCapRound;
+		processPath.lineCapStyle = isPreiOS7 ? kCGLineCapRound : kCGLineCapSquare;
 		processPath.lineWidth = lineWidth;
 		endAngle = (self.progress * 2 * (float)M_PI) + startAngle;
 		[processPath addArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle clockwise:YES];
