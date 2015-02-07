@@ -42,6 +42,12 @@
  */
 @interface MBLMetaWearManager : NSObject
 
+/**
+ If set to YES, an alert view box will pop up if a connected MetaWear is not
+ on the latest firmware, otherwise no alert.
+ */
+@property (nonatomic) BOOL alertIfNewerFirmware;
+
 ///----------------------------------
 /// @name Getting the Shared Instance
 ///----------------------------------

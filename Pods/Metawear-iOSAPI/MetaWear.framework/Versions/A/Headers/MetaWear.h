@@ -36,12 +36,16 @@
 #import <MetaWear/MBLAccelerometer.h>
 #import <MetaWear/MBLAccelerometerData.h>
 #import <MetaWear/MBLANCS.h>
+#import <MetaWear/MBLANCSEventData.h>
 #import <MetaWear/MBLConstants.h>
+#import <MetaWear/MBLData.h>
 #import <MetaWear/MBLDeviceInfo.h>
 #import <MetaWear/MBLEvent.h>
 #import <MetaWear/MBLGPIO.h>
 #import <MetaWear/MBLGPIOPin.h>
 #import <MetaWear/MBLHapticBuzzer.h>
+#import <MetaWear/MBLI2C.h>
+#import <MetaWear/MBLI2CData.h>
 #import <MetaWear/MBLiBeacon.h>
 #import <MetaWear/MBLLED.h>
 #import <MetaWear/MBLLogEntry.h>
@@ -56,3 +60,4 @@
 #import <MetaWear/MBLRMSAccelerometerData.h>
 #import <MetaWear/MBLTemperature.h>
 #import <MetaWear/MBLTemperatureData.h>
+#import <MetaWear/MBLTimer.h>

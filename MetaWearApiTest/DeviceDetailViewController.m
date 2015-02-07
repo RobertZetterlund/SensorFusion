@@ -333,17 +333,17 @@
 - (IBAction)setPullUpPressed:(id)sender
 {
     MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
-    [pin configureType:MBLPinConfigurationPullup];
+    pin.configuration = MBLPinConfigurationPullup;
 }
 - (IBAction)setPullDownPressed:(id)sender
 {
     MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
-    [pin configureType:MBLPinConfigurationPulldown];
+    pin.configuration = MBLPinConfigurationPulldown;
 }
 - (IBAction)setNoPullPressed:(id)sender
 {
     MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
-    [pin configureType:MBLPinConfigurationNopull];
+    pin.configuration = MBLPinConfigurationNopull;
 }
 - (IBAction)setPinPressed:(id)sender
 {
@@ -358,6 +358,7 @@
 - (IBAction)readDigitalPressed:(id)sender
 {
     MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
+    // TODO: Update once firmware 1.0.0 has been released
     [pin readDigitalValueWithHandler:^(BOOL isTrue, NSError *error) {
         self.gpioPinDigitalValue.text = isTrue ? @"1" : @"0";
     }];
@@ -365,6 +366,7 @@
 - (IBAction)readAnalogPressed:(id)sender
 {
     MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
+    // TODO: Update once firmware 1.0.0 has been released
     [pin readAnalogValueUsingMode:MBLAnalogReadModeFixed handler:^(NSDecimalNumber *number, NSError *error) {
         self.gpioPinAnalogValue.text = [NSString stringWithFormat:@"%.3fV", number.doubleValue];
     }];
@@ -407,7 +409,6 @@
     self.accelerometerDataArray = array;
     
     [self.device.accelerometer.dataReadyEvent startNotificationsWithHandler:^(MBLAccelerometerData *acceleration, NSError *error) {
-        NSLog(@"%@", acceleration);
         [self.accelerometerGraph addX:(float)acceleration.x / 1000.0 y:(float)acceleration.y / 1000.0 z:(float)acceleration.z / 1000.0];
         // Add data to data array for saving
         [array addObject:acceleration];
