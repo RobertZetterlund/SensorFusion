@@ -39,8 +39,10 @@
 #import <MetaWear/MBLANCSEventData.h>
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLData.h>
+#import <MetaWear/MBLDataSwitch.h>
 #import <MetaWear/MBLDeviceInfo.h>
 #import <MetaWear/MBLEvent.h>
+#import <MetaWear/MBLFilter.h>
 #import <MetaWear/MBLGPIO.h>
 #import <MetaWear/MBLGPIOPin.h>
 #import <MetaWear/MBLHapticBuzzer.h>

@@ -37,6 +37,8 @@
 #import <MetaWear/MBLRegister.h>
 
 @class MBLData;
+@class MBLFilter;
+@class MBLDataSwitch;
 
 typedef NS_OPTIONS(uint8_t, MBLComparisonOperation) {
     MBLComparisonOperationEqual = 0,
@@ -45,6 +47,24 @@ typedef NS_OPTIONS(uint8_t, MBLComparisonOperation) {
     MBLComparisonOperationLessThanOrEqual = 3,
     MBLComparisonOperationGreaterThan = 4,
     MBLComparisonOperationGreaterThanOrEqual = 5
+};
+
+typedef NS_OPTIONS(uint8_t, MBLArithmeticOperation) {
+    MBLArithmeticOperationNoOp = 0,
+    MBLArithmeticOperationAdd = 1,
+    MBLArithmeticOperationMultiply = 2,
+    MBLArithmeticOperationDivide = 3,
+    MBLArithmeticOperationModulus = 4,
+    MBLArithmeticOperationExponent = 5,
+    MBLArithmeticOperationSquareRoot = 6,
+    MBLArithmeticOperationLeftShift = 7,
+    MBLArithmeticOperationRightShift = 8
+};
+
+typedef NS_OPTIONS(uint8_t, MBLPulseOutput) {
+    MBLPulseOutputWidth = 0,
+    MBLPulseOutputArea = 1,
+    MBLPulseOutputPeak = 2
 };
 
 /**
@@ -188,17 +208,78 @@ typedef NS_OPTIONS(uint8_t, MBLComparisonOperation) {
 ///----------------------------------
 
 /**
+ TODO: This can allow data to pass or not
+ */
+- (MBLDataSwitch *)conditionalDataSwitch:(BOOL)pass;
+
+/**
+ TODO: This can allow X samples to pass
+ */
+- (MBLDataSwitch *)countingDataSwitch:(uint16_t)initialCount;
+
+/**
  Create a new event that accumulates the output data of the current event.
  @returns New event representing accumulated output
  */
-- (MBLEvent *)summationOfEvent;
+- (MBLFilter *)summationOfEvent;
+
+/**
+ Create a new event that averages the output data of the current event. This
+ uses a recursive average technique so the answers are approximate.
+ @param depth Number of samples to average (works fastest if a power of 2)
+ @returns New event representing average of input
+ */
+- (MBLFilter *)averageOfEventWithDepth:(uint8_t)depth;
+
+/**
+ Create a new event that compares the current event and passes through the
+ value only if the comparision is true.
+ @param op Operation type to perform
+ @parma data Value on the right hand side of the operation
+ @returns New event representing input values that meet the comparison condition
+ */
+- (MBLFilter *)compareEventUsingOperation:(MBLComparisonOperation)op withUnsignedData:(uint32_t)data;
+- (MBLFilter *)compareEventUsingOperation:(MBLComparisonOperation)op withSignedData:(int32_t)data;
 
 /**
  Create a new event that occurs at most once every period milliseconds.
  @param periodInMsec Sample period in msec
  @returns New event representing periodically sampled output
  */
-- (MBLEvent *)periodicSampleOfEvent:(uint32_t)periodInMsec;
+- (MBLFilter *)periodicSampleOfEvent:(uint32_t)periodInMsec;
+
+/**
+ Create a new event that represents the difference bettween the current event
+ every periodInMsec milliseconds.  This acts a differential filter giving you
+ the changed in value of a signal.
+ @param periodInMsec Sample period in msec
+ @returns New event representing differential output
+ */
+- (MBLFilter *)differentialSampleOfEvent:(uint32_t)periodInMsec;
+
+/**
+ Create a new event that performs an arithmetic operation on the current event
+ @param op Operation type to perform
+ @parma data Value on the right hand side of the operation
+ @returns New event representing input values after the arithmetic operation
+ */
+- (MBLFilter *)modifyEventUsingOperation:(MBLArithmeticOperation)op withUnsignedData:(uint32_t)data;
+- (MBLFilter *)modifyEventUsingOperation:(MBLArithmeticOperation)op withSignedData:(int32_t)data;
+
+/**
+ Create a new event that delays the current even by a given number of samples.
+ @param count Number of samples to delay
+ @returns New event representing a delayed version of the input
+ */
+- (MBLFilter *)delayOfEventWithCount:(uint8_t)count;
+
+/**
+ Create a new event that delays the current even by a given number of samples.
+ @param count Number of samples to delay
+ @returns New event representing a delayed version of the input
+ */
+- (MBLFilter *)pulseDetectorOfEventWithThreshold:(int32_t)threshold width:(uint16_t)width output:(MBLPulseOutput)output;
+
 
 /**
  Create a new event that occurs at the same time of this event, but whose value is
