@@ -43,20 +43,29 @@
 @interface MBLMechanicalSwitch : MBLModule <NSCoding>
 
 /**
- Perform a single read of the switch state, then handler will be
- passed a YES for depressed and NO for released
- @param handler Will be called once switch value is read
+ Data representing the current state of the switch.
+ Event callbacks will be provided an MBLNumericData object, where a bool value of
+ YES means pressed, and NO means released.
  */
-- (void)readSwitchStateWithHandler:(MBLSwitchStateHandler)handler;
+@property (nonatomic, strong, readonly) MBLData *switchValue;
 
 /**
  Event representing a change in the push button state (pressed/depressed).
- Event callbacks will be provided an NSNumber object, were a bool value of
+ Event callbacks will be provided an MBLNumericData object, where a bool value of
  YES means pressed, and NO means released.
  */
 @property (nonatomic, strong, readonly) MBLEvent *switchUpdateEvent;
 
 
+///----------------------------------
+/// @name Deprecated Methods
+///----------------------------------
+
+/**
+ * @deprecated use [switchValue readWithHandler:] instead
+ * @see [switchValue readWithHandler:]
+ */
+- (void)readSwitchStateWithHandler:(MBLSwitchStateHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [switchValue readWithHandler:] instead");
 
 /**
  * @deprecated use [switchUpdateEvent startNotificationsWithHandler] instead

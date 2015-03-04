@@ -52,7 +52,7 @@
 @property (nonatomic, strong, readonly) NSArray *pins;
 
 ///----------------------------------
-/// @name Deprecated Functions
+/// @name Deprecated Methods
 ///----------------------------------
 
 /**

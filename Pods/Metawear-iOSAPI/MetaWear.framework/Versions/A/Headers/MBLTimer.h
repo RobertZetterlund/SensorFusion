@@ -58,7 +58,7 @@
 - (MBLEvent *)eventWithPeriod:(uint32_t)period;
 
 ///----------------------------------
-/// @name Deprecated Functions
+/// @name Deprecated Methods
 ///----------------------------------
 
 /**

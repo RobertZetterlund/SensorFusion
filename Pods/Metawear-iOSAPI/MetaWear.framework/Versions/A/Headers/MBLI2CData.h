@@ -35,6 +35,9 @@
 
 #import <MetaWear/MBLData.h>
 
+/**
+ Interface for reading/writing a specific I2C device register.
+ */
 @interface MBLI2CData : MBLData
 
 /**

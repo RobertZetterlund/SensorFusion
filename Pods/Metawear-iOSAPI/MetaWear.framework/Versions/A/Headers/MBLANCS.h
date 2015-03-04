@@ -39,6 +39,9 @@
 
 @class MBLANCSEvent;
 
+/**
+ Category in which the iOS notification can be classified
+ */
 typedef NS_OPTIONS(uint16_t, MBLANCSCategoryID) {
     MBLANCSCategoryIDOther              = 1 << 0,
     MBLANCSCategoryIDIncomingCall       = 1 << 1,
@@ -55,6 +58,9 @@ typedef NS_OPTIONS(uint16_t, MBLANCSCategoryID) {
     MBLANCSCategoryIDAny                = 0xFFFF
 };
 
+/**
+ This field informs whether the given iOS notification was added, modified, or removed
+ */
 typedef NS_OPTIONS(uint8_t, MBLANCSEventID) {
     MBLANCSEventIDNotificationAdded    = 1 << 0,
     MBLANCSEventIDNotificationModified = 1 << 1,
@@ -62,6 +68,9 @@ typedef NS_OPTIONS(uint8_t, MBLANCSEventID) {
     MBLANCSEventIDAny                  = 0xFF
 };
 
+/**
+ A bitmask whose set bits inform the specificities of the iOS notification
+ */
 typedef NS_OPTIONS(uint8_t, MBLANCSEventFlag) {
     MBLANCSEventFlagSilent         = 1 << 0,
     MBLANCSEventFlagImportant      = 1 << 1,
@@ -71,6 +80,9 @@ typedef NS_OPTIONS(uint8_t, MBLANCSEventFlag) {
     MBLANCSEventFlagAny            = 0
 };
 
+/**
+ Types of notification attribute data whos data can be filtered on
+ */
 typedef NS_ENUM(uint8_t, MBLANCSNotificationAttributeID) {
     MBLANCSNotificationAttributeIDAppIdentifier       = 0,
     MBLANCSNotificationAttributeIDTitle               = 1,
@@ -83,6 +95,10 @@ typedef NS_ENUM(uint8_t, MBLANCSNotificationAttributeID) {
     MBLANCSNotificationAttributeIDNone                = 0xFF
 };
 
+/**
+ Interface to Apple Notification Center Service (ANCS).
+ For more details on ANCS see https://developer.apple.com/library/ios/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/AppleNotificationCenterServiceSpecification.pdf
+ */
 @interface MBLANCS : MBLModule <NSCoding>
 
 /**
@@ -110,7 +126,7 @@ typedef NS_ENUM(uint8_t, MBLANCSNotificationAttributeID) {
                      attributeData:(NSString *)attributeData;
 
 ///----------------------------------
-/// @name Deprecated Functions
+/// @name Deprecated Methods
 ///----------------------------------
 
 /**

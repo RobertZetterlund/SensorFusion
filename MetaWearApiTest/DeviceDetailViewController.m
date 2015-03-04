@@ -226,8 +226,8 @@
 
 - (IBAction)readSwitchPressed:(id)sender
 {
-    [self.device.mechanicalSwitch readSwitchStateWithHandler:^(BOOL isPressed, NSError *error) {
-        self.mechanicalSwitchLabel.text = isPressed ? @"Down" : @"Up";
+    [self.device.mechanicalSwitch.switchValue readWithHandler:^(MBLNumericData *obj, NSError *error) {
+        self.mechanicalSwitchLabel.text = obj.value.boolValue ? @"Down" : @"Up";
     }];
 }
 
@@ -358,17 +358,15 @@
 - (IBAction)readDigitalPressed:(id)sender
 {
     MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
-    // TODO: Update once firmware 1.0.0 has been released
-    [pin readDigitalValueWithHandler:^(BOOL isTrue, NSError *error) {
-        self.gpioPinDigitalValue.text = isTrue ? @"1" : @"0";
+    [pin.digitalValue readWithHandler:^(MBLNumericData *obj, NSError *error) {
+        self.gpioPinDigitalValue.text = obj.value.boolValue ? @"1" : @"0";
     }];
 }
 - (IBAction)readAnalogPressed:(id)sender
 {
     MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
-    // TODO: Update once firmware 1.0.0 has been released
-    [pin readAnalogValueUsingMode:MBLAnalogReadModeFixed handler:^(NSDecimalNumber *number, NSError *error) {
-        self.gpioPinAnalogValue.text = [NSString stringWithFormat:@"%.3fV", number.doubleValue];
+    [pin.analogAbsolute readWithHandler:^(MBLNumericData *obj, NSError *error) {
+        self.gpioPinAnalogValue.text = [NSString stringWithFormat:@"%.3fV", obj.value.doubleValue];
     }];
 }
 

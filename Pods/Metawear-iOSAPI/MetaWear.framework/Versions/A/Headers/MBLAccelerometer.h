@@ -41,12 +41,18 @@
 
 @class MBLMetaWear;
 
+/**
+ Accelerometer sensitiviy ranges
+ */
 typedef NS_OPTIONS(uint8_t, MBLAccelerometerRange) {
     MBLAccelerometerRange2G = 0,
     MBLAccelerometerRange4G = 1,
     MBLAccelerometerRange8G = 2
 };
 
+/**
+ Accelerometer sample frequencies
+ */
 typedef NS_OPTIONS(uint8_t, MBLAccelerometerSampleFrequency) {
     MBLAccelerometerSampleFrequency800Hz = 0,
     MBLAccelerometerSampleFrequency400Hz = 1,
@@ -58,6 +64,9 @@ typedef NS_OPTIONS(uint8_t, MBLAccelerometerSampleFrequency) {
     MBLAccelerometerSampleFrequency1_56Hz = 7
 };
 
+/**
+ Accelerometer sleep sample frequencies
+ */
 typedef NS_OPTIONS(uint8_t, MBLAccelerometerSleepSampleFrequency) {
     MBLAccelerometerSleepSampleFrequency50Hz = 0,
     MBLAccelerometerSleepSampleFrequency12_5Hz = 1,
@@ -65,6 +74,9 @@ typedef NS_OPTIONS(uint8_t, MBLAccelerometerSleepSampleFrequency) {
     MBLAccelerometerSleepSampleFrequency1_56Hz = 3
 };
 
+/**
+ Accelerometer power modes
+ */
 typedef NS_OPTIONS(uint8_t, MBLAccelerometerPowerScheme) {
     MBLAccelerometerPowerSchemeNormal = 0,
     MBLAccelerometerPowerSchemeLowNoiseLowPower = 1,
@@ -72,12 +84,18 @@ typedef NS_OPTIONS(uint8_t, MBLAccelerometerPowerScheme) {
     MBLAccelerometerPowerSchemeLowerPower = 3,
 };
 
+/**
+ Accelerometer axis
+ */
 typedef NS_OPTIONS(uint8_t, MBLAccelerometerAxis) {
     MBLAccelerometerAxisX = 0,
     MBLAccelerometerAxisY = 1,
     MBLAccelerometerAxisZ = 2
 };
 
+/**
+ Accelerometer tap types
+ */
 typedef NS_OPTIONS(uint8_t, MBLAccelerometerTapType) {
     MBLAccelerometerTapTypeSingle = 0,
     MBLAccelerometerTapTypeDouble = 1,
@@ -174,6 +192,9 @@ typedef NS_OPTIONS(uint8_t, MBLAccelerometerTapType) {
 @property (nonatomic, strong, readonly) MBLEvent *shakeEvent;
 
 
+///----------------------------------
+/// @name Deprecated Methods
+///----------------------------------
 
 /**
  * @deprecated use [dataReadyEvent startNotificationsWithHandler] instead

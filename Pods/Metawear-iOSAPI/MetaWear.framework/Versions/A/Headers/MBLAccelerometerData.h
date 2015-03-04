@@ -58,6 +58,10 @@
  */
 @property (nonatomic, readonly) int RMS;
 
+///----------------------------------
+/// @name Deprecated Properties
+///----------------------------------
+
 /**
  @deprecated Use timestamp property instead
  */

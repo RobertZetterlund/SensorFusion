@@ -35,6 +35,10 @@
 
 #import <MetaWear/MBLFilter.h>
 
+/**
+ The data switch filter conditionally allows the input values to pass.  It can either
+ be on or off, or put into a countdown mode where it allows N samples to pass.
+ */
 @interface MBLDataSwitch : MBLFilter
 
 - (void)resetCount:(uint16_t)count;

@@ -37,17 +37,26 @@
 @class MBLEvent;
 @class MBLData;
 
+/**
+ Input pin configuration types
+ */
 typedef NS_OPTIONS(uint8_t, MBLPinConfiguration) {
     MBLPinConfigurationPullup = 0,
     MBLPinConfigurationPulldown = 1,
     MBLPinConfigurationNopull = 2
 };
 
+/**
+ Analog read modes
+ */
 typedef NS_OPTIONS(uint8_t, MBLAnalogReadMode) {
     MBLAnalogReadModeFixed = 0,
     MBLAnalogReadModeSupplyRatio = 1
 };
 
+/**
+ Pin change types
+ */
 typedef NS_OPTIONS(uint8_t, MBLPinChangeType) {
     MBLPinChangeTypeRising = 1,
     MBLPinChangeTypeFalling = 2,
@@ -96,7 +105,7 @@ typedef NS_OPTIONS(uint8_t, MBLPinChangeType) {
 
 
 ///----------------------------------
-/// @name Deprecated Functions
+/// @name Deprecated Methods
 ///----------------------------------
 
 /**

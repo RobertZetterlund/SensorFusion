@@ -1,8 +1,8 @@
 /**
- * MBLFilter.h
+ * MBLNeopixelStrand.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 10/9/14.
+ * Created by Stephen Schiffli on 3/2/15.
  * Copyright 2014 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
@@ -33,16 +33,43 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <MetaWear/MBLEvent.h>
+#import <MetaWear/MBLNeopixel.h>
+#import <UIKit/UIKit.h>
+
+@interface MBLNeopixelStrand : NSObject <NSCoding>
 
 /**
- The MBLFilter takes an MBLEvent as input, then performs some operation and produces an output.
+ Set Pixel at strand index.
+ @param pixel Pixel index to be set
+ @param color Color the LED will be set to
  */
-@interface MBLFilter : MBLEvent <NSCoding>
+- (void)setPixel:(uint8_t)pixel color:(UIColor *)color;
 
 /**
- Reset the internal state of the filter
+ Clear Neopixel strand.
+ @param start Pixel index to start clearing from
+ @param end Pixel index to clear to, inclusive
  */
-- (void)reset;
+- (void)clearFromStartPixel:(uint8_t)startPixel endPixel:(uint8_t)endPixel;
+
+/**
+ Hold Neopixel strand.
+ @param enable Hold enable
+ */
+- (void)holdStrandWithEnable:(BOOL)enable;
+
+/**
+ Rotate strand at index.
+ @param index Strand number, can be in the range [0, 2]
+ @param direction Rotation direction
+ @param repetitions Number of times to repeat the rotation. Use 0xFF to rotate indefinitely, 0 to terminate
+ @param period Amount of time, in milliseconds, between rotations
+ */
+- (void)rotateStrandWithDirection:(MBLRotationDirection)direction repetitions:(uint8_t)repetitions period:(uint16_t)period;
+
+/**
+ Clears all pixels and puts strand into low power state
+ */
+- (void)turnStrandOff;
 
 @end

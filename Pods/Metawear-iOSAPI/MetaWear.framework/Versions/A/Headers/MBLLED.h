@@ -36,6 +36,9 @@
 #import <UIKit/UIKit.h>
 #import <MetaWear/MBLModule.h>
 
+/**
+ Specific color channel for the LED
+ */
 typedef NS_OPTIONS(uint8_t, MBLLEDColorChannel) {
     MBLLEDColorChannelGreen = 0,
     MBLLEDColorChannelRed = 1,

@@ -36,6 +36,9 @@
 #import <MetaWear/MBLModule.h>
 #import <MetaWear/MBLI2CData.h>
 
+/**
+ Interface for reading/writing externally connected I2C devices.
+ */
 @interface MBLI2C : MBLModule <NSCoding>
 
 - (MBLI2CData *)dataAtDeviceAddress:(uint8_t)deviceAddress

@@ -56,6 +56,7 @@
 #import <MetaWear/MBLMetaWearManager.h>
 #import <MetaWear/MBLModule.h>
 #import <MetaWear/MBLNeopixel.h>
+#import <MetaWear/MBLNeopixelStrand.h>
 #import <MetaWear/MBLNumericData.h>
 #import <MetaWear/MBLOrientationData.h>
 #import <MetaWear/MBLRegister.h>

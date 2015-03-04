@@ -36,6 +36,9 @@
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLModule.h>
 
+/**
+ iBeacon transmiter power
+ */
 typedef NS_OPTIONS(uint8_t, MBLiBeaconTransmitPower) {
     MBLiBeaconTransmitPower4dBm,
     MBLiBeaconTransmitPower0dBm,
@@ -94,6 +97,10 @@ typedef NS_OPTIONS(uint8_t, MBLiBeaconTransmitPower) {
  */
 - (void)setBeaconOn:(BOOL)on;
 
+
+///----------------------------------
+/// @name Deprecated Properties
+///----------------------------------
 
 /**
  * @deprecated use calibratedReceiverPower instead

@@ -37,6 +37,11 @@
 #import <MetaWear/MBLModule.h>
 #import <UIKit/UIKit.h>
 
+@class MBLNeopixelStrand;
+
+/**
+ Coloring ordering of the NeoPixel strand (depends on the LED driver chip)
+ */
 typedef NS_OPTIONS(uint8_t, MBLColorOrdering) {
     MBLColorOrderingRGB = 0,
     MBLColorOrderingRBG = 1,
@@ -44,11 +49,17 @@ typedef NS_OPTIONS(uint8_t, MBLColorOrdering) {
     MBLColorOrderingGBR = 3
 };
 
+/**
+ Speed of the NeoPixel strand (depends on the LED driver chip)
+ */
 typedef NS_OPTIONS(uint8_t, MBLStrandSpeed) {
     MBLStrandSpeedSlow = 0,
     MBLStrandSpeedFast = 1
 };
 
+/**
+ Direction the pixel colors shift during rotation
+ */
 typedef NS_OPTIONS(uint8_t, MBLRotationDirection) {
     MBLRotationDirectionTowardsBoard = 0,
     MBLRotationDirectionAwayFromBoard = 1
@@ -61,76 +72,79 @@ typedef NS_OPTIONS(uint8_t, MBLRotationDirection) {
 
 /**
  Initialize memory on the MetaWear board for a NeoPixel strand
- @param index Strand number (id) to initialize, can be in the range [0, 2]
  @param color Color ordering format
  @param speed Operating speed
  @param pin GPIO pin the strand is connected to
  @param length Number of pixels to initialize
  */
-- (void)initializeStrandAtIndex:(uint8_t)index color:(MBLColorOrdering)color speed:(MBLStrandSpeed)speed pin:(uint8_t)pin length:(uint8_t)length;
+- (MBLNeopixelStrand *)strandWithColor:(MBLColorOrdering)color
+                                 speed:(MBLStrandSpeed)speed
+                                   pin:(uint8_t)pin
+                                length:(uint8_t)length;
+
+
+///----------------------------------
+/// @name Deprecated Methods
+///----------------------------------
 
 /**
- Hold Neopixel strand.
- @param index Strand number, can be in the range [0, 2]
- @param enable Hold enable
+ * @deprecated use MBLNeopixelStrand instead
+ * @see MBLNeopixelStrand
  */
-- (void)holdStrandAtIndex:(uint8_t)index withEnable:(BOOL)enable;
+- (void)initializeStrandAtIndex:(uint8_t)index color:(MBLColorOrdering)color speed:(MBLStrandSpeed)speed pin:(uint8_t)pin length:(uint8_t)length DEPRECATED_MSG_ATTRIBUTE("use MBLNeopixelStrand instead");
 
 /**
- Clear Neopixel strand.
- @param index Strand number, can be in the range [0, 2]
- @param start Pixel index to start clearing from
- @param end Pixel index to clear to, inclusive
+ * @deprecated use MBLNeopixelStrand instead
+ * @see MBLNeopixelStrand
  */
-- (void)clearStrandAtIndex:(uint8_t)index startPixel:(uint8_t)start endPixel:(uint8_t)end;
+- (void)holdStrandAtIndex:(uint8_t)index withEnable:(BOOL)enable DEPRECATED_MSG_ATTRIBUTE("use MBLNeopixelStrand instead");
 
 /**
- Set Pixel at strand index.
- @param index Strand number, can be in the range [0, 2]
- @param pixel Pixel index to be set
- @param color Color the LED will be set to
+ * @deprecated use MBLNeopixelStrand instead
+ * @see MBLNeopixelStrand
  */
-- (void)setPixelAtIndex:(uint8_t)index pixel:(uint8_t)pixel color:(UIColor *)color;
+- (void)clearStrandAtIndex:(uint8_t)index startPixel:(uint8_t)start endPixel:(uint8_t)end DEPRECATED_MSG_ATTRIBUTE("use MBLNeopixelStrand instead");
 
 /**
- Rotate strand at index.
- @param index Strand number, can be in the range [0, 2]
- @param direction Rotation direction
- @param repetitions Number of times to repeat the rotation. Use 0xFF to rotate indefinitely, 0 to terminate
- @param period Amount of time, in milliseconds, between rotations
+ * @deprecated use MBLNeopixelStrand instead
+ * @see MBLNeopixelStrand
  */
-- (void)rotateStrandAtIndex:(uint8_t)index direction:(MBLRotationDirection)direction repetitions:(uint8_t)repetitions period:(uint16_t)period;
+- (void)setPixelAtIndex:(uint8_t)index pixel:(uint8_t)pixel color:(UIColor *)color DEPRECATED_MSG_ATTRIBUTE("use MBLNeopixelStrand instead");
 
 /**
- Deinitialize strand at index.
- @param index Strand number, can be in the range [0, 2]
+ * @deprecated use MBLNeopixelStrand instead
+ * @see MBLNeopixelStrand
  */
-- (void)deinitializeStrandAtIndex:(uint8_t)index;
-
-
+- (void)rotateStrandAtIndex:(uint8_t)index direction:(MBLRotationDirection)direction repetitions:(uint8_t)repetitions period:(uint16_t)period DEPRECATED_MSG_ATTRIBUTE("use MBLNeopixelStrand instead");
 
 /**
- * @deprecated use initializeStrandAtIndex:color:speed:pin:length: instead
- * @see initializeStrandAtIndex:color:speed:pin:length:
+ * @deprecated use MBLNeopixelStrand instead
+ * @see MBLNeopixelStrand
  */
-- (void)initializeStrandAtIndex:(uint8_t)index withColor:(uint8_t)color pin:(uint8_t)pin andLength:(uint8_t)length DEPRECATED_MSG_ATTRIBUTE("Use initializeStrandAtIndex:color:speed:pin:length: instead");
+- (void)deinitializeStrandAtIndex:(uint8_t)index DEPRECATED_MSG_ATTRIBUTE("use MBLNeopixelStrand instead");
 
 /**
- * @deprecated use clearStrandAtIndex:startPixel:endPixel: instead
- * @see clearStrandAtIndex:startPixel:endPixel:
+ * @deprecated use MBLNeopixelStrand instead
+ * @see MBLNeopixelStrand
  */
-- (void)clearStrandwithStartIndex:(uint8_t)start endIndex:(uint8_t)end DEPRECATED_MSG_ATTRIBUTE("Use clearStrandAtIndex:startPixel:endPixel: instead");
+- (void)initializeStrandAtIndex:(uint8_t)index withColor:(uint8_t)color pin:(uint8_t)pin andLength:(uint8_t)length DEPRECATED_MSG_ATTRIBUTE("use MBLNeopixelStrand instead");
 
 /**
- * @deprecated use setPixelAtIndex:pixel:color: instead
- * @see setPixelAtIndex:pixel:color:
+ * @deprecated use MBLNeopixelStrand instead
+ * @see MBLNeopixelStrand
  */
-- (void)setPixelAtIndex:(uint8_t)index withRed:(uint8_t)red Green:(uint8_t)green andBlue:(uint8_t)blue DEPRECATED_MSG_ATTRIBUTE("Use setPixelAtIndex:pixel:color: instead");
+- (void)clearStrandwithStartIndex:(uint8_t)start endIndex:(uint8_t)end DEPRECATED_MSG_ATTRIBUTE("use MBLNeopixelStrand instead");
 
 /**
- * @deprecated use rotateStrandAtIndex:direction:repetitions:period: instead
- * @see rotateStrandAtIndex:direction:repetitions:period:
+ * @deprecated use MBLNeopixelStrand instead
+ * @see MBLNeopixelStrand
  */
-- (void)rotateStrandAtIndex:(uint8_t)index withIncFlag:(uint8_t)flag rotateRepeat:(uint8_t)repeat andDelay:(uint16_t)delay DEPRECATED_MSG_ATTRIBUTE("Use rotateStrandAtIndex:direction:repetitions:period: instead");
+- (void)setPixelAtIndex:(uint8_t)index withRed:(uint8_t)red Green:(uint8_t)green andBlue:(uint8_t)blue DEPRECATED_MSG_ATTRIBUTE("use MBLNeopixelStrand instead");
+
+/**
+ * @deprecated use MBLNeopixelStrand instead
+ * @see MBLNeopixelStrand
+ */
+- (void)rotateStrandAtIndex:(uint8_t)index withIncFlag:(uint8_t)flag rotateRepeat:(uint8_t)repeat andDelay:(uint16_t)delay DEPRECATED_MSG_ATTRIBUTE("use MBLNeopixelStrand instead");
 
 @end

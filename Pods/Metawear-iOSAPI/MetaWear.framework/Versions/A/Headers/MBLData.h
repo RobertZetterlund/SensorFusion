@@ -38,6 +38,9 @@
 
 @class MBLEvent;
 
+/**
+ This object represents synchronous data from sensors and peripherals on the MetaWear board.
+ */
 @interface MBLData : MBLRegister <NSCoding>
 
 /**
@@ -71,7 +74,7 @@
 
 
 ///----------------------------------
-/// @name Deprecated Functions
+/// @name Deprecated Methods
 ///----------------------------------
 
 /**

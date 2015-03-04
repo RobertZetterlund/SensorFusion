@@ -113,9 +113,9 @@
 ///----------------------------------
 
 /**
- This function is intended for recovery mode only.  If a firmware update experiences an unexpected error,
+ This method is intended for recovery mode only.  If a firmware update experiences an unexpected error,
  the device may get stuck in the bootloader and thus won't show up in startScanForMetaWearsWithHandler:.
- This function will start scanning for devices in bootloader mode
+ This method will start scanning for devices in bootloader mode
  @param duplicates YES: only callback when a new device is found, NO: callback each time
  a new advertising packet is found
  @param handler Callback to handle each time a new device is found
@@ -132,7 +132,7 @@
 - (void)stopScanForMetaBoots;
 
 ///----------------------------------
-/// @name Deprecated Functions
+/// @name Deprecated Methods
 ///----------------------------------
 
 /**

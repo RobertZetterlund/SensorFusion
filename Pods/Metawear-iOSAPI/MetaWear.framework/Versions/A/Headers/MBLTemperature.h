@@ -39,11 +39,17 @@
 
 @class MBLMetaWear;
 
+/**
+ Temperature module sensor souce
+ */
 typedef NS_OPTIONS(uint8_t, MBLTemperatureSource) {
     MBLTemperatureSourceInternal,
     MBLTemperatureSourceThermistor
 };
 
+/**
+ Temperature module unit selection
+ */
 typedef NS_OPTIONS(uint8_t, MBLTemperatureUnit) {
     MBLTemperatureUnitCelsius,
     MBLTemperatureUnitFahrenheit

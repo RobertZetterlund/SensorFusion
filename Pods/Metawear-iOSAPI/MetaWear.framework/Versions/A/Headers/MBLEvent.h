@@ -40,6 +40,9 @@
 @class MBLFilter;
 @class MBLDataSwitch;
 
+/**
+ Supported Comparison filter operations
+ */
 typedef NS_OPTIONS(uint8_t, MBLComparisonOperation) {
     MBLComparisonOperationEqual = 0,
     MBLComparisonOperationNotEqual = 1,
@@ -49,6 +52,9 @@ typedef NS_OPTIONS(uint8_t, MBLComparisonOperation) {
     MBLComparisonOperationGreaterThanOrEqual = 5
 };
 
+/**
+ Supported Arithmetic filter operations
+ */
 typedef NS_OPTIONS(uint8_t, MBLArithmeticOperation) {
     MBLArithmeticOperationNoOp = 0,
     MBLArithmeticOperationAdd = 1,
@@ -61,6 +67,9 @@ typedef NS_OPTIONS(uint8_t, MBLArithmeticOperation) {
     MBLArithmeticOperationRightShift = 8
 };
 
+/**
+ Pluse filter output types
+ */
 typedef NS_OPTIONS(uint8_t, MBLPulseOutput) {
     MBLPulseOutputWidth = 0,
     MBLPulseOutputArea = 1,
@@ -122,7 +131,7 @@ typedef NS_OPTIONS(uint8_t, MBLPulseOutput) {
  
  ## Gotchas
  
- @warning Calling summationOfEvent or any other filter function returns a freshly created
+ @warning Calling summationOfEvent or any other filter method returns a freshly created
  MBLEvent object which you must retain for later use.  This is different from the MBLEvent
  properties on the various modules which internally save the MBLEvent object and always return
  the same pointer through the property.
@@ -153,12 +162,12 @@ typedef NS_OPTIONS(uint8_t, MBLPulseOutput) {
 ///----------------------------------
 
 /**
- This function is used for programing the Metawear device to perform actions
+ This method is used for programing the Metawear device to perform actions
  automatically.
  
  Any time this even occurs you can have it trigger other
  Metawear API calls even when the phone isn't connected.
- When this function is called, the given block executed and checked for
+ When this method is called, the given block executed and checked for
  validity.  All Metawear API calls inside the block are sent to the device
  for execution later.
  @warning THE BLOCK IS ONLY EXECUTED ONCE DURNING THIS CALL AND
@@ -274,9 +283,11 @@ typedef NS_OPTIONS(uint8_t, MBLPulseOutput) {
 - (MBLFilter *)delayOfEventWithCount:(uint8_t)count;
 
 /**
- Create a new event that delays the current even by a given number of samples.
- @param count Number of samples to delay
- @returns New event representing a delayed version of the input
+ Create a new event that represents a pulse of the input.
+ @param threshold Min value considered to be a pulse
+ @param width Number of samples input must stay above threshold to be considered a valid pulse
+ @param output Select the type of data this filter should output
+ @returns New event representing a pulse of the input
  */
 - (MBLFilter *)pulseDetectorOfEventWithThreshold:(int32_t)threshold width:(uint16_t)width output:(MBLPulseOutput)output;
 
@@ -290,7 +301,7 @@ typedef NS_OPTIONS(uint8_t, MBLPulseOutput) {
 - (MBLEvent *)readDataOnEvent:(MBLData *)data;
 
 ///----------------------------------
-/// @name Deprecated Functions
+/// @name Deprecated Methods
 ///----------------------------------
 
 /**
