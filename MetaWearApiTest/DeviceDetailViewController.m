@@ -70,6 +70,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *gpioPinDigitalValue;
 @property (weak, nonatomic) IBOutlet UILabel *gpioPinAnalogValue;
 
+@property (weak, nonatomic) IBOutlet UIButton *startSwitch;
+@property (weak, nonatomic) IBOutlet UIButton *stopSwitch;
 @property (weak, nonatomic) IBOutlet UIButton *startAccelerometer;
 @property (weak, nonatomic) IBOutlet UIButton *stopAccelerometer;
 @property (weak, nonatomic) IBOutlet UIButton *startLog;
@@ -104,9 +106,6 @@
     self.grayScreen.backgroundColor = [UIColor grayColor];
     self.grayScreen.alpha = 0.4;
     [self.view addSubview:self.grayScreen];
-    
-    [self.stopAccelerometer setEnabled:NO];
-    [self.stopLog setEnabled:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -154,6 +153,13 @@
         hud.labelText = @"Connecting...";
         [self.device connectWithHandler:^(NSError *error) {
             [self setConnected:(error == nil)];
+            
+            if ([error.domain isEqualToString:kMBLErrorDomain] && error.code == kMBLErrorOutdatedFirmware) {
+                [hud hide:YES];
+                [self updateFirmware:nil];
+                return;
+            }
+            
             hud.mode = MBProgressHUDModeText;
             if (error) {
                 hud.labelText = error.localizedDescription;
@@ -233,6 +239,9 @@
 
 - (IBAction)startSwitchNotifyPressed:(id)sender
 {
+    [self.startSwitch setEnabled:NO];
+    [self.stopSwitch setEnabled:YES];
+    
     self.switchRunning = YES;
     [self.device.mechanicalSwitch.switchUpdateEvent startNotificationsWithHandler:^(MBLNumericData *isPressed, NSError *error) {
         self.mechanicalSwitchLabel.text = isPressed.value.boolValue ? @"Down" : @"Up";
@@ -241,6 +250,9 @@
 
 - (IBAction)StopSwitchNotifyPressed:(id)sender
 {
+    [self.startSwitch setEnabled:YES];
+    [self.stopSwitch setEnabled:NO];
+    
     self.switchRunning = NO;
     [self.device.mechanicalSwitch.switchUpdateEvent stopNotifications];
 }
@@ -303,12 +315,10 @@
             [hud hide:YES afterDelay:2.0];
         }
     } progressHandler:^(float number, NSError *error) {
-        if (number != hud.progress) {
-            hud.progress = number;
-            if (number == 1.0) {
-                hud.mode = MBProgressHUDModeIndeterminate;
-                hud.labelText = @"Resetting...";
-            }
+        hud.progress = number;
+        if (number == 1.0) {
+            hud.mode = MBProgressHUDModeIndeterminate;
+            hud.labelText = @"Resetting...";
         }
     }];
 }
@@ -504,15 +514,15 @@
     [emailController setSubject:subject];
     
     NSMutableString *body = [[NSMutableString alloc] initWithFormat:@"The data was recorded on %@.\n", dateString];
-    [body appendString:[NSString stringWithFormat:@"Scale = %d\n", (int)self.accelerometerScale.selectedSegmentIndex]];
-    [body appendString:[NSString stringWithFormat:@"Freq = %d\n", (int)self.sampleFrequency.selectedSegmentIndex]];
-    [body appendString:[NSString stringWithFormat:@"HPF On = %d\n", (int)self.highPassFilterSwitch.on]];
-    [body appendString:[NSString stringWithFormat:@"HPF Cutoff = %d\n", (int)self.hpfCutoffFreq.selectedSegmentIndex]];
-    [body appendString:[NSString stringWithFormat:@"LowNoise On = %d\n", self.lowNoiseSwitch.on]];
-    [body appendString:[NSString stringWithFormat:@"Active Power Scheme = %d\n", (int)self.activePowerScheme.selectedSegmentIndex]];
-    [body appendString:[NSString stringWithFormat:@"Auto Sleep On = %d\n", self.autoSleepSwitch.on]];
-    [body appendString:[NSString stringWithFormat:@"SleepFreq = %d\n", (int)self.sleepSampleFrequency.selectedSegmentIndex]];
-    [body appendString:[NSString stringWithFormat:@"Sleep Power Scheme = %d\n", (int)self.sleepPowerScheme.selectedSegmentIndex]];
+    [body appendString:[NSString stringWithFormat:@"Scale = %@\n", [self.accelerometerScale titleForSegmentAtIndex:self.accelerometerScale.selectedSegmentIndex]]];
+    [body appendString:[NSString stringWithFormat:@"Freq = %@\n", [self.sampleFrequency titleForSegmentAtIndex:self.sampleFrequency.selectedSegmentIndex]]];
+    [body appendString:self.highPassFilterSwitch.on ? @"HPF On\n" : @"HPF Off\n"];
+    [body appendString:[NSString stringWithFormat:@"HPF Cutoff = %@\n", [self.hpfCutoffFreq titleForSegmentAtIndex:self.hpfCutoffFreq.selectedSegmentIndex]]];
+    [body appendString:self.lowNoiseSwitch.on ? @"LowNoise On\n" : @"LowNoise Off\n"];
+    [body appendString:[NSString stringWithFormat:@"Active Power Scheme = %@\n", [self.activePowerScheme titleForSegmentAtIndex:self.activePowerScheme.selectedSegmentIndex]]];
+    [body appendString:self.autoSleepSwitch.on ? @"Auto Sleep On\n" : @"Auto Sleep Off\n"];
+    [body appendString:[NSString stringWithFormat:@"SleepFreq = %@\n", [self.sleepSampleFrequency titleForSegmentAtIndex:self.sleepSampleFrequency.selectedSegmentIndex]]];
+    [body appendString:[NSString stringWithFormat:@"Sleep Power Scheme = %@\n", [self.sleepPowerScheme titleForSegmentAtIndex:self.sleepPowerScheme.selectedSegmentIndex]]];
     [emailController setMessageBody:body isHTML:NO];
     
     [self presentViewController:emailController animated:YES completion:NULL];

@@ -196,6 +196,10 @@ typedef NS_OPTIONS(uint8_t, MBLTransmitPower) {
  result in a smaller connection radius, default is MBLTransmitPower0dBm.
  */
 @property (nonatomic) MBLTransmitPower transmitPower;
+/**
+ Set a raw value into the scan response BLE advertising packet
+ */
+@property (nonatomic, strong) NSData *scanResponse;
 
 ///----------------------------------
 /// @name Pairing/Bonding

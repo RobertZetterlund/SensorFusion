@@ -81,18 +81,22 @@ typedef NS_OPTIONS(uint8_t, MBLPinChangeType) {
 /**
  Event representing a change in the pin's digital value, you can choose
  what state transitions trigger an event using the changeType property.
+ Event callbacks will be provided an MBLNumericData object
  */
 @property (nonatomic, strong, readonly) MBLEvent *changeEvent;
 /**
- Data representing the digital (0 or 1) value of the pin
+ Data representing the digital (0 or 1) value of the pin.
+ Event callbacks will be provided an MBLNumericData object
  */
 @property (nonatomic, strong, readonly) MBLData *digitalValue;
 /**
  Data representing the analog value of the pin in volts
+ Event callbacks will be provided an MBLNumericData object
  */
 @property (nonatomic, strong, readonly) MBLData *analogAbsolute;
 /**
  Data representing the analog value of the pin as a ratio of the supply voltage
+ Event callbacks will be provided an MBLNumericData object
  */
 @property (nonatomic, strong, readonly) MBLData *analogRatio;
 

@@ -173,12 +173,10 @@
                 [hud hide:YES afterDelay:2.0];
             }
         } progressHandler:^(float number, NSError *error) {
-            if (number != hud.progress) {
-                hud.progress = number;
-                if (number == 1.0) {
-                    hud.mode = MBProgressHUDModeIndeterminate;
-                    hud.labelText = @"Resetting...";
-                }
+            hud.progress = number;
+            if (number == 1.0) {
+                hud.mode = MBProgressHUDModeIndeterminate;
+                hud.labelText = @"Resetting...";
             }
         }];
     } else {

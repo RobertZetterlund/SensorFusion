@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cmc-k5-3Lq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cmc-k5-3Lq">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -354,7 +354,7 @@
                                                     <action selector="startSwitchNotifyPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="gZA-1h-F4b"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ni-dt-Qos">
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ni-dt-Qos">
                                                 <rect key="frame" x="222" y="501" width="78" height="30"/>
                                                 <state key="normal" title="Stop Notify">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -537,7 +537,7 @@
                                                     <action selector="startAccelerationPressed:" destination="cmV-QT-OnK" eventType="touchUpInside" id="68B-wR-W2Q"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ski-pS-qcg">
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ski-pS-qcg">
                                                 <rect key="frame" x="192" y="1755" width="107" height="30"/>
                                                 <state key="normal" title="Stop Streaming">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -755,7 +755,7 @@
                                                     <action selector="startAccelerometerLog:" destination="cmV-QT-OnK" eventType="touchUpInside" id="5NF-Zy-ATh"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4LC-49-0i8">
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4LC-49-0i8">
                                                 <rect key="frame" x="206" y="1793" width="93" height="30"/>
                                                 <state key="normal" title="Stop Logging">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -953,11 +953,13 @@
                         <outlet property="startLog" destination="0Ik-my-L7Y" id="YpQ-Ns-5Vb"/>
                         <outlet property="startOrientation" destination="caH-41-sJd" id="SA2-a3-708"/>
                         <outlet property="startShake" destination="axo-wK-Xoe" id="2GR-W2-oGR"/>
+                        <outlet property="startSwitch" destination="EwT-Xq-UJR" id="vSf-GN-OKG"/>
                         <outlet property="startTap" destination="nMT-Wq-3VG" id="QzJ-LB-3OM"/>
                         <outlet property="stopAccelerometer" destination="ski-pS-qcg" id="fFp-i2-nMc"/>
                         <outlet property="stopLog" destination="4LC-49-0i8" id="Zvg-Sj-92q"/>
                         <outlet property="stopOrientation" destination="sTC-jD-mzB" id="uff-4P-dEe"/>
                         <outlet property="stopShake" destination="D2h-cw-cOS" id="AzC-Nv-3aI"/>
+                        <outlet property="stopSwitch" destination="3ni-dt-Qos" id="Nyf-Yw-lfP"/>
                         <outlet property="stopTap" destination="3e0-R4-1tt" id="E8d-89-xbg"/>
                         <outlet property="tapDetectionAxis" destination="DRD-z0-e11" id="KBj-Rj-WNh"/>
                         <outlet property="tapDetectionType" destination="r21-TG-f1a" id="w9v-c1-Lhx"/>

@@ -172,22 +172,27 @@ typedef NS_OPTIONS(uint8_t, MBLAccelerometerTapType) {
 @property (nonatomic, strong, readonly) MBLEvent *dataReadyEvent;
 /**
  Event representing a new accelerometer data sample, but filtered down to just an RMS value.
+ Event callbacks will be provided an MBLRMSAccelerometerData object
  */
 @property (nonatomic, strong, readonly) MBLEvent *rmsDataReadyEvent;
 /**
- Event representing a tap (single, double, or both based on tapType) on the tapDetectionAxis
+ Event representing a tap (single, double, or both based on tapType) on the tapDetectionAxis.
+Event callbacks will be provided an empty NSData object
  */
 @property (nonatomic, strong, readonly) MBLEvent *tapEvent;
 /**
- Event representing an orientation change
+ Event representing an orientation change.
+ Event callbacks will be provided an MBLOrientationData object
  */
 @property (nonatomic, strong, readonly) MBLEvent *orientationEvent;
 /**
- Event representing free fall, event occurs every 100mSec while the device is in free fall
+ Event representing free fall, event occurs every 100mSec while the device is in free fall.
+ Event callbacks will be provided an empty NSData object
  */
 @property (nonatomic, strong, readonly) MBLEvent *freeFallEvent;
 /**
- Event representing a shake
+ Event representing a shake.
+ Event callbacks will be provided an empty NSData object
  */
 @property (nonatomic, strong, readonly) MBLEvent *shakeEvent;
 
