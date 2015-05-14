@@ -40,7 +40,7 @@
 /**
  Valid Firmware Versions
  */
-typedef NS_OPTIONS(uint8_t, MBLFirmwareVersion) {
+typedef NS_ENUM(uint8_t, MBLFirmwareVersion) {
     MBLFirmwareVersion0_4_1,
     MBLFirmwareVersion0_6_0,
     MBLFirmwareVersion0_8_0,

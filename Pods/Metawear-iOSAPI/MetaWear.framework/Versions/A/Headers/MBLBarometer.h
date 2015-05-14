@@ -1,9 +1,9 @@
 /**
- * MBLOrientationData.h
+ * MBLBarometer.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 10/15/14.
- * Copyright 2014 MbientLab Inc. All rights reserved.
+ * Created by Stephen Schiffli on 4/27/15.
+ * Copyright 2015 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
  * granted under the terms of a software license agreement between the user who
@@ -33,18 +33,59 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <MetaWear/MBLDataSample.h>
+#import <MetaWear/MBLConstants.h>
+#import <MetaWear/MBLEvent.h>
+#import <MetaWear/MBLModule.h>
 
-typedef NS_ENUM(uint8_t, MBLAccelerometerOrientation) {
-    MBLAccelerometerOrientationPortrait = 0,
-    MBLAccelerometerOrientationPortraitUpsideDown = 1,
-    MBLAccelerometerOrientationLandscapeRight = 2,
-    MBLAccelerometerOrientationLandscapeLeft = 3
+/**
+ Barometer oversampling rates
+ */
+typedef NS_ENUM(uint8_t, MBLBarometerOversample) {
+    MBLBarometerOversampleUltraLowPower = 1,
+    MBLBarometerOversampleLowPower = 2,
+    MBLBarometerOversampleStandard = 3,
+    MBLBarometerOversampleHighResolution = 4,
+    MBLBarometerOversampleUltraHighResolution = 5,
 };
 
 /**
- Container for orientation data
+ Barometer output filter
  */
-@interface MBLOrientationData : MBLDataSample
-@property (nonatomic) MBLAccelerometerOrientation orientation;
+typedef NS_ENUM(uint8_t, MBLBarometerFilter) {
+    MBLBarometerFilterOff = 0,
+    MBLBarometerFilterAverage2 = 1,
+    MBLBarometerFilterAverage4 = 2,
+    MBLBarometerFilterAverage8 = 3,
+    MBLBarometerFilterAverage16 = 4,
+};
+
+/**
+ Interface to the barometer sensor
+ */
+@interface MBLBarometer : MBLModule <NSCoding>
+
+/**
+ Use this to set pressure sampling mode, higher values produce more accurate
+ results but will use more power.
+ */
+@property (nonatomic) MBLBarometerOversample pressureOversampling;
+/**
+ Use this to set hardware average filtering of pressure samples.
+ */
+@property (nonatomic) MBLBarometerFilter hardwareAverageFilter;
+
+
+/**
+ Data representing the atmospheric pressure measured by barometer.
+ Event callbacks will be provided an MBLNumericData object whose float
+ value will be pressure in pascals.
+ */
+@property (nonatomic, strong, readonly) MBLData *pressure;
+/**
+ Data representing the altidue calulated from atmospheric pressure.
+ Event callbacks will be provided an MBLNumericData object whose float
+ value will be altitude in meters.
+ */
+@property (nonatomic, strong, readonly) MBLData *altitude;
+
 @end

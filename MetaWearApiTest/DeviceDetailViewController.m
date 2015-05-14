@@ -192,9 +192,8 @@
 
 - (IBAction)readTempraturePressed:(id)sender
 {
-    [self.device.temperature readTemperatureWithHandler:^(NSDecimalNumber *temp, NSError *error) {
-        NSString *suffix = self.device.temperature.units == MBLTemperatureUnitCelsius ? @"°C" : @"°F";
-        self.tempratureLabel.text = [[temp stringValue] stringByAppendingString:suffix];
+    [self.device.temperature.temperatureValue readWithHandler:^(MBLNumericData *obj, NSError *error) {
+        self.tempratureLabel.text = [obj.value.stringValue stringByAppendingString:@"°C"];
     }];
 }
 
@@ -393,7 +392,7 @@
     self.device.accelerometer.fullScaleRange = (int)self.accelerometerScale.selectedSegmentIndex;
     self.device.accelerometer.sampleFrequency = (int)self.sampleFrequency.selectedSegmentIndex;
     self.device.accelerometer.highPassFilter = self.highPassFilterSwitch.on;
-    self.device.accelerometer.filterCutoffFreq = self.hpfCutoffFreq.selectedSegmentIndex;
+    self.device.accelerometer.highPassCutoffFreq = self.hpfCutoffFreq.selectedSegmentIndex;
     self.device.accelerometer.lowNoise = self.lowNoiseSwitch.on;
     self.device.accelerometer.activePowerScheme = (int)self.activePowerScheme.selectedSegmentIndex;
     self.device.accelerometer.autoSleep = self.autoSleepSwitch.on;
@@ -417,7 +416,7 @@
     self.accelerometerDataArray = array;
     
     [self.device.accelerometer.dataReadyEvent startNotificationsWithHandler:^(MBLAccelerometerData *acceleration, NSError *error) {
-        [self.accelerometerGraph addX:(float)acceleration.x / 1000.0 y:(float)acceleration.y / 1000.0 z:(float)acceleration.z / 1000.0];
+        [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
         // Add data to data array for saving
         [array addObject:acceleration];
     }];
@@ -456,7 +455,7 @@
         if (!error) {
             self.accelerometerDataArray = array;
             for (MBLAccelerometerData *acceleration in array) {
-                [self.accelerometerGraph addX:(float)acceleration.x / 1000.0 y:(float)acceleration.y / 1000.0 z:(float)acceleration.z / 1000.0];
+                [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
             }
         }
     } progressHandler:^(float number, NSError *error) {
@@ -473,7 +472,7 @@
     NSMutableData *accelerometerData = [NSMutableData data];
     for (MBLAccelerometerData *dataElement in self.accelerometerDataArray) {
         @autoreleasepool {
-            [accelerometerData appendData:[[NSString stringWithFormat:@"%f,%d,%d,%d\n",
+            [accelerometerData appendData:[[NSString stringWithFormat:@"%f,%f,%f,%f\n",
                                             dataElement.timestamp.timeIntervalSince1970,
                                             dataElement.x,
                                             dataElement.y,

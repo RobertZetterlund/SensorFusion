@@ -1,9 +1,9 @@
 /**
- * MBLOrientationData.h
+ * MBLDataSample.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 10/15/14.
- * Copyright 2014 MbientLab Inc. All rights reserved.
+ * Created by Stephen Schiffli on 5/7/15.
+ * Copyright (c) 2015 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
  * granted under the terms of a software license agreement between the user who
@@ -33,18 +33,12 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <MetaWear/MBLDataSample.h>
-
-typedef NS_ENUM(uint8_t, MBLAccelerometerOrientation) {
-    MBLAccelerometerOrientationPortrait = 0,
-    MBLAccelerometerOrientationPortraitUpsideDown = 1,
-    MBLAccelerometerOrientationLandscapeRight = 2,
-    MBLAccelerometerOrientationLandscapeLeft = 3
-};
+#import <Foundation/Foundation.h>
 
 /**
- Container for orientation data
+ Generic base class for data coming from the MetaWear
  */
-@interface MBLOrientationData : MBLDataSample
-@property (nonatomic) MBLAccelerometerOrientation orientation;
+@interface MBLDataSample : NSObject
+@property (nonatomic, strong, readonly) NSDate *timestamp;
+@property (nonatomic, strong, readonly) NSData *data;
 @end

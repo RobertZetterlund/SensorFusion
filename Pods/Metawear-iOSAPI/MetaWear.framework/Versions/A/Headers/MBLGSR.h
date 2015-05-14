@@ -1,9 +1,9 @@
 /**
- * MBLTemperatureData.h
+ * MBLGSR.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 10/15/14.
- * Copyright 2014 MbientLab Inc. All rights reserved.
+ * Created by Stephen Schiffli on 4/16/15.
+ * Copyright 2015 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
  * granted under the terms of a software license agreement between the user who
@@ -33,9 +33,26 @@
  * contact MbientLab Inc, at www.mbientlab.com.
  */
 
-#import <MetaWear/MBLLogEntry.h>
+#import <MetaWear/MBLModule.h>
 
-NS_UNAVAILABLE // Please use MBLNumericData instead
-@interface MBLTemperatureData : MBLLogEntry
-@property (nonatomic, readonly) float temperature NS_UNAVAILABLE;
+/**
+ Interface to on-board GSR sensor
+ */
+@interface MBLGSR : MBLModule <NSCoding>
+
+/**
+ Array of MBLData objects. The index corresponds to the GSR channel
+ number, for example, channels[0] returns an MBLData corresponding
+ to channel 0, which can be used for perfoming single channel reads.
+ Callbacks will be provided an MBLNumericData object.
+ */
+@property (nonatomic, strong, readonly) NSArray *channels;
+
+/**
+ Perform automatic GSR calibration.  This should be called when
+ temperature changes, or, it can just be called periodically as 
+ it's low overhead.
+ */
+- (void)calibrate;
+
 @end

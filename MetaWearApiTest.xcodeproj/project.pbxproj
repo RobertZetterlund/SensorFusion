@@ -177,7 +177,6 @@
 				ORGANIZATIONNAME = MbientLab;
 				TargetAttributes = {
 					402D420A198843BE0011ADB1 = {
-						DevelopmentTeam = V9V8S5TL85;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -363,6 +362,7 @@
 				GCC_PREFIX_HEADER = "MetaWearApiTest/MetaWearApiTest-Prefix.pch";
 				INFOPLIST_FILE = "MetaWearApiTest/MetaWearApiTest-Info.plist";
 				PRODUCT_NAME = MetaWearApiTest;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -382,6 +382,7 @@
 				GCC_PREFIX_HEADER = "MetaWearApiTest/MetaWearApiTest-Prefix.pch";
 				INFOPLIST_FILE = "MetaWearApiTest/MetaWearApiTest-Info.plist";
 				PRODUCT_NAME = MetaWearApiTest;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
