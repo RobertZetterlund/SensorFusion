@@ -180,6 +180,18 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
 
 
 /**
+ Select threshold (in G's [0.0, 8.0]) for the shakeEvent.  This is used in conjuction 
+ with shakeWidth to determine when a shakeEvent will be generated.  Default value 0.5
+ */
+@property (nonatomic) float shakeThreshold;
+/**
+ Select time (in mSec) required for acceleration to be above shakeThreshold
+ before a shakeEvent will be generated.  Default value 200.0
+ */
+@property (nonatomic) float shakeWidth;
+
+
+/**
  Event representing a new accelerometer data sample complete with x, y,
  and z axis data.  This event will occur at sampleFrequency. Event 
  callbacks will be provided an MBLAccelerometerData object.
@@ -224,8 +236,9 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
  */
 @property (nonatomic, strong, readonly) MBLEvent *freeFallEvent;
 /**
- Event representing a shake.
- Event callbacks will be provided an empty MBLDataSample object
+ Event representing a shake.  The sensitvity can be tuned using 
+ shakeThreshold and shakeWidth properties.
+ Event callbacks will be provided an empty MBLDataSample object.
  */
 @property (nonatomic, strong, readonly) MBLEvent *shakeEvent;
 
