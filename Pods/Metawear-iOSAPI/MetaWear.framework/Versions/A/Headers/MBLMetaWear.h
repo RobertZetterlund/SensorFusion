@@ -38,6 +38,7 @@
 
 @class MBLTemperature;
 @class MBLAccelerometer;
+@class MBLGyro;
 @class MBLLED;
 @class MBLMechanicalSwitch;
 @class MBLGPIO;
@@ -112,6 +113,10 @@ typedef NS_ENUM(uint8_t, MBLTransmitPower) {
  MBLAccelerometer object contains all methods for interacting with the on-board accelerometer sensor
  */
 @property (nonatomic, strong, readonly) MBLAccelerometer *accelerometer;
+/**
+ MBLGyro object contains all methods for interacting with the on-board gyroscope sensor
+ */
+@property (nonatomic, strong, readonly) MBLGyro *gyro;
 /**
  MBLGPIO object contains all methods for interacting with the on-board pins
  */

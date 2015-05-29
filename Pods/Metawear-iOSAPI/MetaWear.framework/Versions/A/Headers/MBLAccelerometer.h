@@ -39,51 +39,6 @@
 #import <MetaWear/MBLEvent.h>
 #import <MetaWear/MBLModule.h>
 
-@class MBLMetaWear;
-
-/**
- Accelerometer sensitiviy ranges
- */
-typedef NS_ENUM(uint8_t, MBLAccelerometerRange) {
-    MBLAccelerometerRange2G = 0,
-    MBLAccelerometerRange4G = 1,
-    MBLAccelerometerRange8G = 2
-};
-
-/**
- Accelerometer sample frequencies
- */
-typedef NS_ENUM(uint8_t, MBLAccelerometerSampleFrequency) {
-    MBLAccelerometerSampleFrequency800Hz = 0,
-    MBLAccelerometerSampleFrequency400Hz = 1,
-    MBLAccelerometerSampleFrequency200Hz = 2,
-    MBLAccelerometerSampleFrequency100Hz = 3,
-    MBLAccelerometerSampleFrequency50Hz = 4,
-    MBLAccelerometerSampleFrequency12_5Hz = 5,
-    MBLAccelerometerSampleFrequency6_25Hz = 6,
-    MBLAccelerometerSampleFrequency1_56Hz = 7
-};
-
-/**
- Accelerometer sleep sample frequencies
- */
-typedef NS_ENUM(uint8_t, MBLAccelerometerSleepSampleFrequency) {
-    MBLAccelerometerSleepSampleFrequency50Hz = 0,
-    MBLAccelerometerSleepSampleFrequency12_5Hz = 1,
-    MBLAccelerometerSleepSampleFrequency6_25Hz = 2,
-    MBLAccelerometerSleepSampleFrequency1_56Hz = 3
-};
-
-/**
- Accelerometer power modes
- */
-typedef NS_ENUM(uint8_t, MBLAccelerometerPowerScheme) {
-    MBLAccelerometerPowerSchemeNormal = 0,
-    MBLAccelerometerPowerSchemeLowNoiseLowPower = 1,
-    MBLAccelerometerPowerSchemeHighResolution = 2,
-    MBLAccelerometerPowerSchemeLowerPower = 3,
-};
-
 /**
  Accelerometer axis
  */
@@ -94,107 +49,26 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerAxis) {
 };
 
 /**
- Accelerometer tap types
- */
-typedef NS_ENUM(uint8_t, MBLAccelerometerTapType) {
-    MBLAccelerometerTapTypeSingle = 0,
-    MBLAccelerometerTapTypeDouble = 1,
-    MBLAccelerometerTapTypeBoth = 2
-};
-
-/**
- Accelerometer tap types
- */
-typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
-    MBLAccelerometerCutoffFreqHigheset = 0,
-    MBLAccelerometerCutoffFreqHigh = 1,
-    MBLAccelerometerCutoffFreqMedium = 2,
-    MBLAccelerometerCutoffFreqLow = 3
-};
-
-/**
- Interface to on-board accelerometer
+ Interface to an abstract on-board accelerometer. If you need more advanced
+ features then upcast to the specific accelerometer on your board.
+ @see MBLAccelerometerMMA8452Q
  */
 @interface MBLAccelerometer : MBLModule <NSCoding>
 /**
- Maximum acceleration the accelerometer can report
+ The frequency, in hertz, for providing accelerometer samples to the event handlers.
+ 
+ @discussion  The value of this property is capped to minimum and maximum values; 
+ the maximum value is determined by the maximum frequency supported by the hardware.
+ If your app is sensitive to the intervals of acceleration data, it should always 
+ check the timestamps of the delivered MBLAccelerometerData instances to determine 
+ the true update interval.
  */
-@property (nonatomic) MBLAccelerometerRange fullScaleRange;
-/**
- High-pass filter enable; YES: Output data high-pass filtered, NO: No filter.
- With a high-pass filter, the frequencies below the cutoff (see highPassCutoffFreq),
- are removed. Only the high frequencies pass through.  This means that when
- enabled, you will only see changes in acceleration and not constant forces, like
- gravity.
- */
-@property (nonatomic) BOOL highPassFilter;
-/**
- High-pass filter cutoff frequency selection.  The higher the frequency the
- less you will see of slow acceleration changes.
- */
-@property (nonatomic) MBLAccelerometerCutoffFreq highPassCutoffFreq;
-/**
- Data rate selection
- */
-@property (nonatomic) MBLAccelerometerSampleFrequency sampleFrequency;
-/**
- Reduced noise reduced mode; NO: Normal Mode, YES: Reduced noise
- in low noise mode, the maximum signal that can be measured is ±4g. Note: Any
- thresholds set above 4g will not be reached.
- */
-@property (nonatomic) BOOL lowNoise;
-/**
- Fast Read mode; NO: Normal Mode, YES: Fast Read Mode F_READ bit selects between
- Normal and Fast Read mode. When selected, the auto-increment counter
- will skip over the LSB data bytes.
- */
-@property (nonatomic) BOOL fastReadMode;
-
-/**
- ACTIVE mode power scheme selection
- */
-@property (nonatomic) MBLAccelerometerPowerScheme activePowerScheme;
-
-/** Configures the Auto-WAKE sample frequency when the device is in 
- SLEEP Mode
- */
-@property (nonatomic) MBLAccelerometerSleepSampleFrequency sleepSampleFrequency;
-/**
- SLEEP mode power scheme selection
- */
-@property (nonatomic) MBLAccelerometerPowerScheme sleepPowerScheme;
-/**
- Auto-SLEEP; NO: Disabled, YES: Enabled
- */
-@property (nonatomic) BOOL autoSleep;
-
-/**
- Select the axis used for tap detection
- */
-@property (nonatomic) MBLAccelerometerAxis tapDetectionAxis;
-/**
- Select the type of taps to be registered. When MBLAccelerometerTapModeBoth is used,
- you will get two events on a double tap, one for the single and one for the double.
- */
-@property (nonatomic) MBLAccelerometerTapType tapType;
-
-
-/**
- Select threshold (in G's [0.0, 8.0]) for the shakeEvent.  This is used in conjuction 
- with shakeWidth to determine when a shakeEvent will be generated.  Default value 0.5
- */
-@property (nonatomic) float shakeThreshold;
-/**
- Select time (in mSec) required for acceleration to be above shakeThreshold
- before a shakeEvent will be generated.  Default value 200.0
- */
-@property (nonatomic) float shakeWidth;
-
+@property (nonatomic) float sampleFrequency;
 
 /**
  Event representing a new accelerometer data sample complete with x, y,
- and z axis data.  This event will occur at sampleFrequency. Event 
- callbacks will be provided an MBLAccelerometerData object.
+ and z axis data.  This event will occur at the neareast hardware value
+ to sampleFrequency. Event callbacks will be provided an MBLAccelerometerData object.
  */
 @property (nonatomic, strong, readonly) MBLEvent *dataReadyEvent;
 /**
@@ -220,42 +94,5 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
  just an RMS value. Event callbacks will be provided an MBLRMSAccelerometerData object
  */
 @property (nonatomic, strong, readonly) MBLEvent *rmsDataReadyEvent;
-/**
- Event representing a tap (single, double, or both based on tapType) on the tapDetectionAxis.
- Event callbacks will be provided an empty MBLDataSample object
- */
-@property (nonatomic, strong, readonly) MBLEvent *tapEvent;
-/**
- Event representing an orientation change.
- Event callbacks will be provided an MBLOrientationData object
- */
-@property (nonatomic, strong, readonly) MBLEvent *orientationEvent;
-/**
- Event representing free fall, event occurs every 100mSec while the device is in free fall.
- Event callbacks will be provided an empty MBLDataSample object
- */
-@property (nonatomic, strong, readonly) MBLEvent *freeFallEvent;
-/**
- Event representing a shake.  The sensitvity can be tuned using 
- shakeThreshold and shakeWidth properties.
- Event callbacks will be provided an empty MBLDataSample object.
- */
-@property (nonatomic, strong, readonly) MBLEvent *shakeEvent;
-
-
-///----------------------------------
-/// @name Deprecated Methods
-///----------------------------------
-
-/**
- * @deprecated use [dataReadyEvent startNotificationsWithHandler] instead
- * @see [dataReadyEvent startNotificationsWithHandler]
- */
-- (void)startAccelerometerUpdatesWithHandler:(MBLAccelerometerHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [dataReadyEvent startNotificationsWithHandler] instead");
-/**
- * @deprecated use [dataReadyEvent stopNotifications] instead
- * @see [dataReadyEvent stopNotifications]
- */
-- (void)stopAccelerometerUpdates DEPRECATED_MSG_ATTRIBUTE("Use [dataReadyEvent stopNotifications] instead");
 
 @end

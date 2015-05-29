@@ -34,7 +34,9 @@
  */
 
 #import <MetaWear/MBLAccelerometer.h>
+#import <MetaWear/MBLAccelerometerBMI160.h>
 #import <MetaWear/MBLAccelerometerData.h>
+#import <MetaWear/MBLAccelerometerMMA8452Q.h>
 #import <MetaWear/MBLANCS.h>
 #import <MetaWear/MBLANCSEventData.h>
 #import <MetaWear/MBLBarometer.h>
@@ -48,6 +50,9 @@
 #import <MetaWear/MBLGPIO.h>
 #import <MetaWear/MBLGPIOPin.h>
 #import <MetaWear/MBLGSR.h>
+#import <MetaWear/MBLGyro.h>
+#import <MetaWear/MBLGyroBMI160.h>
+#import <MetaWear/MBLGyroData.h>
 #import <MetaWear/MBLHapticBuzzer.h>
 #import <MetaWear/MBLI2C.h>
 #import <MetaWear/MBLI2CData.h>

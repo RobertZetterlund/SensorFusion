@@ -165,6 +165,32 @@
                 hud.labelText = error.localizedDescription;
                 [hud hide:YES afterDelay:2];
             } else {
+                // Device specific setup
+                if ([self.device.accelerometer isKindOfClass:[MBLAccelerometerMMA8452Q class]]) {
+                    self.accelerometerMMA8452Q = (MBLAccelerometerMMA8452Q *)self.device.accelerometer;
+                    self.accelerometerBMI160 = nil;
+                } else if ([self.device.accelerometer isKindOfClass:[MBLAccelerometerBMI160 class]]) {
+                    self.accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
+                    self.accelerometerMMA8452Q = nil;
+                }
+                if (self.accelerometerBMI160) {
+                    [self.accelerometerScale setEnabled:NO];
+                    [self.sampleFrequency setEnabled:NO];
+                    [self.highPassFilterSwitch setEnabled:NO];
+                    [self.hpfCutoffFreq setEnabled:NO];
+                    [self.lowNoiseSwitch setEnabled:NO];
+                    [self.activePowerScheme setEnabled:NO];
+                    [self.autoSleepSwitch setEnabled:NO];
+                    [self.sleepSampleFrequency setEnabled:NO];
+                    [self.sleepPowerScheme setEnabled:NO];
+                    [self.tapDetectionAxis setEnabled:NO];
+                    [self.tapDetectionType setEnabled:NO];
+                    
+                    [self.startOrientation setEnabled:NO];
+                    [self.startShake setEnabled:NO];
+                    [self.startTap setEnabled:NO];
+                }
+                
                 hud.labelText = @"Connected!";
                 [hud hide:YES afterDelay:0.5];
             }
@@ -381,25 +407,32 @@
 
 - (void)updateAccelerometerSettings
 {
-    if (self.accelerometerScale.selectedSegmentIndex == 0) {
-        self.accelerometerGraph.fullScale = 2;
-    } else if (self.accelerometerScale.selectedSegmentIndex == 1) {
-        self.accelerometerGraph.fullScale = 4;
-    } else {
-        self.accelerometerGraph.fullScale = 8;
+    if (self.accelerometerMMA8452Q) {
+        if (self.accelerometerScale.selectedSegmentIndex == 0) {
+            self.accelerometerGraph.fullScale = 2;
+        } else if (self.accelerometerScale.selectedSegmentIndex == 1) {
+            self.accelerometerGraph.fullScale = 4;
+        } else {
+            self.accelerometerGraph.fullScale = 8;
+        }
+
+        self.accelerometerMMA8452Q.fullScaleRange = (int)self.accelerometerScale.selectedSegmentIndex;
+        self.accelerometerMMA8452Q.sampleFrequency = [[self.sampleFrequency titleForSegmentAtIndex:self.sampleFrequency.selectedSegmentIndex] floatValue];
+        self.accelerometerMMA8452Q.highPassFilter = self.highPassFilterSwitch.on;
+        self.accelerometerMMA8452Q.highPassCutoffFreq = self.hpfCutoffFreq.selectedSegmentIndex;
+        self.accelerometerMMA8452Q.lowNoise = self.lowNoiseSwitch.on;
+        self.accelerometerMMA8452Q.activePowerScheme = (int)self.activePowerScheme.selectedSegmentIndex;
+        self.accelerometerMMA8452Q.autoSleep = self.autoSleepSwitch.on;
+        self.accelerometerMMA8452Q.sleepSampleFrequency = (int)self.sleepSampleFrequency.selectedSegmentIndex;
+        self.accelerometerMMA8452Q.sleepPowerScheme = (int)self.sleepPowerScheme.selectedSegmentIndex;
+        self.accelerometerMMA8452Q.tapDetectionAxis = (int)self.tapDetectionAxis.selectedSegmentIndex;
+        self.accelerometerMMA8452Q.tapType = (int)self.tapDetectionType.selectedSegmentIndex;
+    } else if (self.accelerometerBMI160) {
+        // TODO: It is fixed at +-16G's for now
+        self.accelerometerGraph.fullScale = 16;
+        // TODO: Fixed sample frequency of 100Hz
+        self.accelerometerBMI160.sampleFrequency = 100;
     }
-    
-    self.device.accelerometer.fullScaleRange = (int)self.accelerometerScale.selectedSegmentIndex;
-    self.device.accelerometer.sampleFrequency = (int)self.sampleFrequency.selectedSegmentIndex;
-    self.device.accelerometer.highPassFilter = self.highPassFilterSwitch.on;
-    self.device.accelerometer.highPassCutoffFreq = self.hpfCutoffFreq.selectedSegmentIndex;
-    self.device.accelerometer.lowNoise = self.lowNoiseSwitch.on;
-    self.device.accelerometer.activePowerScheme = (int)self.activePowerScheme.selectedSegmentIndex;
-    self.device.accelerometer.autoSleep = self.autoSleepSwitch.on;
-    self.device.accelerometer.sleepSampleFrequency = (int)self.sleepSampleFrequency.selectedSegmentIndex;
-    self.device.accelerometer.sleepPowerScheme = (int)self.sleepPowerScheme.selectedSegmentIndex;
-    self.device.accelerometer.tapDetectionAxis = (int)self.tapDetectionAxis.selectedSegmentIndex;
-    self.device.accelerometer.tapType = (int)self.tapDetectionType.selectedSegmentIndex;
 }
 
 - (IBAction)startAccelerationPressed:(id)sender
@@ -538,7 +571,7 @@
     [self.stopTap setEnabled:YES];
     
     [self updateAccelerometerSettings];
-    [self.device.accelerometer.tapEvent startNotificationsWithHandler:^(id obj, NSError *error) {
+    [self.accelerometerMMA8452Q.tapEvent startNotificationsWithHandler:^(id obj, NSError *error) {
         self.tapLabel.text = [NSString stringWithFormat:@"Tap Count: %d", ++self.tapCount];
     }];
 }
@@ -548,7 +581,7 @@
     [self.startTap setEnabled:YES];
     [self.stopTap setEnabled:NO];
     
-    [self.device.accelerometer.tapEvent stopNotifications];
+    [self.accelerometerMMA8452Q.tapEvent stopNotifications];
     self.tapCount = 0;
     self.tapLabel.text = @"Tap Count: 0";
 }
@@ -559,7 +592,7 @@
     [self.stopShake setEnabled:YES];
     
     [self updateAccelerometerSettings];
-    [self.device.accelerometer.shakeEvent startNotificationsWithHandler:^(id obj, NSError *error) {
+    [self.accelerometerMMA8452Q.shakeEvent startNotificationsWithHandler:^(id obj, NSError *error) {
         self.shakeLabel.text = [NSString stringWithFormat:@"Shakes: %d", ++self.shakeCount];
     }];
 }
@@ -569,7 +602,7 @@
     [self.startShake setEnabled:YES];
     [self.stopShake setEnabled:NO];
     
-    [self.device.accelerometer.shakeEvent stopNotifications];
+    [self.accelerometerMMA8452Q.shakeEvent stopNotifications];
     self.shakeCount = 0;
     self.shakeLabel.text = @"Shakes: 0";
 }
@@ -580,7 +613,7 @@
     [self.stopOrientation setEnabled:YES];
     
     [self updateAccelerometerSettings];
-    [self.device.accelerometer.orientationEvent startNotificationsWithHandler:^(id obj, NSError *error) {
+    [self.accelerometerMMA8452Q.orientationEvent startNotificationsWithHandler:^(id obj, NSError *error) {
         MBLOrientationData *data = obj;
         switch (data.orientation) {
             case MBLAccelerometerOrientationPortrait:
@@ -604,7 +637,7 @@
     [self.startOrientation setEnabled:YES];
     [self.stopOrientation setEnabled:NO];
     
-    [self.device.accelerometer.orientationEvent stopNotifications];
+    [self.accelerometerMMA8452Q.orientationEvent stopNotifications];
     self.orientationLabel.text = @"XXXXXXXXXXXXXX";
 }
 
