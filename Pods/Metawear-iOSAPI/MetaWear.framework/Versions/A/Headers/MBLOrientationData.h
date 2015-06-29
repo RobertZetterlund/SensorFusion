@@ -46,5 +46,7 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerOrientation) {
  Container for orientation data
  */
 @interface MBLOrientationData : MBLDataSample
+
 @property (nonatomic) MBLAccelerometerOrientation orientation;
+
 @end

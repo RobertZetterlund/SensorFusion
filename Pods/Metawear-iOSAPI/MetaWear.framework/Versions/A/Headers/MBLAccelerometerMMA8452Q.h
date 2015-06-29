@@ -65,16 +65,7 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerPowerScheme) {
 };
 
 /**
- Accelerometer tap types
- */
-typedef NS_ENUM(uint8_t, MBLAccelerometerTapType) {
-    MBLAccelerometerTapTypeSingle = 0,
-    MBLAccelerometerTapTypeDouble = 1,
-    MBLAccelerometerTapTypeBoth = 2
-};
-
-/**
- Accelerometer tap types
+ Accelerometer high-pass filter cutoff frequency types
  */
 typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
     MBLAccelerometerCutoffFreqHigheset = 0,
@@ -135,6 +126,7 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
  */
 @property (nonatomic) BOOL autoSleep;
 
+
 /**
  Select the axis used for tap detection
  */
@@ -144,6 +136,12 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
  you will get two events on a double tap, one for the single and one for the double.
  */
 @property (nonatomic) MBLAccelerometerTapType tapType;
+/**
+ Event representing a tap (single, double, or both based on tapType) on the tapDetectionAxis.
+ Event callbacks will be provided an empty MBLDataSample object
+ */
+@property (nonatomic, strong, readonly) MBLEvent *tapEvent;
+
 
 /**
  Select threshold (in G's [0.0, 8.0]) for the shakeEvent.  This is used in conjuction
@@ -155,28 +153,37 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
  before a shakeEvent will be generated.  Default value 200.0
  */
 @property (nonatomic) float shakeWidth;
-
-
-/**
- Event representing a tap (single, double, or both based on tapType) on the tapDetectionAxis.
- Event callbacks will be provided an empty MBLDataSample object
- */
-@property (nonatomic, strong, readonly) MBLEvent *tapEvent;
-/**
- Event representing an orientation change.
- Event callbacks will be provided an MBLOrientationData object
- */
-@property (nonatomic, strong, readonly) MBLEvent *orientationEvent;
-/**
- Event representing free fall, event occurs every 100mSec while the device is in free fall.
- Event callbacks will be provided an empty MBLDataSample object
- */
-@property (nonatomic, strong, readonly) MBLEvent *freeFallEvent;
 /**
  Event representing a shake.  The sensitvity can be tuned using
  shakeThreshold and shakeWidth properties.
  Event callbacks will be provided an empty MBLDataSample object.
  */
 @property (nonatomic, strong, readonly) MBLEvent *shakeEvent;
+
+
+/**
+ Select threshold (in G's [0.0, 8.0]) for the freeFallEvent.  This is used in conjuction
+ with freeFallWidth to determine when a freeFallEvent will be generated.  All accelerometer
+ axis' must stay below freeFallThreshold for freeFallWidth mili-seconds.  Default value 0.2
+ */
+@property (nonatomic) float freeFallThreshold;
+/**
+ Select time (in mSec) required for all accelerometer axis' to be above freeFallThreshold
+ before a freeFallEvent will be generated.  Default value 100.0
+ */
+@property (nonatomic) float freeFallWidth;
+/**
+ Event representing free fall, event occurs every freeFallWidth ms while the device
+ is in free fall.
+ Event callbacks will be provided an empty MBLDataSample object
+ */
+@property (nonatomic, strong, readonly) MBLEvent *freeFallEvent;
+
+
+/**
+ Event representing an orientation change.
+ Event callbacks will be provided an MBLOrientationData object
+ */
+@property (nonatomic, strong, readonly) MBLEvent *orientationEvent;
 
 @end

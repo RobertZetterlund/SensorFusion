@@ -34,7 +34,26 @@
  */
 
 #import <MetaWear/MBLAccelerometer.h>
+#import <MetaWear/bmi160.h>
 
+/**
+ Accelerometer sensitiviy ranges
+ */
+typedef NS_ENUM(uint8_t, MBLAccelerometerBMI160Range) {
+    MBLAccelerometerBMI160Range2G = BMI160_ACCEL_RANGE_2G,
+    MBLAccelerometerBMI160Range4G = BMI160_ACCEL_RANGE_4G,
+    MBLAccelerometerBMI160Range8G = BMI160_ACCEL_RANGE_8G,
+    MBLAccelerometerBMI160Range16G = BMI160_ACCEL_RANGE_16G,
+};
+
+/**
+ Interface to on-board accelerometer
+ */
 @interface MBLAccelerometerBMI160 : MBLAccelerometer <NSCoding>
+
+/**
+ Maximum acceleration the accelerometer can report
+ */
+@property (nonatomic) MBLAccelerometerBMI160Range fullScaleRange;
 
 @end

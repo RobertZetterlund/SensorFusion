@@ -56,5 +56,9 @@ Serial Number string
  Firmware Revision string
  */
 @property (nonatomic, strong) NSString *firmwareRevision;
+/**
+ Model Number string
+ */
+@property (nonatomic, strong) NSString *modelNumber;
 
 @end

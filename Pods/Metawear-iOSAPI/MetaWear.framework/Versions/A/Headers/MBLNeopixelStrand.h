@@ -49,6 +49,15 @@
 - (void)setPixel:(uint8_t)pixel color:(UIColor *)color;
 
 /**
+ This sets each pixel in the strand so that it looks like a rainbow.
+ Very cool for a quick demo!
+ @param hold If YES, then we hold the strand duing update so that
+ it instantly takes the rainbow colors, if NO then you will see each
+ pixel update individually
+ */
+- (void)setRainbowWithHold:(BOOL)hold;
+
+/**
  Clear Neopixel strand.
  @param start Pixel index to start clearing from
  @param end Pixel index to clear to, inclusive
