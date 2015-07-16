@@ -36,16 +36,9 @@
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLEvent.h>
 #import <MetaWear/MBLModule.h>
+#import <MetaWear/MBLExternalThermistor.h>
 
 @class MBLMetaWear;
-
-/**
- Temperature module sensor souce
- */
-typedef NS_ENUM(uint8_t, MBLTemperatureSource) {
-    MBLTemperatureSourceInternal,
-    MBLTemperatureSourceThermistor
-};
 
 /**
  Interface to the on-chip and external thermistor temperature sensors
@@ -53,27 +46,41 @@ typedef NS_ENUM(uint8_t, MBLTemperatureSource) {
 @interface MBLTemperature : MBLModule <NSCoding>
 
 /**
- Choose where temperature readings are taken from, note that MBLTemperatureSourceThermistor
- requires installing an external thermistor and setting the thermistorReadPin
- and thermistorEnablePin properties
- */
-@property (nonatomic) MBLTemperatureSource source;
-/**
- Thermistor output pin number
- */
-@property (nonatomic) uint8_t thermistorReadPin;
-/**
- Thermistor enable pin number
- */
-@property (nonatomic) uint8_t thermistorEnablePin;
-
-
-/**
- Data representing the current temperate. Event callbacks will be 
- provided an MBLNumericData object whose float value will be 
+ Array of MBLData (or derived class) objects corresponding to the different
+ temperature sensors available on this particular MetaWear. Event callbacks
+ will be provided an MBLNumericData object whose float value will be
  degrees Celsius.
  */
-@property (nonatomic, strong, readonly) MBLData *temperatureValue;
+@property (nonatomic, strong, readonly) NSArray *channels;
+
+///----------------------------------
+/// @name Convenient Assessors - also available via channels[N]
+///----------------------------------
+
+/**
+ Data representing the current temperate of the internal (on-die) sensor.
+ This is guaranteed to always be available (equal to channels[0]).
+ Event callbacks will be provided an MBLNumericData object whose float 
+ value will be degrees Celsius.
+ */
+@property (nonatomic, strong, readonly) MBLData *internal;
+
+/**
+ Data representing the current temperate of the external thermistor, if
+ equiped. This is a thermistor that you connect manually, so you need
+ to setup readPin and enablePin on the MBLExternalThermistor object.
+ Event callbacks will be provided an MBLNumericData object whose float
+ value will be degrees Celsius.
+ */
+@property (nonatomic, strong, readonly) MBLExternalThermistor *externalThermistor;
+
+/**
+ Data representing the current temperate of the on-board thermistor, if
+ equiped. Event callbacks will be provided an MBLNumericData object whose
+ float value will be degrees Celsius.
+ */
+@property (nonatomic, strong, readonly) MBLData *onboardThermistor;
+
 
 
 ///----------------------------------
@@ -88,6 +95,34 @@ typedef NS_ENUM(uint8_t, MBLTemperatureUnit) {
     MBLTemperatureUnitCelsius DEPRECATED_MSG_ATTRIBUTE("To simpliy use with filters, all temperature values will be in Celsius"),
     MBLTemperatureUnitFahrenheit DEPRECATED_MSG_ATTRIBUTE("To simpliy use with filters, all temperature values will be in Celsius")
 };
+
+/**
+ @deprecated use internal or externalThermistor properties
+ */
+DEPRECATED_MSG_ATTRIBUTE("Use internal or externalThermistor properties")
+typedef NS_ENUM(uint8_t, MBLTemperatureSource) {
+    MBLTemperatureSourceInternal DEPRECATED_MSG_ATTRIBUTE("Use internal or externalThermistor properties"),
+    MBLTemperatureSourceThermistor DEPRECATED_MSG_ATTRIBUTE("Use internal or externalThermistor properties")
+};
+
+
+/**
+ @deprecated use internal or externalThermistor properties
+ */
+@property (nonatomic) MBLTemperatureSource source DEPRECATED_MSG_ATTRIBUTE("Use internal or externalThermistor properties");
+/**
+ @deprecated use externalThermistor.readPin
+ */
+@property (nonatomic) uint8_t thermistorReadPin DEPRECATED_MSG_ATTRIBUTE("Use externalThermistor.readPin");
+/**
+ @deprecated use externalThermistor.enablePin
+ */
+@property (nonatomic) uint8_t thermistorEnablePin DEPRECATED_MSG_ATTRIBUTE("Use externalThermistor.enablePin");
+
+/**
+ @deprecated use internal or externalThermistor properties
+ */
+@property (nonatomic, strong, readonly) MBLData *temperatureValue DEPRECATED_MSG_ATTRIBUTE("Use internal or externalThermistor properties");
 
 /**
  @deprecated To simpliy use with filters, all temperature values will be in Celsius

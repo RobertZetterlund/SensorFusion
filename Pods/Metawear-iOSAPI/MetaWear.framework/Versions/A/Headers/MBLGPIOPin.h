@@ -77,6 +77,20 @@ typedef NS_ENUM(uint8_t, MBLPinChangeType) {
  */
 @property (nonatomic) MBLPinConfiguration configuration;
 
+/**
+ To save power, sensors connected to a GPIO pin may optionally have an
+ "enable" switch connected to another pin.  Pulling up or down this
+ enable pin can programmatically turn off the sensor to save power.
+ By setting this value we will automatically enable the sensor just 
+ long enought to get a sample.
+ */
+@property (nonatomic) NSNumber *enablePin;
+/**
+ Used when enablePin is set, YES means when enablePin is low the sensor
+ will be on, NO means when enablePin is high the sensor will be on.
+ */
+@property (nonatomic) BOOL enablePinActiveLow;
+
 
 /**
  Event representing a change in the pin's digital value, you can choose

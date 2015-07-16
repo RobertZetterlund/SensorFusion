@@ -7,196 +7,213 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		51F39E5F3F003E25EED54FEC /* Pods-MetaWearApiTest-MBProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E646087DECCE7FEB62A8A79 /* Pods-MetaWearApiTest-MBProgressHUD-dummy.m */; };
-		5393AAF844B85ABC28D22242 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 628EA948B66009B9FE32D240 /* CoreGraphics.framework */; };
-		6091E9AEC6ED0ECAFBA2C5E5 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F528021D3CE1866323ABC3E /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		7146C6CBC0FA081880525A84 /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B11BD70F72BD678A809BEB3 /* MBProgressHUD.h */; };
-		8E40CC9EB40669335E4CDA0F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA502B4C78968832F24E9C3E /* Foundation.framework */; };
-		E6CEA378FAF08A970992EA6F /* Pods-MetaWearApiTest-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 12C586A31A11E50F3EF78DA5 /* Pods-MetaWearApiTest-dummy.m */; };
-		F077AC7DEAA64DB20CBD2890 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA502B4C78968832F24E9C3E /* Foundation.framework */; };
+		08E42EFA5100582DF7048DE4 /* Pods-MetaWearApiTest-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E13E467FADFEA1E785145A /* Pods-MetaWearApiTest-dummy.m */; };
+		2A7420674F0FDE7E8C5E407C /* Pods-MetaWearApiTest-MBProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D22891E2AF9647F499753C8 /* Pods-MetaWearApiTest-MBProgressHUD-dummy.m */; };
+		431BFDB3725831299530995B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB266F897EAF1F53754F6A02 /* Foundation.framework */; };
+		459E386490AA759BAEE798FB /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EC854BBE6F3375BD7ABF5E14 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		6EABF6DAD8083CA4B96172B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB266F897EAF1F53754F6A02 /* Foundation.framework */; };
+		E555FAD226357EABE7598484 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC721EB7C6E5D2072A70AE3C /* CoreGraphics.framework */; };
+		F3E5A19763ECB8D4859BEBFF /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BAF044264F73752E19ACC66 /* MBProgressHUD.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		16B308449B9DEDBC99D46DBC /* PBXContainerItemProxy */ = {
+		40412F74E897652F887F4B34 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = BFB2A06E5EFA810C269496F4 /* Project object */;
+			containerPortal = 7D57FA800C349E52873451A5 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 273A49A670D34A7ADD3B8C2B;
+			remoteGlobalIDString = 457CC5BABE07C804A29DB392;
 			remoteInfo = "Pods-MetaWearApiTest-MBProgressHUD";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		04791C5828AC90E3AEB55E81 /* Pods-MetaWearApiTest-MBProgressHUD-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MetaWearApiTest-MBProgressHUD-Private.xcconfig"; sourceTree = "<group>"; };
-		0F528021D3CE1866323ABC3E /* MBProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		12C586A31A11E50F3EF78DA5 /* Pods-MetaWearApiTest-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MetaWearApiTest-dummy.m"; sourceTree = "<group>"; };
-		1E4DF54AC3706B1EFB694452 /* Pods-MetaWearApiTest-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MetaWearApiTest-environment.h"; sourceTree = "<group>"; };
-		247FDF612A910C1301599934 /* Pods-MetaWearApiTest-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MetaWearApiTest-acknowledgements.markdown"; sourceTree = "<group>"; };
-		2DD3DB535D72E4A99A5D098C /* Pods-MetaWearApiTest-MBProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MetaWearApiTest-MBProgressHUD-prefix.pch"; sourceTree = "<group>"; };
-		5B11BD70F72BD678A809BEB3 /* MBProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		5E646087DECCE7FEB62A8A79 /* Pods-MetaWearApiTest-MBProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MetaWearApiTest-MBProgressHUD-dummy.m"; sourceTree = "<group>"; };
-		628EA948B66009B9FE32D240 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		6C5746F5F34C36A1C1A535E8 /* Pods-MetaWearApiTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MetaWearApiTest.debug.xcconfig"; sourceTree = "<group>"; };
-		72FA898C9347190B2340A614 /* Pods-MetaWearApiTest-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MetaWearApiTest-resources.sh"; sourceTree = "<group>"; };
-		89C2E85A2222C896FFC21637 /* MetaWear.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MetaWear.framework; sourceTree = "<group>"; };
-		998F4B5181D11B9913E1C43B /* Pods-MetaWearApiTest-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MetaWearApiTest-acknowledgements.plist"; sourceTree = "<group>"; };
-		AFC55DB38355E6E852A165C4 /* libPods-MetaWearApiTest-MBProgressHUD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MetaWearApiTest-MBProgressHUD.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA023D75895EDB5FB3688F2A /* Pods-MetaWearApiTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MetaWearApiTest.release.xcconfig"; sourceTree = "<group>"; };
-		C95E81DB0229005C9E42A60D /* libPods-MetaWearApiTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MetaWearApiTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA502B4C78968832F24E9C3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		F4B10E9299BBA1FF08740A1C /* Pods-MetaWearApiTest-MBProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MetaWearApiTest-MBProgressHUD.xcconfig"; sourceTree = "<group>"; };
-		F7C4808D18136BA77DE8C79C /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0232B7E961E38AC7250DE693 /* Pods-MetaWearApiTest-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MetaWearApiTest-acknowledgements.plist"; sourceTree = "<group>"; };
+		1D720BF5B2AE211C05C85A16 /* Pods-MetaWearApiTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MetaWearApiTest.release.xcconfig"; sourceTree = "<group>"; };
+		43E13E467FADFEA1E785145A /* Pods-MetaWearApiTest-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MetaWearApiTest-dummy.m"; sourceTree = "<group>"; };
+		49DCDAAFEBE00BE54FC930CA /* MetaWear.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MetaWear.framework; sourceTree = "<group>"; };
+		4B1A814C38D8127410C668F9 /* libPods-MetaWearApiTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MetaWearApiTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BFF66A1964D47B2AB0EBD25 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		84C062E6EEBF9643B4DFFCE5 /* Pods-MetaWearApiTest-MBProgressHUD-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MetaWearApiTest-MBProgressHUD-Private.xcconfig"; sourceTree = "<group>"; };
+		953908DD5F329D187105B42B /* Pods-MetaWearApiTest-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MetaWearApiTest-environment.h"; sourceTree = "<group>"; };
+		9BAF044264F73752E19ACC66 /* MBProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		9D22891E2AF9647F499753C8 /* Pods-MetaWearApiTest-MBProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MetaWearApiTest-MBProgressHUD-dummy.m"; sourceTree = "<group>"; };
+		A502E61A3C769BD69968F9CA /* libPods-MetaWearApiTest-MBProgressHUD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MetaWearApiTest-MBProgressHUD.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABEE3DD0A4DB170B037092C6 /* Pods-MetaWearApiTest-MBProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MetaWearApiTest-MBProgressHUD.xcconfig"; sourceTree = "<group>"; };
+		AC721EB7C6E5D2072A70AE3C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		AF59A348E15AB568C72A1278 /* Pods-MetaWearApiTest-MBProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MetaWearApiTest-MBProgressHUD-prefix.pch"; sourceTree = "<group>"; };
+		BAE577A33F1155A4D67C0387 /* Pods-MetaWearApiTest-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MetaWearApiTest-acknowledgements.markdown"; sourceTree = "<group>"; };
+		D3BD968FF6C41E4AEACC993F /* Pods-MetaWearApiTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MetaWearApiTest.debug.xcconfig"; sourceTree = "<group>"; };
+		EB266F897EAF1F53754F6A02 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		EC854BBE6F3375BD7ABF5E14 /* MBProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		F91A49C6CBE6A48E3EDA549B /* Pods-MetaWearApiTest-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MetaWearApiTest-resources.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5827743D0981FAB5BF26BC72 /* Frameworks */ = {
+		54821593B8E4B404530C92DD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5393AAF844B85ABC28D22242 /* CoreGraphics.framework in Frameworks */,
-				F077AC7DEAA64DB20CBD2890 /* Foundation.framework in Frameworks */,
+				E555FAD226357EABE7598484 /* CoreGraphics.framework in Frameworks */,
+				431BFDB3725831299530995B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9652A0C924022AFDA313673F /* Frameworks */ = {
+		7758A1E9359F92D3B83684DE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E40CC9EB40669335E4CDA0F /* Foundation.framework in Frameworks */,
+				6EABF6DAD8083CA4B96172B8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1423982501007EF600F470AB /* Pods */ = {
+		0461A1F3ED5DF01D9B05AB28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D8670B000D740F5E18288128 /* MBProgressHUD */,
-				8DF9967F8E016164C792702C /* Metawear-iOSAPI */,
+				E22C12CD1FC4D1A1B8285E57 /* iOS */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2504D37F57DEE9E2C597DF18 = {
+		0AF0D3C4BE8BB66C974FDD5A /* Pods-MetaWearApiTest */ = {
 			isa = PBXGroup;
 			children = (
-				F7C4808D18136BA77DE8C79C /* Podfile */,
-				CF21A1828078E737CB4D44F6 /* Frameworks */,
-				1423982501007EF600F470AB /* Pods */,
-				29EC224271DC68C2C9F1655C /* Products */,
-				583E523F5C4A0CEA004749C5 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		29EC224271DC68C2C9F1655C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C95E81DB0229005C9E42A60D /* libPods-MetaWearApiTest.a */,
-				AFC55DB38355E6E852A165C4 /* libPods-MetaWearApiTest-MBProgressHUD.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		583E523F5C4A0CEA004749C5 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				947C9F73F9DF28426A548D7A /* Pods-MetaWearApiTest */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		8DF9967F8E016164C792702C /* Metawear-iOSAPI */ = {
-			isa = PBXGroup;
-			children = (
-				AE85C840CBB4FDB2E115DA61 /* Frameworks */,
-			);
-			path = "Metawear-iOSAPI";
-			sourceTree = "<group>";
-		};
-		947C9F73F9DF28426A548D7A /* Pods-MetaWearApiTest */ = {
-			isa = PBXGroup;
-			children = (
-				247FDF612A910C1301599934 /* Pods-MetaWearApiTest-acknowledgements.markdown */,
-				998F4B5181D11B9913E1C43B /* Pods-MetaWearApiTest-acknowledgements.plist */,
-				12C586A31A11E50F3EF78DA5 /* Pods-MetaWearApiTest-dummy.m */,
-				1E4DF54AC3706B1EFB694452 /* Pods-MetaWearApiTest-environment.h */,
-				72FA898C9347190B2340A614 /* Pods-MetaWearApiTest-resources.sh */,
-				6C5746F5F34C36A1C1A535E8 /* Pods-MetaWearApiTest.debug.xcconfig */,
-				BA023D75895EDB5FB3688F2A /* Pods-MetaWearApiTest.release.xcconfig */,
+				BAE577A33F1155A4D67C0387 /* Pods-MetaWearApiTest-acknowledgements.markdown */,
+				0232B7E961E38AC7250DE693 /* Pods-MetaWearApiTest-acknowledgements.plist */,
+				43E13E467FADFEA1E785145A /* Pods-MetaWearApiTest-dummy.m */,
+				953908DD5F329D187105B42B /* Pods-MetaWearApiTest-environment.h */,
+				F91A49C6CBE6A48E3EDA549B /* Pods-MetaWearApiTest-resources.sh */,
+				D3BD968FF6C41E4AEACC993F /* Pods-MetaWearApiTest.debug.xcconfig */,
+				1D720BF5B2AE211C05C85A16 /* Pods-MetaWearApiTest.release.xcconfig */,
 			);
 			name = "Pods-MetaWearApiTest";
 			path = "Target Support Files/Pods-MetaWearApiTest";
 			sourceTree = "<group>";
 		};
-		AE85C840CBB4FDB2E115DA61 /* Frameworks */ = {
+		12FF85F2B0612FB0A6265CB7 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				89C2E85A2222C896FFC21637 /* MetaWear.framework */,
+				0AF0D3C4BE8BB66C974FDD5A /* Pods-MetaWearApiTest */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		1FB1091226F05104F1AB0D63 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				49DCDAAFEBE00BE54FC930CA /* MetaWear.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B97BCC8C8351C93789909385 /* Support Files */ = {
+		3D0663F7E43AA10AA5BCD35E /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				F4B10E9299BBA1FF08740A1C /* Pods-MetaWearApiTest-MBProgressHUD.xcconfig */,
-				04791C5828AC90E3AEB55E81 /* Pods-MetaWearApiTest-MBProgressHUD-Private.xcconfig */,
-				5E646087DECCE7FEB62A8A79 /* Pods-MetaWearApiTest-MBProgressHUD-dummy.m */,
-				2DD3DB535D72E4A99A5D098C /* Pods-MetaWearApiTest-MBProgressHUD-prefix.pch */,
+				9BAF044264F73752E19ACC66 /* MBProgressHUD.h */,
+				EC854BBE6F3375BD7ABF5E14 /* MBProgressHUD.m */,
+				5B3963AB3A4408062DED90BB /* Support Files */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		5B3963AB3A4408062DED90BB /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				ABEE3DD0A4DB170B037092C6 /* Pods-MetaWearApiTest-MBProgressHUD.xcconfig */,
+				84C062E6EEBF9643B4DFFCE5 /* Pods-MetaWearApiTest-MBProgressHUD-Private.xcconfig */,
+				9D22891E2AF9647F499753C8 /* Pods-MetaWearApiTest-MBProgressHUD-dummy.m */,
+				AF59A348E15AB568C72A1278 /* Pods-MetaWearApiTest-MBProgressHUD-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Pods-MetaWearApiTest-MBProgressHUD";
 			sourceTree = "<group>";
 		};
-		CF21A1828078E737CB4D44F6 /* Frameworks */ = {
+		A5432829D7B320BC8279235E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EF8A19B2F4E1BD1B56510343 /* iOS */,
+				4B1A814C38D8127410C668F9 /* libPods-MetaWearApiTest.a */,
+				A502E61A3C769BD69968F9CA /* libPods-MetaWearApiTest-MBProgressHUD.a */,
 			);
-			name = Frameworks;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		D8670B000D740F5E18288128 /* MBProgressHUD */ = {
+		B857FE2BA1E6B8F1E37C6057 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5B11BD70F72BD678A809BEB3 /* MBProgressHUD.h */,
-				0F528021D3CE1866323ABC3E /* MBProgressHUD.m */,
-				B97BCC8C8351C93789909385 /* Support Files */,
+				3D0663F7E43AA10AA5BCD35E /* MBProgressHUD */,
+				D1BA09EB2CE0B4244A43B28B /* Metawear-iOSAPI */,
 			);
-			path = MBProgressHUD;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		EF8A19B2F4E1BD1B56510343 /* iOS */ = {
+		D1BA09EB2CE0B4244A43B28B /* Metawear-iOSAPI */ = {
 			isa = PBXGroup;
 			children = (
-				628EA948B66009B9FE32D240 /* CoreGraphics.framework */,
-				EA502B4C78968832F24E9C3E /* Foundation.framework */,
+				1FB1091226F05104F1AB0D63 /* Frameworks */,
+			);
+			path = "Metawear-iOSAPI";
+			sourceTree = "<group>";
+		};
+		E22C12CD1FC4D1A1B8285E57 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				AC721EB7C6E5D2072A70AE3C /* CoreGraphics.framework */,
+				EB266F897EAF1F53754F6A02 /* Foundation.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		F5639A253BDF3C614466977E = {
+			isa = PBXGroup;
+			children = (
+				4BFF66A1964D47B2AB0EBD25 /* Podfile */,
+				0461A1F3ED5DF01D9B05AB28 /* Frameworks */,
+				B857FE2BA1E6B8F1E37C6057 /* Pods */,
+				A5432829D7B320BC8279235E /* Products */,
+				12FF85F2B0612FB0A6265CB7 /* Targets Support Files */,
+			);
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		8FC59DAD4C647E93FD123E74 /* Headers */ = {
+		F25D060F6642FB31661B6106 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7146C6CBC0FA081880525A84 /* MBProgressHUD.h in Headers */,
+				F3E5A19763ECB8D4859BEBFF /* MBProgressHUD.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		273A49A670D34A7ADD3B8C2B /* Pods-MetaWearApiTest-MBProgressHUD */ = {
+		1814EE43628E807A6E7DCC58 /* Pods-MetaWearApiTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DD86ED215C73125C197A1E0F /* Build configuration list for PBXNativeTarget "Pods-MetaWearApiTest-MBProgressHUD" */;
+			buildConfigurationList = 2ED25B80C8441CAFC3832799 /* Build configuration list for PBXNativeTarget "Pods-MetaWearApiTest" */;
 			buildPhases = (
-				A3B1178753DC10547585BE02 /* Sources */,
-				5827743D0981FAB5BF26BC72 /* Frameworks */,
-				8FC59DAD4C647E93FD123E74 /* Headers */,
+				CF8DCCBBDAC1BFA4A0AD1538 /* Sources */,
+				7758A1E9359F92D3B83684DE /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BCB0C2875F556C8A62A5D9D4 /* PBXTargetDependency */,
+			);
+			name = "Pods-MetaWearApiTest";
+			productName = "Pods-MetaWearApiTest";
+			productReference = 4B1A814C38D8127410C668F9 /* libPods-MetaWearApiTest.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		457CC5BABE07C804A29DB392 /* Pods-MetaWearApiTest-MBProgressHUD */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 192321EFF21A327B6DC299C5 /* Build configuration list for PBXNativeTarget "Pods-MetaWearApiTest-MBProgressHUD" */;
+			buildPhases = (
+				2A13939F102E72F165BCB836 /* Sources */,
+				54821593B8E4B404530C92DD /* Frameworks */,
+				F25D060F6642FB31661B6106 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -204,83 +221,66 @@
 			);
 			name = "Pods-MetaWearApiTest-MBProgressHUD";
 			productName = "Pods-MetaWearApiTest-MBProgressHUD";
-			productReference = AFC55DB38355E6E852A165C4 /* libPods-MetaWearApiTest-MBProgressHUD.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		455E0ED643B899B5A51C0ED9 /* Pods-MetaWearApiTest */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F221E768D303A8D329AD51BA /* Build configuration list for PBXNativeTarget "Pods-MetaWearApiTest" */;
-			buildPhases = (
-				B860B3D6F05A8AC8E8D327BC /* Sources */,
-				9652A0C924022AFDA313673F /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FE16220B88FFF7AE4A5E52BF /* PBXTargetDependency */,
-			);
-			name = "Pods-MetaWearApiTest";
-			productName = "Pods-MetaWearApiTest";
-			productReference = C95E81DB0229005C9E42A60D /* libPods-MetaWearApiTest.a */;
+			productReference = A502E61A3C769BD69968F9CA /* libPods-MetaWearApiTest-MBProgressHUD.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		BFB2A06E5EFA810C269496F4 /* Project object */ = {
+		7D57FA800C349E52873451A5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0640;
 			};
-			buildConfigurationList = 35E7BBEBF85C695D534D4161 /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = FF5435CECD2FAA12879C08A0 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 2504D37F57DEE9E2C597DF18;
-			productRefGroup = 29EC224271DC68C2C9F1655C /* Products */;
+			mainGroup = F5639A253BDF3C614466977E;
+			productRefGroup = A5432829D7B320BC8279235E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				455E0ED643B899B5A51C0ED9 /* Pods-MetaWearApiTest */,
-				273A49A670D34A7ADD3B8C2B /* Pods-MetaWearApiTest-MBProgressHUD */,
+				1814EE43628E807A6E7DCC58 /* Pods-MetaWearApiTest */,
+				457CC5BABE07C804A29DB392 /* Pods-MetaWearApiTest-MBProgressHUD */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A3B1178753DC10547585BE02 /* Sources */ = {
+		2A13939F102E72F165BCB836 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6091E9AEC6ED0ECAFBA2C5E5 /* MBProgressHUD.m in Sources */,
-				51F39E5F3F003E25EED54FEC /* Pods-MetaWearApiTest-MBProgressHUD-dummy.m in Sources */,
+				459E386490AA759BAEE798FB /* MBProgressHUD.m in Sources */,
+				2A7420674F0FDE7E8C5E407C /* Pods-MetaWearApiTest-MBProgressHUD-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B860B3D6F05A8AC8E8D327BC /* Sources */ = {
+		CF8DCCBBDAC1BFA4A0AD1538 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6CEA378FAF08A970992EA6F /* Pods-MetaWearApiTest-dummy.m in Sources */,
+				08E42EFA5100582DF7048DE4 /* Pods-MetaWearApiTest-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		FE16220B88FFF7AE4A5E52BF /* PBXTargetDependency */ = {
+		BCB0C2875F556C8A62A5D9D4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-MetaWearApiTest-MBProgressHUD";
-			target = 273A49A670D34A7ADD3B8C2B /* Pods-MetaWearApiTest-MBProgressHUD */;
-			targetProxy = 16B308449B9DEDBC99D46DBC /* PBXContainerItemProxy */;
+			target = 457CC5BABE07C804A29DB392 /* Pods-MetaWearApiTest-MBProgressHUD */;
+			targetProxy = 40412F74E897652F887F4B34 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0240572043DA0A2663864EBA /* Debug */ = {
+		0DD9EC5CA675F190DA56D181 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -319,41 +319,9 @@
 			};
 			name = Debug;
 		};
-		07B940F8B529C4A022DF4D8F /* Debug */ = {
+		296D13ED6D29C49BAAFC5B24 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C5746F5F34C36A1C1A535E8 /* Pods-MetaWearApiTest.debug.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		1BA42453032A4898BE03831A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA023D75895EDB5FB3688F2A /* Pods-MetaWearApiTest.release.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		28A87614217E5DC80A151C7B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 04791C5828AC90E3AEB55E81 /* Pods-MetaWearApiTest-MBProgressHUD-Private.xcconfig */;
+			baseConfigurationReference = 84C062E6EEBF9643B4DFFCE5 /* Pods-MetaWearApiTest-MBProgressHUD-Private.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Pods-MetaWearApiTest-MBProgressHUD/Pods-MetaWearApiTest-MBProgressHUD-prefix.pch";
@@ -367,23 +335,7 @@
 			};
 			name = Debug;
 		};
-		EF87170BB3FDAD4DEA992F24 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 04791C5828AC90E3AEB55E81 /* Pods-MetaWearApiTest-MBProgressHUD-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-MetaWearApiTest-MBProgressHUD/Pods-MetaWearApiTest-MBProgressHUD-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		FA647FB876C9565E6C2D2768 /* Release */ = {
+		46E39712D51052634E3A9402 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -417,37 +369,85 @@
 			};
 			name = Release;
 		};
+		CBFBB9C71F035E2D55F9E583 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 84C062E6EEBF9643B4DFFCE5 /* Pods-MetaWearApiTest-MBProgressHUD-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-MetaWearApiTest-MBProgressHUD/Pods-MetaWearApiTest-MBProgressHUD-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		E5998D473E9ABA6295BBD51C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D720BF5B2AE211C05C85A16 /* Pods-MetaWearApiTest.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		FC5E0A5375258A5A29CE70FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3BD968FF6C41E4AEACC993F /* Pods-MetaWearApiTest.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		35E7BBEBF85C695D534D4161 /* Build configuration list for PBXProject "Pods" */ = {
+		192321EFF21A327B6DC299C5 /* Build configuration list for PBXNativeTarget "Pods-MetaWearApiTest-MBProgressHUD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0240572043DA0A2663864EBA /* Debug */,
-				FA647FB876C9565E6C2D2768 /* Release */,
+				296D13ED6D29C49BAAFC5B24 /* Debug */,
+				CBFBB9C71F035E2D55F9E583 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DD86ED215C73125C197A1E0F /* Build configuration list for PBXNativeTarget "Pods-MetaWearApiTest-MBProgressHUD" */ = {
+		2ED25B80C8441CAFC3832799 /* Build configuration list for PBXNativeTarget "Pods-MetaWearApiTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				28A87614217E5DC80A151C7B /* Debug */,
-				EF87170BB3FDAD4DEA992F24 /* Release */,
+				FC5E0A5375258A5A29CE70FE /* Debug */,
+				E5998D473E9ABA6295BBD51C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F221E768D303A8D329AD51BA /* Build configuration list for PBXNativeTarget "Pods-MetaWearApiTest" */ = {
+		FF5435CECD2FAA12879C08A0 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				07B940F8B529C4A022DF4D8F /* Debug */,
-				1BA42453032A4898BE03831A /* Release */,
+				0DD9EC5CA675F190DA56D181 /* Debug */,
+				46E39712D51052634E3A9402 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = BFB2A06E5EFA810C269496F4 /* Project object */;
+	rootObject = 7D57FA800C349E52873451A5 /* Project object */;
 }

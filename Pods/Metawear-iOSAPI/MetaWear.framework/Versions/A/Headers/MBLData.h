@@ -44,12 +44,6 @@
 @interface MBLData : MBLRegister <NSCoding>
 
 /**
- Perform read of the current value, without getting a callback.  Useful for
- programming a triggered read.
- */
-- (void)read;
-
-/**
  Perform a one time read of the current value
  @param handler Callback once read is complete
  */

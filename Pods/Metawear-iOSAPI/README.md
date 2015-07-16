@@ -16,7 +16,7 @@ It comes pre-loaded with a wirelessly upgradeable firmware, so you can always ta
 - Device running iOS 7.1 or later with Bluetooth 4.0
 
 > REQUIREMENT NOTES  
-The iOS simulator doesn’t support Bluetooth 4.0, so test apps must be run on a real iOS device which requires a developer account.  Bluetooth 4.0 avaliable on iPhone 4S+, iPad 3rd generation+, or iPod Touch 5th generation.
+The iOS simulator doesn’t support Bluetooth 4.0, so test apps must be run on a real iOS device which requires a developer account.  Bluetooth 4.0 available on iPhone 4S+, iPad 3rd generation+, or iPod Touch 5th generation.
 
 ### License
 See the [License](https://github.com/mbientlab/Metawear-iOSAPI/blob/master/LICENSE)

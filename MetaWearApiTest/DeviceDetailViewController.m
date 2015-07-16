@@ -218,7 +218,13 @@
 
 - (IBAction)readTempraturePressed:(id)sender
 {
-    [self.device.temperature.temperatureValue readWithHandler:^(MBLNumericData *obj, NSError *error) {
+    // The internal temperature will always be available
+    MBLData *temperature = self.device.temperature.internal;
+    if (self.device.temperature.onboardThermistor) {
+        // Use the more accurate thermistor if available
+        temperature = self.device.temperature.onboardThermistor;
+    }
+    [temperature readWithHandler:^(MBLNumericData *obj, NSError *error) {
         self.tempratureLabel.text = [obj.value.stringValue stringByAppendingString:@"°C"];
     }];
 }
@@ -314,7 +320,7 @@
 - (IBAction)checkForFirmwareUpdatesPressed:(id)sender
 {
     [self.device checkForFirmwareUpdateWithHandler:^(BOOL isTrue, NSError *error) {
-        self.firmwareUpdateLabel.text = isTrue ? @"Avaliable!" : @"Up To Date";
+        self.firmwareUpdateLabel.text = isTrue ? @"Available!" : @"Up To Date";
     }];
 }
 
