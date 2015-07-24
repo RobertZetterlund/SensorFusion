@@ -36,6 +36,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 @class MBLAccelerometerData;
 @class MBLDeviceInfo;
+@class MBLFirmwareBuild;
 
 #pragma mark - Block Typedefs
 
@@ -46,7 +47,6 @@ typedef void (^MBLObjectHandler)(id obj, NSError *error);
 typedef void (^MBLArrayHandler)(NSArray *array);
 typedef void (^MBLArrayErrorHandler)(NSArray *array, NSError *error);
 typedef void (^MBLCentralManagerStateHandler)(CBCentralManagerState state);
-typedef void (^MBLPeripheralStateHandler)(CBPeripheralState state);
 typedef void (^MBLAccelerometerHandler)(MBLAccelerometerData *acceleration, NSError *error);
 typedef void (^MBLDeviceInfoHandler)(MBLDeviceInfo *deviceInfo, NSError *error);
 typedef void (^MBLDecimalNumberHandler)(NSDecimalNumber *number, NSError *error);
@@ -56,6 +56,7 @@ typedef void (^MBLSwitchStateHandler)(BOOL isPressed, NSError *error);
 typedef void (^MBLBoolHandler)(BOOL isTrue, NSError *error);
 typedef void (^MBLFloatHandler)(float number, NSError *error);
 typedef void (^MBLStringHandler)(NSString *string);
+typedef void (^MBLFirmwareBuildHandler)(MBLFirmwareBuild *firmware);
 typedef void (^MBLUrlHandler)(NSURL *url, NSError *error);
 
 #pragma mark - Errors
@@ -82,3 +83,9 @@ extern NSInteger const kMBLErrorOutdatedFirmware;
 
 /*! @abstract 106: Unexpected disconnect during a connection */
 extern NSInteger const kMBLErrorUnexpectedDisconnect;
+
+/*! @abstract 107: Timeout during connection */
+extern NSInteger const kMBLErrorConnectionTimeout;
+
+/*! @abstract 108: Couldn't perform DFU, bad model number given */
+extern NSInteger const kMBLErrorWrongFirmwareModelNumber;

@@ -66,6 +66,17 @@ typedef NS_ENUM(uint8_t, MBLTransmitPower) {
     MBLTransmitPowerMinus30dBm
 };
 
+/**
+ Current state of the MetaWear connection
+ */
+typedef NS_ENUM(NSInteger, MBLConnectionState) {
+    MBLConnectionStateDisconnected = 0,
+    MBLConnectionStateConnecting,
+    MBLConnectionStateConnected,
+    MBLConnectionStateDisconnecting,
+    MBLConnectionStateDiscovery,
+};
+
 @class MBLMetaWear;
 
 /**
@@ -189,7 +200,7 @@ typedef NS_ENUM(uint8_t, MBLTransmitPower) {
 /**
  Current connection state of this MetaWear
  */
-@property (nonatomic, readonly) CBPeripheralState state;
+@property (nonatomic, readonly) MBLConnectionState state;
 /**
  iOS generated unique identifier for this MetaWear
  */
@@ -243,6 +254,15 @@ typedef NS_ENUM(uint8_t, MBLTransmitPower) {
  @param handler Callback once connection is complete
  */
 - (void)connectWithHandler:(MBLErrorHandler)handler;
+/**
+ Connect/reconnect to the MetaWear board, but with a timeout if the board can't be 
+ located.  Once connection is complete, the provided block will be invoked.  If the 
+ NSError provided to the block is null then the connection succeeded, otherwise 
+ failure (see provided error for details)
+ @param timeout Max time to search for MetaWear before giving up
+ @param handler Callback once connection is complete
+ */
+- (void)connectWithTimeout:(NSTimeInterval)timeout handler:(MBLErrorHandler)handler;
 
 /**
  Disconnect from the MetaWear board.

@@ -689,13 +689,13 @@ typedef struct {
 typedef struct {
   uint8_t int_flat_theta:6;
   uint8_t :2;
-} bmi160_reg_int_flat_1_t;
+} bmi160_reg_int_flat_0_t;
 
 typedef struct {
   uint8_t int_flat_hy:4;
   uint8_t int_flag_hold:2;
   uint8_t :2;
-} bmi160_reg_int_flat_0_t;
+} bmi160_reg_int_flat_1_t;
 
 typedef struct {
   uint8_t foc_acc_z:2;

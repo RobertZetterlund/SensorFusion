@@ -60,6 +60,21 @@ typedef NS_ENUM(uint8_t, MBLBarometerFilter) {
 };
 
 /**
+ Barometer standby times
+ */
+typedef NS_ENUM(uint8_t, MBLBarometerStandby) {
+    MBLBarometerStandby0_5 = 0,
+    MBLBarometerStandby62_5 = 1,
+    MBLBarometerStandby125 = 2,
+    MBLBarometerStandby250 = 3,
+    MBLBarometerStandby500 = 4,
+    MBLBarometerStandby1000 = 5,
+    MBLBarometerStandby2000 = 6,
+    MBLBarometerStandby4000 = 7
+};
+
+
+/**
  Interface to the barometer sensor
  */
 @interface MBLBarometer : MBLModule <NSCoding>
@@ -73,6 +88,11 @@ typedef NS_ENUM(uint8_t, MBLBarometerFilter) {
  Use this to set hardware average filtering of pressure samples.
  */
 @property (nonatomic) MBLBarometerFilter hardwareAverageFilter;
+/**
+ Set the standby time for the periodicAltitidue and periodicPressure events.
+ That is how long the device sleeps between successive measurements
+ */
+@property (nonatomic) MBLBarometerStandby standbyTime;
 
 
 /**
@@ -87,5 +107,21 @@ typedef NS_ENUM(uint8_t, MBLBarometerFilter) {
  value will be altitude in meters.
  */
 @property (nonatomic, strong, readonly) MBLData *altitude;
+
+
+/**
+ Data representing the atmospheric pressure measured by barometer. Period
+ of event will depend on pressureOversampling and standbyTime.
+ Event callbacks will be provided an MBLNumericData object whose float
+ value will be pressure in pascals.
+ */
+@property (nonatomic, strong, readonly) MBLEvent *periodicPressure;
+/**
+ Event representing the altidue calulated from atmospheric pressure. Period
+ of event will depend on pressureOversampling and standbyTime.
+ Event callbacks will be provided an MBLNumericData object whose float
+ value will be altitude in meters.
+ */
+@property (nonatomic, strong, readonly) MBLEvent *periodicAltitude;
 
 @end

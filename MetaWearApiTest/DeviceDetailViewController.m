@@ -231,29 +231,29 @@
 
 - (IBAction)turnOnGreenLEDPressed:(id)sender
 {
-    [self.device.led setLEDColor:[UIColor greenColor] withIntensity:0.25];
+    [self.device.led setLEDColor:[UIColor greenColor] withIntensity:1.0];
 }
 - (IBAction)flashGreenLEDPressed:(id)sender
 {
-    [self.device.led flashLEDColor:[UIColor greenColor] withIntensity:0.25];
+    [self.device.led flashLEDColor:[UIColor greenColor] withIntensity:1.0];
 }
 
 - (IBAction)turnOnRedLEDPressed:(id)sender
 {
-    [self.device.led setLEDColor:[UIColor redColor] withIntensity:0.25];
+    [self.device.led setLEDColor:[UIColor redColor] withIntensity:1.0];
 }
 - (IBAction)flashRedLEDPressed:(id)sender
 {
-    [self.device.led flashLEDColor:[UIColor redColor] withIntensity:0.25];
+    [self.device.led flashLEDColor:[UIColor redColor] withIntensity:1.0];
 }
 
 - (IBAction)turnOnBlueLEDPressed:(id)sender
 {
-    [self.device.led setLEDColor:[UIColor blueColor] withIntensity:0.25];
+    [self.device.led setLEDColor:[UIColor blueColor] withIntensity:1.0];
 }
 - (IBAction)flashBlueLEDPressed:(id)sender
 {
-    [self.device.led flashLEDColor:[UIColor blueColor] withIntensity:0.25];
+    [self.device.led flashLEDColor:[UIColor blueColor] withIntensity:1.0];
 }
 
 - (IBAction)turnOffLEDPressed:(id)sender
