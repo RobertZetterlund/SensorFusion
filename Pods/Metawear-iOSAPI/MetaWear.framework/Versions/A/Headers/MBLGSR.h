@@ -36,9 +36,35 @@
 #import <MetaWear/MBLModule.h>
 
 /**
+ Gain applied in the GSR circuit
+ */
+typedef NS_ENUM(uint8_t, MBLGSRGain) {
+    MBLGSRGain499K = 0,
+    MBLGSRGain1M = 1
+};
+
+/**
+ Constant voltage applied on the GSR electrodes
+ */
+typedef NS_ENUM(uint8_t, MBLGSRVoltage) {
+    MBLGSRVoltage500mV = 1,
+    MBLGSRVoltage250mV = 0
+};
+
+/**
  Interface to on-board GSR sensor
  */
 @interface MBLGSR : MBLModule <NSCoding>
+
+/**
+ Gain applied in the GSR circuit
+ */
+@property (nonatomic) MBLGSRGain gain;
+/**
+ Constant voltage applied on the GSR electrodes
+ */
+@property (nonatomic) MBLGSRVoltage voltage;
+
 
 /**
  Array of MBLData objects. The index corresponds to the GSR channel
@@ -50,7 +76,7 @@
 
 /**
  Perform automatic GSR calibration.  This should be called when
- temperature changes, or, it can just be called periodically as 
+ temperature changes, or it can just be called periodically as
  it's low overhead.
  */
 - (void)calibrate;

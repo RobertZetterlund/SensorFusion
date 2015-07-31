@@ -38,62 +38,9 @@
 #import <MetaWear/MBLModule.h>
 
 /**
- Barometer oversampling rates
- */
-typedef NS_ENUM(uint8_t, MBLBarometerOversample) {
-    MBLBarometerOversampleUltraLowPower = 1,
-    MBLBarometerOversampleLowPower = 2,
-    MBLBarometerOversampleStandard = 3,
-    MBLBarometerOversampleHighResolution = 4,
-    MBLBarometerOversampleUltraHighResolution = 5,
-};
-
-/**
- Barometer output filter
- */
-typedef NS_ENUM(uint8_t, MBLBarometerFilter) {
-    MBLBarometerFilterOff = 0,
-    MBLBarometerFilterAverage2 = 1,
-    MBLBarometerFilterAverage4 = 2,
-    MBLBarometerFilterAverage8 = 3,
-    MBLBarometerFilterAverage16 = 4,
-};
-
-/**
- Barometer standby times
- */
-typedef NS_ENUM(uint8_t, MBLBarometerStandby) {
-    MBLBarometerStandby0_5 = 0,
-    MBLBarometerStandby62_5 = 1,
-    MBLBarometerStandby125 = 2,
-    MBLBarometerStandby250 = 3,
-    MBLBarometerStandby500 = 4,
-    MBLBarometerStandby1000 = 5,
-    MBLBarometerStandby2000 = 6,
-    MBLBarometerStandby4000 = 7
-};
-
-
-/**
- Interface to the barometer sensor
+ Interface to a generic barometer sensor
  */
 @interface MBLBarometer : MBLModule <NSCoding>
-
-/**
- Use this to set pressure sampling mode, higher values produce more accurate
- results but will use more power.
- */
-@property (nonatomic) MBLBarometerOversample pressureOversampling;
-/**
- Use this to set hardware average filtering of pressure samples.
- */
-@property (nonatomic) MBLBarometerFilter hardwareAverageFilter;
-/**
- Set the standby time for the periodicAltitidue and periodicPressure events.
- That is how long the device sleeps between successive measurements
- */
-@property (nonatomic) MBLBarometerStandby standbyTime;
-
 
 /**
  Data representing the atmospheric pressure measured by barometer.
@@ -107,21 +54,5 @@ typedef NS_ENUM(uint8_t, MBLBarometerStandby) {
  value will be altitude in meters.
  */
 @property (nonatomic, strong, readonly) MBLData *altitude;
-
-
-/**
- Data representing the atmospheric pressure measured by barometer. Period
- of event will depend on pressureOversampling and standbyTime.
- Event callbacks will be provided an MBLNumericData object whose float
- value will be pressure in pascals.
- */
-@property (nonatomic, strong, readonly) MBLEvent *periodicPressure;
-/**
- Event representing the altidue calulated from atmospheric pressure. Period
- of event will depend on pressureOversampling and standbyTime.
- Event callbacks will be provided an MBLNumericData object whose float
- value will be altitude in meters.
- */
-@property (nonatomic, strong, readonly) MBLEvent *periodicAltitude;
 
 @end

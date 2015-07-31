@@ -56,7 +56,7 @@ typedef void (^MBLSwitchStateHandler)(BOOL isPressed, NSError *error);
 typedef void (^MBLBoolHandler)(BOOL isTrue, NSError *error);
 typedef void (^MBLFloatHandler)(float number, NSError *error);
 typedef void (^MBLStringHandler)(NSString *string);
-typedef void (^MBLFirmwareBuildHandler)(MBLFirmwareBuild *firmware);
+typedef void (^MBLFirmwareBuildHandler)(MBLFirmwareBuild *firmware, NSError *error);
 typedef void (^MBLUrlHandler)(NSURL *url, NSError *error);
 
 #pragma mark - Errors
@@ -89,3 +89,6 @@ extern NSInteger const kMBLErrorConnectionTimeout;
 
 /*! @abstract 108: Couldn't perform DFU, bad model number given */
 extern NSInteger const kMBLErrorWrongFirmwareModelNumber;
+
+/*! @abstract 109: Couldn't perform DFU, no valid firmware releases found */
+extern NSInteger const kMBLErrorNoAvaliableFirmware;

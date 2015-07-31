@@ -37,9 +37,12 @@
 #import <MetaWear/MBLAccelerometerBMI160.h>
 #import <MetaWear/MBLAccelerometerData.h>
 #import <MetaWear/MBLAccelerometerMMA8452Q.h>
+#import <MetaWear/MBLAmbientLight.h>
+#import <MetaWear/MBLAmbientLightLTR329.h>
 #import <MetaWear/MBLANCS.h>
 #import <MetaWear/MBLANCSEventData.h>
 #import <MetaWear/MBLBarometer.h>
+#import <MetaWear/MBLBarometerBMP280.h>
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLData.h>
 #import <MetaWear/MBLDataSample.h>

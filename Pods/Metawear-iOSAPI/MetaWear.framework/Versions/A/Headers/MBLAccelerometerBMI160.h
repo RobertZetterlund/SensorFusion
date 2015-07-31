@@ -50,10 +50,28 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerBMI160Range) {
  Interface to on-board accelerometer
  */
 @interface MBLAccelerometerBMI160 : MBLAccelerometer <NSCoding>
-
 /**
  Maximum acceleration the accelerometer can report
  */
 @property (nonatomic) MBLAccelerometerBMI160Range fullScaleRange;
+
+
+/**
+ Select the type of taps to be registered. When MBLAccelerometerTapModeBoth is used,
+ you will get two events on a double tap, one for the single and one for the double.
+ */
+@property (nonatomic) MBLAccelerometerTapType tapType;
+/**
+ Event representing a tap (single, double, or both based on tapType) on the tapDetectionAxis.
+ Event callbacks will be provided an empty MBLDataSample object
+ */
+@property (nonatomic, strong, readonly) MBLEvent *tapEvent;
+
+
+/**
+ Event representing an orientation change.
+ Event callbacks will be provided an MBLOrientationData object
+ */
+@property (nonatomic, strong, readonly) MBLEvent *orientationEvent;
 
 @end

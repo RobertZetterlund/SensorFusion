@@ -34,7 +34,26 @@
  */
 
 #import <MetaWear/MBLGyro.h>
+#import <MetaWear/bmi160.h>
 
+/**
+ Gyro sensitiviy ranges in degrees per second
+ */
+typedef NS_ENUM(uint8_t, MBLGyroBMI160Range) {
+    MBLGyroBMI160Range125 = BMI160_GYRO_RANGE_125_DEG_SEC,
+    MBLGyroBMI160Range250 = BMI160_GYRO_RANGE_250_DEG_SEC,
+    MBLGyroBMI160Range500 = BMI160_GYRO_RANGE_500_DEG_SEC,
+    MBLGyroBMI160Range1000 = BMI160_GYRO_RANGE_1000_DEG_SEC,
+    MBLGyroBMI160Range2000 = BMI160_GYRO_RANGE_2000_DEG_SEC
+};
+
+/**
+ Interface to on-board BMI160 gyro
+ */
 @interface MBLGyroBMI160 : MBLGyro <NSCoding>
+/**
+ Maximum rotation the gyro can report
+ */
+@property (nonatomic) MBLGyroBMI160Range fullScaleRange;
 
 @end

@@ -51,6 +51,7 @@
 @class MBLTimer;
 @class MBLGSR;
 @class MBLBarometer;
+@class MBLAmbientLight;
 
 /**
  BLE transmiter power
@@ -164,6 +165,10 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  MBLBarometer object contains all methods for interacting with the barometer sensor
  */
 @property (nonatomic, strong, readonly) MBLBarometer *barometer;
+/**
+ MBLAmbientLight object contains all methods for interacting with the ambient light sensor
+ */
+@property (nonatomic, strong, readonly) MBLAmbientLight *ambientLight;
 /**
  MBLDeviceInfo object contains version information about the device
  */
