@@ -47,7 +47,7 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerBMI160Range) {
 };
 
 /**
- Interface to on-board accelerometer
+ Interface to a BMI160 accelerometer
  */
 @interface MBLAccelerometerBMI160 : MBLAccelerometer <NSCoding>
 /**
@@ -73,5 +73,30 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerBMI160Range) {
  Event callbacks will be provided an MBLOrientationData object
  */
 @property (nonatomic, strong, readonly) MBLEvent *orientationEvent;
+
+
+/**
+ Event representing the device being laid down flat (or removed from a flat posistion).
+ Event callbacks will be provided an MBLNumericData object, where a bool value of
+ YES means flat, and NO means not-flat.
+ */
+@property (nonatomic, strong, readonly) MBLEvent *flatEvent;
+
+
+/**
+ This event will fire when a step pattern is detected. Event callbacks will be provided
+ an MBLNumericData object, whose int value is always 1.
+ */
+@property (nonatomic, strong, readonly) MBLEvent *stepEvent;
+/**
+ This data endpoint keeps a running counter in hardware of the number of steps taken.
+ Event callbacks will be provided an MBLNumericData object, whose unsigened value is
+ the number steps taken.  Note this only counts up when stepEvent is active.
+ */
+@property (nonatomic, strong, readonly) MBLData *stepCounter;
+/**
+ Use this to reset stepCounter to 0
+ */
+- (void)resetStepCount;
 
 @end

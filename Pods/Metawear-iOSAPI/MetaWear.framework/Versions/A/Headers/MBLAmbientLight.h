@@ -38,7 +38,9 @@
 #import <MetaWear/MBLModule.h>
 
 /**
- Interface to the ambient light sensor
+ Interface to an abstract ambient light sensor. If you need more advanced
+ features then upcast to the specific sensor on your board, MBLAmbientLightLTR329.
+ @see MBLAmbientLightLTR329
  */
 @interface MBLAmbientLight : MBLModule <NSCoding>
 

@@ -103,7 +103,7 @@ typedef NS_ENUM(uint8_t, MBLPinChangeType) {
 /**
  Data representing the digital value of the pin.
  Event callbacks will be provided an MBLNumericData object whose bool
- value indicates what state the pin is in, YES means set, NO means clean.
+ value indicates what state the pin is in, YES means set, NO means clear.
  */
 @property (nonatomic, strong, readonly) MBLData *digitalValue;
 /**

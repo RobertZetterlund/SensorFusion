@@ -72,16 +72,16 @@
 ///----------------------------------
 
 /**
- * @deprecated create an id<MBLRestorable> object and use [MBLMetaWear setConfiguration:handler:] instead
+ * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
  */
 - (MBLEvent *)periodicReadWithPeriod:(uint32_t)period
-                          identifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an id<MBLRestorable> object and use [MBLMetaWear setConfiguration:handler:] instead");
+                          identifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
 
 /**
- * @deprecated create an id<MBLRestorable> object and use [MBLMetaWear setConfiguration:handler:] instead
+ * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
  */
 - (MBLEvent *)periodicReadWithPeriod:(uint32_t)period
                          repeatCount:(uint16_t)repeatCount
-                          identifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an id<MBLRestorable> object and use [MBLMetaWear setConfiguration:handler:] instead");
+                          identifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
 
 @end

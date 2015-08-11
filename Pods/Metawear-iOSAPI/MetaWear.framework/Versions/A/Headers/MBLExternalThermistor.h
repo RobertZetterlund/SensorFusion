@@ -36,7 +36,8 @@
 #import <MetaWear/MBLData.h>
 
 /**
- Interface for configuring an external thermistor
+ Interface for configuring an external thermistor.  For details on connecting,
+ see our blog post at http://projects.mbientlab.com/metawear-and-thermistor/
  */
 @interface MBLExternalThermistor : MBLData
 

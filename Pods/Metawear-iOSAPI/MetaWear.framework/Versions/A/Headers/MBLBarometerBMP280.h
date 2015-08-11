@@ -72,7 +72,7 @@ typedef NS_ENUM(uint8_t, MBLBarometerBMP280Standby) {
 };
 
 /**
- Interface to BMP280 pressure sensor
+ Interface to a BMP280 pressure sensor
  */
 @interface MBLBarometerBMP280 : MBLBarometer
 

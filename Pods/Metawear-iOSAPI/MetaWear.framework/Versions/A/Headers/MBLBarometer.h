@@ -38,7 +38,9 @@
 #import <MetaWear/MBLModule.h>
 
 /**
- Interface to a generic barometer sensor
+ Interface to an abstract barometer sensor. If you need more advanced
+ features then upcast to the specific sensor on your board, MBLBarometerBMP280.
+ @see MBLAmbientLightLTR329
  */
 @interface MBLBarometer : MBLModule <NSCoding>
 

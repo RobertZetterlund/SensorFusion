@@ -75,7 +75,7 @@ typedef NS_ENUM(uint8_t, MBLAmbientLightLTR329Rate) {
 };
 
 /**
- Interface to LTR329 Ambient Light sensor
+ Interface to a LTR329 ambient light sensor
  */
 @interface MBLAmbientLightLTR329 : MBLAmbientLight
 

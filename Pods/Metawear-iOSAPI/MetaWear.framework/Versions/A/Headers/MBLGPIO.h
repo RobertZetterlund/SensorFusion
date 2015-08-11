@@ -39,7 +39,8 @@
 #import <MetaWear/MBLGPIOPin.h>
 
 /**
- Interface to on-board pins
+ Interface to the general purprose input/output pins on the MetaWear.  This 
+ allows you to attach your own sensors or drive digitial devices.
  */
 @interface MBLGPIO : MBLModule <NSCoding>
 

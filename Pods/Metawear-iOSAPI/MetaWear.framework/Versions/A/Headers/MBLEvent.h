@@ -252,11 +252,19 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
 - (MBLDataSwitch *)countingDataSwitch:(uint16_t)initialCount;
 
 /**
- Create a new event that accumulates the output data of the current event.
+ Create a new event that accumulates the output data values of the current event.
  Event callbacks will be provided the same object as the input.
  @returns New event representing accumulated output
  */
 - (MBLFilter *)summationOfEvent;
+
+/**
+ Create a new event that accumulates the number of times the current event fires.
+ Event callbacks will be provided an MBLNumericData data object whose int value
+ will be the number of times the input event fired.
+ @returns New event representing counted intput
+ */
+- (MBLFilter *)counterOfEvent;
 
 /**
  Create a new event that averages the output data of the current event. This
@@ -351,14 +359,14 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
 ///----------------------------------
 
 /**
- * @deprecated create an id<MBLRestorable> object and use [MBLMetaWear setConfiguration:handler:] instead
+ * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
  */
-- (MBLFilter *)periodicSampleOfEvent:(uint32_t)periodInMsec identifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an id<MBLRestorable> object and use [MBLMetaWear setConfiguration:handler:] instead");
+- (MBLFilter *)periodicSampleOfEvent:(uint32_t)periodInMsec identifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
 
 /**
- * @deprecated create an id<MBLRestorable> object and use [MBLMetaWear setConfiguration:handler:] instead
+ * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
  */
-- (MBLFilter *)summationOfEventWithIdentifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an id<MBLRestorable> object and use [MBLMetaWear setConfiguration:handler:] instead");
+- (MBLFilter *)summationOfEventWithIdentifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
 
 /**
  * @deprecated Use compareEventUsingOperation:withData: instead

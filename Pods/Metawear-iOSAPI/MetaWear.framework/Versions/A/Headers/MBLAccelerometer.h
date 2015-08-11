@@ -59,7 +59,8 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerTapType) {
 
 /**
  Interface to an abstract on-board accelerometer. If you need more advanced
- features then upcast to the specific accelerometer on your board.
+ features then upcast to the specific accelerometer on your board, either
+ MBLAccelerometerMMA8452Q or MBLAccelerometerBMI160.
  @see MBLAccelerometerMMA8452Q
  @see MBLAccelerometerBMI160
  */

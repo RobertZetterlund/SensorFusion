@@ -41,8 +41,14 @@
  */
 @interface MBLDataSwitch : MBLFilter
 
+/**
+ Set the countdown to a specific value.  This will allows 'count' values to pass through.
+ */
 - (void)resetCount:(uint16_t)count;
 
+/**
+ Set the switch to allow samples to pass throught or not.  YES will pass samples, NO will not.
+ */
 - (void)resetConditional:(BOOL)pass;
 
 @end

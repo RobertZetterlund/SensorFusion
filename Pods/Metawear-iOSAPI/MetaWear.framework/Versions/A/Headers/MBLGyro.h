@@ -47,7 +47,7 @@ typedef NS_ENUM(uint8_t, MBLGyroAxis) {
 
 /**
  Interface to an abstract on-board gyroscope. If you need more advanced
- features then upcast to the specific gyroscope on your board.
+ features then upcast to the specific gyroscope on your board, MBLGyroBMI160.
  @see MBLGyroBMI160
  */
 @interface MBLGyro : MBLModule <NSCoding>

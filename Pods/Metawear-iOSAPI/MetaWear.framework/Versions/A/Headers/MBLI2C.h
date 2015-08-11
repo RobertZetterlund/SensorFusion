@@ -41,8 +41,25 @@
  */
 @interface MBLI2C : MBLModule <NSCoding>
 
+/**
+ Create an I2C data endpoint.  The deivce and register address
+ will be available in the data sheet of whatever device you connect.
+ Event callbacks will be provided an MBLDataSample object whose data
+ property can be used to access the data as bytes.
+ */
 - (MBLI2CData *)dataAtDeviceAddress:(uint8_t)deviceAddress
                     registerAddress:(uint8_t)registerAddress
                              length:(uint8_t)length;
+
+/**
+ Create an I2C data endpoint.  The deivce and register address
+ will be available in the data sheet of whatever device you connect.
+ Event callbacks will be provided an MBLNumericData object whose value
+ will contain the register value formatted as a number.
+ */
+- (MBLI2CData *)numberAtDeviceAddress:(uint8_t)deviceAddress
+                      registerAddress:(uint8_t)registerAddress
+                               length:(uint8_t)length
+                             isSigned:(BOOL)isSigned;
 
 @end
