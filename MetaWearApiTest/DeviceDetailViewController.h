@@ -37,11 +37,10 @@
 #import <MetaWear/MetaWear.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import <StaticDataTableViewController/StaticDataTableViewController.h>
 
-@interface DeviceDetailViewController : UIViewController
+@interface DeviceDetailViewController : StaticDataTableViewController
 
 @property (strong, nonatomic) MBLMetaWear *device;
-@property (weak, nonatomic) MBLAccelerometerMMA8452Q *accelerometerMMA8452Q;
-@property (weak, nonatomic) MBLAccelerometerBMI160 *accelerometerBMI160;
 
 @end

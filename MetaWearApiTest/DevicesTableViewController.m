@@ -116,6 +116,11 @@
     });
 }
 
+- (IBAction)clearListPressed:(id)sender
+{
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -125,8 +130,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *identifier = self.metaBootSwitch.on ? @"MetaBootCell" : @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     MBLMetaWear *cur = self.devices[indexPath.row];
     
     UILabel *uuid = (UILabel *)[cell viewWithTag:1];
@@ -141,6 +145,9 @@
     } else {
         [connected setHidden:YES];
     }
+    
+    UILabel *name = (UILabel *)[cell viewWithTag:4];
+    name.text = cur.name;
     
     return cell;
 }
