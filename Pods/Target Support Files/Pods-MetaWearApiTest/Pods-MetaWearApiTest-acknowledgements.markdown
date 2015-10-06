@@ -217,7 +217,7 @@ See https://www.mbientlab.com/terms/
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright [yyyy] [name of copyright owner]
+   Copyright 2015 Peter Paulis - min60 s.r.o. (min60.com)
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

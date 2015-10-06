@@ -272,7 +272,7 @@
 {
     [self.connectionSwitch setOn:YES animated:YES];
     // Perform all device specific setup
-
+    
     // We always have the info and state features
     [self cells:self.infoAndStateCells setHidden:NO];
     self.mfgNameLabel.text = self.device.deviceInfo.manufacturerName;
@@ -284,13 +284,13 @@
     [self readBatteryPressed:nil];
     [self readRSSIPressed:nil];
     [self checkForFirmwareUpdatesPressed:nil];
-
-
+    
+    
     // Go through each module and enable the correct cell for the modules on this particular MetaWear
     if (self.device.mechanicalSwitch) {
         [self cell:self.mechanicalSwitchCell setHidden:NO];
     }
-
+    
     if (self.device.led) {
         [self cell:self.ledCell setHidden:NO];
     }
@@ -357,9 +357,6 @@
     if (on) {
         hud.labelText = @"Connecting...";
         [self.device connectWithTimeout:15 handler:^(NSError *error) {
-            if (!error) {
-                [self deviceConnected];
-            }
             if ([error.domain isEqualToString:kMBLErrorDomain] && error.code == kMBLErrorOutdatedFirmware) {
                 [hud hide:YES];
                 self.firmwareUpdateLabel.text = @"Force Update";
@@ -464,7 +461,10 @@
 {
     // Resetting causes a disconnection
     [self deviceDisconnected];
-    // Setting a nil configuration removes all state perisited in flash memory
+    
+    // In case any pairing information is on the device mark it for removal too
+    [self.device deleteAllBonds];
+    // Setting a nil configuration removes state perisited in flash memory
     [self.device setConfiguration:nil handler:nil];
 }
 
@@ -601,11 +601,11 @@
     [self.stopLog setEnabled:NO];
     
     [self updateAccelerometerSettings];
-
+    
     // These variables are used for data recording
     NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:1000];
     self.accelerometerDataArray = array;
-
+    
     [self.streamingEvents addObject:self.device.accelerometer.dataReadyEvent];
     [self.device.accelerometer.dataReadyEvent startNotificationsWithHandler:^(MBLAccelerometerData *acceleration, NSError *error) {
         [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
@@ -685,7 +685,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM_dd_yyyy-HH_mm_ss"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-
+    
     MFMailComposeViewController *emailController = [[MFMailComposeViewController alloc] init];
     emailController.mailComposeDelegate = self;
     
@@ -832,7 +832,7 @@
     [self.accelerometerBMI160StopLog setEnabled:NO];
     
     [self updateAccelerometerBMI160Settings];
-   
+    
     NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:1000];
     self.accelerometerBMI160Data = array;
     
@@ -859,9 +859,9 @@
     [self.accelerometerBMI160StopLog setEnabled:YES];
     [self.accelerometerBMI160StartStream setEnabled:NO];
     [self.accelerometerBMI160StopStream setEnabled:NO];
- 
+    
     [self updateAccelerometerBMI160Settings];
-
+    
     [self.device.accelerometer.dataReadyEvent startLogging];
 }
 
@@ -904,10 +904,10 @@
     for (MBLAccelerometerData *dataElement in self.accelerometerBMI160Data) {
         @autoreleasepool {
             [accelerometerData appendData:[[NSString stringWithFormat:@"%f,%f,%f,%f\n",
-                                   dataElement.timestamp.timeIntervalSince1970,
-                                   dataElement.x,
-                                   dataElement.y,
-                                   dataElement.z] dataUsingEncoding:NSUTF8StringEncoding]];
+                                            dataElement.timestamp.timeIntervalSince1970,
+                                            dataElement.x,
+                                            dataElement.y,
+                                            dataElement.z] dataUsingEncoding:NSUTF8StringEncoding]];
         }
     }
     [self sendMail:accelerometerData title:@"AccData"];
@@ -919,7 +919,7 @@
     [self.accelerometerBMI160StopTap setEnabled:YES];
     
     [self updateAccelerometerBMI160Settings];
-
+    
     MBLAccelerometerBMI160 *accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerBMI160.tapEvent];
     [accelerometerBMI160.tapEvent startNotificationsWithHandler:^(id obj, NSError *error) {
@@ -1260,7 +1260,7 @@
     int pwidth = [self.hapticPulseWidth.text intValue];
     pwidth = MIN(pwidth, 10000);
     pwidth = MAX(pwidth, 0);
-
+    
     [sender setEnabled:NO];
     [self.device.hapticBuzzer startBuzzerWithPulseWidth:pwidth completion:^{
         [sender setEnabled:YES];
@@ -1327,7 +1327,7 @@
     } else {
         barometerBMP280.standbyTime = MBLBarometerBMP280Standby4000;
     }
-
+    
     [self.streamingEvents addObject:barometerBMP280.periodicAltitude];
     [barometerBMP280.periodicAltitude startNotificationsWithHandler:^(MBLNumericData *obj, NSError *error) {
         self.barometerBMP280Altitude.text = [NSString stringWithFormat:@"%.3f", obj.value.floatValue];
