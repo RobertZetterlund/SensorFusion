@@ -1,6 +1,6 @@
 PODS:
   - MBProgressHUD (0.9.1)
-  - Metawear-iOSAPI (1.10.0)
+  - Metawear-iOSAPI (1.10.1)
   - StaticDataTableViewController (2.0.5)
 
 DEPENDENCIES:
@@ -10,7 +10,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  Metawear-iOSAPI: 9397a0ef486e6b4cabadd330fa7286ca111d2625
+  Metawear-iOSAPI: 96649a4bf872ffcbd4f7d09c801ff7a15690d510
   StaticDataTableViewController: 7ea8d7bc8c7f0a4e9255a320224462c7346c1d4a
 
 COCOAPODS: 0.38.2
