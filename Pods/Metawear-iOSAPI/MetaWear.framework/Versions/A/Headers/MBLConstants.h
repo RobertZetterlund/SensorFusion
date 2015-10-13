@@ -41,27 +41,27 @@
 #pragma mark - Block Typedefs
 
 typedef void (^MBLVoidHandler)();
-typedef void (^MBLErrorHandler)(NSError *error);
-typedef void (^MBLDataHandler)(NSData *data, NSError *error);
-typedef void (^MBLObjectHandler)(id obj, NSError *error);
-typedef void (^MBLArrayHandler)(NSArray *array);
-typedef void (^MBLArrayErrorHandler)(NSArray *array, NSError *error);
+typedef void (^MBLErrorHandler)(NSError *__nullable error);
+typedef void (^MBLDataHandler)(NSData *__nullable data, NSError *__nullable error);
+typedef void (^MBLObjectHandler)(id __nullable obj, NSError *__nullable error);
+typedef void (^MBLArrayHandler)(NSArray *__nullable array);
+typedef void (^MBLArrayErrorHandler)(NSArray *__nullable array, NSError *__nullable error);
 typedef void (^MBLCentralManagerStateHandler)(CBCentralManagerState state);
-typedef void (^MBLAccelerometerHandler)(MBLAccelerometerData *acceleration, NSError *error);
-typedef void (^MBLDeviceInfoHandler)(MBLDeviceInfo *deviceInfo, NSError *error);
-typedef void (^MBLDecimalNumberHandler)(NSDecimalNumber *number, NSError *error);
-typedef void (^MBLThresholdHandler)(NSDecimalNumber *number, BOOL isRising, NSError *error);
-typedef void (^MBLNumberHandler)(NSNumber *number, NSError *error);
-typedef void (^MBLSwitchStateHandler)(BOOL isPressed, NSError *error);
-typedef void (^MBLBoolHandler)(BOOL isTrue, NSError *error);
-typedef void (^MBLFloatHandler)(float number, NSError *error);
-typedef void (^MBLStringHandler)(NSString *string);
-typedef void (^MBLFirmwareBuildHandler)(MBLFirmwareBuild *firmware, NSError *error);
-typedef void (^MBLUrlHandler)(NSURL *url, NSError *error);
+typedef void (^MBLAccelerometerHandler)(MBLAccelerometerData *__nullable acceleration, NSError *__nullable error);
+typedef void (^MBLDeviceInfoHandler)(MBLDeviceInfo *__nullable deviceInfo, NSError *__nullable error);
+typedef void (^MBLDecimalNumberHandler)(NSDecimalNumber *__nullable number, NSError *__nullable error);
+typedef void (^MBLThresholdHandler)(NSDecimalNumber *__nullable number, BOOL isRising, NSError *__nullable error);
+typedef void (^MBLNumberHandler)(NSNumber *__nullable number, NSError *__nullable error);
+typedef void (^MBLSwitchStateHandler)(BOOL isPressed, NSError *__nullable error);
+typedef void (^MBLBoolHandler)(BOOL isTrue, NSError *__nullable error);
+typedef void (^MBLFloatHandler)(float number, NSError *__nullable error);
+typedef void (^MBLStringHandler)(NSString *__nullable string);
+typedef void (^MBLFirmwareBuildHandler)(MBLFirmwareBuild *__nullable firmware, NSError *__nullable error);
+typedef void (^MBLUrlHandler)(NSURL *__nullable url, NSError *__nullable error);
 
 #pragma mark - Errors
 
-extern NSString *const kMBLErrorDomain;
+extern NSString *__nonnull const kMBLErrorDomain;
 
 /*! @abstract 100: Unexpected number of bluetooth services */
 extern NSInteger const kMBLErrorUnexpectedServices;
@@ -95,3 +95,6 @@ extern NSInteger const kMBLErrorNoAvaliableFirmware;
 
 /*! @abstract 110: MetaWear not connected, can't perform operation */
 extern NSInteger const kMBLErrorNotConnected;
+
+/*! @abstract 111: MetaWear out of memory, can't perform action */
+extern NSInteger const kMBLErrorInsufficientMemory;

@@ -42,5 +42,5 @@
 /**
  Value of the numeric data
  */
-@property (nonatomic, strong, readonly) NSNumber *value;
+@property (nonatomic, readonly, nonnull) NSNumber *value;
 @end

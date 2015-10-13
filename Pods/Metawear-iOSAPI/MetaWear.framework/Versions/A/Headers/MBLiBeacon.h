@@ -59,7 +59,7 @@ typedef NS_ENUM(uint8_t, MBLiBeaconTransmitPower) {
 /**
  The iBeacon UUID being broadcast, the default is the MetaWear Service UUID
  */
-@property (nonatomic, strong) CBUUID *uuid;
+@property (nonatomic) CBUUID *uuid;
 /**
  The iBeacon major value being broadcast, the default is 0x0000
  */

@@ -140,7 +140,7 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
  Event representing a tap (single, double, or both based on tapType) on the tapDetectionAxis.
  Event callbacks will be provided an empty MBLDataSample object
  */
-@property (nonatomic, strong, readonly) MBLEvent *tapEvent;
+@property (nonatomic, readonly, nonnull) MBLEvent *tapEvent;
 
 
 /**
@@ -158,7 +158,7 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
  shakeThreshold and shakeWidth properties.
  Event callbacks will be provided an empty MBLDataSample object.
  */
-@property (nonatomic, strong, readonly) MBLEvent *shakeEvent;
+@property (nonatomic, readonly, nonnull) MBLEvent *shakeEvent;
 
 
 /**
@@ -177,13 +177,13 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
  is in free fall.
  Event callbacks will be provided an empty MBLDataSample object
  */
-@property (nonatomic, strong, readonly) MBLEvent *freeFallEvent;
+@property (nonatomic, readonly, nonnull) MBLEvent *freeFallEvent;
 
 
 /**
  Event representing an orientation change.
  Event callbacks will be provided an MBLOrientationData object
  */
-@property (nonatomic, strong, readonly) MBLEvent *orientationEvent;
+@property (nonatomic, readonly, nonnull) MBLEvent *orientationEvent;
 
 @end

@@ -55,14 +55,14 @@ typedef NS_ENUM(uint8_t, MBLLEDColorChannel) {
  @param color Which color the LED should be
  @param intensity Scale from 0-1.0 on how bright the LED should be
  */
-- (void)setLEDColor:(UIColor *)color withIntensity:(CGFloat)intensity;
+- (void)setLEDColor:(nonnull UIColor *)color withIntensity:(CGFloat)intensity;
 
 /**
  Flash a specific color on the LED
  @param color Which color the LED should flash
  @param intensity Scale from 0-1.0 on how bright the LED should be
  */
-- (void)flashLEDColor:(UIColor *)color withIntensity:(CGFloat)intensity;
+- (void)flashLEDColor:(nonnull UIColor *)color withIntensity:(CGFloat)intensity;
 
 /**
  Flash a specific color on the LED
@@ -70,7 +70,7 @@ typedef NS_ENUM(uint8_t, MBLLEDColorChannel) {
  @param intensity Scale from 0-1.0 on how bright the LED should be
  @param numberOfFlashes Number of times LED will flash before turning off
  */
-- (void)flashLEDColor:(UIColor *)color withIntensity:(CGFloat)intensity numberOfFlashes:(uint8_t)numberOfFlashes;
+- (void)flashLEDColor:(nonnull UIColor *)color withIntensity:(CGFloat)intensity numberOfFlashes:(uint8_t)numberOfFlashes;
 
 /**
  Flash a specific color on the LED
@@ -79,7 +79,7 @@ typedef NS_ENUM(uint8_t, MBLLEDColorChannel) {
  @param otime Time in mSec LED spends on
  @param period Flash period lenght in mSec
  */
-- (void)flashLEDColor:(UIColor *)color withIntensity:(CGFloat)intensity onTime:(uint16_t)otime andPeriod:(uint16_t)period;
+- (void)flashLEDColor:(nonnull UIColor *)color withIntensity:(CGFloat)intensity onTime:(uint16_t)otime andPeriod:(uint16_t)period;
 
 
 #pragma mark - Advanced Settings

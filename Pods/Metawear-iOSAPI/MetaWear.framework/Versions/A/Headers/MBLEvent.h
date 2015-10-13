@@ -168,7 +168,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  object that is passed to the handler depends on the event being handled
  @param handler Block invoked when this event occus
  */
-- (void)startNotificationsWithHandler:(MBLObjectHandler)handler;
+- (void)startNotificationsWithHandler:(nonnull MBLObjectHandler)handler;
 /**
  Stop receiving callbacks when this event occurs, and release the block provided
  to startNotificationsWithHandler:
@@ -192,7 +192,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  NEVER AGAIN, DON'T ATTEMPT TO USE CALLBACKS INSIDE THIS BLOCK
  @param block Block consisting of API calls to make when this event occus
  */
-- (void)programCommandsToRunOnEvent:(void(^)())block;
+- (void)programCommandsToRunOnEvent:(nonnull MBLVoidHandler)block;
 /**
  Removes all commands setup when calling programCommandsToRunOnEvent:
  */
@@ -222,8 +222,8 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param progressHandler Periodically called while log download is in progress
  */
 - (void)downloadLogAndStopLogging:(BOOL)stopLogging
-                          handler:(MBLArrayErrorHandler)handler
-                  progressHandler:(MBLFloatHandler)progressHandler;
+                          handler:(nonnull MBLArrayErrorHandler)handler
+                  progressHandler:(nullable MBLFloatHandler)progressHandler;
 /**
  See if this event is currently being logged
  @returns YES if logging, NO otherwise
@@ -240,7 +240,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param pass Initially allow samples to pass or not
  @returns New event that conditionally represents the input
  */
-- (MBLDataSwitch *)conditionalDataSwitch:(BOOL)pass;
+- (nonnull MBLDataSwitch *)conditionalDataSwitch:(BOOL)pass;
 
 /**
  Create a new event that allows N input samples to pass to the output.
@@ -249,14 +249,14 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param initialCount Number of samples to allow through
  @returns New event representing N events of the input
  */
-- (MBLDataSwitch *)countingDataSwitch:(uint16_t)initialCount;
+- (nonnull MBLDataSwitch *)countingDataSwitch:(uint16_t)initialCount;
 
 /**
  Create a new event that accumulates the output data values of the current event.
  Event callbacks will be provided the same object as the input.
  @returns New event representing accumulated output
  */
-- (MBLFilter *)summationOfEvent;
+- (nonnull MBLFilter *)summationOfEvent;
 
 /**
  Create a new event that accumulates the number of times the current event fires.
@@ -264,7 +264,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  will be the number of times the input event fired.
  @returns New event representing counted intput
  */
-- (MBLFilter *)counterOfEvent;
+- (nonnull MBLFilter *)counterOfEvent;
 
 /**
  Create a new event that averages the output data of the current event. This
@@ -273,7 +273,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param depth Number of samples to average (works fastest if a power of 2)
  @returns New event representing average of input
  */
-- (MBLFilter *)averageOfEventWithDepth:(uint8_t)depth;
+- (nonnull MBLFilter *)averageOfEventWithDepth:(uint8_t)depth;
 
 /**
  Create a new event that compares the current event and passes through the
@@ -283,7 +283,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @parma data Value on the right hand side of the operation
  @returns New event representing input values that meet the comparison condition
  */
-- (MBLFilter *)compareEventUsingOperation:(MBLComparisonOperation)op withData:(float)data;
+- (nonnull MBLFilter *)compareEventUsingOperation:(MBLComparisonOperation)op withData:(float)data;
 
 /**
  Create a new event that occurs at most once every period milliseconds.
@@ -291,7 +291,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param periodInMsec Sample period in msec
  @returns New event representing periodically sampled output
  */
-- (MBLFilter *)periodicSampleOfEvent:(uint32_t)periodInMsec;
+- (nonnull MBLFilter *)periodicSampleOfEvent:(uint32_t)periodInMsec;
 
 /**
  Create a new event that represents the difference bettween the current event
@@ -301,7 +301,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param periodInMsec Sample period in msec
  @returns New event representing differential output
  */
-- (MBLFilter *)differentialSampleOfEvent:(uint32_t)periodInMsec;
+- (nonnull MBLFilter *)differentialSampleOfEvent:(uint32_t)periodInMsec;
 
 /**
  Create a new event that delays the current even by a given number of samples.
@@ -309,7 +309,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param count Number of samples to delay
  @returns New event representing a delayed version of the input
  */
-- (MBLFilter *)delayOfEventWithCount:(uint8_t)count;
+- (nonnull MBLFilter *)delayOfEventWithCount:(uint8_t)count;
 
 /**
  Create a new event that represents a pulse of the input.  A pulse event will be
@@ -323,7 +323,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param output Select the type of data this filter should output
  @returns New event representing a pulse of the input
  */
-- (MBLFilter *)pulseDetectorOfEventWithThreshold:(float)threshold width:(uint16_t)width output:(MBLPulseOutput)output;
+- (nonnull MBLFilter *)pulseDetectorOfEventWithThreshold:(float)threshold width:(uint16_t)width output:(MBLPulseOutput)output;
 
 /**
  Create a new event that occurs when the given event changes by a specified delta.
@@ -334,7 +334,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param output Select the type of data this filter should output
  @returns New event representing a changed of the input
  */
-- (MBLFilter *)changeOfEventByDelta:(float)delta output:(MBLDeltaValueOutput)output;
+- (nonnull MBLFilter *)changeOfEventByDelta:(float)delta output:(MBLDeltaValueOutput)output;
 
 /**
  Create a new event that occurs when the given event crosses a specified threshold.
@@ -344,7 +344,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param output Select the type of data this filter should output
  @returns New event representing a changed of the input
  */
-- (MBLFilter *)changeOfEventAcrossThreshold:(float)threshold hysteresis:(float)hysteresis output:(MBLThresholdValueOutput)output;
+- (nonnull MBLFilter *)changeOfEventAcrossThreshold:(float)threshold hysteresis:(float)hysteresis output:(MBLThresholdValueOutput)output;
 
 /**
  Create a new event that occurs at the same time of this event, but whose value is
@@ -352,7 +352,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param data Object to be read when this event occurs
  @returns New event representing the data read
  */
-- (MBLEvent *)readDataOnEvent:(MBLData *)data;
+- (nonnull MBLEvent *)readDataOnEvent:(nonnull MBLData *)data;
 
 ///----------------------------------
 /// @name Deprecated Methods
@@ -361,31 +361,31 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
 /**
  * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
  */
-- (MBLFilter *)periodicSampleOfEvent:(uint32_t)periodInMsec identifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
+- (nonnull MBLFilter *)periodicSampleOfEvent:(uint32_t)periodInMsec identifier:(nullable NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
 
 /**
  * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
  */
-- (MBLFilter *)summationOfEventWithIdentifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
+- (nonnull MBLFilter *)summationOfEventWithIdentifier:(nullable NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
 
 /**
  * @deprecated Use compareEventUsingOperation:withData: instead
  */
-- (MBLFilter *)compareEventUsingOperation:(MBLComparisonOperation)op withUnsignedData:(uint32_t)data DEPRECATED_MSG_ATTRIBUTE("Use [compareEventUsingOperation:withData: instead");
+- (nonnull MBLFilter *)compareEventUsingOperation:(MBLComparisonOperation)op withUnsignedData:(uint32_t)data DEPRECATED_MSG_ATTRIBUTE("Use [compareEventUsingOperation:withData: instead");
 
 /**
  * @deprecated Use compareEventUsingOperation:withData: instead
  */
-- (MBLFilter *)compareEventUsingOperation:(MBLComparisonOperation)op withSignedData:(int32_t)data DEPRECATED_MSG_ATTRIBUTE("Use [compareEventUsingOperation:withData: instead");
+- (nonnull MBLFilter *)compareEventUsingOperation:(MBLComparisonOperation)op withSignedData:(int32_t)data DEPRECATED_MSG_ATTRIBUTE("Use [compareEventUsingOperation:withData: instead");
 
 /**
  * @deprecated
  */
-- (MBLFilter *)modifyEventUsingOperation:(MBLArithmeticOperation)op withUnsignedData:(uint32_t)data DEPRECATED_ATTRIBUTE;
+- (nonnull MBLFilter *)modifyEventUsingOperation:(MBLArithmeticOperation)op withUnsignedData:(uint32_t)data DEPRECATED_ATTRIBUTE;
 
 /**
  * @deprecated
  */
-- (MBLFilter *)modifyEventUsingOperation:(MBLArithmeticOperation)op withSignedData:(int32_t)data DEPRECATED_ATTRIBUTE;
+- (nonnull MBLFilter *)modifyEventUsingOperation:(MBLArithmeticOperation)op withSignedData:(int32_t)data DEPRECATED_ATTRIBUTE;
 
 @end

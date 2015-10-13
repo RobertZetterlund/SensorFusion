@@ -43,22 +43,22 @@
 /**
  Manufacturer Name string
  */
-@property (nonatomic, strong) NSString *manufacturerName;
+@property (nonatomic, nonnull) NSString *manufacturerName;
 /**
  Serial Number string
  */
-@property (nonatomic, strong) NSString *serialNumber;
+@property (nonatomic, nonnull) NSString *serialNumber;
 /**
  Hardware Revision string
  */
-@property (nonatomic, strong) NSString *hardwareRevision;
+@property (nonatomic, nonnull) NSString *hardwareRevision;
 /**
  Firmware Revision string
  */
-@property (nonatomic, strong) NSString *firmwareRevision;
+@property (nonatomic, nonnull) NSString *firmwareRevision;
 /**
  Model Number string
  */
-@property (nonatomic, strong) NSString *modelNumber;
+@property (nonatomic, nullable) NSString *modelNumber;
 
 @end

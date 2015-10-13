@@ -81,29 +81,29 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerTapType) {
  and z axis data.  This event will occur at the neareast hardware value
  to sampleFrequency. Event callbacks will be provided an MBLAccelerometerData object.
  */
-@property (nonatomic, strong, readonly) MBLEvent *dataReadyEvent;
+@property (nonatomic, readonly) MBLEvent *dataReadyEvent;
 /**
  Event representing a new accelerometer X axis sample. This event
  will occur at sampleFrequency. Event callbacks will be provided an
  MBLNumericData object whose float value will be acceleration in G's.
  */
-@property (nonatomic, strong, readonly) MBLEvent *xAxisReadyEvent;
+@property (nonatomic, readonly) MBLEvent *xAxisReadyEvent;
 /**
  Event representing a new accelerometer Y axis sample. This event
  will occur at sampleFrequency. Event callbacks will be provided an
  MBLNumericData object whose float value will be acceleration in G's.
  */
-@property (nonatomic, strong, readonly) MBLEvent *yAxisReadyEvent;
+@property (nonatomic, readonly) MBLEvent *yAxisReadyEvent;
 /**
  Event representing a new accelerometer Z axis sample. This event
  will occur at sampleFrequency. Event callbacks will be provided an
  MBLNumericData object whose float value will be acceleration in G's.
  */
-@property (nonatomic, strong, readonly) MBLEvent *zAxisReadyEvent;
+@property (nonatomic, readonly) MBLEvent *zAxisReadyEvent;
 /**
  Event representing a new accelerometer data sample, but filtered down to 
  just an RMS value. Event callbacks will be provided an MBLRMSAccelerometerData object
  */
-@property (nonatomic, strong, readonly) MBLEvent *rmsDataReadyEvent;
+@property (nonatomic, readonly) MBLEvent *rmsDataReadyEvent;
 
 @end

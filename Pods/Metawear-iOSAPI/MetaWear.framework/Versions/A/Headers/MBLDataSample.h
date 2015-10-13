@@ -39,6 +39,6 @@
  Generic base class for data coming from the MetaWear
  */
 @interface MBLDataSample : NSObject
-@property (nonatomic, strong, readonly) NSDate *timestamp;
-@property (nonatomic, strong, readonly) NSData *data;
+@property (nonatomic, readonly, nonnull) NSDate *timestamp;
+@property (nonatomic, readonly, nullable) NSData *data;
 @end

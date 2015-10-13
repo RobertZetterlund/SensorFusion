@@ -47,14 +47,14 @@
  Event callbacks will be provided an MBLNumericData object, where a bool value of
  YES means pressed, and NO means released.
  */
-@property (nonatomic, strong, readonly) MBLData *switchValue;
+@property (nonatomic, readonly, nonnull) MBLData *switchValue;
 
 /**
  Event representing a change in the push button state (pressed/depressed).
  Event callbacks will be provided an MBLNumericData object, where a bool value of
  YES means pressed, and NO means released.
  */
-@property (nonatomic, strong, readonly) MBLEvent *switchUpdateEvent;
+@property (nonatomic, readonly, nonnull) MBLEvent *switchUpdateEvent;
 
 
 ///----------------------------------
@@ -65,13 +65,13 @@
  * @deprecated use [switchValue readWithHandler:] instead
  * @see [switchValue readWithHandler:]
  */
-- (void)readSwitchStateWithHandler:(MBLSwitchStateHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [switchValue readWithHandler:] instead");
+- (void)readSwitchStateWithHandler:(nonnull MBLSwitchStateHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [switchValue readWithHandler:] instead");
 
 /**
  * @deprecated use [switchUpdateEvent startNotificationsWithHandler] instead
  * @see [switchUpdateEvent startNotificationsWithHandler]
  */
-- (void)startSwitchUpdatesWithHandler:(MBLSwitchStateHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [switchUpdateEvent startNotificationsWithHandler] instead");
+- (void)startSwitchUpdatesWithHandler:(nonnull MBLSwitchStateHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [switchUpdateEvent startNotificationsWithHandler] instead");
 /**
  * @deprecated use [switchUpdateEvent stopNotifications] instead
  * @see [switchUpdateEvent stopNotifications]

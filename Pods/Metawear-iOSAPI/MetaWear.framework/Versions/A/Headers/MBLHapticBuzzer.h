@@ -47,13 +47,13 @@
  @param pwidth Duration of buzz in mSec
  @param completion Callback when the buzz is complete
  */
-- (void)startHapticWithDutyCycle:(uint8_t)dcycle pulseWidth:(uint16_t)pwidth completion:(MBLVoidHandler)completion;
+- (void)startHapticWithDutyCycle:(uint8_t)dcycle pulseWidth:(uint16_t)pwidth completion:(nullable MBLVoidHandler)completion;
 
 /**
  Turn on Buzzer Driver.
  @param pwidth Duration of buzz in mSec
  @param completion Callback when the buzz is complete
  */
-- (void)startBuzzerWithPulseWidth:(uint16_t)pwidth completion:(MBLVoidHandler)completion;
+- (void)startBuzzerWithPulseWidth:(uint16_t)pwidth completion:(nullable MBLVoidHandler)completion;
 
 @end

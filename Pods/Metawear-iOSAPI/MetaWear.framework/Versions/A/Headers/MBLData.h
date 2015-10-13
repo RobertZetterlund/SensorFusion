@@ -47,7 +47,7 @@
  Perform a one time read of the current value
  @param handler Callback once read is complete
  */
-- (void)readWithHandler:(MBLObjectHandler)handler;
+- (void)readWithHandler:(nullable MBLObjectHandler)handler;
 
 
 /**
@@ -56,15 +56,15 @@
  @param repeatCount Number of times event will be triggered, 0xFFFF will repeat forever
  @returns New event that will read this data periodically
  */
-- (MBLEvent *)periodicReadWithPeriod:(uint32_t)period
-                         repeatCount:(uint16_t)repeatCount;
+- (nonnull MBLEvent *)periodicReadWithPeriod:(uint32_t)period
+                                 repeatCount:(uint16_t)repeatCount;
 
 /**
  Create a new event that will periodically read this data until canceled.
  @param period Period time in mSec
  @returns New event that will read this data periodically
  */
-- (MBLEvent *)periodicReadWithPeriod:(uint32_t)period;
+- (nonnull MBLEvent *)periodicReadWithPeriod:(uint32_t)period;
 
 
 ///----------------------------------
@@ -74,14 +74,14 @@
 /**
  * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
  */
-- (MBLEvent *)periodicReadWithPeriod:(uint32_t)period
-                          identifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
+- (nonnull MBLEvent *)periodicReadWithPeriod:(uint32_t)period
+                                  identifier:(nullable NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
 
 /**
  * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
  */
-- (MBLEvent *)periodicReadWithPeriod:(uint32_t)period
-                         repeatCount:(uint16_t)repeatCount
-                          identifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
+- (nonnull MBLEvent *)periodicReadWithPeriod:(uint32_t)period
+                                 repeatCount:(uint16_t)repeatCount
+                                  identifier:(nullable NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
 
 @end

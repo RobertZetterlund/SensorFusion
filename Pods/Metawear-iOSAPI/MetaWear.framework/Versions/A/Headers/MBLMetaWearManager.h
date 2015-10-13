@@ -49,7 +49,8 @@ typedef NS_ENUM(uint8_t, MBLFirmwareVersion) {
     MBLFirmwareVersion1_0_0,
     MBLFirmwareVersion1_0_1,
     MBLFirmwareVersion1_0_3,
-    MBLFirmwareVersion1_0_4
+    MBLFirmwareVersion1_0_4,
+    MBLFirmwareVersion1_0_5
 };
 
 /**
@@ -73,7 +74,7 @@ typedef NS_ENUM(uint8_t, MBLFirmwareVersion) {
  @returns The shared manager object.
  @warning You should not create an MBLMetaWearManager object, only used the sharedManager
  */
-+ (instancetype)sharedManager;
++ (nonnull instancetype)sharedManager;
 
 ///----------------------------------
 /// @name Setting Callback Queue
@@ -84,7 +85,7 @@ typedef NS_ENUM(uint8_t, MBLFirmwareVersion) {
  MBLMetaWear will occur on.  Defaults to the main queue.
  @param queue The queue on which the events will be dispatched.
  */
-- (void)setCallbackQueue:(NSOperationQueue *)queue;
+- (void)setCallbackQueue:(nonnull NSOperationQueue *)queue;
 
 ///----------------------------------
 /// @name MetaWear Scanning and Finding
@@ -97,7 +98,7 @@ typedef NS_ENUM(uint8_t, MBLFirmwareVersion) {
  @param handler Callback to handle each time a new device is found
  @see startScanForMetaWearsAllowDuplicates:handler:
  */
-- (void)startScanForMetaWearsWithHandler:(MBLArrayHandler)handler;
+- (void)startScanForMetaWearsWithHandler:(nonnull MBLArrayHandler)handler;
 /**
  Begin scanning for MetaWear devices with the option to filter duplicate devices or not.
  
@@ -110,7 +111,7 @@ typedef NS_ENUM(uint8_t, MBLFirmwareVersion) {
  @param handler Callback to handle each time a new device is found
  a new advertising packet is found
  */
-- (void)startScanForMetaWearsAllowDuplicates:(BOOL)duplicates handler:(MBLArrayHandler)handler;
+- (void)startScanForMetaWearsAllowDuplicates:(BOOL)duplicates handler:(nonnull MBLArrayHandler)handler;
 
 /**
  Stop scanning for MetaWear devices, this will release all handlers given to
@@ -122,7 +123,7 @@ typedef NS_ENUM(uint8_t, MBLFirmwareVersion) {
  Returns a list of saved MetaWear objects, you add to this list by calling [MBLMetaWear rememberDevice]
  @param handler Callback to deliever list remembered MBLMetaWear objects
  */
-- (void)retrieveSavedMetaWearsWithHandler:(MBLArrayHandler)handler;
+- (void)retrieveSavedMetaWearsWithHandler:(nonnull MBLArrayHandler)handler;
 
 ///----------------------------------
 /// @name MetaBoot Recovery Scanning
@@ -139,7 +140,7 @@ typedef NS_ENUM(uint8_t, MBLFirmwareVersion) {
  in the array
  @warning This will cancel any current MetaWear scans
  */
-- (void)startScanForMetaBootsAllowDuplicates:(BOOL)duplicates handler:(MBLArrayHandler)handler;
+- (void)startScanForMetaBootsAllowDuplicates:(BOOL)duplicates handler:(nonnull MBLArrayHandler)handler;
 
 /**
  Stop scanning for MetaBoot devices, this will release all handlers given to
@@ -154,10 +155,10 @@ typedef NS_ENUM(uint8_t, MBLFirmwareVersion) {
 /**
  * @deprecated Use [MBLMetaWear connectWithHandler:] instead
  */
-- (void)connectMetaWear:(MBLMetaWear *)device withHandler:(MBLErrorHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [MBLMetaWear connectWithHandler:] instead");
+- (void)connectMetaWear:(nonnull MBLMetaWear *)device withHandler:(nullable MBLErrorHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [MBLMetaWear connectWithHandler:] instead");
 /**
  * @deprecated Use [MBLMetaWear disconnectWithHandler:] instead
  */
-- (void)cancelMetaWearConnection:(MBLMetaWear *)device withHandler:(MBLErrorHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [MBLMetaWear disconnectWithHandler:] instead");
+- (void)cancelMetaWearConnection:(nonnull MBLMetaWear *)device withHandler:(nullable MBLErrorHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [MBLMetaWear disconnectWithHandler:] instead");
 
 @end

@@ -40,6 +40,6 @@
  */
 DEPRECATED_MSG_ATTRIBUTE("This was renamed to MBLDataSample, as it's used as a base class for logging and notifications now")
 @interface MBLLogEntry : NSObject
-@property (nonatomic, strong, readonly) NSDate *timestamp;
-@property (nonatomic, strong, readonly) NSData *data;
+@property (nonatomic, readonly) NSDate *timestamp;
+@property (nonatomic, readonly) NSData *data;
 @end

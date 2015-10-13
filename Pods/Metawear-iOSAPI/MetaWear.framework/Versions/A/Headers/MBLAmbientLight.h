@@ -49,6 +49,6 @@
  Event callbacks will be provided an MBLNumericData object whose
  float value will be illuminance in lux.
  */
-@property (nonatomic, strong, readonly) MBLData *illuminance;
+@property (nonatomic, readonly, nonnull) MBLData *illuminance;
 
 @end

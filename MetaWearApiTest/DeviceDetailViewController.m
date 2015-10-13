@@ -272,6 +272,8 @@
 {
     [self.connectionSwitch setOn:YES animated:YES];
     // Perform all device specific setup
+ 
+    NSLog(@"%@", self.device.identifier);
     
     // We always have the info and state features
     [self cells:self.infoAndStateCells setHidden:NO];
@@ -647,12 +649,22 @@
     hud.labelText = @"Downloading...";
     
     [self.device.accelerometer.dataReadyEvent downloadLogAndStopLogging:YES handler:^(NSArray *array, NSError *error) {
-        [hud hide:YES];
         if (!error) {
             self.accelerometerDataArray = array;
             for (MBLAccelerometerData *acceleration in array) {
                 [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
             }
+            hud.mode = MBProgressHUDModeIndeterminate;
+            hud.labelText = @"Clearing Log...";
+            [self logCleanup:^(NSError *error) {
+                [hud hide:YES];
+                if (error) {
+                    [self connectDevice:NO];
+                }
+            }];
+        } else {
+            [self connectDevice:NO];
+            [hud hide:YES];
         }
     } progressHandler:^(float number, NSError *error) {
         hud.progress = number;
@@ -1112,12 +1124,22 @@
     hud.labelText = @"Downloading...";
     
     [self.device.gyro.dataReadyEvent downloadLogAndStopLogging:YES handler:^(NSArray *array, NSError *error) {
-        [hud hide:YES];
         if (!error) {
             self.gyroBMI160Data = array;
             for (MBLGyroData *obj in array) {
                 [self.gyroBMI160Graph addX:obj.x * .008 y:obj.y * .008 z:obj.z * .008];
             }
+            hud.mode = MBProgressHUDModeIndeterminate;
+            hud.labelText = @"Clearing Log...";
+            [self logCleanup:^(NSError *error) {
+                [hud hide:YES];
+                if (error) {
+                    [self connectDevice:NO];
+                }
+            }];
+        } else {
+            [self connectDevice:NO];
+            [hud hide:YES];
         }
     } progressHandler:^(float number, NSError *error) {
         hud.progress = number;

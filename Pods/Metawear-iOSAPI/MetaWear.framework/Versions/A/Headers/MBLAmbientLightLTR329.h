@@ -99,6 +99,6 @@ typedef NS_ENUM(uint8_t, MBLAmbientLightLTR329Rate) {
  of event will depend on measurementRate. Event callbacks will be provided
  an MBLNumericData object whose float value will be illuminance in lux. 
  */
-@property (nonatomic, strong, readonly) MBLEvent *periodicIlluminance;
+@property (nonatomic, readonly, nonnull) MBLEvent *periodicIlluminance;
 
 @end

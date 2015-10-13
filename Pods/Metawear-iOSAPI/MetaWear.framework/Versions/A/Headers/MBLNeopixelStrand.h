@@ -46,7 +46,7 @@
  @param pixel Pixel index to be set
  @param color Color the LED will be set to
  */
-- (void)setPixel:(uint8_t)pixel color:(UIColor *)color;
+- (void)setPixel:(uint8_t)pixel color:(nonnull UIColor *)color;
 
 /**
  This sets each pixel in the strand so that it looks like a rainbow.

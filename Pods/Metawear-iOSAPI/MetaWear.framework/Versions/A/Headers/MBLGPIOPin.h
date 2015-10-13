@@ -84,7 +84,7 @@ typedef NS_ENUM(uint8_t, MBLPinChangeType) {
  By setting this value we will automatically enable the sensor just 
  long enought to get a sample.
  */
-@property (nonatomic) NSNumber *enablePin;
+@property (nonatomic, nullable) NSNumber *enablePin;
 /**
  Used when enablePin is set, YES means when enablePin is low the sensor
  will be on, NO means when enablePin is high the sensor will be on.
@@ -99,20 +99,20 @@ typedef NS_ENUM(uint8_t, MBLPinChangeType) {
  value indicates what state the pin changed to, YES means set, NO means
  clear.
  */
-@property (nonatomic, strong, readonly) MBLEvent *changeEvent;
+@property (nonatomic, readonly, nonnull) MBLEvent *changeEvent;
 /**
  Data representing the digital value of the pin.
  Event callbacks will be provided an MBLNumericData object whose bool
  value indicates what state the pin is in, YES means set, NO means clear.
  */
-@property (nonatomic, strong, readonly) MBLData *digitalValue;
+@property (nonatomic, readonly, nonnull) MBLData *digitalValue;
 /**
  Data representing the analog value of the pin.
  Event callbacks will be provided an MBLNumericData object whose float
  value will be volts.
  @warning Only pins 0-3 can perform analog reads
  */
-@property (nonatomic, strong, readonly) MBLData *analogAbsolute;
+@property (nonatomic, readonly, nullable) MBLData *analogAbsolute;
 /**
  Data representing the analog value of the pin as a ratio of the supply voltage.
  Event callbacks will be provided an MBLNumericData object whose float value
@@ -120,7 +120,7 @@ typedef NS_ENUM(uint8_t, MBLPinChangeType) {
  ground, and 1.0 indicates pin is equal to supply voltage.
  @warning Only pins 0-3 can perform analog reads
  */
-@property (nonatomic, strong, readonly) MBLData *analogRatio;
+@property (nonatomic, readonly, nullable) MBLData *analogRatio;
 
 
 /**
@@ -142,11 +142,11 @@ typedef NS_ENUM(uint8_t, MBLPinChangeType) {
 /**
  @deprecated use [analogAbsolute readWithHandler:] or [analogRatio readWithHandler:] instead
  */
-- (void)readAnalogValueUsingMode:(MBLAnalogReadMode)mode handler:(MBLDecimalNumberHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [analogAbsolute readWithHandler:] or [analogRatio readWithHandler:] instead");
+- (void)readAnalogValueUsingMode:(MBLAnalogReadMode)mode handler:(nonnull MBLDecimalNumberHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [analogAbsolute readWithHandler:] or [analogRatio readWithHandler:] instead");
 
 /**
  @deprecated use [digitalValue readWithHandler:] instead
  */
-- (void)readDigitalValueWithHandler:(MBLBoolHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [digitalValue readWithHandler:] instead");
+- (void)readDigitalValueWithHandler:(nonnull MBLBoolHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use [digitalValue readWithHandler:] instead");
 
 @end

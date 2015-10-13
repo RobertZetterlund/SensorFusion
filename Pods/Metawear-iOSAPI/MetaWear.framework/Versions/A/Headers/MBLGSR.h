@@ -72,7 +72,7 @@ typedef NS_ENUM(uint8_t, MBLGSRVoltage) {
  to channel 0, which can be used for perfoming single channel reads.
  Callbacks will be provided an MBLNumericData object.
  */
-@property (nonatomic, strong, readonly) NSArray *channels;
+@property (nonatomic, readonly, nonnull) NSArray *channels;
 
 /**
  Perform automatic GSR calibration.  This should be called when

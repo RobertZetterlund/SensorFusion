@@ -105,25 +105,25 @@ typedef NS_ENUM(uint8_t, MBLANCSNotificationAttributeID) {
  Event representing an ANCS event of one or more CategoryID's. Event callbacks will
  be provided an MBLANCSEventData object.
  */
-- (MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds;
+- (nonnull MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds;
 
 /**
  Event representing an ANCS event of a specific CategoryID, EventID, and EventFlags.
  Event callbacks will be provided an MBLANCSEventData object.
  */
-- (MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
-                          eventIds:(MBLANCSEventID)eventIds
-                        eventFlags:(MBLANCSEventFlag)eventFlags;
+- (nonnull MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
+                                  eventIds:(MBLANCSEventID)eventIds
+                                eventFlags:(MBLANCSEventFlag)eventFlags;
 
 /**
  Event representing an ANCS event of a specific CategoryID, EventID, EventFlags, and Notification Attribute.
  Event callbacks will be provided an MBLANCSEventData object.
  */
-- (MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
-                          eventIds:(MBLANCSEventID)eventIds
-                        eventFlags:(MBLANCSEventFlag)eventFlags
-                       attributeId:(MBLANCSNotificationAttributeID)attributeId
-                     attributeData:(NSString *)attributeData;
+- (nonnull MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
+                                  eventIds:(MBLANCSEventID)eventIds
+                                eventFlags:(MBLANCSEventFlag)eventFlags
+                               attributeId:(MBLANCSNotificationAttributeID)attributeId
+                             attributeData:(nonnull NSString *)attributeData;
 
 ///----------------------------------
 /// @name Deprecated Methods
@@ -132,24 +132,24 @@ typedef NS_ENUM(uint8_t, MBLANCSNotificationAttributeID) {
 /**
  * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
  */
-- (MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
-                          eventIds:(MBLANCSEventID)eventIds
-                        eventFlags:(MBLANCSEventFlag)eventFlags
-                       attributeId:(MBLANCSNotificationAttributeID)attributeId
-                     attributeData:(NSString *)attributeData
-                        identifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
+- (nonnull MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
+                                  eventIds:(MBLANCSEventID)eventIds
+                                eventFlags:(MBLANCSEventFlag)eventFlags
+                               attributeId:(MBLANCSNotificationAttributeID)attributeId
+                             attributeData:(nullable NSString *)attributeData
+                                identifier:(nullable NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
 
 /**
  * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
  */
-- (MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
-                          eventIds:(MBLANCSEventID)eventIds
-                        eventFlags:(MBLANCSEventFlag)eventFlags
-                        identifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
+- (nonnull MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
+                                  eventIds:(MBLANCSEventID)eventIds
+                                eventFlags:(MBLANCSEventFlag)eventFlags
+                                identifier:(nullable NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
 
 /**
  * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
  */
-- (MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds identifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
+- (nonnull MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds identifier:(nullable NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
 
 @end

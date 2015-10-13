@@ -77,10 +77,10 @@ typedef NS_ENUM(uint8_t, MBLRotationDirection) {
  @param pin GPIO pin the strand is connected to
  @param length Number of pixels to initialize
  */
-- (MBLNeopixelStrand *)strandWithColor:(MBLColorOrdering)color
-                                 speed:(MBLStrandSpeed)speed
-                                   pin:(uint8_t)pin
-                                length:(uint8_t)length;
+- (nonnull MBLNeopixelStrand *)strandWithColor:(MBLColorOrdering)color
+                                         speed:(MBLStrandSpeed)speed
+                                           pin:(uint8_t)pin
+                                        length:(uint8_t)length;
 
 
 ///----------------------------------
@@ -109,7 +109,7 @@ typedef NS_ENUM(uint8_t, MBLRotationDirection) {
  * @deprecated use MBLNeopixelStrand instead
  * @see MBLNeopixelStrand
  */
-- (void)setPixelAtIndex:(uint8_t)index pixel:(uint8_t)pixel color:(UIColor *)color DEPRECATED_MSG_ATTRIBUTE("use MBLNeopixelStrand instead");
+- (void)setPixelAtIndex:(uint8_t)index pixel:(uint8_t)pixel color:(nonnull UIColor *)color DEPRECATED_MSG_ATTRIBUTE("use MBLNeopixelStrand instead");
 
 /**
  * @deprecated use MBLNeopixelStrand instead
