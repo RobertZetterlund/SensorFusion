@@ -86,6 +86,7 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  MBLMetaWear object using the setConfiguration:handler: method
  */
 @protocol MBLRestorable <NSObject, NSCoding>
+@optional
 /**
  Any API calls in this method will be persisted in non-volatile memory on the
  MetaWear, so upon power cycle it will setup the device with whatever you want automatically
@@ -207,6 +208,11 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  */
 @property (nonatomic, readonly) MBLConnectionState state;
 /**
+ If YES, then WARNING, this is not the owning application and you can cause 
+ data loss for the other application that is using the device.
+ */
+@property (nonatomic, readonly) BOOL isGuestConnection;
+/**
  iOS generated unique identifier for this MetaWear
  */
 @property (nonatomic, readonly, nonnull) NSUUID *identifier;
@@ -290,6 +296,17 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  */
 - (void)forgetDevice;
 
+/**
+ The state of all MetaWear modules are persisted to disk for ease of use
+ across application launches.  Most of the time you don't need to explicitly
+ call this function as it is called automatically after interactions with the 
+ board.  Function that count as interacation include start/stopLogging,
+ start/stopNotifications, program/eraseCommands.  If you make changes and don't
+ call one of these functions, then it may be usefully to call this function so
+ you don't lose the state of any settings.
+ */
+- (void)synchronize;
+
 ///----------------------------------
 /// @name State Reading
 ///----------------------------------
@@ -310,7 +327,8 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
 ///----------------------------------
 
 /**
- Perform a software reset of the device
+ Perform a software reset of the device.  Note that all module properties of
+ this object will be invalidated, so remove any external references to them.
  @warning This will cause the device to disconnect
  */
 - (void)resetDevice;
@@ -335,7 +353,6 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  */
 - (void)updateFirmwareWithHandler:(nonnull MBLErrorHandler)handler
                   progressHandler:(nullable MBLFloatHandler)progressHandler;
-
 
 ///----------------------------------
 /// @name Deprecated Methods

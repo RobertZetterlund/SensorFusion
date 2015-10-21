@@ -37,7 +37,7 @@
 #import "MBProgressHUD.h"
 #import "APLGraphView.h"
 
-@interface DeviceDetailViewController () <MFMailComposeViewControllerDelegate>
+@interface DeviceDetailViewController ()
 @property (weak, nonatomic) IBOutlet UISwitch *connectionSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *connectionStateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -172,6 +172,8 @@
 
 
 @property (nonatomic, strong) NSMutableArray *streamingEvents;
+
+@property (nonatomic, strong) UIDocumentInteractionController *controller;
 @end
 
 @implementation DeviceDetailViewController
@@ -273,7 +275,7 @@
     [self.connectionSwitch setOn:YES animated:YES];
     // Perform all device specific setup
  
-    NSLog(@"%@", self.device.identifier);
+    NSLog(@"ID: %@", self.device.identifier.UUIDString);
     
     // We always have the info and state features
     [self cells:self.infoAndStateCells setHidden:NO];
@@ -310,13 +312,35 @@
     
     if ([self.device.accelerometer isKindOfClass:[MBLAccelerometerMMA8452Q class]]) {
         [self cell:self.accelerometerMMA8452QCell setHidden:NO];
+        if (self.device.accelerometer.dataReadyEvent.isLogging) {
+            [self.startLog setEnabled:NO];
+            [self.stopLog setEnabled:YES];
+            [self.startAccelerometer setEnabled:NO];
+            [self.stopAccelerometer setEnabled:NO];
+        } else {
+            [self.startLog setEnabled:YES];
+            [self.stopLog setEnabled:NO];
+            [self.startAccelerometer setEnabled:YES];
+            [self.stopAccelerometer setEnabled:NO];
+        }
     } else if ([self.device.accelerometer isKindOfClass:[MBLAccelerometerBMI160 class]]) {
         [self cell:self.accelerometerBMI160Cell setHidden:NO];
+        if (self.device.accelerometer.dataReadyEvent.isLogging) {
+            [self.accelerometerBMI160StartLog setEnabled:NO];
+            [self.accelerometerBMI160StopLog setEnabled:YES];
+            [self.accelerometerBMI160StartStream setEnabled:NO];
+            [self.accelerometerBMI160StopStream setEnabled:NO];
+        } else {
+            [self.accelerometerBMI160StartLog setEnabled:YES];
+            [self.accelerometerBMI160StopLog setEnabled:NO];
+            [self.accelerometerBMI160StartStream setEnabled:YES];
+            [self.accelerometerBMI160StopStream setEnabled:NO];
+        }
     }
     
     if ([self.device.gyro isKindOfClass:[MBLGyroBMI160 class]]) {
         [self cell:self.gyroBMI160Cell setHidden:NO];
-        if ([self.device.gyro.dataReadyEvent isLogging]) {
+        if (self.device.gyro.dataReadyEvent.isLogging) {
             [self.gyroBMI160StartLog setEnabled:NO];
             [self.gyroBMI160StopLog setEnabled:YES];
             [self.gyroBMI160StartStream setEnabled:NO];
@@ -683,40 +707,27 @@
                                             dataElement.z] dataUsingEncoding:NSUTF8StringEncoding]];
         }
     }
-    [self sendMail:accelerometerData title:@"AccData"];
+    [self sendData:accelerometerData title:@"AccData"];
 }
 
-- (void)sendMail:(NSData *)attachment title:(NSString *)title
+- (void)sendData:(NSData *)data title:(NSString *)title
 {
-    if (![MFMailComposeViewController canSendMail]) {
-        [[[UIAlertView alloc] initWithTitle:@"Mail Error" message:@"This device does not have an email account setup" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
-        return;
-    }
-    
     // Get current Time/Date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM_dd_yyyy-HH_mm_ss"];
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-    
-    MFMailComposeViewController *emailController = [[MFMailComposeViewController alloc] init];
-    emailController.mailComposeDelegate = self;
-    
-    // attachment
     NSString *name = [NSString stringWithFormat:@"%@_%@.csv", title, dateString];
-    [emailController addAttachmentData:attachment mimeType:@"text/plain" fileName:name];
-    
-    // subject
-    [emailController setSubject:name];
-    
-    NSMutableString *body = [[NSMutableString alloc] initWithFormat:@"The data was recorded on %@.\n", dateString];
-    [emailController setMessageBody:body isHTML:NO];
-    
-    [self presentViewController:emailController animated:YES completion:NULL];
-}
-
--(void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    NSURL *fileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:name]];
+    NSError *error = nil;
+    if ([data writeToURL:fileURL options:NSDataWritingAtomic error:&error]) {
+        // Popup the default share screen
+        self.controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+        if (![self.controller presentOptionsMenuFromRect:self.view.bounds inView:self.view animated:YES]) {
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"No programs installed that could save document" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+        }
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+    }
 }
 
 - (IBAction)startTapPressed:(id)sender
@@ -922,7 +933,7 @@
                                             dataElement.z] dataUsingEncoding:NSUTF8StringEncoding]];
         }
     }
-    [self sendMail:accelerometerData title:@"AccData"];
+    [self sendData:accelerometerData title:@"AccData"];
 }
 
 - (IBAction)accelerometerBMI160StartTapPressed:(id)sender
@@ -1158,7 +1169,7 @@
                                    dataElement.z] dataUsingEncoding:NSUTF8StringEncoding]];
         }
     }
-    [self sendMail:gyroData title:@"GyroData"];
+    [self sendData:gyroData title:@"GyroData"];
 }
 
 - (IBAction)gpioPinSelectorPressed:(id)sender
