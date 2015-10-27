@@ -64,6 +64,7 @@
 #import <MetaWear/MBLMechanicalSwitch.h>
 #import <MetaWear/MBLMetaWear.h>
 #import <MetaWear/MBLMetaWearManager.h>
+#import <MetaWear/MBLMetaWearConfiguration.h>
 #import <MetaWear/MBLModule.h>
 #import <MetaWear/MBLNeopixel.h>
 #import <MetaWear/MBLNeopixelStrand.h>

@@ -52,6 +52,7 @@
 @class MBLGSR;
 @class MBLBarometer;
 @class MBLAmbientLight;
+@class MBLMetaWearConfiguration;
 
 /**
  BLE transmiter power
@@ -80,20 +81,12 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
 
 @class MBLMetaWear;
 
-/**
- An MBLRestorable object is used to persist state across resets and disconnects.
- You create an object that conforms to this protocol and then assing it to an
- MBLMetaWear object using the setConfiguration:handler: method
- */
+
+DEPRECATED_MSG_ATTRIBUTE("Derive from MBLMetaWearConfiguration and override the setupEvents method")
 @protocol MBLRestorable <NSObject, NSCoding>
 @optional
-/**
- Any API calls in this method will be persisted in non-volatile memory on the
- MetaWear, so upon power cycle it will setup the device with whatever you want automatically
- */
 - (void)runOnDeviceBoot:(nonnull MBLMetaWear *)device;
 @end
-
 
 /**
  Each MBLMetaWear object corresponds a physical MetaWear board.  It contains all the logical
@@ -181,23 +174,23 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
 ///----------------------------------
 
 /**
- MBLRestorable object containing custom settings and events that are programmed to 
- the MetaWear and preserved even after reset or power failure.
+ MBLMetaWearConfiguration object containing custom settings and events that are 
+ programmed to the MetaWear and preserved between disconnects and app termination.
  */
-@property (nonatomic, readonly, nullable) id<MBLRestorable> configuration;
+@property (nonatomic, readonly, nullable) MBLMetaWearConfiguration *configuration;
 
 /**
- Program MetaWear with persistance settings.  This only needs to be called once, likely 
- after you confirm the device from a scanning screen or such.  Upon calling it will
+ Assign a new configuration object to this MetaWear.  This only needs to be called once,
+ likely after you confirm the device from a scanning screen or such.  Upon calling it will
  erase all non-volatile memory the device (which requires disconnect), then perform reset, 
- then once its comes back online we will connect and invoke the runOnDeviceBoot method.
- These settings will be persisted device side so after any future reset these settings
- will be applied automatically.
+ once its comes back online we will connect and invoke the setupEvents method.
+ Then the runOnDeviceBoot method is invoked and all calls in that method are persisted 
+ device side so after any future reset these settings will be applied automatically.
  @param configuration Pointer to object containing programming commands.  Writing nil
  will reset to factory settings.
  @param handler Callback once programming is complete
  */
-- (void)setConfiguration:(nullable id<MBLRestorable>)configuration handler:(nullable MBLErrorHandler)handler;
+- (void)setConfiguration:(nullable MBLMetaWearConfiguration *)configuration handler:(nullable MBLErrorHandler)handler;
 
 ///----------------------------------
 /// @name State Accessors
