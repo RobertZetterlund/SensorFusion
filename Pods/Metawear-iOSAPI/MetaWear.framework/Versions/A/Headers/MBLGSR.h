@@ -54,7 +54,7 @@ typedef NS_ENUM(uint8_t, MBLGSRVoltage) {
 /**
  Interface to on-board GSR sensor
  */
-@interface MBLGSR : MBLModule <NSCoding>
+@interface MBLGSR : MBLModule
 
 /**
  Gain applied in the GSR circuit

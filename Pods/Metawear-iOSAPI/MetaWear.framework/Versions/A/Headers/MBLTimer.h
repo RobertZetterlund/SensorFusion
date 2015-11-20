@@ -39,7 +39,7 @@
 /**
  Interface to timer module
  */
-@interface MBLTimer : MBLModule <NSCoding>
+@interface MBLTimer : MBLModule
 
 /**
  Create a new event that will trigger periodically a fixed number of times.

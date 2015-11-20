@@ -41,7 +41,7 @@
 /**
  This object represents synchronous data from sensors and peripherals on the MetaWear board.
  */
-@interface MBLData : MBLRegister <NSCoding>
+@interface MBLData : MBLRegister
 
 /**
  Perform a one time read of the current value

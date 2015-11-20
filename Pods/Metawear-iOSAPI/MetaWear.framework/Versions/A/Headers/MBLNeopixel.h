@@ -68,7 +68,7 @@ typedef NS_ENUM(uint8_t, MBLRotationDirection) {
 /**
  Interface to external NeoPixel stands
  */
-@interface MBLNeopixel : MBLModule <NSCoding>
+@interface MBLNeopixel : MBLModule
 
 /**
  Initialize memory on the MetaWear board for a NeoPixel strand

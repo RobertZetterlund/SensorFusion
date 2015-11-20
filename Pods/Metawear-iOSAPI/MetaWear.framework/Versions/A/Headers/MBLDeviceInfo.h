@@ -38,7 +38,7 @@
 /**
  Container for a device revision data
  */
-@interface MBLDeviceInfo : NSObject <NSCoding>
+@interface MBLDeviceInfo : NSObject
 
 /**
  Manufacturer Name string

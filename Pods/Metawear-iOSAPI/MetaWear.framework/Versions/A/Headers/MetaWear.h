@@ -64,7 +64,6 @@
 #import <MetaWear/MBLMechanicalSwitch.h>
 #import <MetaWear/MBLMetaWear.h>
 #import <MetaWear/MBLMetaWearManager.h>
-#import <MetaWear/MBLMetaWearConfiguration.h>
 #import <MetaWear/MBLModule.h>
 #import <MetaWear/MBLNeopixel.h>
 #import <MetaWear/MBLNeopixelStrand.h>
@@ -72,6 +71,7 @@
 #import <MetaWear/MBLOrientationData.h>
 #import <MetaWear/MBLRegister.h>
 #import <MetaWear/MBLRMSAccelerometerData.h>
+#import <MetaWear/MBLSettings.h>
 #import <MetaWear/MBLTemperature.h>
 #import <MetaWear/MBLExternalThermistor.h>
 #import <MetaWear/MBLTimer.h>

@@ -43,7 +43,7 @@
 /**
  Interface to the on-chip and external thermistor temperature sensors
  */
-@interface MBLTemperature : MBLModule <NSCoding>
+@interface MBLTemperature : MBLModule
 
 /**
  Array of MBLData (or derived class) objects corresponding to the different

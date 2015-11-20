@@ -77,7 +77,7 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
 /**
  Interface to an MMA8452Q accelerometer
  */
-@interface MBLAccelerometerMMA8452Q : MBLAccelerometer <NSCoding>
+@interface MBLAccelerometerMMA8452Q : MBLAccelerometer
 /**
  Maximum acceleration the accelerometer can report
  */

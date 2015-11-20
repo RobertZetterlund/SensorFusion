@@ -38,7 +38,7 @@
 /**
  The MBLFilter takes an MBLEvent as input, then performs some operation and produces an output.
  */
-@interface MBLFilter : MBLEvent <NSCoding>
+@interface MBLFilter : MBLEvent
 
 /**
  Reset the internal state of the filter

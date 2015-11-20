@@ -38,6 +38,6 @@
 /**
  Base class for MetaWear registers
  */
-@interface MBLRegister : NSObject <NSCoding>
+@interface MBLRegister : NSObject
 
 @end

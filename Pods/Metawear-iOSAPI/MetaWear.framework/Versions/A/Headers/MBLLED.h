@@ -48,7 +48,7 @@ typedef NS_ENUM(uint8_t, MBLLEDColorChannel) {
 /**
  Interface to on-board LED
  */
-@interface MBLLED : MBLModule <NSCoding>
+@interface MBLLED : MBLModule
 
 /**
  Display a specific color on the LED

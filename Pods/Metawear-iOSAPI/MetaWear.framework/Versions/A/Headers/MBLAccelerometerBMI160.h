@@ -49,7 +49,7 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerBMI160Range) {
 /**
  Interface to a BMI160 accelerometer
  */
-@interface MBLAccelerometerBMI160 : MBLAccelerometer <NSCoding>
+@interface MBLAccelerometerBMI160 : MBLAccelerometer
 /**
  Maximum acceleration the accelerometer can report
  */

@@ -39,7 +39,20 @@
 /**
  Interface to a strand of NeoPixels
  */
-@interface MBLNeopixelStrand : NSObject <NSCoding>
+@interface MBLNeopixelStrand : NSObject
+
+/**
+ Initialize the strand, this must be called before invoking any other
+ commands on the strand.  This should only be call once when the strand
+ is created.
+ */
+- (void)initialize;
+/**
+ Deinitialize the strand, this should only be call once right before
+ you are ready to drop all references to this object.  This should
+ NOT be used to turn if off temporarily, for that use clearAllPixels.
+ */
+- (void)deinitialize;
 
 /**
  Set Pixel at strand index.
@@ -63,6 +76,10 @@
  @param end Pixel index to clear to, inclusive
  */
 - (void)clearFromStartPixel:(uint8_t)startPixel endPixel:(uint8_t)endPixel;
+/**
+ Clear all neopixel pixels in the strand
+ */
+- (void)clearAllPixels;
 
 /**
  Hold Neopixel strand.
@@ -80,8 +97,8 @@
 - (void)rotateStrandWithDirection:(MBLRotationDirection)direction repetitions:(uint8_t)repetitions period:(uint16_t)period;
 
 /**
- Clears all pixels and puts strand into low power state
+ @deprecated use clearAllPixels instead
  */
-- (void)turnStrandOff;
+- (void)turnStrandOff DEPRECATED_MSG_ATTRIBUTE("use clearAllPixels instead");
 
 @end

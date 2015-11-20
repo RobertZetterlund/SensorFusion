@@ -42,7 +42,7 @@
  Interface to the general purprose input/output pins on the MetaWear.  This 
  allows you to attach your own sensors or drive digitial devices.
  */
-@interface MBLGPIO : MBLModule <NSCoding>
+@interface MBLGPIO : MBLModule
 
 /**
  Array of MBLGPIOPin objects. The index corresponds to the pin number

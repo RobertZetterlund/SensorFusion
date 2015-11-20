@@ -157,7 +157,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  custom event on reconnect.  This is where the NSString identifier comes in, you can call
  retrieveEventWithIdentifier: on the freshly connected MBLMetaWear object to get your event back.
  */
-@interface MBLEvent : MBLRegister <NSCoding>
+@interface MBLEvent : MBLRegister
 
 ///----------------------------------
 /// @name Notifications
@@ -197,6 +197,11 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  Removes all commands setup when calling programCommandsToRunOnEvent:
  */
 - (void)eraseCommandsToRunOnEvent;
+/**
+ See if this event currently has commands programmed to run
+ @returns YES if has commands, NO otherwise
+ */
+- (BOOL)hasCommands;
 
 ///----------------------------------
 /// @name Logging

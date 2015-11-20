@@ -39,7 +39,7 @@
 /**
  Interface for reading/writing externally connected I2C devices.
  */
-@interface MBLI2C : MBLModule <NSCoding>
+@interface MBLI2C : MBLModule
 
 /**
  Create an I2C data endpoint.  The deivce and register address

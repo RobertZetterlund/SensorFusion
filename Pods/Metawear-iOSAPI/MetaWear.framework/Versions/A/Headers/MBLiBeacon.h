@@ -54,7 +54,7 @@ typedef NS_ENUM(uint8_t, MBLiBeaconTransmitPower) {
 /**
  Interface to program the device to advertise as an iBeacon
  */
-@interface MBLiBeacon : MBLModule <NSCoding>
+@interface MBLiBeacon : MBLModule
 
 /**
  The iBeacon UUID being broadcast, the default is the MetaWear Service UUID
@@ -96,19 +96,5 @@ typedef NS_ENUM(uint8_t, MBLiBeaconTransmitPower) {
  @param on YES turns iBeacon on, NO, turns iBeacon off
  */
 - (void)setBeaconOn:(BOOL)on;
-
-
-///----------------------------------
-/// @name Deprecated Properties
-///----------------------------------
-
-/**
- * @deprecated use calibratedReceiverPower instead
- */
-@property (nonatomic) uint8_t powerRX DEPRECATED_MSG_ATTRIBUTE("Use calibratedReceiverPower instead");
-/**
- * @deprecated use transmitPower instead
- */
-@property (nonatomic) uint8_t powerTX DEPRECATED_MSG_ATTRIBUTE("Use transmitPower instead");
 
 @end

@@ -42,7 +42,7 @@
  features then upcast to the specific sensor on your board, MBLAmbientLightLTR329.
  @see MBLAmbientLightLTR329
  */
-@interface MBLAmbientLight : MBLModule <NSCoding>
+@interface MBLAmbientLight : MBLModule
 
 /**
  Data representing the intensity of visible light present.

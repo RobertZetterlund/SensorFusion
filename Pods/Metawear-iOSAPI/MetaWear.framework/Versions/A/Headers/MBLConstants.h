@@ -44,7 +44,7 @@ typedef void (^MBLVoidHandler)();
 typedef void (^MBLErrorHandler)(NSError *__nullable error);
 typedef void (^MBLDataHandler)(NSData *__nullable data, NSError *__nullable error);
 typedef void (^MBLObjectHandler)(id __nullable obj, NSError *__nullable error);
-typedef void (^MBLArrayHandler)(NSArray *__nullable array);
+typedef void (^MBLArrayHandler)(NSArray *__nonnull array);
 typedef void (^MBLArrayErrorHandler)(NSArray *__nullable array, NSError *__nullable error);
 typedef void (^MBLCentralManagerStateHandler)(CBCentralManagerState state);
 typedef void (^MBLAccelerometerHandler)(MBLAccelerometerData *__nullable acceleration, NSError *__nullable error);

@@ -38,6 +38,6 @@
 /**
  Base class for all sensors and peripherals
  */
-@interface MBLModule : NSObject <NSCoding>
+@interface MBLModule : NSObject
 
 @end

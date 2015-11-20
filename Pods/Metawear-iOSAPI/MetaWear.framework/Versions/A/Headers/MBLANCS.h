@@ -99,7 +99,7 @@ typedef NS_ENUM(uint8_t, MBLANCSNotificationAttributeID) {
  Interface to Apple Notification Center Service (ANCS).
  For more details on ANCS see https://developer.apple.com/library/ios/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/AppleNotificationCenterServiceSpecification.pdf
  */
-@interface MBLANCS : MBLModule <NSCoding>
+@interface MBLANCS : MBLModule
 
 /**
  Event representing an ANCS event of one or more CategoryID's. Event callbacks will

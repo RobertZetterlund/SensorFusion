@@ -50,7 +50,7 @@ typedef NS_ENUM(uint8_t, MBLGyroBMI160Range) {
 /**
  Interface to on-board BMI160 gyro
  */
-@interface MBLGyroBMI160 : MBLGyro <NSCoding>
+@interface MBLGyroBMI160 : MBLGyro
 /**
  Maximum rotation the gyro can report
  */

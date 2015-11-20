@@ -64,7 +64,7 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerTapType) {
  @see MBLAccelerometerMMA8452Q
  @see MBLAccelerometerBMI160
  */
-@interface MBLAccelerometer : MBLModule <NSCoding>
+@interface MBLAccelerometer : MBLModule
 /**
  The frequency, in hertz, for providing accelerometer samples to the event handlers.
  

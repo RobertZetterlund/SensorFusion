@@ -52,21 +52,8 @@
 @class MBLGSR;
 @class MBLBarometer;
 @class MBLAmbientLight;
-@class MBLMetaWearConfiguration;
+@class MBLSettings;
 
-/**
- BLE transmiter power
- */
-typedef NS_ENUM(uint8_t, MBLTransmitPower) {
-    MBLTransmitPower4dBm,
-    MBLTransmitPower0dBm,
-    MBLTransmitPowerMinus4dBm,
-    MBLTransmitPowerMinus8dBm,
-    MBLTransmitPowerMinus12dBm,
-    MBLTransmitPowerMinus16dBm,
-    MBLTransmitPowerMinus20dBm,
-    MBLTransmitPowerMinus30dBm
-};
 
 /**
  Current state of the MetaWear connection
@@ -82,11 +69,26 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
 @class MBLMetaWear;
 
 
-DEPRECATED_MSG_ATTRIBUTE("Derive from MBLMetaWearConfiguration and override the setupEvents method")
-@protocol MBLRestorable <NSObject, NSCoding>
-@optional
+/**
+ An MBLRestorable object is used to persist state across resets and disconnects.
+ You create an object that conforms to this protocol and then assign it to an
+ MBLMetaWear object using the setConfiguration:handler: method
+ */
+@protocol MBLRestorable <NSObject>
+/**
+ This function is called shortly after you assign this object to a MetaWear device.
+ Override this function and use it as the main initialization point for setting up
+ custom events needed for your application.
+ 
+ Any API calls in this method will be persisted in non-volatile memory on the
+ MetaWear, and be executed when the MetaWear powers on.  For example, if you want
+ the device to automatically (after reset or power-loss) startLogging some 
+ event, set the peripheral name, or modifiy a connection parameter, do that in this function.
+ */
 - (void)runOnDeviceBoot:(nonnull MBLMetaWear *)device;
 @end
+
+
 
 /**
  Each MBLMetaWear object corresponds a physical MetaWear board.  It contains all the logical
@@ -97,7 +99,7 @@ DEPRECATED_MSG_ATTRIBUTE("Derive from MBLMetaWearConfiguration and override the 
  here via properties.  For example, all accelerometer functionality is contained in the 
  MBLAccelerometer class and is accessed using the accelerometer property
  */
-@interface MBLMetaWear : NSObject <CBPeripheralDelegate, NSCoding>
+@interface MBLMetaWear : NSObject <CBPeripheralDelegate>
 
 ///----------------------------------
 /// @name Sensor and Peripheral Accessors
@@ -164,6 +166,10 @@ DEPRECATED_MSG_ATTRIBUTE("Derive from MBLMetaWearConfiguration and override the 
  */
 @property (nonatomic, readonly, nullable) MBLAmbientLight *ambientLight;
 /**
+ MBLSettings object contains all methods for interacting with MetaWear device settings
+ */
+@property (nonatomic, readonly, nullable) MBLSettings *settings;
+/**
  MBLDeviceInfo object contains version information about the device
  */
 @property (nonatomic, readonly, nullable) MBLDeviceInfo *deviceInfo;
@@ -177,7 +183,7 @@ DEPRECATED_MSG_ATTRIBUTE("Derive from MBLMetaWearConfiguration and override the 
  MBLMetaWearConfiguration object containing custom settings and events that are 
  programmed to the MetaWear and preserved between disconnects and app termination.
  */
-@property (nonatomic, readonly, nullable) MBLMetaWearConfiguration *configuration;
+@property (nonatomic, readonly, nullable) id<MBLRestorable> configuration;
 
 /**
  Assign a new configuration object to this MetaWear.  This only needs to be called once,
@@ -190,7 +196,7 @@ DEPRECATED_MSG_ATTRIBUTE("Derive from MBLMetaWearConfiguration and override the 
  will reset to factory settings.
  @param handler Callback once programming is complete
  */
-- (void)setConfiguration:(nullable MBLMetaWearConfiguration *)configuration handler:(nullable MBLErrorHandler)handler;
+- (void)setConfiguration:(nullable id<MBLRestorable>)configuration handler:(nullable MBLErrorHandler)handler;
 
 ///----------------------------------
 /// @name State Accessors
@@ -214,38 +220,10 @@ DEPRECATED_MSG_ATTRIBUTE("Derive from MBLMetaWearConfiguration and override the 
  */
 @property (nonatomic, nullable) NSNumber *discoveryTimeRSSI;
 /**
- Advertised device name, max 8 characters
+ Advertised device name.  You can simply assign a new string
+ if you wish to change the advertised name, max 8 characters!
  */
 @property (nonatomic, nonnull) NSString *name;
-/**
- Advertising interval in ms
- */
-@property (nonatomic) uint16_t advertisingInterval;
-/**
- Bluetooth radio transmit power.  Setting a smaller (lower dBm) value will
- result in a smaller connection radius, default is MBLTransmitPower0dBm.
- */
-@property (nonatomic) MBLTransmitPower transmitPower;
-/**
- Set a raw value into the scan response BLE advertising packet
- */
-@property (nonatomic, nullable) NSData *scanResponse;
-
-///----------------------------------
-/// @name Pairing/Bonding
-///----------------------------------
-
-/**
- Start the pairing process which creates a persistent bond between the 
- MetaWear and iOS device
- */
-- (void)initiatePairing;
-/**
- Removes all bonding information stored on the MetaWear.  Note, to delete
- bonding information on the iOS device you must go to Settings -> Bluetooth
- choose the device you want to remove and select "Forget This Device"
- */
-- (void)deleteAllBonds;
 
 ///----------------------------------
 /// @name Connect/Disconnect
@@ -347,9 +325,42 @@ DEPRECATED_MSG_ATTRIBUTE("Derive from MBLMetaWearConfiguration and override the 
 - (void)updateFirmwareWithHandler:(nonnull MBLErrorHandler)handler
                   progressHandler:(nullable MBLFloatHandler)progressHandler;
 
+
+///----------------------------------
+/// @name Utility Methods
+///----------------------------------
+
+/**
+ Get a callback after all commands have been sent to the MetaWear
+ board and expected responses recieved.
+ @param handler Callback once all commands are complete
+ */
+- (void)waitForCommandCompletion:(nonnull MBLVoidHandler)handler;
+
 ///----------------------------------
 /// @name Deprecated Methods
 ///----------------------------------
+
+/**
+ * @deprecated Use settings.advertisingInterval instead
+ */
+@property (nonatomic) uint16_t advertisingInterval DEPRECATED_MSG_ATTRIBUTE("Use settings.advertisingInterval instead");
+/**
+ * @deprecated Use settings.transmitPower instead
+ */
+@property (nonatomic) uint8_t transmitPower DEPRECATED_MSG_ATTRIBUTE("Use settings.transmitPower instead");
+/**
+ * @deprecated Use settings.scanResponse instead
+ */
+@property (nonatomic, nullable) NSData *scanResponse DEPRECATED_MSG_ATTRIBUTE("Use settings.scanResponse instead");
+/**
+ * @deprecated Use [settings initiatePairing] instead
+ */
+- (void)initiatePairing DEPRECATED_MSG_ATTRIBUTE("Use [settings initiatePairing] instead");
+/**
+ * @deprecated Use [settings deleteAllBonds] instead
+ */
+- (void)deleteAllBonds DEPRECATED_MSG_ATTRIBUTE("Use [settings deleteAllBonds] instead");
 
 /**
  * @deprecated use setConfiguration:handler: instead

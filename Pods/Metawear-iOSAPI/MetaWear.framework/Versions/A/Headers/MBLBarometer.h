@@ -42,7 +42,7 @@
  features then upcast to the specific sensor on your board, MBLBarometerBMP280.
  @see MBLAmbientLightLTR329
  */
-@interface MBLBarometer : MBLModule <NSCoding>
+@interface MBLBarometer : MBLModule
 
 /**
  Data representing the atmospheric pressure measured by barometer.

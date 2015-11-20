@@ -50,7 +50,7 @@ typedef NS_ENUM(uint8_t, MBLGyroAxis) {
  features then upcast to the specific gyroscope on your board, MBLGyroBMI160.
  @see MBLGyroBMI160
  */
-@interface MBLGyro : MBLModule <NSCoding>
+@interface MBLGyro : MBLModule
 
 /**
  The frequency, in hertz, for providing gyro samples to the event handlers.

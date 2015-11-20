@@ -49,5 +49,11 @@
  Thermistor enable pin number
  */
 @property (nonatomic) uint8_t enablePin;
+/**
+ YES means when enablePin is low the thermistor will be on, NO means when
+ enablePin is high the sensor will be on. This will be determined by how
+ you connect the thermistor to the MetaWear.
+ */
+@property (nonatomic) BOOL enablePinActiveLow;
 
 @end

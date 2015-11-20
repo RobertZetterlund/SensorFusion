@@ -229,7 +229,7 @@
 {
     switch (self.device.state) {
         case MBLConnectionStateConnected:
-            return @"Connected";
+            return self.device.isGuestConnection ? @"Connected (GUEST)" : @"Connected";
         case MBLConnectionStateConnecting:
             return @"Connecting";
         case MBLConnectionStateDisconnected:
@@ -289,14 +289,24 @@
     [self readRSSIPressed:nil];
     [self checkForFirmwareUpdatesPressed:nil];
     
+    if (self.device.led) {
+        [self cell:self.ledCell setHidden:NO];
+    }
+    
+    // Only allow LED module if we are a guest
+    if (self.device.isGuestConnection) {
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:@"ihaveseenguestmessage"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"ihaveseenguestmessage"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[[UIAlertView alloc] initWithTitle:@"Notice" message:@"You have connected to a device being used by another app, so you are in GUEST mode.  If you wish to take control please press 'Reset To Factory Defaults', which will wipe the device clean." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+        }
+        [self reloadDataAnimated:YES];
+        return;
+    }
     
     // Go through each module and enable the correct cell for the modules on this particular MetaWear
     if (self.device.mechanicalSwitch) {
         [self cell:self.mechanicalSwitchCell setHidden:NO];
-    }
-    
-    if (self.device.led) {
-        [self cell:self.ledCell setHidden:NO];
     }
     
     if (self.device.temperature) {
@@ -489,7 +499,7 @@
     [self deviceDisconnected];
     
     // In case any pairing information is on the device mark it for removal too
-    [self.device deleteAllBonds];
+    [self.device.settings deleteAllBonds];
     // Setting a nil configuration removes state perisited in flash memory
     [self.device setConfiguration:nil handler:nil];
 }

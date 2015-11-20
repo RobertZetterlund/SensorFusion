@@ -40,7 +40,7 @@
 /**
  Interface to on-board switch (pushbutton)
  */
-@interface MBLMechanicalSwitch : MBLModule <NSCoding>
+@interface MBLMechanicalSwitch : MBLModule
 
 /**
  Data representing the current state of the switch.

@@ -39,7 +39,7 @@
 /**
  Interface to external haptic or buzzers
  */
-@interface MBLHapticBuzzer : MBLModule <NSCoding>
+@interface MBLHapticBuzzer : MBLModule
 
 /**
  Turn on Haptic Driver.

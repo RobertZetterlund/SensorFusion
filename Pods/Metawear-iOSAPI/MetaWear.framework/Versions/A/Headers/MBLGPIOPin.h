@@ -66,7 +66,7 @@ typedef NS_ENUM(uint8_t, MBLPinChangeType) {
 /**
  Encapsulation of a single input/output pin
  */
-@interface MBLGPIOPin : NSObject <NSCoding>
+@interface MBLGPIOPin : NSObject
 
 /**
  Set what pin state transitions trigger a changeEvent.
