@@ -172,6 +172,7 @@
 
 
 @property (nonatomic, strong) NSMutableArray *streamingEvents;
+@property (nonatomic) BOOL isObserving;
 
 @property (nonatomic, strong) UIDocumentInteractionController *controller;
 @end
@@ -197,7 +198,7 @@
     self.nameLabel.text = self.device.name;
     
     // Listen for state changes
-    [self.device addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:nil];
+    self.isObserving = YES;
     
     // Start off the connection flow
     [self connectDevice:YES];
@@ -207,12 +208,32 @@
 {
     [super viewWillDisappear:animated];
     
-    [self.device removeObserver:self forKeyPath:@"state"];
+    self.isObserving = NO;
     
     for (MBLEvent *event in self.streamingEvents) {
         [event stopNotifications];
     }
     [self.streamingEvents removeAllObjects];
+}
+
+- (void)setIsObserving:(BOOL)isObserving
+{
+    @synchronized(self) {
+        if (isObserving) {
+            if (_isObserving) {
+                // Do nothing
+            } else {
+                [self.device addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:nil];
+            }
+        } else {
+            if (_isObserving) {
+                [self.device removeObserver:self forKeyPath:@"state"];
+            } else {
+                // Do nothing
+            }
+        }
+        _isObserving = isObserving;
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -245,9 +266,9 @@
 {
     // In order for the device to actaully erase the flash memory we can't be in a connection
     // so temporally disconnect to allow flash to erase.
-    [self.device removeObserver:self forKeyPath:@"state"];
+    self.isObserving = NO;
     [self.device disconnectWithHandler:^(NSError *error) {
-        [self.device addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:nil];
+        self.isObserving = YES;
         if (error) {
             if (handler) {
                 handler(error);
