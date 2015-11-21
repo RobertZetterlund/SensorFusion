@@ -384,8 +384,15 @@
         }
     }
     
-    if (self.device.gpio) {
+    if (self.device.gpio.pins.count) {
         [self cell:self.gpioCell setHidden:NO];
+        // The number of pins is variable
+        [self.gpioPinSelector removeAllSegments];
+        for (int i = 0; i < self.device.gpio.pins.count; i++) {
+            [self.gpioPinSelector insertSegmentWithTitle:[NSString stringWithFormat:@"%d", i] atIndex:i animated:NO];
+        }
+        [self.gpioPinSelector setSelectedSegmentIndex:0];
+        [self gpioPinSelectorPressed:self.gpioPinSelector];
     }
     
     if (self.device.hapticBuzzer) {
@@ -1205,17 +1212,20 @@
 
 - (IBAction)gpioPinSelectorPressed:(id)sender
 {
-    // As of now only pins 0-3 have analog read capabilities
-    if (self.gpioPinSelector.selectedSegmentIndex > 3) {
-        [self.gpioAnalogAbsoluteButton setHidden:YES];
-        [self.gpioAnalogAbsoluteValue setHidden:YES];
-        [self.gpioAnalogRatioButton setHidden:YES];
-        [self.gpioAnalogRatioValue setHidden:YES];
-    } else {
+    MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
+    if (pin.analogAbsolute) {
         [self.gpioAnalogAbsoluteButton setHidden:NO];
         [self.gpioAnalogAbsoluteValue setHidden:NO];
+    } else {
+        [self.gpioAnalogAbsoluteButton setHidden:YES];
+        [self.gpioAnalogAbsoluteValue setHidden:YES];
+    }
+    if (pin.analogRatio) {
         [self.gpioAnalogRatioButton setHidden:NO];
         [self.gpioAnalogRatioValue setHidden:NO];
+    } else {
+        [self.gpioAnalogRatioButton setHidden:YES];
+        [self.gpioAnalogRatioValue setHidden:YES];
     }
 }
 
