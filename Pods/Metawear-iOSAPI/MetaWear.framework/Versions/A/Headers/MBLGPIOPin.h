@@ -110,7 +110,7 @@ typedef NS_ENUM(uint8_t, MBLPinChangeType) {
  Data representing the analog value of the pin.
  Event callbacks will be provided an MBLNumericData object whose float
  value will be volts.
- @warning Only pins 0-3 can perform analog reads
+ @warning Not all pins support analog reads
  */
 @property (nonatomic, readonly, nullable) MBLData *analogAbsolute;
 /**
@@ -118,14 +118,14 @@ typedef NS_ENUM(uint8_t, MBLPinChangeType) {
  Event callbacks will be provided an MBLNumericData object whose float value
  will range from 0.0 to 1.0, where 0.0 indicates pin is equal to
  ground, and 1.0 indicates pin is equal to supply voltage.
- @warning Only pins 0-3 can perform analog reads
+ @warning Not all pins support analog reads
  */
 @property (nonatomic, readonly, nullable) MBLData *analogRatio;
 
 
 /**
  Set a digital output GPIO Pin to a 1 or 0.
- @param on YES sets pin to 1, NO clears pin to 0
+ @param on YES sets pin to 1 (high), NO clears pin to 0 (low)
  */
 - (void)setToDigitalValue:(BOOL)on;
 

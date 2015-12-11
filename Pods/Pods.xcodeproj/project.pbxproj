@@ -8,16 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		2989492A1A182744E36FD61DF1746D94 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E093D627869B650AB8D6411D2DE6B7A /* Foundation.framework */; };
-		5EB4F27B76513AE918BA5AE0868E87C8 /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 857BA0385A8BB55B4F28AFFB84D0AC4F /* MBProgressHUD.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5EB4F27B76513AE918BA5AE0868E87C8 /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 508DB45E509F06091B1808146F2570D1 /* MBProgressHUD.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6EB6B200A78DC1145AD46D4670D88B7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E093D627869B650AB8D6411D2DE6B7A /* Foundation.framework */; };
 		70D801E0B95C23BCC270E4EC8659D463 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1264325C4220C1BDC3C73E5D496129FD /* CoreGraphics.framework */; };
-		82FC12F67E83874B93592218E9FB4CA0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BB858304720566925BB886906940F842 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		87C7570ACDDE595BAB55893A9E8666CC /* StaticDataTableViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 37782DA01B7FEE286070128BEAAA5E21 /* StaticDataTableViewController-dummy.m */; };
+		82FC12F67E83874B93592218E9FB4CA0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 38825D0EFB8AE04490336734CEC20665 /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		87C7570ACDDE595BAB55893A9E8666CC /* StaticDataTableViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 776953EFB4B8D08AE739F740B995925D /* StaticDataTableViewController-dummy.m */; };
 		D8597A7365B53BF54161FC577CBCB168 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E093D627869B650AB8D6411D2DE6B7A /* Foundation.framework */; };
 		D8A3378C879FC55A21CAB2F4DBFE2FE8 /* Pods-MetaWearApiTest-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CE7898426B8F3A6DD1ECF41CA536675 /* Pods-MetaWearApiTest-dummy.m */; };
-		E27844615019B419512B233A2BD314BD /* StaticDataTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = FA234E239001E1988302DE634DFCB52B /* StaticDataTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EA36C68EB0BE0E4345491A6650641BBA /* StaticDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844D07049A93099B95E36F5FDC88CCDE /* StaticDataTableViewController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		FC214077677D4F02E03C6C85F774E028 /* MBProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C452B30BF3E966162E5484AD57096944 /* MBProgressHUD-dummy.m */; };
+		E27844615019B419512B233A2BD314BD /* StaticDataTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DBF2170170284AFBBCC98CB69EFB8DD3 /* StaticDataTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA36C68EB0BE0E4345491A6650641BBA /* StaticDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B77F6161F1724958DBB097BE83DE8489 /* StaticDataTableViewController.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		FC214077677D4F02E03C6C85F774E028 /* MBProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 82473A489CE150D4B376F8EFCB5ED8C3 /* MBProgressHUD-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,29 +39,31 @@
 
 /* Begin PBXFileReference section */
 		05D3CBF46F2A5A332EDF0EFE74AEDB9C /* Pods-MetaWearApiTest-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MetaWearApiTest-acknowledgements.plist"; sourceTree = "<group>"; };
+		09A284561F2CCE212224EBFF881761BF /* MBProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MBProgressHUD.xcconfig; sourceTree = "<group>"; };
 		1264325C4220C1BDC3C73E5D496129FD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		1711ECAD2DC590BADD9BE9F89C96667A /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
 		1CE7898426B8F3A6DD1ECF41CA536675 /* Pods-MetaWearApiTest-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MetaWearApiTest-dummy.m"; sourceTree = "<group>"; };
-		37782DA01B7FEE286070128BEAAA5E21 /* StaticDataTableViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "StaticDataTableViewController-dummy.m"; sourceTree = "<group>"; };
+		38825D0EFB8AE04490336734CEC20665 /* MBProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		38D71BBA008D9C7BA9EB9A781F36BEFE /* Pods-MetaWearApiTest-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MetaWearApiTest-acknowledgements.markdown"; sourceTree = "<group>"; };
 		3A8BBC86A2217A1127917B6EE62B0D23 /* libMBProgressHUD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMBProgressHUD.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		447D8E4433846C355409DAB6C3B4DFB5 /* StaticDataTableViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = StaticDataTableViewController.xcconfig; sourceTree = "<group>"; };
-		4B977A3C990022217C570CB710227660 /* StaticDataTableViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "StaticDataTableViewController-prefix.pch"; sourceTree = "<group>"; };
-		4CC6BE27EEA72DEB9A3244638D37EB47 /* MBProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-prefix.pch"; sourceTree = "<group>"; };
+		3B04C5A3D3BFAED24829A5D2B453BA80 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = iOS/Crashlytics.framework; sourceTree = "<group>"; };
+		3DE39D1BAE64013E28B375B898CDC4F1 /* StaticDataTableViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "StaticDataTableViewController-prefix.pch"; sourceTree = "<group>"; };
+		508DB45E509F06091B1808146F2570D1 /* MBProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		54A83D1A558D2E39A503F86879B7486D /* MetaWear.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MetaWear.framework; sourceTree = "<group>"; };
 		56DDDEDF9B87EFB749F2EA08FE6A9F34 /* libStaticDataTableViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStaticDataTableViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		59806ACA62CD865BB5A7F125DC5B6AE9 /* libPods-MetaWearApiTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MetaWearApiTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5F23880D51158D1CE2F5C7551B674764 /* MetaWear.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MetaWear.framework; sourceTree = "<group>"; };
 		6E093D627869B650AB8D6411D2DE6B7A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		844D07049A93099B95E36F5FDC88CCDE /* StaticDataTableViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = StaticDataTableViewController.m; sourceTree = "<group>"; };
-		857BA0385A8BB55B4F28AFFB84D0AC4F /* MBProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		A7AD313DFB4DC1B8D987EB1C0B9EA163 /* MBProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MBProgressHUD.xcconfig; sourceTree = "<group>"; };
+		776953EFB4B8D08AE739F740B995925D /* StaticDataTableViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "StaticDataTableViewController-dummy.m"; sourceTree = "<group>"; };
+		82473A489CE150D4B376F8EFCB5ED8C3 /* MBProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD-dummy.m"; sourceTree = "<group>"; };
+		B77F6161F1724958DBB097BE83DE8489 /* StaticDataTableViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = StaticDataTableViewController.m; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		BB858304720566925BB886906940F842 /* MBProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		BD619CA285489F84A1DBCB8594E49FBD /* MBProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-prefix.pch"; sourceTree = "<group>"; };
 		C013C5B77E3E3986DB2A587863852F5B /* Pods-MetaWearApiTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MetaWearApiTest.debug.xcconfig"; sourceTree = "<group>"; };
-		C452B30BF3E966162E5484AD57096944 /* MBProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD-dummy.m"; sourceTree = "<group>"; };
 		C95B2FAC72028AB2A88BDE1C8C1BAA50 /* Pods-MetaWearApiTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MetaWearApiTest.release.xcconfig"; sourceTree = "<group>"; };
+		DBF2170170284AFBBCC98CB69EFB8DD3 /* StaticDataTableViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = StaticDataTableViewController.h; sourceTree = "<group>"; };
 		E133B0C36F0CE4671FA452781005F188 /* Pods-MetaWearApiTest-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MetaWearApiTest-resources.sh"; sourceTree = "<group>"; };
 		F10F730F1D3D2D0FBC5602E4255986B7 /* Pods-MetaWearApiTest-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MetaWearApiTest-frameworks.sh"; sourceTree = "<group>"; };
-		FA234E239001E1988302DE634DFCB52B /* StaticDataTableViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = StaticDataTableViewController.h; sourceTree = "<group>"; };
+		F234270F74B32D3143597C83CF8CB508 /* StaticDataTableViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = StaticDataTableViewController.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,12 +95,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0628888AB950EEB3E5A422E4005D2C85 /* Metawear-iOSAPI */ = {
+		09A036CEF96FAB56D379D586B3C3ED1B /* Metawear-iOSAPI */ = {
 			isa = PBXGroup;
 			children = (
-				17B2544A46CC4851B0AE60C972A0AACE /* Frameworks */,
+				53117A80A5EF17FE824A0CA299AD6459 /* Frameworks */,
 			);
 			path = "Metawear-iOSAPI";
+			sourceTree = "<group>";
+		};
+		0F56909BF385858824A51A6FAE4DBC4B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1711ECAD2DC590BADD9BE9F89C96667A /* Fabric.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		106F706598018D322C7C55EA40E7BD07 /* Targets Support Files */ = {
@@ -107,25 +117,6 @@
 				EA22DCCF720DD38FFE8CC494D8C361FE /* Pods-MetaWearApiTest */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		17B2544A46CC4851B0AE60C972A0AACE /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5F23880D51158D1CE2F5C7551B674764 /* MetaWear.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		2944F8DF1F2F956458B985D36F3421CE /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				A7AD313DFB4DC1B8D987EB1C0B9EA163 /* MBProgressHUD.xcconfig */,
-				C452B30BF3E966162E5484AD57096944 /* MBProgressHUD-dummy.m */,
-				4CC6BE27EEA72DEB9A3244638D37EB47 /* MBProgressHUD-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/MBProgressHUD";
 			sourceTree = "<group>";
 		};
 		36C06A02A00144C64CD7282BA31846BD /* iOS */ = {
@@ -137,6 +128,25 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		4073F2109A434F318B29776B42F307EF /* Crashlytics */ = {
+			isa = PBXGroup;
+			children = (
+				C2591C066AD62B6DCD2B5F2FEAC673FF /* Frameworks */,
+			);
+			path = Crashlytics;
+			sourceTree = "<group>";
+		};
+		423231CCFF92B99160BF5BE98AFA23A9 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				09A284561F2CCE212224EBFF881761BF /* MBProgressHUD.xcconfig */,
+				82473A489CE150D4B376F8EFCB5ED8C3 /* MBProgressHUD-dummy.m */,
+				BD619CA285489F84A1DBCB8594E49FBD /* MBProgressHUD-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/MBProgressHUD";
+			sourceTree = "<group>";
+		};
 		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,14 +155,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4C19AF11C5E44906454335433B0336B5 /* MBProgressHUD */ = {
+		53117A80A5EF17FE824A0CA299AD6459 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				857BA0385A8BB55B4F28AFFB84D0AC4F /* MBProgressHUD.h */,
-				BB858304720566925BB886906940F842 /* MBProgressHUD.m */,
-				2944F8DF1F2F956458B985D36F3421CE /* Support Files */,
+				54A83D1A558D2E39A503F86879B7486D /* MetaWear.framework */,
 			);
-			path = MBProgressHUD;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		58B282C9F67528F4E6FA5EA7C0C731D2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				F234270F74B32D3143597C83CF8CB508 /* StaticDataTableViewController.xcconfig */,
+				776953EFB4B8D08AE739F740B995925D /* StaticDataTableViewController-dummy.m */,
+				3DE39D1BAE64013E28B375B898CDC4F1 /* StaticDataTableViewController-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/StaticDataTableViewController";
+			sourceTree = "<group>";
+		};
+		5A41CCBC20C8F424C52C2F9FED42475E /* Fabric */ = {
+			isa = PBXGroup;
+			children = (
+				0F56909BF385858824A51A6FAE4DBC4B /* Frameworks */,
+			);
+			path = Fabric;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -160,20 +187,28 @@
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				DC8F628D3E2FB70284EE96837EE9285B /* Pods */,
+				E7D13191B89C9EBDC8A35956880B814E /* Pods */,
 				C70C46E61FD0E16948BA76B5AB20CD65 /* Products */,
 				106F706598018D322C7C55EA40E7BD07 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		8A17982C8405D87582B245237E28DF95 /* StaticDataTableViewController */ = {
+		AFD7BA5B131AFB7069E4ECE3D6A5F060 /* StaticDataTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				FA234E239001E1988302DE634DFCB52B /* StaticDataTableViewController.h */,
-				844D07049A93099B95E36F5FDC88CCDE /* StaticDataTableViewController.m */,
-				E4F89E85C8E3E6A5160DE2AA7F179FF7 /* Support Files */,
+				DBF2170170284AFBBCC98CB69EFB8DD3 /* StaticDataTableViewController.h */,
+				B77F6161F1724958DBB097BE83DE8489 /* StaticDataTableViewController.m */,
+				58B282C9F67528F4E6FA5EA7C0C731D2 /* Support Files */,
 			);
 			path = StaticDataTableViewController;
+			sourceTree = "<group>";
+		};
+		C2591C066AD62B6DCD2B5F2FEAC673FF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3B04C5A3D3BFAED24829A5D2B453BA80 /* Crashlytics.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C70C46E61FD0E16948BA76B5AB20CD65 /* Products */ = {
@@ -186,25 +221,26 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DC8F628D3E2FB70284EE96837EE9285B /* Pods */ = {
+		E3430F75762787AC120C6395304865BA /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				4C19AF11C5E44906454335433B0336B5 /* MBProgressHUD */,
-				0628888AB950EEB3E5A422E4005D2C85 /* Metawear-iOSAPI */,
-				8A17982C8405D87582B245237E28DF95 /* StaticDataTableViewController */,
+				508DB45E509F06091B1808146F2570D1 /* MBProgressHUD.h */,
+				38825D0EFB8AE04490336734CEC20665 /* MBProgressHUD.m */,
+				423231CCFF92B99160BF5BE98AFA23A9 /* Support Files */,
 			);
-			name = Pods;
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
-		E4F89E85C8E3E6A5160DE2AA7F179FF7 /* Support Files */ = {
+		E7D13191B89C9EBDC8A35956880B814E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				447D8E4433846C355409DAB6C3B4DFB5 /* StaticDataTableViewController.xcconfig */,
-				37782DA01B7FEE286070128BEAAA5E21 /* StaticDataTableViewController-dummy.m */,
-				4B977A3C990022217C570CB710227660 /* StaticDataTableViewController-prefix.pch */,
+				4073F2109A434F318B29776B42F307EF /* Crashlytics */,
+				5A41CCBC20C8F424C52C2F9FED42475E /* Fabric */,
+				E3430F75762787AC120C6395304865BA /* MBProgressHUD */,
+				09A036CEF96FAB56D379D586B3C3ED1B /* Metawear-iOSAPI */,
+				AFD7BA5B131AFB7069E4ECE3D6A5F060 /* StaticDataTableViewController */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/StaticDataTableViewController";
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		EA22DCCF720DD38FFE8CC494D8C361FE /* Pods-MetaWearApiTest */ = {
@@ -461,7 +497,7 @@
 		};
 		86A38D2EC6EC19B452808608BE9BF8FC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A7AD313DFB4DC1B8D987EB1C0B9EA163 /* MBProgressHUD.xcconfig */;
+			baseConfigurationReference = 09A284561F2CCE212224EBFF881761BF /* MBProgressHUD.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/MBProgressHUD/MBProgressHUD-prefix.pch";
@@ -479,7 +515,7 @@
 		};
 		BACBA241E4D8400955DDEC5CDE3535B1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 447D8E4433846C355409DAB6C3B4DFB5 /* StaticDataTableViewController.xcconfig */;
+			baseConfigurationReference = F234270F74B32D3143597C83CF8CB508 /* StaticDataTableViewController.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/StaticDataTableViewController/StaticDataTableViewController-prefix.pch";
@@ -497,7 +533,7 @@
 		};
 		DF0E31D3EE8243209DE82BD3C9D99761 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A7AD313DFB4DC1B8D987EB1C0B9EA163 /* MBProgressHUD.xcconfig */;
+			baseConfigurationReference = 09A284561F2CCE212224EBFF881761BF /* MBProgressHUD.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/MBProgressHUD/MBProgressHUD-prefix.pch";
@@ -515,7 +551,7 @@
 		};
 		EDC7D088102245D42DD5E1217F491FFD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 447D8E4433846C355409DAB6C3B4DFB5 /* StaticDataTableViewController.xcconfig */;
+			baseConfigurationReference = F234270F74B32D3143597C83CF8CB508 /* StaticDataTableViewController.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/StaticDataTableViewController/StaticDataTableViewController-prefix.pch";

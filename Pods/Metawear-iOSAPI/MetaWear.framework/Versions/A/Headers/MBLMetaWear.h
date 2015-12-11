@@ -180,8 +180,8 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
 ///----------------------------------
 
 /**
- MBLMetaWearConfiguration object containing custom settings and events that are 
- programmed to the MetaWear and preserved between disconnects and app termination.
+ MBLRestorable object containing custom settings and events that are programmed
+ to the MetaWear and preserved between disconnects and app termination.
  */
 @property (nonatomic, readonly, nullable) id<MBLRestorable> configuration;
 
@@ -212,7 +212,8 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  */
 @property (nonatomic, readonly) BOOL isGuestConnection;
 /**
- iOS generated unique identifier for this MetaWear
+ iOS generated unique identifier for this MetaWear.  This is device specific and
+ two different iOS devices with generate two different identifiers.
  */
 @property (nonatomic, readonly, nonnull) NSUUID *identifier;
 /**
