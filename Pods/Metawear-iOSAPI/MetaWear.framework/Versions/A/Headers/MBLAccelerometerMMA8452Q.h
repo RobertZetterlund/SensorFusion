@@ -35,6 +35,8 @@
 
 #import <MetaWear/MBLAccelerometer.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Accelerometer sensitiviy ranges
  */
@@ -140,7 +142,7 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
  Event representing a tap (single, double, or both based on tapType) on the tapDetectionAxis.
  Event callbacks will be provided an empty MBLDataSample object
  */
-@property (nonatomic, readonly, nonnull) MBLEvent *tapEvent;
+@property (nonatomic, readonly, nonnull) MBLEvent MBL_GENERIC(MBLDataSample *) *tapEvent;
 
 
 /**
@@ -158,7 +160,7 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
  shakeThreshold and shakeWidth properties.
  Event callbacks will be provided an empty MBLDataSample object.
  */
-@property (nonatomic, readonly, nonnull) MBLEvent *shakeEvent;
+@property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLDataSample *) *shakeEvent;
 
 
 /**
@@ -177,13 +179,15 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
  is in free fall.
  Event callbacks will be provided an empty MBLDataSample object
  */
-@property (nonatomic, readonly, nonnull) MBLEvent *freeFallEvent;
+@property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLDataSample *) *freeFallEvent;
 
 
 /**
  Event representing an orientation change.
  Event callbacks will be provided an MBLOrientationData object
  */
-@property (nonatomic, readonly, nonnull) MBLEvent *orientationEvent;
+@property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLOrientationData *) *orientationEvent;
 
 @end
+
+NS_ASSUME_NONNULL_END

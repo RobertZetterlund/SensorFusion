@@ -54,7 +54,7 @@ typedef void (^MBLThresholdHandler)(NSDecimalNumber *__nullable number, BOOL isR
 typedef void (^MBLNumberHandler)(NSNumber *__nullable number, NSError *__nullable error);
 typedef void (^MBLSwitchStateHandler)(BOOL isPressed, NSError *__nullable error);
 typedef void (^MBLBoolHandler)(BOOL isTrue, NSError *__nullable error);
-typedef void (^MBLFloatHandler)(float number, NSError *__nullable error);
+typedef void (^MBLFloatHandler)(float number);
 typedef void (^MBLStringHandler)(NSString *__nullable string);
 typedef void (^MBLFirmwareBuildHandler)(MBLFirmwareBuild *__nullable firmware, NSError *__nullable error);
 typedef void (^MBLUrlHandler)(NSURL *__nullable url, NSError *__nullable error);
@@ -98,3 +98,21 @@ extern NSInteger const kMBLErrorNotConnected;
 
 /*! @abstract 111: MetaWear out of memory, can't perform action */
 extern NSInteger const kMBLErrorInsufficientMemory;
+
+/*! @abstract 112: Invalid use of API, can't perform action */
+extern NSInteger const kMBLErrorOperationInvalid;
+
+/*! @abstract 113: MetaWear had unexpected data */
+extern NSInteger const kMBLErrorUnexpectedData;
+
+
+///--------------------------------------
+/// @name Obj-C Generics Macros
+///--------------------------------------
+
+#if __has_feature(objc_generics) || __has_extension(objc_generics)
+#  define MBL_GENERIC(...) <__VA_ARGS__>
+#else
+#  define MBL_GENERIC(...)
+#  define MBLGenericObject id
+#endif

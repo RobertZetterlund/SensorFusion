@@ -34,6 +34,14 @@
  */
 
 #import <MetaWear/MBLModule.h>
+#import <MetaWear/MBLConstants.h>
+#import <Bolts/Bolts.h>
+@class MBLEvent MBL_GENERIC(MBLGenericType);
+@class MBLData MBL_GENERIC(MBLGenericType);
+@class MBLStringData;
+@class MBLDataSample;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  BLE transmiter power
@@ -83,12 +91,27 @@ typedef NS_ENUM(uint8_t, MBLTransmitPower) {
  */
 @property (nonatomic) BOOL circularBufferLog;
 
+/**
+ Event representing a BLE disconnection event.  Note this doesn't make sense to
+ stream, but it's likely that programCommandsToRunOnEventAsync will have utility.
+ Event callbacks will be provided an MBLDataSample object.
+ @warning Avaliable on latest firmware only
+ */
+@property (nonatomic, readonly, nullable) MBLEvent MBL_GENERIC(MBLDataSample *) *disconnectEvent;
+
+/**
+ Get the MAC address of the device
+ Event callbacks will be provided an MBLStringData object.
+ @warning Avaliable on latest firmware only
+ */
+@property (nonatomic, readonly, nullable) MBLData MBL_GENERIC(MBLStringData *) *macAddress;
+
 
 /**
  Start the pairing process which creates a persistent bond between the
  MetaWear and iOS device
  */
-- (void)initiatePairing;
+- (BFTask *)initiatePairingAsync;
 /**
  Removes all bonding information stored on the MetaWear.  The delete will
  actually occur on the next disconnect.
@@ -97,14 +120,14 @@ typedef NS_ENUM(uint8_t, MBLTransmitPower) {
  Settings -> Bluetooth choose the device you want to remove and 
  select "Forget This Device"
  */
-- (void)deleteAllBonds;
+- (BFTask *)deleteAllBondsAsync;
 
 /**
  This call will start advertisement.  You can hook this call up to any MBLEvent
  if you need advanced ways to start advertising.  Note a button press it already
  hard coded to always trigger advertising, which should cover most cases.
  */
-- (void)startAdvertisement;
+- (BFTask *)startAdvertisementAsync;
 
 
 
@@ -131,6 +154,8 @@ typedef NS_ENUM(uint8_t, MBLTransmitPower) {
 /**
  Write all the above values to the device
  */
-- (void)applyConnectionParameters;
+- (BFTask *)applyConnectionParametersAsync;
 
 @end
+
+NS_ASSUME_NONNULL_END

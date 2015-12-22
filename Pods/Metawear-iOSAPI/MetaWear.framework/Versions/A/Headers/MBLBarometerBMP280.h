@@ -35,6 +35,8 @@
 
 #import <MetaWear/MBLBarometer.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Barometer oversampling rates
  */
@@ -98,13 +100,15 @@ typedef NS_ENUM(uint8_t, MBLBarometerBMP280Standby) {
  Event callbacks will be provided an MBLNumericData object whose float
  value will be pressure in pascals.
  */
-@property (nonatomic, readonly, nonnull) MBLEvent *periodicPressure;
+@property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *periodicPressure;
 /**
  Event representing the altidue calulated from atmospheric pressure. Period
  of event will depend on pressureOversampling and standbyTime.
  Event callbacks will be provided an MBLNumericData object whose float
  value will be altitude in meters.
  */
-@property (nonatomic, readonly, nonnull) MBLEvent *periodicAltitude;
+@property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *periodicAltitude;
 
 @end
+
+NS_ASSUME_NONNULL_END

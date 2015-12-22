@@ -35,6 +35,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Container for a device revision data
  */
@@ -43,22 +45,24 @@
 /**
  Manufacturer Name string
  */
-@property (nonatomic, nonnull) NSString *manufacturerName;
+@property (nonatomic) NSString *manufacturerName;
 /**
  Serial Number string
  */
-@property (nonatomic, nonnull) NSString *serialNumber;
+@property (nonatomic) NSString *serialNumber;
 /**
  Hardware Revision string
  */
-@property (nonatomic, nonnull) NSString *hardwareRevision;
+@property (nonatomic) NSString *hardwareRevision;
 /**
  Firmware Revision string
  */
-@property (nonatomic, nonnull) NSString *firmwareRevision;
+@property (nonatomic) NSString *firmwareRevision;
 /**
  Model Number string
  */
 @property (nonatomic, nullable) NSString *modelNumber;
 
 @end
+
+NS_ASSUME_NONNULL_END

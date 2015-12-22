@@ -38,6 +38,10 @@
 #import <MetaWear/MBLOrientationData.h>
 #import <MetaWear/MBLEvent.h>
 #import <MetaWear/MBLModule.h>
+@class MBLNumericData;
+@class MBLRMSAccelerometerData;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Accelerometer axis
@@ -81,29 +85,31 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerTapType) {
  and z axis data.  This event will occur at the neareast hardware value
  to sampleFrequency. Event callbacks will be provided an MBLAccelerometerData object.
  */
-@property (nonatomic, readonly) MBLEvent *dataReadyEvent;
+@property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLAccelerometerData *) *dataReadyEvent;
 /**
  Event representing a new accelerometer X axis sample. This event
  will occur at sampleFrequency. Event callbacks will be provided an
  MBLNumericData object whose float value will be acceleration in G's.
  */
-@property (nonatomic, readonly) MBLEvent *xAxisReadyEvent;
+@property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *xAxisReadyEvent;
 /**
  Event representing a new accelerometer Y axis sample. This event
  will occur at sampleFrequency. Event callbacks will be provided an
  MBLNumericData object whose float value will be acceleration in G's.
  */
-@property (nonatomic, readonly) MBLEvent *yAxisReadyEvent;
+@property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *yAxisReadyEvent;
 /**
  Event representing a new accelerometer Z axis sample. This event
  will occur at sampleFrequency. Event callbacks will be provided an
  MBLNumericData object whose float value will be acceleration in G's.
  */
-@property (nonatomic, readonly) MBLEvent *zAxisReadyEvent;
+@property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *zAxisReadyEvent;
 /**
  Event representing a new accelerometer data sample, but filtered down to 
  just an RMS value. Event callbacks will be provided an MBLRMSAccelerometerData object
  */
-@property (nonatomic, readonly) MBLEvent *rmsDataReadyEvent;
+@property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLRMSAccelerometerData *) *rmsDataReadyEvent;
 
 @end
+
+NS_ASSUME_NONNULL_END

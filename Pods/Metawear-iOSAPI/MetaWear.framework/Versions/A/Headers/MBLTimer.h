@@ -33,13 +33,16 @@
  * contact MbientLab via email: hello@mbientlab.com
  */
 
-#import <MetaWear/MBLModule.h>
+#import <MetaWear/MBLEntityModule.h>
 #import <MetaWear/MBLEvent.h>
+@class MBLDataSample;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Interface to timer module
  */
-@interface MBLTimer : MBLModule
+@interface MBLTimer : MBLEntityModule
 
 /**
  Create a new event that will trigger periodically a fixed number of times.
@@ -47,31 +50,16 @@
  @param repeatCount Number of times event will be triggered, 0xFFFF will repeat forever
  @returns New event that will trigger periodically
  */
-- (MBLEvent *)eventWithPeriod:(uint32_t)period
-                  repeatCount:(uint16_t)repeatCount;
+- (MBLEvent MBL_GENERIC(MBLDataSample *) *)eventWithPeriod:(uint32_t)period
+                                               repeatCount:(uint16_t)repeatCount;
 
 /**
  Create a new event that will trigger periodically until canceled.
  @param period Period time in mSec
  @returns New event that will trigger periodically
  */
-- (MBLEvent *)eventWithPeriod:(uint32_t)period;
-
-///----------------------------------
-/// @name Deprecated Methods
-///----------------------------------
-
-/**
- * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
- */
-- (MBLEvent *)eventWithPeriod:(uint32_t)period
-                   identifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
-
-/**
- * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
- */
-- (MBLEvent *)eventWithPeriod:(uint32_t)period
-                  repeatCount:(uint16_t)repeatCount
-                   identifier:(NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
+- (MBLEvent MBL_GENERIC(MBLDataSample *) *)eventWithPeriod:(uint32_t)period;
 
 @end
+
+NS_ASSUME_NONNULL_END

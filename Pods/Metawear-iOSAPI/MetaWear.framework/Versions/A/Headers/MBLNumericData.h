@@ -35,12 +35,18 @@
 
 #import <MetaWear/MBLDataSample.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  All MetaWear data that can be represented as a number
  */
 @interface MBLNumericData : MBLDataSample
+
 /**
  Value of the numeric data
  */
-@property (nonatomic, readonly, nonnull) NSNumber *value;
+@property (nonatomic, readonly) NSNumber *value;
+
 @end
+
+NS_ASSUME_NONNULL_END

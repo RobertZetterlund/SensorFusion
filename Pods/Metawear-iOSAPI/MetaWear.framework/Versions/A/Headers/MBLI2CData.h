@@ -35,33 +35,37 @@
 
 #import <MetaWear/MBLData.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Interface for reading/writing a specific I2C device register.
  */
-@interface MBLI2CData : MBLData
+@interface MBLI2CData MBL_GENERIC(MBLGenericType) : MBLData MBL_GENERIC(MBLGenericType)
 
 /**
  Write the given value to the I2C register
  @param data Data to be written
  */
-- (void)writeData:(NSData *)data;
+- (BFTask *)writeDataAsync:(nullable NSData *)data;
 
 /**
  Write the given byte to the I2C register
  @param byte Byte to be written
  */
-- (void)writeByte:(uint8_t)byte;
+- (BFTask *)writeByteAsync:(uint8_t)byte;
 
 /**
  Write the given word to the I2C register
  @param word Word to be written
  */
-- (void)writeWord:(uint16_t)word;
+- (BFTask *)writeWordAsync:(uint16_t)word;
 
 /**
  Write the given dword to the I2C register
  @param dword Dword to be written
  */
-- (void)writeDword:(uint32_t)dword;
+- (BFTask *)writeDwordAsync:(uint32_t)dword;
 
 @end
+
+NS_ASSUME_NONNULL_END

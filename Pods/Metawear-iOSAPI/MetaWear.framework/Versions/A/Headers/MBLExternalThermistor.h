@@ -35,11 +35,13 @@
 
 #import <MetaWear/MBLData.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Interface for configuring an external thermistor.  For details on connecting,
  see our blog post at http://projects.mbientlab.com/metawear-and-thermistor/
  */
-@interface MBLExternalThermistor : MBLData
+@interface MBLExternalThermistor MBL_GENERIC(MBLGenericType) : MBLData MBL_GENERIC(MBLGenericType)
 
 /**
  Thermistor output pin number
@@ -57,3 +59,5 @@
 @property (nonatomic) BOOL enablePinActiveLow;
 
 @end
+
+NS_ASSUME_NONNULL_END

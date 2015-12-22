@@ -36,6 +36,8 @@
 #import <MetaWear/MBLGyro.h>
 #import <MetaWear/bmi160.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Gyro sensitiviy ranges in degrees per second
  */
@@ -57,3 +59,5 @@ typedef NS_ENUM(uint8_t, MBLGyroBMI160Range) {
 @property (nonatomic) MBLGyroBMI160Range fullScaleRange;
 
 @end
+
+NS_ASSUME_NONNULL_END

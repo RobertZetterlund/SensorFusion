@@ -211,7 +211,7 @@
     self.isObserving = NO;
     
     for (MBLEvent *event in self.streamingEvents) {
-        [event stopNotifications];
+        [event stopNotificationsAsync];
     }
     [self.streamingEvents removeAllObjects];
 }
@@ -504,7 +504,7 @@
             hud.labelText = @"Success!";
             [hud hide:YES afterDelay:2.0];
         }
-    } progressHandler:^(float number, NSError *error) {
+    } progressHandler:^(float number) {
         hud.progress = number;
         if (number == 1.0) {
             hud.mode = MBProgressHUDModeIndeterminate;
@@ -527,7 +527,7 @@
     [self deviceDisconnected];
     
     // In case any pairing information is on the device mark it for removal too
-    [self.device.settings deleteAllBonds];
+    [self.device.settings deleteAllBondsAsync];
     // Setting a nil configuration removes state perisited in flash memory
     [self.device setConfiguration:nil handler:nil];
 }
@@ -535,8 +535,8 @@
 
 - (IBAction)readSwitchPressed:(id)sender
 {
-    [self.device.mechanicalSwitch.switchValue readWithHandler:^(MBLNumericData *obj, NSError *error) {
-        self.mechanicalSwitchLabel.text = obj.value.boolValue ? @"Down" : @"Up";
+    [[self.device.mechanicalSwitch.switchValue readAsync] success:^(MBLNumericData * _Nonnull result) {
+        self.mechanicalSwitchLabel.text = result.value.boolValue ? @"Down" : @"Up";
     }];
 }
 
@@ -546,8 +546,8 @@
     [self.stopSwitch setEnabled:YES];
     
     [self.streamingEvents addObject:self.device.mechanicalSwitch.switchUpdateEvent];
-    [self.device.mechanicalSwitch.switchUpdateEvent startNotificationsWithHandler:^(MBLNumericData *isPressed, NSError *error) {
-        self.mechanicalSwitchLabel.text = isPressed.value.boolValue ? @"Down" : @"Up";
+    [self.device.mechanicalSwitch.switchUpdateEvent startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
+        self.mechanicalSwitchLabel.text = obj.value.boolValue ? @"Down" : @"Up";
     }];
 }
 
@@ -557,40 +557,40 @@
     [self.stopSwitch setEnabled:NO];
     
     [self.streamingEvents removeObject:self.device.mechanicalSwitch.switchUpdateEvent];
-    [self.device.mechanicalSwitch.switchUpdateEvent stopNotifications];
+    [self.device.mechanicalSwitch.switchUpdateEvent stopNotificationsAsync];
 }
 
 
 - (IBAction)turnOnGreenLEDPressed:(id)sender
 {
-    [self.device.led setLEDColor:[UIColor greenColor] withIntensity:1.0];
+    [self.device.led setLEDColorAsync:[UIColor greenColor] withIntensity:1.0];
 }
 - (IBAction)flashGreenLEDPressed:(id)sender
 {
-    [self.device.led flashLEDColor:[UIColor greenColor] withIntensity:1.0];
+    [self.device.led flashLEDColorAsync:[UIColor greenColor] withIntensity:1.0];
 }
 
 - (IBAction)turnOnRedLEDPressed:(id)sender
 {
-    [self.device.led setLEDColor:[UIColor redColor] withIntensity:1.0];
+    [self.device.led setLEDColorAsync:[UIColor redColor] withIntensity:1.0];
 }
 - (IBAction)flashRedLEDPressed:(id)sender
 {
-    [self.device.led flashLEDColor:[UIColor redColor] withIntensity:1.0];
+    [self.device.led flashLEDColorAsync:[UIColor redColor] withIntensity:1.0];
 }
 
 - (IBAction)turnOnBlueLEDPressed:(id)sender
 {
-    [self.device.led setLEDColor:[UIColor blueColor] withIntensity:1.0];
+    [self.device.led setLEDColorAsync:[UIColor blueColor] withIntensity:1.0];
 }
 - (IBAction)flashBlueLEDPressed:(id)sender
 {
-    [self.device.led flashLEDColor:[UIColor blueColor] withIntensity:1.0];
+    [self.device.led flashLEDColorAsync:[UIColor blueColor] withIntensity:1.0];
 }
 
 - (IBAction)turnOffLEDPressed:(id)sender
 {
-    [self.device.led setLEDOn:NO withOptions:1];
+    [self.device.led setLEDOnAsync:NO withOptions:1];
 }
 
 
@@ -622,13 +622,13 @@
 
 - (IBAction)readTempraturePressed:(id)sender
 {
-    MBLData *selected = self.device.temperature.channels[self.tempChannelSelector.selectedSegmentIndex];
+    MBLData<MBLNumericData *> *selected = self.device.temperature.channels[self.tempChannelSelector.selectedSegmentIndex];
     if ([selected isKindOfClass:[MBLExternalThermistor class]]) {
         ((MBLExternalThermistor *)selected).readPin = [self.readPinTextField.text intValue];
         ((MBLExternalThermistor *)selected).enablePin = [self.enablePinTextField.text intValue];
     }
-    [selected readWithHandler:^(MBLNumericData *obj, NSError *error) {
-        self.tempratureLabel.text = [obj.value.stringValue stringByAppendingString:@"°C"];
+    [[selected readAsync] success:^(MBLNumericData * _Nonnull result) {
+        self.tempratureLabel.text = [result.value.stringValue stringByAppendingString:@"°C"];
     }];
 }
 
@@ -671,7 +671,7 @@
     self.accelerometerDataArray = array;
     
     [self.streamingEvents addObject:self.device.accelerometer.dataReadyEvent];
-    [self.device.accelerometer.dataReadyEvent startNotificationsWithHandler:^(MBLAccelerometerData *acceleration, NSError *error) {
+    [self.device.accelerometer.dataReadyEvent startNotificationsWithHandlerAsync:^(MBLAccelerometerData * _Nullable acceleration, NSError * _Nullable error) {
         [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
         // Add data to data array for saving
         [array addObject:acceleration];
@@ -685,7 +685,7 @@
     [self.startLog setEnabled:YES];
     
     [self.streamingEvents removeObject:self.device.accelerometer.dataReadyEvent];
-    [self.device.accelerometer.dataReadyEvent stopNotifications];
+    [self.device.accelerometer.dataReadyEvent stopNotificationsAsync];
 }
 
 - (IBAction)startAccelerometerLog:(id)sender
@@ -697,7 +697,7 @@
     
     [self updateAccelerometerSettings];
     
-    [self.device.accelerometer.dataReadyEvent startLogging];
+    [self.device.accelerometer.dataReadyEvent startLoggingAsync];
 }
 
 - (IBAction)stopAccelerometerLog:(id)sender
@@ -710,26 +710,24 @@
     hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
     hud.labelText = @"Downloading...";
     
-    [self.device.accelerometer.dataReadyEvent downloadLogAndStopLogging:YES handler:^(NSArray *array, NSError *error) {
-        if (!error) {
-            self.accelerometerDataArray = array;
-            for (MBLAccelerometerData *acceleration in array) {
-                [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
-            }
-            hud.mode = MBProgressHUDModeIndeterminate;
-            hud.labelText = @"Clearing Log...";
-            [self logCleanup:^(NSError *error) {
-                [hud hide:YES];
-                if (error) {
-                    [self connectDevice:NO];
-                }
-            }];
-        } else {
-            [self connectDevice:NO];
-            [hud hide:YES];
-        }
-    } progressHandler:^(float number, NSError *error) {
+    [[[self.device.accelerometer.dataReadyEvent downloadLogAndStopLoggingAsync:YES progressHandler:^(float number) {
         hud.progress = number;
+    }] success:^(NSArray<MBLAccelerometerData *> * _Nonnull array) {
+        self.accelerometerDataArray = array;
+        for (MBLAccelerometerData *acceleration in array) {
+            [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
+        }
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.labelText = @"Clearing Log...";
+        [self logCleanup:^(NSError *error) {
+            [hud hide:YES];
+            if (error) {
+                [self connectDevice:NO];
+            }
+        }];
+    }] failure:^(NSError * _Nonnull error) {
+        [self connectDevice:NO];
+        [hud hide:YES];
     }];
 }
 
@@ -776,7 +774,7 @@
     [self updateAccelerometerSettings];
     MBLAccelerometerMMA8452Q *accelerometerMMA8452Q = (MBLAccelerometerMMA8452Q *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerMMA8452Q.tapEvent];
-    [accelerometerMMA8452Q.tapEvent startNotificationsWithHandler:^(id obj, NSError *error) {
+    [accelerometerMMA8452Q.tapEvent startNotificationsWithHandlerAsync:^(MBLDataSample * _Nullable obj, NSError * _Nullable error) {
         self.tapLabel.text = [NSString stringWithFormat:@"Tap Count: %d", ++self.tapCount];
     }];
 }
@@ -788,7 +786,7 @@
     
     MBLAccelerometerMMA8452Q *accelerometerMMA8452Q = (MBLAccelerometerMMA8452Q *)self.device.accelerometer;
     [self.streamingEvents removeObject:accelerometerMMA8452Q.tapEvent];
-    [accelerometerMMA8452Q.tapEvent stopNotifications];
+    [accelerometerMMA8452Q.tapEvent stopNotificationsAsync];
     self.tapCount = 0;
     self.tapLabel.text = @"Tap Count: 0";
 }
@@ -801,7 +799,7 @@
     [self updateAccelerometerSettings];
     MBLAccelerometerMMA8452Q *accelerometerMMA8452Q = (MBLAccelerometerMMA8452Q *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerMMA8452Q.shakeEvent];
-    [accelerometerMMA8452Q.shakeEvent startNotificationsWithHandler:^(id obj, NSError *error) {
+    [accelerometerMMA8452Q.shakeEvent startNotificationsWithHandlerAsync:^(MBLDataSample * _Nullable obj, NSError * _Nullable error) {
         self.shakeLabel.text = [NSString stringWithFormat:@"Shakes: %d", ++self.shakeCount];
     }];
 }
@@ -813,7 +811,7 @@
     
     MBLAccelerometerMMA8452Q *accelerometerMMA8452Q = (MBLAccelerometerMMA8452Q *)self.device.accelerometer;
     [self.streamingEvents removeObject:accelerometerMMA8452Q.shakeEvent];
-    [accelerometerMMA8452Q.shakeEvent stopNotifications];
+    [accelerometerMMA8452Q.shakeEvent stopNotificationsAsync];
     self.shakeCount = 0;
     self.shakeLabel.text = @"Shakes: 0";
 }
@@ -826,7 +824,7 @@
     [self updateAccelerometerSettings];
     MBLAccelerometerMMA8452Q *accelerometerMMA8452Q = (MBLAccelerometerMMA8452Q *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerMMA8452Q.orientationEvent];
-    [accelerometerMMA8452Q.orientationEvent startNotificationsWithHandler:^(MBLOrientationData *obj, NSError *error) {
+    [accelerometerMMA8452Q.orientationEvent startNotificationsWithHandlerAsync:^(MBLOrientationData * _Nullable obj, NSError * _Nullable error) {
         switch (obj.orientation) {
             case MBLAccelerometerOrientationPortrait:
                 self.orientationLabel.text = @"Portrait";
@@ -851,7 +849,7 @@
     
     MBLAccelerometerMMA8452Q *accelerometerMMA8452Q = (MBLAccelerometerMMA8452Q *)self.device.accelerometer;
     [self.streamingEvents removeObject:accelerometerMMA8452Q.orientationEvent];
-    [accelerometerMMA8452Q.orientationEvent stopNotifications];
+    [accelerometerMMA8452Q.orientationEvent stopNotificationsAsync];
     self.orientationLabel.text = @"XXXXXXXXXXXXXX";
 }
 
@@ -898,7 +896,7 @@
     self.accelerometerBMI160Data = array;
     
     [self.streamingEvents addObject:self.device.accelerometer.dataReadyEvent];
-    [self.device.accelerometer.dataReadyEvent startNotificationsWithHandler:^(MBLAccelerometerData *obj, NSError *error) {
+    [self.device.accelerometer.dataReadyEvent startNotificationsWithHandlerAsync:^(MBLAccelerometerData * _Nullable obj, NSError * _Nullable error) {
         [self.accelerometerBMI160Graph addX:obj.x y:obj.y z:obj.z];
         [array addObject:obj];
     }];
@@ -911,7 +909,7 @@
     [self.accelerometerBMI160StartLog setEnabled:YES];
     
     [self.streamingEvents removeObject:self.device.accelerometer.dataReadyEvent];
-    [self.device.accelerometer.dataReadyEvent stopNotifications];
+    [self.device.accelerometer.dataReadyEvent stopNotificationsAsync];
 }
 
 - (IBAction)accelerometerBMI160StartLogPressed:(id)sender
@@ -923,7 +921,7 @@
     
     [self updateAccelerometerBMI160Settings];
     
-    [self.device.accelerometer.dataReadyEvent startLogging];
+    [self.device.accelerometer.dataReadyEvent startLoggingAsync];
 }
 
 - (IBAction)accelerometerBMI160StopLogPressed:(id)sender
@@ -936,26 +934,24 @@
     hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
     hud.labelText = @"Downloading...";
     
-    [self.device.accelerometer.dataReadyEvent downloadLogAndStopLogging:YES handler:^(NSArray *array, NSError *error) {
-        if (!error) {
-            self.accelerometerBMI160Data = array;
-            for (MBLAccelerometerData *obj in array) {
-                [self.accelerometerBMI160Graph addX:obj.x y:obj.y z:obj.z];
-            }
-            hud.mode = MBProgressHUDModeIndeterminate;
-            hud.labelText = @"Clearing Log...";
-            [self logCleanup:^(NSError *error) {
-                [hud hide:YES];
-                if (error) {
-                    [self connectDevice:NO];
-                }
-            }];
-        } else {
-            [self connectDevice:NO];
-            [hud hide:YES];
-        }
-    } progressHandler:^(float number, NSError *error) {
+    [[[self.device.accelerometer.dataReadyEvent downloadLogAndStopLoggingAsync:YES progressHandler:^(float number) {
         hud.progress = number;
+    }] success:^(NSArray<MBLAccelerometerData *> * _Nonnull array) {
+        self.accelerometerBMI160Data = array;
+        for (MBLAccelerometerData *obj in array) {
+            [self.accelerometerBMI160Graph addX:obj.x y:obj.y z:obj.z];
+        }
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.labelText = @"Clearing Log...";
+        [self logCleanup:^(NSError *error) {
+            [hud hide:YES];
+            if (error) {
+                [self connectDevice:NO];
+            }
+        }];
+    }] failure:^(NSError * _Nonnull error) {
+        [self connectDevice:NO];
+        [hud hide:YES];
     }];
 }
 
@@ -983,7 +979,7 @@
     
     MBLAccelerometerBMI160 *accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerBMI160.tapEvent];
-    [accelerometerBMI160.tapEvent startNotificationsWithHandler:^(id obj, NSError *error) {
+    [accelerometerBMI160.tapEvent startNotificationsWithHandlerAsync:^(MBLDataSample * _Nullable obj, NSError * _Nullable error) {
         self.accelerometerBMI160TapLabel.text = [NSString stringWithFormat:@"Tap Count: %d", ++self.accelerometerBMI160TapCount];
     }];
 }
@@ -995,7 +991,7 @@
     
     MBLAccelerometerBMI160 *accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
     [self.streamingEvents removeObject:accelerometerBMI160.tapEvent];
-    [accelerometerBMI160.tapEvent stopNotifications];
+    [accelerometerBMI160.tapEvent stopNotificationsAsync];
     self.accelerometerBMI160TapCount = 0;
     self.accelerometerBMI160TapLabel.text = @"Tap Count: 0";
 }
@@ -1009,7 +1005,7 @@
     
     MBLAccelerometerBMI160 *accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerBMI160.flatEvent];
-    [accelerometerBMI160.flatEvent startNotificationsWithHandler:^(MBLNumericData *obj, NSError *error) {
+    [accelerometerBMI160.flatEvent startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
         self.accelerometerBMI160FlatLabel.text = obj.value.boolValue ? @"Flat" : @"Not Flat";
     }];
 }
@@ -1021,7 +1017,7 @@
     
     MBLAccelerometerBMI160 *accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
     [self.streamingEvents removeObject:accelerometerBMI160.flatEvent];
-    [accelerometerBMI160.flatEvent stopNotifications];
+    [accelerometerBMI160.flatEvent stopNotificationsAsync];
     self.accelerometerBMI160FlatLabel.text = @"XXXXXXX";
 }
 
@@ -1033,7 +1029,7 @@
     [self updateAccelerometerBMI160Settings];
     MBLAccelerometerBMI160 *accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerBMI160.orientationEvent];
-    [accelerometerBMI160.orientationEvent startNotificationsWithHandler:^(MBLOrientationData *obj, NSError *error) {
+    [accelerometerBMI160.orientationEvent startNotificationsWithHandlerAsync:^(MBLOrientationData * _Nullable obj, NSError * _Nullable error) {
         switch (obj.orientation) {
             case MBLAccelerometerOrientationPortrait:
                 self.accelerometerBMI160OrientLabel.text = @"Portrait";
@@ -1058,7 +1054,7 @@
     
     MBLAccelerometerBMI160 *accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
     [self.streamingEvents removeObject:accelerometerBMI160.orientationEvent];
-    [accelerometerBMI160.orientationEvent stopNotifications];
+    [accelerometerBMI160.orientationEvent stopNotificationsAsync];
     self.accelerometerBMI160OrientLabel.text = @"XXXXXXXXXXXXXX";
 }
 
@@ -1071,7 +1067,7 @@
     
     MBLAccelerometerBMI160 *accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerBMI160.stepEvent];
-    [accelerometerBMI160.stepEvent startNotificationsWithHandler:^(MBLNumericData *obj, NSError *error) {
+    [accelerometerBMI160.stepEvent startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
         self.accelerometerBMI160StepLabel.text = [NSString stringWithFormat:@"Step Count: %d", ++self.accelerometerBMI160StepCount];
     }];
 }
@@ -1083,7 +1079,7 @@
     
     MBLAccelerometerBMI160 *accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
     [self.streamingEvents removeObject:accelerometerBMI160.stepEvent];
-    [accelerometerBMI160.stepEvent stopNotifications];
+    [accelerometerBMI160.stepEvent stopNotificationsAsync];
     self.accelerometerBMI160StepCount = 0;
     self.accelerometerBMI160StepLabel.text = @"Step Count: 0";
 }
@@ -1132,7 +1128,7 @@
     self.gyroBMI160Data = array;
     
     [self.streamingEvents addObject:self.device.gyro.dataReadyEvent];
-    [self.device.gyro.dataReadyEvent startNotificationsWithHandler:^(MBLGyroData *obj, NSError *error) {
+    [self.device.gyro.dataReadyEvent startNotificationsWithHandlerAsync:^(MBLGyroData * _Nullable obj, NSError * _Nullable error) {
         // TODO: Come up with a better graph interface, we need to scale value
         // to show up right
         [self.gyroBMI160Graph addX:obj.x * .008 y:obj.y * .008 z:obj.z * .008];
@@ -1147,7 +1143,7 @@
     [self.gyroBMI160StartLog setEnabled:YES];
     
     [self.streamingEvents removeObject:self.device.gyro.dataReadyEvent];
-    [self.device.gyro.dataReadyEvent stopNotifications];
+    [self.device.gyro.dataReadyEvent stopNotificationsAsync];
 }
 
 - (IBAction)gyroBMI160StartLogPressed:(id)sender
@@ -1159,7 +1155,7 @@
     
     [self updateGyroBMI160Settings];
     
-    [self.device.gyro.dataReadyEvent startLogging];
+    [self.device.gyro.dataReadyEvent startLoggingAsync];
 }
 
 - (IBAction)gyroBMI160StopLogPressed:(id)sender
@@ -1172,26 +1168,24 @@
     hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
     hud.labelText = @"Downloading...";
     
-    [self.device.gyro.dataReadyEvent downloadLogAndStopLogging:YES handler:^(NSArray *array, NSError *error) {
-        if (!error) {
-            self.gyroBMI160Data = array;
-            for (MBLGyroData *obj in array) {
-                [self.gyroBMI160Graph addX:obj.x * .008 y:obj.y * .008 z:obj.z * .008];
-            }
-            hud.mode = MBProgressHUDModeIndeterminate;
-            hud.labelText = @"Clearing Log...";
-            [self logCleanup:^(NSError *error) {
-                [hud hide:YES];
-                if (error) {
-                    [self connectDevice:NO];
-                }
-            }];
-        } else {
-            [self connectDevice:NO];
-            [hud hide:YES];
-        }
-    } progressHandler:^(float number, NSError *error) {
+    [[[self.device.gyro.dataReadyEvent downloadLogAndStopLoggingAsync:YES progressHandler:^(float number) {
         hud.progress = number;
+    }] success:^(NSArray<MBLGyroData *> * _Nonnull array) {
+        self.gyroBMI160Data = array;
+        for (MBLGyroData *obj in array) {
+            [self.gyroBMI160Graph addX:obj.x * .008 y:obj.y * .008 z:obj.z * .008];
+        }
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.labelText = @"Clearing Log...";
+        [self logCleanup:^(NSError *error) {
+            [hud hide:YES];
+            if (error) {
+                [self connectDevice:NO];
+            }
+        }];
+    }] failure:^(NSError * _Nonnull error) {
+        [self connectDevice:NO];
+        [hud hide:YES];
     }];
 }
 
@@ -1250,13 +1244,13 @@
 - (IBAction)setPinPressed:(id)sender
 {
     MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
-    [pin setToDigitalValue:YES];
+    [pin setToDigitalValueAsync:YES];
 }
 
 - (IBAction)clearPinPressed:(id)sender
 {
     MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
-    [pin setToDigitalValue:NO];
+    [pin setToDigitalValueAsync:NO];
 }
 
 - (IBAction)gpioStartPinChangePressed:(id)sender
@@ -1273,7 +1267,7 @@
         pin.changeType = MBLPinChangeTypeAny;
     }
     [self.streamingEvents addObject:pin.changeEvent];
-    [pin.changeEvent startNotificationsWithHandler:^(MBLNumericData *isPressed, NSError *error) {
+    [pin.changeEvent startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
         self.gpioPinChangeLabel.text = [NSString stringWithFormat:@"Change Count: %d", ++self.gpioPinChangeCount];
     }];
 }
@@ -1285,7 +1279,7 @@
     
     MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
     [self.streamingEvents removeObject:pin.changeEvent];
-    [pin.changeEvent stopNotifications];
+    [pin.changeEvent stopNotificationsAsync];
     self.gpioPinChangeCount = 0;
     self.gpioPinChangeLabel.text = @"Change Count: 0";
 }
@@ -1293,23 +1287,23 @@
 - (IBAction)readDigitalPressed:(id)sender
 {
     MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
-    [pin.digitalValue readWithHandler:^(MBLNumericData *obj, NSError *error) {
-        self.gpioDigitalValue.text = obj.value.boolValue ? @"1" : @"0";
+    [[pin.digitalValue readAsync] success:^(MBLNumericData * _Nonnull result) {
+        self.gpioDigitalValue.text = result.value.boolValue ? @"1" : @"0";
     }];
 }
 
 - (IBAction)readAnalogAbsolutePressed:(id)sender
 {
     MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
-    [pin.analogAbsolute readWithHandler:^(MBLNumericData *obj, NSError *error) {
-        self.gpioAnalogAbsoluteValue.text = [NSString stringWithFormat:@"%.3fV", obj.value.doubleValue];
+    [[pin.analogAbsolute readAsync] success:^(MBLNumericData * _Nonnull result) {
+        self.gpioAnalogAbsoluteValue.text = [NSString stringWithFormat:@"%.3fV", result.value.doubleValue];
     }];
 }
 - (IBAction)readAnalogRatioPressed:(id)sender
 {
     MBLGPIOPin *pin = self.device.gpio.pins[self.gpioPinSelector.selectedSegmentIndex];
-    [pin.analogRatio readWithHandler:^(MBLNumericData *obj, NSError *error) {
-        self.gpioAnalogRatioValue.text = [NSString stringWithFormat:@"%.3f", obj.value.doubleValue];
+    [[pin.analogRatio readAsync] success:^(MBLNumericData * _Nonnull result) {
+        self.gpioAnalogRatioValue.text = [NSString stringWithFormat:@"%.3f", result.value.doubleValue];
     }];
 }
 
@@ -1324,7 +1318,7 @@
     pwidth = MAX(pwidth, 0);
     
     [sender setEnabled:NO];
-    [self.device.hapticBuzzer startHapticWithDutyCycle:dcycle pulseWidth:pwidth completion:^{
+    [self.device.hapticBuzzer startHapticWithDutyCycleAsync:dcycle pulseWidth:pwidth completion:^{
         [sender setEnabled:YES];
     }];
 }
@@ -1336,7 +1330,7 @@
     pwidth = MAX(pwidth, 0);
     
     [sender setEnabled:NO];
-    [self.device.hapticBuzzer startBuzzerWithPulseWidth:pwidth completion:^{
+    [self.device.hapticBuzzer startBuzzerWithPulseWidthAsync:pwidth completion:^{
         [sender setEnabled:YES];
     }];
 }
@@ -1345,12 +1339,12 @@
 - (IBAction)startiBeaconPressed:(id)sender
 {
     // TODO: Expose the other iBeacon parameters
-    [self.device.iBeacon setBeaconOn:YES];
+    [self.device.iBeacon setBeaconOnAsync:YES];
 }
 
 - (IBAction)stopiBeaconPressed:(id)sender
 {
-    [self.device.iBeacon setBeaconOn:NO];
+    [self.device.iBeacon setBeaconOnAsync:NO];
 }
 
 
@@ -1403,7 +1397,7 @@
     }
     
     [self.streamingEvents addObject:barometerBMP280.periodicAltitude];
-    [barometerBMP280.periodicAltitude startNotificationsWithHandler:^(MBLNumericData *obj, NSError *error) {
+    [barometerBMP280.periodicAltitude startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
         self.barometerBMP280Altitude.text = [NSString stringWithFormat:@"%.3f", obj.value.floatValue];
     }];
 }
@@ -1415,7 +1409,7 @@
     
     MBLBarometerBMP280 *barometerBMP280 = (MBLBarometerBMP280 *)self.device.barometer;
     [self.streamingEvents removeObject:barometerBMP280.periodicAltitude];
-    [barometerBMP280.periodicAltitude stopNotifications];
+    [barometerBMP280.periodicAltitude stopNotificationsAsync];
     self.barometerBMP280Altitude.text = @"X.XXX";
 }
 
@@ -1496,7 +1490,7 @@
     }
     
     [self.streamingEvents addObject:ambientLightLTR329.periodicIlluminance];
-    [ambientLightLTR329.periodicIlluminance startNotificationsWithHandler:^(MBLNumericData *obj, NSError *error) {
+    [ambientLightLTR329.periodicIlluminance startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
         self.ambientLightLTR329Illuminance.text = [NSString stringWithFormat:@"%.3f", obj.value.floatValue];
     }];
 }
@@ -1508,7 +1502,7 @@
     
     MBLAmbientLightLTR329 *ambientLightLTR329 = (MBLAmbientLightLTR329 *)self.device.ambientLight;
     [self.streamingEvents removeObject:ambientLightLTR329.periodicIlluminance];
-    [ambientLightLTR329.periodicIlluminance stopNotifications];
+    [ambientLightLTR329.periodicIlluminance stopNotificationsAsync];
     self.ambientLightLTR329Illuminance.text = @"X.XXX";
 }
 

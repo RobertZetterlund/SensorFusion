@@ -36,6 +36,9 @@
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLEvent.h>
 #import <MetaWear/MBLModule.h>
+@class MBLNumericData;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Interface to an abstract barometer sensor. If you need more advanced
@@ -49,12 +52,14 @@
  Event callbacks will be provided an MBLNumericData object whose float
  value will be pressure in pascals.
  */
-@property (nonatomic, readonly, nonnull) MBLData *pressure;
+@property (nonatomic, readonly) MBLData MBL_GENERIC(MBLNumericData *) *pressure;
 /**
  Data representing the altidue calulated from atmospheric pressure.
  Event callbacks will be provided an MBLNumericData object whose float
  value will be altitude in meters.
  */
-@property (nonatomic, readonly, nonnull) MBLData *altitude;
+@property (nonatomic, readonly) MBLData MBL_GENERIC(MBLNumericData *) *altitude;
 
 @end
+
+NS_ASSUME_NONNULL_END

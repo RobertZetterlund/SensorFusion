@@ -35,6 +35,8 @@
 
 #import <MetaWear/MBLDataSample.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(uint8_t, MBLAccelerometerOrientation) {
     MBLAccelerometerOrientationPortrait = 0,
     MBLAccelerometerOrientationPortraitUpsideDown = 1,
@@ -50,3 +52,5 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerOrientation) {
 @property (nonatomic) MBLAccelerometerOrientation orientation;
 
 @end
+
+NS_ASSUME_NONNULL_END

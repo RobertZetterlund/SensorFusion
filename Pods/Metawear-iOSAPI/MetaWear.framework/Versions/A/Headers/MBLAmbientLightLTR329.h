@@ -35,6 +35,8 @@
 
 #import <MetaWear/MBLAmbientLight.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Gain applied to the ambient light sensor signal, changes the dynamic range
  */
@@ -99,6 +101,8 @@ typedef NS_ENUM(uint8_t, MBLAmbientLightLTR329Rate) {
  of event will depend on measurementRate. Event callbacks will be provided
  an MBLNumericData object whose float value will be illuminance in lux. 
  */
-@property (nonatomic, readonly, nonnull) MBLEvent *periodicIlluminance;
+@property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *periodicIlluminance;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -36,6 +36,8 @@
 #import <MetaWear/MBLDataSample.h>
 #import <MetaWear/MBLANCS.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Data encapsulation for an ANCS event.
  */
@@ -59,3 +61,5 @@
 @property (nonatomic, readonly) uint8_t categoryCount;
 
 @end
+
+NS_ASSUME_NONNULL_END

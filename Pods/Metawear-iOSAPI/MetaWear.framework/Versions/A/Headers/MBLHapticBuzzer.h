@@ -35,6 +35,9 @@
 
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLModule.h>
+#import <Bolts/Bolts.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Interface to external haptic or buzzers
@@ -47,13 +50,15 @@
  @param pwidth Duration of buzz in mSec
  @param completion Callback when the buzz is complete
  */
-- (void)startHapticWithDutyCycle:(uint8_t)dcycle pulseWidth:(uint16_t)pwidth completion:(nullable MBLVoidHandler)completion;
+- (BFTask *)startHapticWithDutyCycleAsync:(uint8_t)dcycle pulseWidth:(uint16_t)pwidth completion:(nullable MBLVoidHandler)completion;
 
 /**
  Turn on Buzzer Driver.
  @param pwidth Duration of buzz in mSec
  @param completion Callback when the buzz is complete
  */
-- (void)startBuzzerWithPulseWidth:(uint16_t)pwidth completion:(nullable MBLVoidHandler)completion;
+- (BFTask *)startBuzzerWithPulseWidthAsync:(uint16_t)pwidth completion:(nullable MBLVoidHandler)completion;
 
 @end
+
+NS_ASSUME_NONNULL_END

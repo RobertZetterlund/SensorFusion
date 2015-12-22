@@ -35,6 +35,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MetaWear/MBLModule.h>
+#import <Bolts/Bolts.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Specific color channel for the LED
@@ -55,14 +58,14 @@ typedef NS_ENUM(uint8_t, MBLLEDColorChannel) {
  @param color Which color the LED should be
  @param intensity Scale from 0-1.0 on how bright the LED should be
  */
-- (void)setLEDColor:(nonnull UIColor *)color withIntensity:(CGFloat)intensity;
+- (BFTask *)setLEDColorAsync:(UIColor *)color withIntensity:(CGFloat)intensity;
 
 /**
  Flash a specific color on the LED
  @param color Which color the LED should flash
  @param intensity Scale from 0-1.0 on how bright the LED should be
  */
-- (void)flashLEDColor:(nonnull UIColor *)color withIntensity:(CGFloat)intensity;
+- (BFTask *)flashLEDColorAsync:(UIColor *)color withIntensity:(CGFloat)intensity;
 
 /**
  Flash a specific color on the LED
@@ -70,7 +73,7 @@ typedef NS_ENUM(uint8_t, MBLLEDColorChannel) {
  @param intensity Scale from 0-1.0 on how bright the LED should be
  @param numberOfFlashes Number of times LED will flash before turning off
  */
-- (void)flashLEDColor:(nonnull UIColor *)color withIntensity:(CGFloat)intensity numberOfFlashes:(uint8_t)numberOfFlashes;
+- (BFTask *)flashLEDColorAsync:(UIColor *)color withIntensity:(CGFloat)intensity numberOfFlashes:(uint8_t)numberOfFlashes;
 
 /**
  Flash a specific color on the LED
@@ -79,7 +82,7 @@ typedef NS_ENUM(uint8_t, MBLLEDColorChannel) {
  @param otime Time in mSec LED spends on
  @param period Flash period lenght in mSec
  */
-- (void)flashLEDColor:(nonnull UIColor *)color withIntensity:(CGFloat)intensity onTime:(uint16_t)otime andPeriod:(uint16_t)period;
+- (BFTask *)flashLEDColorAsync:(UIColor *)color withIntensity:(CGFloat)intensity onTime:(uint16_t)otime andPeriod:(uint16_t)period;
 
 
 #pragma mark - Advanced Settings
@@ -99,22 +102,24 @@ typedef NS_ENUM(uint8_t, MBLLEDColorChannel) {
  @param offset Time Offset
  @param repeat Repeat Count (0-254, 255: Forever)
  */
-- (void)setLEDModeWithColorChannel:(MBLLEDColorChannel)channel
-                       onIntensity:(uint8_t)onint
-                      offIntensity:(uint8_t)ofint
-                          riseTime:(uint16_t)rtime
-                          fallTime:(uint16_t)ftime
-                            onTime:(uint16_t)otime
-                            period:(uint16_t)period
-                            offset:(uint16_t)offset
-                       repeatCount:(uint8_t)repeat;
+- (BFTask *)setLEDModeWithColorChannelAsync:(MBLLEDColorChannel)channel
+                                onIntensity:(uint8_t)onint
+                               offIntensity:(uint8_t)ofint
+                                   riseTime:(uint16_t)rtime
+                                   fallTime:(uint16_t)ftime
+                                     onTime:(uint16_t)otime
+                                     period:(uint16_t)period
+                                     offset:(uint16_t)offset
+                                repeatCount:(uint8_t)repeat;
 
 /**
  Change global LED state.
  @param on YES turns LED on, NO, turns LED off
- @param mode If on == YES then (0: pause, 1: play), 
+ @param mode If on == YES then (0: pause, 1: play),
  if on == NO then (0: Stop, 1: Stop and reset channels)
  */
-- (void)setLEDOn:(BOOL)on withOptions:(uint8_t)mode;
+- (BFTask *)setLEDOnAsync:(BOOL)on withOptions:(uint8_t)mode;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -1,8 +1,8 @@
 /**
- * MBLLogEntry.h
+ * MBLEntityEvent.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 9/23/14.
+ * Created by Stephen Schiffli on 12/3/15.
  * Copyright 2014-2015 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
@@ -33,13 +33,8 @@
  * contact MbientLab via email: hello@mbientlab.com
  */
 
-#import <Foundation/Foundation.h>
+#import <MetaWear/MBLEvent.h>
 
-/**
- Generic base class for data coming from the MetaWear log
- */
-DEPRECATED_MSG_ATTRIBUTE("This was renamed to MBLDataSample, as it's used as a base class for logging and notifications now")
-@interface MBLLogEntry : NSObject
-@property (nonatomic, readonly) NSDate *timestamp;
-@property (nonatomic, readonly) NSData *data;
+@interface MBLEntityEvent MBL_GENERIC(MBLGenericType) : MBLEvent MBL_GENERIC(MBLGenericType)
+
 @end

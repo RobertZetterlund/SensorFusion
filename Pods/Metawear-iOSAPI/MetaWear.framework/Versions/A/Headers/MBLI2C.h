@@ -35,6 +35,9 @@
 
 #import <MetaWear/MBLModule.h>
 #import <MetaWear/MBLI2CData.h>
+@class MBLDataSample;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Interface for reading/writing externally connected I2C devices.
@@ -47,9 +50,9 @@
  Event callbacks will be provided an MBLDataSample object whose data
  property can be used to access the data as bytes.
  */
-- (nonnull MBLI2CData *)dataAtDeviceAddress:(uint8_t)deviceAddress
-                            registerAddress:(uint8_t)registerAddress
-                                     length:(uint8_t)length;
+- (MBLI2CData MBL_GENERIC(MBLDataSample *) *)dataAtDeviceAddress:(uint8_t)deviceAddress
+                                                 registerAddress:(uint8_t)registerAddress
+                                                          length:(uint8_t)length;
 
 /**
  Create an I2C data endpoint.  The deivce and register address
@@ -57,9 +60,11 @@
  Event callbacks will be provided an MBLNumericData object whose value
  will contain the register value formatted as a number.
  */
-- (nonnull MBLI2CData *)numberAtDeviceAddress:(uint8_t)deviceAddress
-                              registerAddress:(uint8_t)registerAddress
-                                       length:(uint8_t)length
-                                     isSigned:(BOOL)isSigned;
+- (MBLI2CData MBL_GENERIC(MBLDataSample *) *)numberAtDeviceAddress:(uint8_t)deviceAddress
+                                                   registerAddress:(uint8_t)registerAddress
+                                                            length:(uint8_t)length
+                                                          isSigned:(BOOL)isSigned;
 
 @end
+
+NS_ASSUME_NONNULL_END

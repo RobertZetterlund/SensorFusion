@@ -35,9 +35,11 @@
 
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLEvent.h>
-#import <MetaWear/MBLModule.h>
-
+#import <MetaWear/MBLEntityModule.h>
+@class MBLANCSEventData;
 @class MBLANCSEvent;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Category in which the iOS notification can be classified
@@ -99,57 +101,32 @@ typedef NS_ENUM(uint8_t, MBLANCSNotificationAttributeID) {
  Interface to Apple Notification Center Service (ANCS).
  For more details on ANCS see https://developer.apple.com/library/ios/documentation/CoreBluetooth/Reference/AppleNotificationCenterServiceSpecification/AppleNotificationCenterServiceSpecification.pdf
  */
-@interface MBLANCS : MBLModule
+@interface MBLANCS : MBLEntityModule
 
 /**
  Event representing an ANCS event of one or more CategoryID's. Event callbacks will
  be provided an MBLANCSEventData object.
  */
-- (nonnull MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds;
+- (MBLEvent MBL_GENERIC(MBLANCSEventData *) *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds;
 
 /**
  Event representing an ANCS event of a specific CategoryID, EventID, and EventFlags.
  Event callbacks will be provided an MBLANCSEventData object.
  */
-- (nonnull MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
-                                  eventIds:(MBLANCSEventID)eventIds
-                                eventFlags:(MBLANCSEventFlag)eventFlags;
+- (MBLEvent MBL_GENERIC(MBLANCSEventData *) *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
+                                                          eventIds:(MBLANCSEventID)eventIds
+                                                        eventFlags:(MBLANCSEventFlag)eventFlags;
 
 /**
  Event representing an ANCS event of a specific CategoryID, EventID, EventFlags, and Notification Attribute.
  Event callbacks will be provided an MBLANCSEventData object.
  */
-- (nonnull MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
-                                  eventIds:(MBLANCSEventID)eventIds
-                                eventFlags:(MBLANCSEventFlag)eventFlags
-                               attributeId:(MBLANCSNotificationAttributeID)attributeId
-                             attributeData:(nonnull NSString *)attributeData;
-
-///----------------------------------
-/// @name Deprecated Methods
-///----------------------------------
-
-/**
- * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
- */
-- (nonnull MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
-                                  eventIds:(MBLANCSEventID)eventIds
-                                eventFlags:(MBLANCSEventFlag)eventFlags
-                               attributeId:(MBLANCSNotificationAttributeID)attributeId
-                             attributeData:(nullable NSString *)attributeData
-                                identifier:(nullable NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
-
-/**
- * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
- */
-- (nonnull MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
-                                  eventIds:(MBLANCSEventID)eventIds
-                                eventFlags:(MBLANCSEventFlag)eventFlags
-                                identifier:(nullable NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
-
-/**
- * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
- */
-- (nonnull MBLEvent *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds identifier:(nullable NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
+- (MBLEvent MBL_GENERIC(MBLANCSEventData *) *)eventWithCategoryIds:(MBLANCSCategoryID)categoryIds
+                                                          eventIds:(MBLANCSEventID)eventIds
+                                                        eventFlags:(MBLANCSEventFlag)eventFlags
+                                                       attributeId:(MBLANCSNotificationAttributeID)attributeId
+                                                     attributeData:(NSString *)attributeData;
 
 @end
+
+NS_ASSUME_NONNULL_END

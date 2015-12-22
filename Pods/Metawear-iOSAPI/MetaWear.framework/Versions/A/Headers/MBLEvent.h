@@ -35,10 +35,13 @@
 
 #import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLRegister.h>
+#import <Bolts/Bolts.h>
+@class MBLData MBL_GENERIC(MBLGenericType);
+@class MBLFilter MBL_GENERIC(MBLGenericType);
+@class MBLDataSwitch MBL_GENERIC(MBLGenericType);
+@class MBLNumericData;
 
-@class MBLData;
-@class MBLFilter;
-@class MBLDataSwitch;
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Supported Comparison filter operations
@@ -101,10 +104,10 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  this object, they are:
  
  1. Send notifications to the connected iOS device when the event occurs, see
-    startNotificationsWithHandler: and stopNotifications
+    startNotificationsWithHandlerAsync: and stopNotificationsAsync
  2. Program other commands to be executed offline on the MetaWear device when the event occurs,
-    see programCommandsToRunOnEvent: and eraseCommandsToRunOnEvent.
- 3. Log the event in the MetaWear's flash storage, see startLogging and
+    see programCommandsToRunOnEventAsync: and eraseCommandsToRunOnEventAsync.
+ 3. Log the event in the MetaWear's flash storage, see startLoggingAsync and
     downloadLogAndStopLogging:handler:progressHandler:
  4. Pass the event data into a filter, which and process the data in some way and outputs the result
     in a new MBLEvent. See summationOfEvent and periodicSampleOfEvent:.
@@ -114,19 +117,19 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  
 **Notifications**:
  
- If you call startNotificationsWithHandler: and keep a live connection to the MetaWear,
+ If you call startNotificationsWithHandlerAsync: and keep a live connection to the MetaWear,
  any time you press or release the switch you will get a callback to the provided block.
  
-    [device.mechanicalSwitch.switchUpdateEvent startNotificationsWithHandler:^(id obj, NSError *error) {
+    [device.mechanicalSwitch.switchUpdateEvent startNotificationsWithHandlerAsync:^(id obj, NSError *error) {
         // Handle the button press/release
     }];
  
  **Logging**:
  
- If you call startLogging, then anytime you press or release the button, an entry will 
+ If you call startLoggingAsync, then anytime you press or release the button, an entry will 
  be created in the log which can be download later using downloadLogAndStopLogging:handler:progressHandler:.
  
-    [device.mechanicalSwitch.switchUpdateEvent startLogging];
+    [device.mechanicalSwitch.switchUpdateEvent startLoggingAsync];
     // Some time later..
     [device.mechanicalSwitch.switchUpdateEvent downloadLogAndStopLogging:YES/NO handler:{...} progressHandler:{...}];
  
@@ -134,7 +137,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  
  If you want the device to buzz when you press the switch then you would do the following:
  
-    [device.mechanicalSwitch.switchUpdateEvent programCommandsToRunOnEvent:^{
+    [device.mechanicalSwitch.switchUpdateEvent programCommandsToRunOnEventAsync:^{
         [device.hapticBuzzer startHapticWithDutyCycle:248 pulseWidth:500 completion:nil]
     }];
  
@@ -143,7 +146,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  If you want to log a running count of pushbutton events, you could do the following:
  
     MBLEvent *event = [device.mechanicalSwitch.switchUpdateEvent summationOfEvent];
-    [event startLogging];
+    [event startLoggingAsync];
     // Some time later..
     [event downloadLogAndStopLogging:YES/NO handler:{...} progressHandler:{...}];
  
@@ -154,10 +157,13 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  properties on the various modules which internally save the MBLEvent object and always return
  the same pointer through the property.
  @warning Since all MBLEvent's are invalidated on disconnect, you need a way to restore your
- custom event on reconnect.  This is where the NSString identifier comes in, you can call
- retrieveEventWithIdentifier: on the freshly connected MBLMetaWear object to get your event back.
+ custom event on reconnect.  This is where the MBLRestorable comes in, you can call
+ setConfiguration:handler: on the MBLMetaWear object to save any properties on your custom
+ MBLRestorable object.
  */
-@interface MBLEvent : MBLRegister
+@interface MBLEvent MBL_GENERIC(MBLGenericType) : MBLRegister
+
+typedef void (^MBLNotificationHandler)(MBLGenericType __nullable obj, NSError *__nullable error);
 
 ///----------------------------------
 /// @name Notifications
@@ -168,12 +174,17 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  object that is passed to the handler depends on the event being handled
  @param handler Block invoked when this event occus
  */
-- (void)startNotificationsWithHandler:(nonnull MBLObjectHandler)handler;
+- (BFTask *)startNotificationsWithHandlerAsync:(nullable MBLNotificationHandler)handler;
 /**
  Stop receiving callbacks when this event occurs, and release the block provided
- to startNotificationsWithHandler:
+ to startNotificationsWithHandlerAsync:
  */
-- (void)stopNotifications;
+- (BFTask *)stopNotificationsAsync;
+/**
+ See if this event currently has notifications enabled
+ @returns YES if logging, NO otherwise
+ */
+- (BOOL)isNotifying;
 
 ///----------------------------------
 /// @name Commands
@@ -192,11 +203,11 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  NEVER AGAIN, DON'T ATTEMPT TO USE CALLBACKS INSIDE THIS BLOCK
  @param block Block consisting of API calls to make when this event occus
  */
-- (void)programCommandsToRunOnEvent:(nonnull MBLVoidHandler)block;
+- (BFTask *)programCommandsToRunOnEventAsync:(MBLVoidHandler)block;
 /**
- Removes all commands setup when calling programCommandsToRunOnEvent:
+ Removes all commands setup when calling programCommandsToRunOnEventAsync:
  */
-- (void)eraseCommandsToRunOnEvent;
+- (BFTask *)eraseCommandsToRunOnEventAsync;
 /**
  See if this event currently has commands programmed to run
  @returns YES if has commands, NO otherwise
@@ -210,30 +221,32 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
 /**
  Start recording notifications for this event.
  
- Each time this event occus an entry is made into non-volatile flash memory 
+ Each time this event occus an entry is made into non-volatile flash memory
  that is on the metawear device. This is useful for tracking things while the
  phone isn't connected to the Metawear
  */
-- (void)startLogging;
+- (BFTask *)startLoggingAsync;
 /**
  Fetch contents of log from MetaWear device, and optionally turn off logging.
  
  Executes the progressHandler periodically with the progress (0.0 - 1.0),
- progressHandler will get called with 1.0 before handler is called.  The handler 
- is passed an array of entries, the exact class of the entry depends on what is 
+ progressHandler will get called with 1.0 before handler is called.  The handler
+ is passed an array of entries, the exact class of the entry depends on what is
  being logged.  For example, the accelerometer log returns an array of MBLAccelerometerData's
  @param stopLogging YES: Stop logging the current event, NO: Keep logging the event after download
- @param handler Callback once download is complete
  @param progressHandler Periodically called while log download is in progress
  */
-- (void)downloadLogAndStopLogging:(BOOL)stopLogging
-                          handler:(nonnull MBLArrayErrorHandler)handler
-                  progressHandler:(nullable MBLFloatHandler)progressHandler;
+- (BFTask MBL_GENERIC(NSArray MBL_GENERIC(MBLGenericType) *) *)downloadLogAndStopLoggingAsync:(BOOL)stopLogging
+                                                                              progressHandler:(nullable MBLFloatHandler)progressHandler;
+
+- (BFTask MBL_GENERIC(NSArray MBL_GENERIC(MBLGenericType) *) *)downloadLogAndStopLoggingAsync:(BOOL)stopLogging;
+
 /**
  See if this event is currently being logged
  @returns YES if logging, NO otherwise
  */
 - (BOOL)isLogging;
+
 
 ///----------------------------------
 /// @name Processing Filters
@@ -245,7 +258,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param pass Initially allow samples to pass or not
  @returns New event that conditionally represents the input
  */
-- (nonnull MBLDataSwitch *)conditionalDataSwitch:(BOOL)pass;
+- (MBLDataSwitch MBL_GENERIC(MBLGenericType) *)conditionalDataSwitch:(BOOL)pass;
 
 /**
  Create a new event that allows N input samples to pass to the output.
@@ -254,14 +267,14 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param initialCount Number of samples to allow through
  @returns New event representing N events of the input
  */
-- (nonnull MBLDataSwitch *)countingDataSwitch:(uint16_t)initialCount;
+- (MBLDataSwitch MBL_GENERIC(MBLGenericType) *)countingDataSwitch:(uint16_t)initialCount;
 
 /**
  Create a new event that accumulates the output data values of the current event.
  Event callbacks will be provided the same object as the input.
  @returns New event representing accumulated output
  */
-- (nonnull MBLFilter *)summationOfEvent;
+- (MBLFilter MBL_GENERIC(MBLGenericType) *)summationOfEvent;
 
 /**
  Create a new event that accumulates the number of times the current event fires.
@@ -269,7 +282,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  will be the number of times the input event fired.
  @returns New event representing counted intput
  */
-- (nonnull MBLFilter *)counterOfEvent;
+- (MBLFilter MBL_GENERIC(MBLNumericData *) *)counterOfEvent;
 
 /**
  Create a new event that averages the output data of the current event. This
@@ -278,7 +291,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param depth Number of samples to average (works fastest if a power of 2)
  @returns New event representing average of input
  */
-- (nonnull MBLFilter *)averageOfEventWithDepth:(uint8_t)depth;
+- (MBLFilter MBL_GENERIC(MBLGenericType) *)averageOfEventWithDepth:(uint8_t)depth;
 
 /**
  Create a new event that compares the current event and passes through the
@@ -288,7 +301,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @parma data Value on the right hand side of the operation
  @returns New event representing input values that meet the comparison condition
  */
-- (nonnull MBLFilter *)compareEventUsingOperation:(MBLComparisonOperation)op withData:(float)data;
+- (MBLFilter MBL_GENERIC(MBLGenericType) *)compareEventUsingOperation:(MBLComparisonOperation)op withData:(float)data;
 
 /**
  Create a new event that occurs at most once every period milliseconds.
@@ -296,7 +309,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param periodInMsec Sample period in msec
  @returns New event representing periodically sampled output
  */
-- (nonnull MBLFilter *)periodicSampleOfEvent:(uint32_t)periodInMsec;
+- (MBLFilter MBL_GENERIC(MBLGenericType) *)periodicSampleOfEvent:(uint32_t)periodInMsec;
 
 /**
  Create a new event that represents the difference bettween the current event
@@ -306,7 +319,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param periodInMsec Sample period in msec
  @returns New event representing differential output
  */
-- (nonnull MBLFilter *)differentialSampleOfEvent:(uint32_t)periodInMsec;
+- (MBLFilter MBL_GENERIC(MBLGenericType) *)differentialSampleOfEvent:(uint32_t)periodInMsec;
 
 /**
  Create a new event that delays the current even by a given number of samples.
@@ -314,7 +327,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param count Number of samples to delay
  @returns New event representing a delayed version of the input
  */
-- (nonnull MBLFilter *)delayOfEventWithCount:(uint8_t)count;
+- (MBLFilter MBL_GENERIC(MBLGenericType) *)delayOfEventWithCount:(uint8_t)count;
 
 /**
  Create a new event that represents a pulse of the input.  A pulse event will be
@@ -328,7 +341,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param output Select the type of data this filter should output
  @returns New event representing a pulse of the input
  */
-- (nonnull MBLFilter *)pulseDetectorOfEventWithThreshold:(float)threshold width:(uint16_t)width output:(MBLPulseOutput)output;
+- (MBLFilter *)pulseDetectorOfEventWithThreshold:(float)threshold width:(uint16_t)width output:(MBLPulseOutput)output;
 
 /**
  Create a new event that occurs when the given event changes by a specified delta.
@@ -339,7 +352,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param output Select the type of data this filter should output
  @returns New event representing a changed of the input
  */
-- (nonnull MBLFilter *)changeOfEventByDelta:(float)delta output:(MBLDeltaValueOutput)output;
+- (MBLFilter *)changeOfEventByDelta:(float)delta output:(MBLDeltaValueOutput)output;
 
 /**
  Create a new event that occurs when the given event crosses a specified threshold.
@@ -349,7 +362,7 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param output Select the type of data this filter should output
  @returns New event representing a changed of the input
  */
-- (nonnull MBLFilter *)changeOfEventAcrossThreshold:(float)threshold hysteresis:(float)hysteresis output:(MBLThresholdValueOutput)output;
+- (MBLFilter MBL_GENERIC(MBLGenericType) *)changeOfEventAcrossThreshold:(float)threshold hysteresis:(float)hysteresis output:(MBLThresholdValueOutput)output;
 
 /**
  Create a new event that occurs at the same time of this event, but whose value is
@@ -357,40 +370,8 @@ typedef NS_ENUM(uint8_t, MBLThresholdValueOutput) {
  @param data Object to be read when this event occurs
  @returns New event representing the data read
  */
-- (nonnull MBLEvent *)readDataOnEvent:(nonnull MBLData *)data;
-
-///----------------------------------
-/// @name Deprecated Methods
-///----------------------------------
-
-/**
- * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
- */
-- (nonnull MBLFilter *)periodicSampleOfEvent:(uint32_t)periodInMsec identifier:(nullable NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
-
-/**
- * @deprecated create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead
- */
-- (nonnull MBLFilter *)summationOfEventWithIdentifier:(nullable NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Create an MBLRestorable object and use [MBLMetaWear setConfiguration:handler:] instead");
-
-/**
- * @deprecated Use compareEventUsingOperation:withData: instead
- */
-- (nonnull MBLFilter *)compareEventUsingOperation:(MBLComparisonOperation)op withUnsignedData:(uint32_t)data DEPRECATED_MSG_ATTRIBUTE("Use [compareEventUsingOperation:withData: instead");
-
-/**
- * @deprecated Use compareEventUsingOperation:withData: instead
- */
-- (nonnull MBLFilter *)compareEventUsingOperation:(MBLComparisonOperation)op withSignedData:(int32_t)data DEPRECATED_MSG_ATTRIBUTE("Use [compareEventUsingOperation:withData: instead");
-
-/**
- * @deprecated
- */
-- (nonnull MBLFilter *)modifyEventUsingOperation:(MBLArithmeticOperation)op withUnsignedData:(uint32_t)data DEPRECATED_ATTRIBUTE;
-
-/**
- * @deprecated
- */
-- (nonnull MBLFilter *)modifyEventUsingOperation:(MBLArithmeticOperation)op withSignedData:(int32_t)data DEPRECATED_ATTRIBUTE;
+- (MBLEvent *)readDataOnEvent:(MBLData *)data;
 
 @end
+
+NS_ASSUME_NONNULL_END

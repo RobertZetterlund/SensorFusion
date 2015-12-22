@@ -53,7 +53,9 @@
 @class MBLBarometer;
 @class MBLAmbientLight;
 @class MBLSettings;
+@class MBLMetaWear;
 
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Current state of the MetaWear connection
@@ -65,8 +67,6 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
     MBLConnectionStateDisconnecting,
     MBLConnectionStateDiscovery,
 };
-
-@class MBLMetaWear;
 
 
 /**
@@ -82,10 +82,10 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  
  Any API calls in this method will be persisted in non-volatile memory on the
  MetaWear, and be executed when the MetaWear powers on.  For example, if you want
- the device to automatically (after reset or power-loss) startLogging some 
+ the device to automatically (after reset or power-loss) startLoggingAsync some 
  event, set the peripheral name, or modifiy a connection parameter, do that in this function.
  */
-- (void)runOnDeviceBoot:(nonnull MBLMetaWear *)device;
+- (void)runOnDeviceBoot:(MBLMetaWear *)device;
 @end
 
 
@@ -215,7 +215,7 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  iOS generated unique identifier for this MetaWear.  This is device specific and
  two different iOS devices with generate two different identifiers.
  */
-@property (nonatomic, readonly, nonnull) NSUUID *identifier;
+@property (nonatomic, readonly) NSUUID *identifier;
 /**
  Stored value of signal strength at discovery time
  */
@@ -224,7 +224,7 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  Advertised device name.  You can simply assign a new string
  if you wish to change the advertised name, max 8 characters!
  */
-@property (nonatomic, nonnull) NSString *name;
+@property (nonatomic) NSString *name;
 
 ///----------------------------------
 /// @name Connect/Disconnect
@@ -273,9 +273,9 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  across application launches.  Most of the time you don't need to explicitly
  call this function as it is called automatically after interactions with the 
  board.  Function that count as interacation include start/stopLogging,
- start/stopNotifications, program/eraseCommands.  If you make changes and don't
- call one of these functions, then it may be usefully to call this function so
- you don't lose the state of any settings.
+ start/stopNotificationsAsync, program/eraseCommands.  If you make changes to various
+ module setting but don't call one of these functions, then it may be usefully 
+ to call this function so you don't lose the state of those setting changes.
  */
 - (void)synchronize;
 
@@ -287,12 +287,12 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  Query the current RSSI
  @param handler Callback once RSSI reading is complete
  */
-- (void)readRSSIWithHandler:(nonnull MBLNumberHandler)handler;
+- (void)readRSSIWithHandler:(MBLNumberHandler)handler;
 /**
  Query the percent remaining battery life, returns int between 0-100
  @param handler Callback once battery life reading is complete
  */
-- (void)readBatteryLifeWithHandler:(nonnull MBLNumberHandler)handler;
+- (void)readBatteryLifeWithHandler:(MBLNumberHandler)handler;
 
 ///----------------------------------
 /// @name Firmware Update and Reset
@@ -309,7 +309,7 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  See if this device is running the most up to date firmware
  @param handler Callback once current firmware version is checked against the latest
  */
-- (void)checkForFirmwareUpdateWithHandler:(nonnull MBLBoolHandler)handler;
+- (void)checkForFirmwareUpdateWithHandler:(MBLBoolHandler)handler;
 
 /**
  Updates the device to the latest firmware, or re-installs the latest firmware.
@@ -320,10 +320,14 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  seconds while we wait for the device to install the firmware and reboot.  After
  the reboot, handler will be called and passed an NSError object if the update
  failed or nil if the update was successful.
+ 
+ This is one API you can call WITHOUT being connected, there are some cases where
+ you can't connect because the firmware is too old, but you still need to be able
+ to update it!
  @param handler Callback once update is complete
  @param progressHandler Periodically called while firmware upload is in progress
  */
-- (void)updateFirmwareWithHandler:(nonnull MBLErrorHandler)handler
+- (void)updateFirmwareWithHandler:(MBLErrorHandler)handler
                   progressHandler:(nullable MBLFloatHandler)progressHandler;
 
 
@@ -336,46 +340,8 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  board and expected responses recieved.
  @param handler Callback once all commands are complete
  */
-- (void)waitForCommandCompletion:(nonnull MBLVoidHandler)handler;
-
-///----------------------------------
-/// @name Deprecated Methods
-///----------------------------------
-
-/**
- * @deprecated Use settings.advertisingInterval instead
- */
-@property (nonatomic) uint16_t advertisingInterval DEPRECATED_MSG_ATTRIBUTE("Use settings.advertisingInterval instead");
-/**
- * @deprecated Use settings.transmitPower instead
- */
-@property (nonatomic) uint8_t transmitPower DEPRECATED_MSG_ATTRIBUTE("Use settings.transmitPower instead");
-/**
- * @deprecated Use settings.scanResponse instead
- */
-@property (nonatomic, nullable) NSData *scanResponse DEPRECATED_MSG_ATTRIBUTE("Use settings.scanResponse instead");
-/**
- * @deprecated Use [settings initiatePairing] instead
- */
-- (void)initiatePairing DEPRECATED_MSG_ATTRIBUTE("Use [settings initiatePairing] instead");
-/**
- * @deprecated Use [settings deleteAllBonds] instead
- */
-- (void)deleteAllBonds DEPRECATED_MSG_ATTRIBUTE("Use [settings deleteAllBonds] instead");
-
-/**
- * @deprecated use setConfiguration:handler: instead
- */
-- (nullable MBLEvent *)retrieveEventWithIdentifier:(nonnull NSString *)identifier DEPRECATED_MSG_ATTRIBUTE("Use setConfiguration:handler: instead");
-
-/**
- * @deprecated use deviceInfo property instead
- */
-- (void)readDeviceInfoWithHandler:(nonnull MBLDeviceInfoHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use deviceInfo property instead");
-
-/**
- * @deprecated Use connectWithHandler: instead
- */
-- (void)connecWithHandler:(nullable MBLErrorHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use connectWithHandler: instead");
+- (void)waitForCommandCompletion:(MBLVoidHandler)handler;
 
 @end
+
+NS_ASSUME_NONNULL_END

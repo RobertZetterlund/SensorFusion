@@ -347,7 +347,7 @@ typedef struct {
  *    magnetometer values for x,y and
  *    z-axis in int16_t
  */
-struct {
+typedef struct {
   int16_t x;  /**< BMM150 and AKM09911 X raw data*/
   int16_t y;  /**< BMM150 and AKM09911 Y raw data*/
   int16_t z;  /**< BMM150 and AKM09911 Z raw data*/

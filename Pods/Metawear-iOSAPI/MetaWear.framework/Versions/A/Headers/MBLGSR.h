@@ -34,6 +34,9 @@
  */
 
 #import <MetaWear/MBLModule.h>
+#import <Bolts/Bolts.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  Gain applied in the GSR circuit
@@ -72,13 +75,15 @@ typedef NS_ENUM(uint8_t, MBLGSRVoltage) {
  to channel 0, which can be used for perfoming single channel reads.
  Callbacks will be provided an MBLNumericData object.
  */
-@property (nonatomic, readonly, nonnull) NSArray *channels;
+@property (nonatomic, readonly) NSArray *channels;
 
 /**
  Perform automatic GSR calibration.  This should be called when
  temperature changes, or it can just be called periodically as
  it's low overhead.
  */
-- (void)calibrate;
+- (BFTask *)calibrateAsync;
 
 @end
+
+NS_ASSUME_NONNULL_END

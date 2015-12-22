@@ -179,7 +179,7 @@
                 hud.labelText = @"Success!";
                 [hud hide:YES afterDelay:2.0];
             }
-        } progressHandler:^(float number, NSError *error) {
+        } progressHandler:^(float number) {
             hud.progress = number;
             if (number == 1.0) {
                 hud.mode = MBProgressHUDModeIndeterminate;
