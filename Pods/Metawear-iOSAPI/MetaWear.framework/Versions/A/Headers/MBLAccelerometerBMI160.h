@@ -36,6 +36,7 @@
 #import <MetaWear/MBLAccelerometer.h>
 #import <MetaWear/bmi160.h>
 @class MBLNumericData;
+@class MBLAccelerometerBMI160LowOrHighGEvent;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -57,6 +58,13 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerBMI160Range) {
  Maximum acceleration the accelerometer can report
  */
 @property (nonatomic) MBLAccelerometerBMI160Range fullScaleRange;
+
+
+/**
+ Event representing a low-g (free fall) or high-g (impact) event.
+ Event callbacks will be provided an empty MBLDataSample object
+ */
+@property (nonatomic, readonly) MBLAccelerometerBMI160LowOrHighGEvent *lowOrHighGEvent;
 
 
 /**

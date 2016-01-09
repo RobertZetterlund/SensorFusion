@@ -1,9 +1,9 @@
 /**
- * MBLBarometer.h
+ * MBLMagnetometer.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 4/27/15.
- * Copyright 2014-2015 MbientLab Inc. All rights reserved.
+ * Created by Stephen Schiffli on 1/5/16.
+ * Copyright 2016 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
  * granted under the terms of a software license agreement between the user who
@@ -34,31 +34,25 @@
  */
 
 #import <MetaWear/MBLConstants.h>
-#import <MetaWear/MBLEvent.h>
+#import <MetaWear/MBLData.h>
 #import <MetaWear/MBLModule.h>
-@class MBLNumericData;
+@class MBLMagnetometerData;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- Interface to an abstract barometer sensor. If you need more advanced
- features then upcast to the specific sensor on your board, MBLBarometerBMP280.
- @see MBLAmbientLightLTR329
+ Interface to an abstract magnetometer. If you need more advanced
+ features then upcast to the specific sensor on your board, MBLMagnetometerBMM150.
+ @see MBLMagnetometerBMM150
  */
-@interface MBLBarometer : MBLModule
+@interface MBLMagnetometer : MBLModule
 
 /**
- Data representing the atmospheric pressure measured by barometer.
- Event callbacks will be provided an MBLNumericData object whose double
- value will be pressure in pascals.
+ Data representing the magnetic field measured by magnetometer.
+ Event callbacks will be provided an MBLMagnetometerData object.
+ NOT YET IMPLEMENTED
  */
-@property (nonatomic, readonly) MBLData MBL_GENERIC(MBLNumericData *) *pressure;
-/**
- Data representing the altidue calulated from atmospheric pressure.
- Event callbacks will be provided an MBLNumericData object whose double
- value will be altitude in meters.
- */
-@property (nonatomic, readonly) MBLData MBL_GENERIC(MBLNumericData *) *altitude;
+@property (nonatomic, readonly, nullable) MBLData MBL_GENERIC(MBLMagnetometerData *) *magneticField;
 
 @end
 

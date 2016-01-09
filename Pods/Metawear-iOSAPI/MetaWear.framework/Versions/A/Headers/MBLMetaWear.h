@@ -52,6 +52,7 @@
 @class MBLGSR;
 @class MBLBarometer;
 @class MBLAmbientLight;
+@class MBLMagnetometer;
 @class MBLSettings;
 @class MBLMetaWear;
 
@@ -165,6 +166,10 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  MBLAmbientLight object contains all methods for interacting with the ambient light sensor
  */
 @property (nonatomic, readonly, nullable) MBLAmbientLight *ambientLight;
+/**
+ MBLMagnetometer object contains all methods for interacting with the magnetometer sensor
+ */
+@property (nonatomic, readonly, nullable) MBLMagnetometer *magnetometer;
 /**
  MBLSettings object contains all methods for interacting with MetaWear device settings
  */

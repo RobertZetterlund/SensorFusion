@@ -97,14 +97,14 @@ typedef NS_ENUM(uint8_t, MBLBarometerBMP280Standby) {
 /**
  Data representing the atmospheric pressure measured by barometer. Period
  of event will depend on pressureOversampling and standbyTime.
- Event callbacks will be provided an MBLNumericData object whose float
+ Event callbacks will be provided an MBLNumericData object whose double
  value will be pressure in pascals.
  */
 @property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *periodicPressure;
 /**
  Event representing the altidue calulated from atmospheric pressure. Period
  of event will depend on pressureOversampling and standbyTime.
- Event callbacks will be provided an MBLNumericData object whose float
+ Event callbacks will be provided an MBLNumericData object whose double
  value will be altitude in meters.
  */
 @property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *periodicAltitude;

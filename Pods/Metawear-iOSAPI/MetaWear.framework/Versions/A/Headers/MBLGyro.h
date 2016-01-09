@@ -65,7 +65,7 @@ typedef NS_ENUM(uint8_t, MBLGyroAxis) {
  check the timestamps of the delivered MBLGyroData instances to determine the
  true update interval.
  */
-@property (nonatomic) float sampleFrequency;
+@property (nonatomic) double sampleFrequency;
 
 /**
  Event representing a new gryo data sample complete with x, y, and z
@@ -76,19 +76,19 @@ typedef NS_ENUM(uint8_t, MBLGyroAxis) {
 /**
  Event representing a new gyro X-axis sample. This event will occur
  at sampleFrequency. Event callbacks will be provided an MBLNumericData
- object whose float value will be rotation rate in degrees per second.
+ object whose double value will be rotation rate in degrees per second.
  */
 @property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *xAxisReadyEvent;
 /**
  Event representing a new gyro Y-axis sample. This event will occur
  at sampleFrequency. Event callbacks will be provided an MBLNumericData
- object whose float value will be rotation rate in degrees per second.
+ object whose double value will be rotation rate in degrees per second.
  */
 @property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *yAxisReadyEvent;
 /**
  Event representing a new gyro Z-axis sample. This event will occur
  at sampleFrequency. Event callbacks will be provided an MBLNumericData
- object whose float value will be rotation rate in degrees per second.
+ object whose double value will be rotation rate in degrees per second.
  */
 @property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *zAxisReadyEvent;
 

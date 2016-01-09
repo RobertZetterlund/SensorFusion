@@ -1,8 +1,8 @@
 /**
- * MBLBarometer.h
+ * MBLAccelerometerBMI160LowOrHighGEvent.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 4/27/15.
+ * Created by Stephen Schiffli on 11/4/15.
  * Copyright 2014-2015 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
@@ -33,32 +33,61 @@
  * contact MbientLab via email: hello@mbientlab.com
  */
 
-#import <MetaWear/MBLConstants.h>
 #import <MetaWear/MBLEvent.h>
-#import <MetaWear/MBLModule.h>
-@class MBLNumericData;
+#import <MetaWear/MBLAccelerometer.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- Interface to an abstract barometer sensor. If you need more advanced
- features then upcast to the specific sensor on your board, MBLBarometerBMP280.
- @see MBLAmbientLightLTR329
- */
-@interface MBLBarometer : MBLModule
+@interface MBLAccelerometerBMI160LowOrHighGEvent : MBLEvent MBL_GENERIC(MBLDataSample *)
+
+
+#pragma mark - Beta API (Subject to change)
 
 /**
- Data representing the atmospheric pressure measured by barometer.
- Event callbacks will be provided an MBLNumericData object whose double
- value will be pressure in pascals.
+ The BMI160 combines low-g and high-g detection, so below we expose the
+ raw registers as a first enabling step.  Over time this will become
+ better encapsulated.
  */
-@property (nonatomic, readonly) MBLData MBL_GENERIC(MBLNumericData *) *pressure;
+
 /**
- Data representing the altidue calulated from atmospheric pressure.
- Event callbacks will be provided an MBLNumericData object whose double
- value will be altitude in meters.
+ Set to YES if you want low-g events
  */
-@property (nonatomic, readonly) MBLData MBL_GENERIC(MBLNumericData *) *altitude;
+@property (nonatomic) BOOL lowGEnabled;
+/**
+ Time in ms that acceleration must stay below lowGThreshold before an event is triggered.
+ */
+@property (nonatomic) double lowGDuration;
+/**
+ Acceleration in G's that acceleration must stay below to be consided a low-g event.
+ */
+@property (nonatomic) double lowGThreshold;
+/**
+ Hysteresis for the low-g threshold.
+ */
+@property (nonatomic) double lowGHysteresis;
+/**
+ Set to YES for axis-summing mode (summed absolute value of all axis must be below lowGThreshold).
+ Set to NO for single-axis mode (absolute value of each axis is compared to lowGThreshold).
+ */
+@property (nonatomic) BOOL lowGMode;
+
+
+/**
+ Bitmask for axis enabled for high-g detection.
+ */
+@property (nonatomic) MBLAccelerometerAxis highGEnabledAxis;
+/**
+ Time in ms that acceleration must stay above highGThreshold before an event is triggered.
+ */
+@property (nonatomic) double highGDuration;
+/**
+ Acceleration in G's that acceleration must stay above to be consided a high-g event.
+ */
+@property (nonatomic) double highGThreshold;
+/**
+ Hysteresis for the high-g threshold.
+ */
+@property (nonatomic) double highGHysteresis;
 
 @end
 

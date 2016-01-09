@@ -135,6 +135,14 @@
 @property (weak, nonatomic) IBOutlet APLGraphView *gyroBMI160Graph;
 @property (strong, nonatomic) NSArray *gyroBMI160Data;
 
+@property (weak, nonatomic) IBOutlet UITableViewCell *magnetometerBMM150Cell;
+@property (weak, nonatomic) IBOutlet UIButton *magnetometerBMM150StartStream;
+@property (weak, nonatomic) IBOutlet UIButton *magnetometerBMM150StopStream;
+@property (weak, nonatomic) IBOutlet UIButton *magnetometerBMM150StartLog;
+@property (weak, nonatomic) IBOutlet UIButton *magnetometerBMM150StopLog;
+@property (weak, nonatomic) IBOutlet APLGraphView *magnetometerBMM150Graph;
+@property (strong, nonatomic) NSArray *magnetometerBMM150Data;
+
 @property (weak, nonatomic) IBOutlet UITableViewCell *gpioCell;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *gpioPinSelector;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *gpioPinChangeType;
@@ -381,6 +389,22 @@
             [self.gyroBMI160StopLog setEnabled:NO];
             [self.gyroBMI160StartStream setEnabled:YES];
             [self.gyroBMI160StopStream setEnabled:NO];
+        }
+    }
+    
+    if ([self.device.magnetometer isKindOfClass:[MBLMagnetometerBMM150 class]]) {
+        [self cell:self.magnetometerBMM150Cell setHidden:NO];
+        MBLMagnetometerBMM150 *magnetometerBMM150 = (MBLMagnetometerBMM150 *)self.device.magnetometer;
+        if (magnetometerBMM150.periodicMagneticField.isLogging) {
+            [self.magnetometerBMM150StartLog setEnabled:NO];
+            [self.magnetometerBMM150StopLog setEnabled:YES];
+            [self.magnetometerBMM150StartStream setEnabled:NO];
+            [self.magnetometerBMM150StopStream setEnabled:NO];
+        } else {
+            [self.magnetometerBMM150StartLog setEnabled:YES];
+            [self.magnetometerBMM150StopLog setEnabled:NO];
+            [self.magnetometerBMM150StartStream setEnabled:YES];
+            [self.magnetometerBMM150StopStream setEnabled:NO];
         }
     }
     
@@ -1202,6 +1226,99 @@
         }
     }
     [self sendData:gyroData title:@"GyroData"];
+}
+
+- (IBAction)magnetometerBMM150StartStreamPressed:(id)sender
+{
+    [self.magnetometerBMM150StartStream setEnabled:NO];
+    [self.magnetometerBMM150StopStream setEnabled:YES];
+    [self.magnetometerBMM150StartLog setEnabled:NO];
+    [self.magnetometerBMM150StopLog setEnabled:NO];
+    
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:1000];
+    self.magnetometerBMM150Data = array;
+    
+    self.magnetometerBMM150Graph.fullScale = 4;
+    
+    MBLMagnetometerBMM150 *magnetometerBMM150 = (MBLMagnetometerBMM150 *)self.device.magnetometer;
+    [self.streamingEvents addObject:magnetometerBMM150.periodicMagneticField];
+    [magnetometerBMM150.periodicMagneticField startNotificationsWithHandlerAsync:^(MBLGyroData * _Nullable obj, NSError * _Nullable error) {
+        // TODO: Come up with a better graph interface, we need to scale value
+        // to show up right
+        [self.magnetometerBMM150Graph addX:obj.x * 20000.0 y:obj.y * 20000.0 z:obj.z * 20000.0];
+        [array addObject:obj];
+    }];
+}
+
+- (IBAction)magnetometerBMM150StopStreamPressed:(id)sender
+{
+    [self.magnetometerBMM150StartStream setEnabled:YES];
+    [self.magnetometerBMM150StopStream setEnabled:NO];
+    [self.magnetometerBMM150StartLog setEnabled:YES];
+    
+    MBLMagnetometerBMM150 *magnetometerBMM150 = (MBLMagnetometerBMM150 *)self.device.magnetometer;
+    [self.streamingEvents removeObject:magnetometerBMM150.periodicMagneticField];
+    [magnetometerBMM150.periodicMagneticField stopNotificationsAsync];
+}
+
+- (IBAction)magnetometerBMM150StartLogPressed:(id)sender
+{
+    [self.magnetometerBMM150StartLog setEnabled:NO];
+    [self.magnetometerBMM150StopLog setEnabled:YES];
+    [self.magnetometerBMM150StartStream setEnabled:NO];
+    [self.magnetometerBMM150StopStream setEnabled:NO];
+    
+    self.magnetometerBMM150Graph.fullScale = 4;
+
+    MBLMagnetometerBMM150 *magnetometerBMM150 = (MBLMagnetometerBMM150 *)self.device.magnetometer;
+    [magnetometerBMM150.periodicMagneticField startLoggingAsync];
+}
+
+- (IBAction)magnetometerBMM150StopLogPressed:(id)sender
+{
+    [self.magnetometerBMM150StartLog setEnabled:YES];
+    [self.magnetometerBMM150StopLog setEnabled:NO];
+    [self.magnetometerBMM150StartStream setEnabled:YES];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+    hud.labelText = @"Downloading...";
+    
+    MBLMagnetometerBMM150 *magnetometerBMM150 = (MBLMagnetometerBMM150 *)self.device.magnetometer;
+    [[[magnetometerBMM150.periodicMagneticField downloadLogAndStopLoggingAsync:YES progressHandler:^(float number) {
+        hud.progress = number;
+    }] success:^(NSArray<MBLMagnetometerData *> * _Nonnull array) {
+        self.magnetometerBMM150Data = array;
+        for (MBLMagnetometerData *obj in array) {
+            [self.magnetometerBMM150Graph addX:obj.x * 20000.0 y:obj.y * 20000.0 z:obj.z * 20000.0];
+        }
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.labelText = @"Clearing Log...";
+        [self logCleanup:^(NSError *error) {
+            [hud hide:YES];
+            if (error) {
+                [self connectDevice:NO];
+            }
+        }];
+    }] failure:^(NSError * _Nonnull error) {
+        [self connectDevice:NO];
+        [hud hide:YES];
+    }];
+}
+
+- (IBAction)magnetometerBMM150SendDataPressed:(id)sender
+{
+    NSMutableData *magnetometerData = [NSMutableData data];
+    for (MBLMagnetometerData *dataElement in self.magnetometerBMM150Data) {
+        @autoreleasepool {
+            [magnetometerData appendData:[[NSString stringWithFormat:@"%f,%f,%f,%f\n",
+                                           dataElement.timestamp.timeIntervalSince1970,
+                                           dataElement.x,
+                                           dataElement.y,
+                                           dataElement.z] dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+    }
+    [self sendData:magnetometerData title:@"MagnetometerData"];
 }
 
 - (IBAction)gpioPinSelectorPressed:(id)sender

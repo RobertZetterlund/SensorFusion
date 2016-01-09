@@ -1,9 +1,9 @@
 /**
- * MBLBarometer.h
+ * MBLMagnetometerData.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 4/27/15.
- * Copyright 2014-2015 MbientLab Inc. All rights reserved.
+ * Created by Stephen Schiffli on 1/5/16.
+ * Copyright 2016 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
  * granted under the terms of a software license agreement between the user who
@@ -33,32 +33,27 @@
  * contact MbientLab via email: hello@mbientlab.com
  */
 
-#import <MetaWear/MBLConstants.h>
-#import <MetaWear/MBLEvent.h>
-#import <MetaWear/MBLModule.h>
-@class MBLNumericData;
+#import <MetaWear/MBLDataSample.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- Interface to an abstract barometer sensor. If you need more advanced
- features then upcast to the specific sensor on your board, MBLBarometerBMP280.
- @see MBLAmbientLightLTR329
+ Container for a single magnetometer sensor reading
  */
-@interface MBLBarometer : MBLModule
+@interface MBLMagnetometerData : MBLDataSample
 
 /**
- Data representing the atmospheric pressure measured by barometer.
- Event callbacks will be provided an MBLNumericData object whose double
- value will be pressure in pascals.
+ Magnetic field along X axis in Tesla's
  */
-@property (nonatomic, readonly) MBLData MBL_GENERIC(MBLNumericData *) *pressure;
+@property (nonatomic, readonly) double x;
 /**
- Data representing the altidue calulated from atmospheric pressure.
- Event callbacks will be provided an MBLNumericData object whose double
- value will be altitude in meters.
+ Magnetic field along Y axis in Tesla's
  */
-@property (nonatomic, readonly) MBLData MBL_GENERIC(MBLNumericData *) *altitude;
+@property (nonatomic, readonly) double y;
+/**
+  Magnetic field along Z axis in Tesla's
+ */
+@property (nonatomic, readonly) double z;
 
 @end
 

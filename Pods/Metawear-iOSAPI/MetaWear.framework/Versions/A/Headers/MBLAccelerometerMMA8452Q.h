@@ -130,7 +130,7 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
 
 
 /**
- Select the axis used for tap detection
+ Select one or more axis used for tap detection
  */
 @property (nonatomic) MBLAccelerometerAxis tapDetectionAxis;
 /**
@@ -149,12 +149,12 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
  Select threshold (in G's [0.0, 8.0]) for the shakeEvent.  This is used in conjuction
  with shakeWidth to determine when a shakeEvent will be generated.  Default value 0.5
  */
-@property (nonatomic) float shakeThreshold;
+@property (nonatomic) double shakeThreshold;
 /**
  Select time (in mSec) required for acceleration to be above shakeThreshold
  before a shakeEvent will be generated.  Default value 200.0
  */
-@property (nonatomic) float shakeWidth;
+@property (nonatomic) double shakeWidth;
 /**
  Event representing a shake.  The sensitvity can be tuned using
  shakeThreshold and shakeWidth properties.
@@ -168,12 +168,12 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerCutoffFreq) {
  with freeFallWidth to determine when a freeFallEvent will be generated.  All accelerometer
  axis' must stay below freeFallThreshold for freeFallWidth mili-seconds.  Default value 0.2
  */
-@property (nonatomic) float freeFallThreshold;
+@property (nonatomic) double freeFallThreshold;
 /**
  Select time (in mSec) required for all accelerometer axis' to be above freeFallThreshold
  before a freeFallEvent will be generated.  Default value 100.0
  */
-@property (nonatomic) float freeFallWidth;
+@property (nonatomic) double freeFallWidth;
 /**
  Event representing free fall, event occurs every freeFallWidth ms while the device
  is in free fall.

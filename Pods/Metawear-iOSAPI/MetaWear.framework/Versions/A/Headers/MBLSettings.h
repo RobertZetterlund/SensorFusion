@@ -64,7 +64,7 @@ typedef NS_ENUM(uint8_t, MBLTransmitPower) {
  This should be carefully considered, because it affects the time to discovery 
  and connect performance, and also battery life.
  */
-@property (nonatomic) float advertisingInterval;
+@property (nonatomic) double advertisingInterval;
 /**
  Advertising timeout in seconds. Valid range is [0, 180], use 0 for unlimited 
  advertising (0 is default)

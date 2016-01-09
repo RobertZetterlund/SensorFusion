@@ -1185,10 +1185,79 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Magnetometer BMM150" id="u7y-cw-Ssn" userLabel="Magnetometer BMM150">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="293" id="17s-iT-6rd" userLabel="Magnetometer BMM150 Cell">
+                                        <rect key="frame" x="0.0" y="3924" width="320" height="293"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="17s-iT-6rd" id="tAC-gv-LYI">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="292"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gty-4n-GiH" customClass="APLGraphView">
+                                                    <rect key="frame" x="0.0" y="118" width="320" height="112"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PQl-QL-dA7">
+                                                    <rect key="frame" x="213" y="80" width="93" height="30"/>
+                                                    <state key="normal" title="Stop Logging">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="magnetometerBMM150StopLogPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="Fwq-yg-AUV"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3qA-ea-bcf">
+                                                    <rect key="frame" x="123" y="238" width="74" height="30"/>
+                                                    <state key="normal" title="Send Data">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="magnetometerBMM150SendDataPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="9oR-We-kDm"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Magnetometer Data:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LI-9i-452">
+                                                    <rect key="frame" x="81" y="13" width="158" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s7l-Sn-HGG">
+                                                    <rect key="frame" x="14" y="42" width="108" height="30"/>
+                                                    <state key="normal" title="Start Streaming">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="magnetometerBMM150StartStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="RAO-zY-5Hk"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1mT-hY-ZxY">
+                                                    <rect key="frame" x="14" y="80" width="93" height="30"/>
+                                                    <state key="normal" title="Start Logging">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="magnetometerBMM150StartLogPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="r2g-Is-aRC"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSb-1B-CEI">
+                                                    <rect key="frame" x="199" y="42" width="107" height="30"/>
+                                                    <state key="normal" title="Stop Streaming">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="magnetometerBMM150StopStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="shd-At-e2m"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="GPIO" id="WAZ-gj-2YQ">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="444" id="yRW-sQ-jgf">
-                                        <rect key="frame" x="0.0" y="3924" width="320" height="444"/>
+                                        <rect key="frame" x="0.0" y="4260" width="320" height="444"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yRW-sQ-jgf" id="Phe-rA-6n1">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="443"/>
@@ -1358,7 +1427,7 @@
                             <tableViewSection headerTitle="Haptic/Buzzer" id="LZo-Av-eiC">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="139" id="iVV-zU-QrA">
-                                        <rect key="frame" x="0.0" y="4411" width="320" height="139"/>
+                                        <rect key="frame" x="0.0" y="4747" width="320" height="139"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iVV-zU-QrA" id="efj-Kw-F0V">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="138"/>
@@ -1412,7 +1481,7 @@
                             <tableViewSection headerTitle="iBeacon" id="esL-1P-kud">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="103" id="6NG-WJ-AbP">
-                                        <rect key="frame" x="0.0" y="4593" width="320" height="103"/>
+                                        <rect key="frame" x="0.0" y="4929" width="320" height="103"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6NG-WJ-AbP" id="AO0-SW-X8L">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
@@ -1450,7 +1519,7 @@
                             <tableViewSection headerTitle="Barometer BMP280" id="1pL-zp-K2o">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="278" id="36h-5y-INY">
-                                        <rect key="frame" x="0.0" y="4739" width="320" height="278"/>
+                                        <rect key="frame" x="0.0" y="5075" width="320" height="278"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="36h-5y-INY" id="ded-ph-96r">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="277"/>
@@ -1542,7 +1611,7 @@
                             <tableViewSection headerTitle="Ambient Light LTR329" id="k2T-az-d2v">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="285" id="dqJ-xr-btu">
-                                        <rect key="frame" x="0.0" y="5060" width="320" height="285"/>
+                                        <rect key="frame" x="0.0" y="5396" width="320" height="285"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dqJ-xr-btu" id="p8h-Zx-HB6">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="284"/>
@@ -1705,7 +1774,7 @@
                         <outlet property="gpioStopPinChange" destination="V6h-Wg-udz" id="UvS-2T-h1y"/>
                         <outlet property="gyroBMI160Cell" destination="Z0i-aU-yuj" id="WCO-e7-OLm"/>
                         <outlet property="gyroBMI160Frequency" destination="Mfy-X3-zoy" id="NQF-vk-2ic"/>
-                        <outlet property="gyroBMI160Graph" destination="fup-Wq-fJx" id="4Pb-I6-gHM"/>
+                        <outlet property="gyroBMI160Graph" destination="fup-Wq-fJx" id="h4u-Xw-Ryl"/>
                         <outlet property="gyroBMI160Scale" destination="5rO-IX-LRQ" id="6XD-m3-eYi"/>
                         <outlet property="gyroBMI160StartLog" destination="J47-EM-Pxl" id="Hi9-vX-9qe"/>
                         <outlet property="gyroBMI160StartStream" destination="lbt-7T-juf" id="fgm-09-3dp"/>
@@ -1720,6 +1789,12 @@
                         <outlet property="iBeaconCell" destination="6NG-WJ-AbP" id="JT2-qC-kdh"/>
                         <outlet property="ledCell" destination="Nhr-ih-E25" id="hFa-he-xO8"/>
                         <outlet property="lowNoiseSwitch" destination="z7L-Af-YBm" id="9PX-qA-KxZ"/>
+                        <outlet property="magnetometerBMM150Cell" destination="17s-iT-6rd" id="bEL-JU-Vaa"/>
+                        <outlet property="magnetometerBMM150Graph" destination="gty-4n-GiH" id="6hO-VX-u3O"/>
+                        <outlet property="magnetometerBMM150StartLog" destination="1mT-hY-ZxY" id="lCV-5a-P2G"/>
+                        <outlet property="magnetometerBMM150StartStream" destination="s7l-Sn-HGG" id="jQf-RK-PgS"/>
+                        <outlet property="magnetometerBMM150StopLog" destination="PQl-QL-dA7" id="vlK-Zj-ald"/>
+                        <outlet property="magnetometerBMM150StopStream" destination="ZSb-1B-CEI" id="pye-8w-wnJ"/>
                         <outlet property="mechanicalSwitchCell" destination="Rbc-DC-udN" id="5Ea-8H-3LX"/>
                         <outlet property="mechanicalSwitchLabel" destination="3Nk-xe-wNY" id="iKs-zw-ELO"/>
                         <outlet property="mfgNameLabel" destination="ffW-eA-i2N" id="spr-Cc-mCh"/>
@@ -1769,6 +1844,7 @@
                         <outletCollection property="allCells" destination="36h-5y-INY" id="Ga0-42-2kA"/>
                         <outletCollection property="allCells" destination="d1T-vb-s5i" id="smo-xl-7Tq"/>
                         <outletCollection property="allCells" destination="dqJ-xr-btu" id="fw2-Ej-ne5"/>
+                        <outletCollection property="allCells" destination="17s-iT-6rd" id="B37-ex-PLz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wq9-CB-brG" userLabel="First Responder" sceneMemberID="firstResponder"/>

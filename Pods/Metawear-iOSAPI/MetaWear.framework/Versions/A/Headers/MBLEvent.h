@@ -301,7 +301,7 @@ typedef void (^MBLNotificationHandler)(MBLGenericType __nullable obj, NSError *_
  @parma data Value on the right hand side of the operation
  @returns New event representing input values that meet the comparison condition
  */
-- (MBLFilter MBL_GENERIC(MBLGenericType) *)compareEventUsingOperation:(MBLComparisonOperation)op withData:(float)data;
+- (MBLFilter MBL_GENERIC(MBLGenericType) *)compareEventUsingOperation:(MBLComparisonOperation)op withData:(double)data;
 
 /**
  Create a new event that occurs at most once every period milliseconds.
@@ -341,7 +341,7 @@ typedef void (^MBLNotificationHandler)(MBLGenericType __nullable obj, NSError *_
  @param output Select the type of data this filter should output
  @returns New event representing a pulse of the input
  */
-- (MBLFilter *)pulseDetectorOfEventWithThreshold:(float)threshold width:(uint16_t)width output:(MBLPulseOutput)output;
+- (MBLFilter *)pulseDetectorOfEventWithThreshold:(double)threshold width:(uint16_t)width output:(MBLPulseOutput)output;
 
 /**
  Create a new event that occurs when the given event changes by a specified delta.
@@ -352,7 +352,7 @@ typedef void (^MBLNotificationHandler)(MBLGenericType __nullable obj, NSError *_
  @param output Select the type of data this filter should output
  @returns New event representing a changed of the input
  */
-- (MBLFilter *)changeOfEventByDelta:(float)delta output:(MBLDeltaValueOutput)output;
+- (MBLFilter *)changeOfEventByDelta:(double)delta output:(MBLDeltaValueOutput)output;
 
 /**
  Create a new event that occurs when the given event crosses a specified threshold.
@@ -362,7 +362,7 @@ typedef void (^MBLNotificationHandler)(MBLGenericType __nullable obj, NSError *_
  @param output Select the type of data this filter should output
  @returns New event representing a changed of the input
  */
-- (MBLFilter MBL_GENERIC(MBLGenericType) *)changeOfEventAcrossThreshold:(float)threshold hysteresis:(float)hysteresis output:(MBLThresholdValueOutput)output;
+- (MBLFilter MBL_GENERIC(MBLGenericType) *)changeOfEventAcrossThreshold:(double)threshold hysteresis:(double)hysteresis output:(MBLThresholdValueOutput)output;
 
 /**
  Create a new event that occurs at the same time of this event, but whose value is

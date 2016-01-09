@@ -112,14 +112,14 @@ typedef NS_ENUM(uint8_t, MBLPinChangeType) {
 @property (nonatomic, readonly) MBLData MBL_GENERIC(MBLNumericData *) *digitalValue;
 /**
  Data representing the analog value of the pin.
- Event callbacks will be provided an MBLNumericData object whose float
+ Event callbacks will be provided an MBLNumericData object whose double
  value will be volts.
  @warning Not all pins support analog reads
  */
 @property (nonatomic, readonly) MBLData MBL_GENERIC(MBLNumericData *) *analogAbsolute;
 /**
  Data representing the analog value of the pin as a ratio of the supply voltage.
- Event callbacks will be provided an MBLNumericData object whose float value
+ Event callbacks will be provided an MBLNumericData object whose double value
  will range from 0.0 to 1.0, where 0.0 indicates pin is equal to
  ground, and 1.0 indicates pin is equal to supply voltage.
  @warning Not all pins support analog reads

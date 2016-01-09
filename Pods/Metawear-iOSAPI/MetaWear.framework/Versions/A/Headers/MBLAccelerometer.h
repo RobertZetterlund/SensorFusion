@@ -46,10 +46,10 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Accelerometer axis
  */
-typedef NS_ENUM(uint8_t, MBLAccelerometerAxis) {
-    MBLAccelerometerAxisX = 0,
-    MBLAccelerometerAxisY = 1,
-    MBLAccelerometerAxisZ = 2
+typedef NS_OPTIONS(uint8_t, MBLAccelerometerAxis) {
+    MBLAccelerometerAxisX = 1 << 0,
+    MBLAccelerometerAxisY = 1 << 1,
+    MBLAccelerometerAxisZ = 1 << 2
 };
 
 /**
@@ -78,7 +78,7 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerTapType) {
  check the timestamps of the delivered MBLAccelerometerData instances to determine 
  the true update interval.
  */
-@property (nonatomic) float sampleFrequency;
+@property (nonatomic) double sampleFrequency;
 
 /**
  Event representing a new accelerometer data sample complete with x, y,
@@ -89,19 +89,19 @@ typedef NS_ENUM(uint8_t, MBLAccelerometerTapType) {
 /**
  Event representing a new accelerometer X axis sample. This event
  will occur at sampleFrequency. Event callbacks will be provided an
- MBLNumericData object whose float value will be acceleration in G's.
+ MBLNumericData object whose double value will be acceleration in G's.
  */
 @property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *xAxisReadyEvent;
 /**
  Event representing a new accelerometer Y axis sample. This event
  will occur at sampleFrequency. Event callbacks will be provided an
- MBLNumericData object whose float value will be acceleration in G's.
+ MBLNumericData object whose double value will be acceleration in G's.
  */
 @property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *yAxisReadyEvent;
 /**
  Event representing a new accelerometer Z axis sample. This event
  will occur at sampleFrequency. Event callbacks will be provided an
- MBLNumericData object whose float value will be acceleration in G's.
+ MBLNumericData object whose double value will be acceleration in G's.
  */
 @property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *zAxisReadyEvent;
 /**
