@@ -571,7 +571,9 @@
     
     [self.streamingEvents addObject:self.device.mechanicalSwitch.switchUpdateEvent];
     [self.device.mechanicalSwitch.switchUpdateEvent startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
-        self.mechanicalSwitchLabel.text = obj.value.boolValue ? @"Down" : @"Up";
+        if (obj) {
+            self.mechanicalSwitchLabel.text = obj.value.boolValue ? @"Down" : @"Up";
+        }
     }];
 }
 
@@ -696,9 +698,11 @@
     
     [self.streamingEvents addObject:self.device.accelerometer.dataReadyEvent];
     [self.device.accelerometer.dataReadyEvent startNotificationsWithHandlerAsync:^(MBLAccelerometerData * _Nullable acceleration, NSError * _Nullable error) {
-        [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
-        // Add data to data array for saving
-        [array addObject:acceleration];
+        if (acceleration) {
+            [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
+            // Add data to data array for saving
+            [array addObject:acceleration];
+        }
     }];
 }
 
@@ -799,7 +803,9 @@
     MBLAccelerometerMMA8452Q *accelerometerMMA8452Q = (MBLAccelerometerMMA8452Q *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerMMA8452Q.tapEvent];
     [accelerometerMMA8452Q.tapEvent startNotificationsWithHandlerAsync:^(MBLDataSample * _Nullable obj, NSError * _Nullable error) {
-        self.tapLabel.text = [NSString stringWithFormat:@"Tap Count: %d", ++self.tapCount];
+        if (obj) {
+            self.tapLabel.text = [NSString stringWithFormat:@"Tap Count: %d", ++self.tapCount];
+        }
     }];
 }
 
@@ -824,7 +830,9 @@
     MBLAccelerometerMMA8452Q *accelerometerMMA8452Q = (MBLAccelerometerMMA8452Q *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerMMA8452Q.shakeEvent];
     [accelerometerMMA8452Q.shakeEvent startNotificationsWithHandlerAsync:^(MBLDataSample * _Nullable obj, NSError * _Nullable error) {
-        self.shakeLabel.text = [NSString stringWithFormat:@"Shakes: %d", ++self.shakeCount];
+        if (obj) {
+            self.shakeLabel.text = [NSString stringWithFormat:@"Shakes: %d", ++self.shakeCount];
+        }
     }];
 }
 
@@ -849,19 +857,21 @@
     MBLAccelerometerMMA8452Q *accelerometerMMA8452Q = (MBLAccelerometerMMA8452Q *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerMMA8452Q.orientationEvent];
     [accelerometerMMA8452Q.orientationEvent startNotificationsWithHandlerAsync:^(MBLOrientationData * _Nullable obj, NSError * _Nullable error) {
-        switch (obj.orientation) {
-            case MBLAccelerometerOrientationPortrait:
-                self.orientationLabel.text = @"Portrait";
-                break;
-            case MBLAccelerometerOrientationPortraitUpsideDown:
-                self.orientationLabel.text = @"PortraitUpsideDown";
-                break;
-            case MBLAccelerometerOrientationLandscapeLeft:
-                self.orientationLabel.text = @"LandscapeLeft";
-                break;
-            case MBLAccelerometerOrientationLandscapeRight:
-                self.orientationLabel.text = @"LandscapeRight";
-                break;
+        if (obj) {
+            switch (obj.orientation) {
+                case MBLAccelerometerOrientationPortrait:
+                    self.orientationLabel.text = @"Portrait";
+                    break;
+                case MBLAccelerometerOrientationPortraitUpsideDown:
+                    self.orientationLabel.text = @"PortraitUpsideDown";
+                    break;
+                case MBLAccelerometerOrientationLandscapeLeft:
+                    self.orientationLabel.text = @"LandscapeLeft";
+                    break;
+                case MBLAccelerometerOrientationLandscapeRight:
+                    self.orientationLabel.text = @"LandscapeRight";
+                    break;
+            }
         }
     }];
 }
@@ -921,8 +931,10 @@
     
     [self.streamingEvents addObject:self.device.accelerometer.dataReadyEvent];
     [self.device.accelerometer.dataReadyEvent startNotificationsWithHandlerAsync:^(MBLAccelerometerData * _Nullable obj, NSError * _Nullable error) {
-        [self.accelerometerBMI160Graph addX:obj.x y:obj.y z:obj.z];
-        [array addObject:obj];
+        if (obj) {
+            [self.accelerometerBMI160Graph addX:obj.x y:obj.y z:obj.z];
+            [array addObject:obj];
+        }
     }];
 }
 
@@ -1004,7 +1016,9 @@
     MBLAccelerometerBMI160 *accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerBMI160.tapEvent];
     [accelerometerBMI160.tapEvent startNotificationsWithHandlerAsync:^(MBLDataSample * _Nullable obj, NSError * _Nullable error) {
-        self.accelerometerBMI160TapLabel.text = [NSString stringWithFormat:@"Tap Count: %d", ++self.accelerometerBMI160TapCount];
+        if (obj) {
+            self.accelerometerBMI160TapLabel.text = [NSString stringWithFormat:@"Tap Count: %d", ++self.accelerometerBMI160TapCount];
+        }
     }];
 }
 
@@ -1030,7 +1044,9 @@
     MBLAccelerometerBMI160 *accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerBMI160.flatEvent];
     [accelerometerBMI160.flatEvent startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
-        self.accelerometerBMI160FlatLabel.text = obj.value.boolValue ? @"Flat" : @"Not Flat";
+        if (obj) {
+            self.accelerometerBMI160FlatLabel.text = obj.value.boolValue ? @"Flat" : @"Not Flat";
+        }
     }];
 }
 
@@ -1054,19 +1070,21 @@
     MBLAccelerometerBMI160 *accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerBMI160.orientationEvent];
     [accelerometerBMI160.orientationEvent startNotificationsWithHandlerAsync:^(MBLOrientationData * _Nullable obj, NSError * _Nullable error) {
-        switch (obj.orientation) {
-            case MBLAccelerometerOrientationPortrait:
-                self.accelerometerBMI160OrientLabel.text = @"Portrait";
-                break;
-            case MBLAccelerometerOrientationPortraitUpsideDown:
-                self.accelerometerBMI160OrientLabel.text = @"PortraitUpsideDown";
-                break;
-            case MBLAccelerometerOrientationLandscapeLeft:
-                self.accelerometerBMI160OrientLabel.text = @"LandscapeLeft";
-                break;
-            case MBLAccelerometerOrientationLandscapeRight:
-                self.accelerometerBMI160OrientLabel.text = @"LandscapeRight";
-                break;
+        if (obj) {
+            switch (obj.orientation) {
+                case MBLAccelerometerOrientationPortrait:
+                    self.accelerometerBMI160OrientLabel.text = @"Portrait";
+                    break;
+                case MBLAccelerometerOrientationPortraitUpsideDown:
+                    self.accelerometerBMI160OrientLabel.text = @"PortraitUpsideDown";
+                    break;
+                case MBLAccelerometerOrientationLandscapeLeft:
+                    self.accelerometerBMI160OrientLabel.text = @"LandscapeLeft";
+                    break;
+                case MBLAccelerometerOrientationLandscapeRight:
+                    self.accelerometerBMI160OrientLabel.text = @"LandscapeRight";
+                    break;
+            }
         }
     }];
 }
@@ -1092,7 +1110,9 @@
     MBLAccelerometerBMI160 *accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
     [self.streamingEvents addObject:accelerometerBMI160.stepEvent];
     [accelerometerBMI160.stepEvent startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
-        self.accelerometerBMI160StepLabel.text = [NSString stringWithFormat:@"Step Count: %d", ++self.accelerometerBMI160StepCount];
+        if (obj) {
+            self.accelerometerBMI160StepLabel.text = [NSString stringWithFormat:@"Step Count: %d", ++self.accelerometerBMI160StepCount];
+        }
     }];
 }
 
@@ -1153,10 +1173,12 @@
     
     [self.streamingEvents addObject:self.device.gyro.dataReadyEvent];
     [self.device.gyro.dataReadyEvent startNotificationsWithHandlerAsync:^(MBLGyroData * _Nullable obj, NSError * _Nullable error) {
-        // TODO: Come up with a better graph interface, we need to scale value
-        // to show up right
-        [self.gyroBMI160Graph addX:obj.x * .008 y:obj.y * .008 z:obj.z * .008];
-        [array addObject:obj];
+        if (obj) {
+            // TODO: Come up with a better graph interface, we need to scale value
+            // to show up right
+            [self.gyroBMI160Graph addX:obj.x * .008 y:obj.y * .008 z:obj.z * .008];
+            [array addObject:obj];
+        }
     }];
 }
 
@@ -1195,18 +1217,9 @@
     [[[self.device.gyro.dataReadyEvent downloadLogAndStopLoggingAsync:YES progressHandler:^(float number) {
         hud.progress = number;
     }] success:^(NSArray<MBLGyroData *> * _Nonnull array) {
-        self.gyroBMI160Data = array;
         for (MBLGyroData *obj in array) {
             [self.gyroBMI160Graph addX:obj.x * .008 y:obj.y * .008 z:obj.z * .008];
         }
-        hud.mode = MBProgressHUDModeIndeterminate;
-        hud.labelText = @"Clearing Log...";
-        [self logCleanup:^(NSError *error) {
-            [hud hide:YES];
-            if (error) {
-                [self connectDevice:NO];
-            }
-        }];
     }] failure:^(NSError * _Nonnull error) {
         [self connectDevice:NO];
         [hud hide:YES];
@@ -1243,10 +1256,12 @@
     MBLMagnetometerBMM150 *magnetometerBMM150 = (MBLMagnetometerBMM150 *)self.device.magnetometer;
     [self.streamingEvents addObject:magnetometerBMM150.periodicMagneticField];
     [magnetometerBMM150.periodicMagneticField startNotificationsWithHandlerAsync:^(MBLGyroData * _Nullable obj, NSError * _Nullable error) {
-        // TODO: Come up with a better graph interface, we need to scale value
-        // to show up right
-        [self.magnetometerBMM150Graph addX:obj.x * 20000.0 y:obj.y * 20000.0 z:obj.z * 20000.0];
-        [array addObject:obj];
+        if (obj) {
+            // TODO: Come up with a better graph interface, we need to scale value
+            // to show up right
+            [self.magnetometerBMM150Graph addX:obj.x * 20000.0 y:obj.y * 20000.0 z:obj.z * 20000.0];
+            [array addObject:obj];
+        }
     }];
 }
 
@@ -1385,7 +1400,9 @@
     }
     [self.streamingEvents addObject:pin.changeEvent];
     [pin.changeEvent startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
-        self.gpioPinChangeLabel.text = [NSString stringWithFormat:@"Change Count: %d", ++self.gpioPinChangeCount];
+        if (obj) {
+            self.gpioPinChangeLabel.text = [NSString stringWithFormat:@"Change Count: %d", ++self.gpioPinChangeCount];
+        }
     }];
 }
 
@@ -1515,7 +1532,9 @@
     
     [self.streamingEvents addObject:barometerBMP280.periodicAltitude];
     [barometerBMP280.periodicAltitude startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
-        self.barometerBMP280Altitude.text = [NSString stringWithFormat:@"%.3f", obj.value.floatValue];
+        if (obj) {
+            self.barometerBMP280Altitude.text = [NSString stringWithFormat:@"%.3f", obj.value.floatValue];
+        }
     }];
 }
 
@@ -1608,7 +1627,9 @@
     
     [self.streamingEvents addObject:ambientLightLTR329.periodicIlluminance];
     [ambientLightLTR329.periodicIlluminance startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
-        self.ambientLightLTR329Illuminance.text = [NSString stringWithFormat:@"%.3f", obj.value.floatValue];
+        if (obj) {
+            self.ambientLightLTR329Illuminance.text = [NSString stringWithFormat:@"%.3f", obj.value.floatValue];
+        }
     }];
 }
 
