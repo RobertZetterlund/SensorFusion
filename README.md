@@ -10,4 +10,4 @@ We use [CocoaPods](http://cocoapods.org) for dependency management, this means y
 
 ## Getting Started
 
-If you are new to MetaWear please check out out [getting started guide](https://mbientlab.com/gettingstarted).
+If you are new to MetaWear please check out our [getting started guide](https://mbientlab.com/gettingstarted).
