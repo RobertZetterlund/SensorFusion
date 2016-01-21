@@ -40,6 +40,7 @@
 @class MBLData MBL_GENERIC(MBLGenericType);
 @class MBLStringData;
 @class MBLDataSample;
+@class MBLNumericData;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -95,16 +96,19 @@ typedef NS_ENUM(uint8_t, MBLTransmitPower) {
  Event representing a BLE disconnection event.  Note this doesn't make sense to
  stream, but it's likely that programCommandsToRunOnEventAsync will have utility.
  Event callbacks will be provided an MBLDataSample object.
- @warning Avaliable on latest firmware only
  */
 @property (nonatomic, readonly, nullable) MBLEvent MBL_GENERIC(MBLDataSample *) *disconnectEvent;
 
 /**
- Get the MAC address of the device
+ Get the MAC address of the MetaWear
  Event callbacks will be provided an MBLStringData object.
- @warning Avaliable on latest firmware only
  */
 @property (nonatomic, readonly, nullable) MBLData MBL_GENERIC(MBLStringData *) *macAddress;
+
+/**
+ Percent remaining battery life, returns int between 0-100
+ */
+@property (nonatomic, readonly, nullable) MBLData MBL_GENERIC(MBLNumericData *) *batteryRemaining;
 
 
 /**
@@ -155,6 +159,11 @@ typedef NS_ENUM(uint8_t, MBLTransmitPower) {
  Write all the above values to the device
  */
 - (BFTask *)applyConnectionParametersAsync;
+
+/**
+ Raw battery voltage in mV.  For enabling only, please use batteryRemaining instead.
+ */
+@property (nonatomic, readonly, nullable) MBLData MBL_GENERIC(MBLNumericData *) *batteryVoltage;
 
 @end
 
