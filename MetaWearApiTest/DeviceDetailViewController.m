@@ -291,6 +291,15 @@
     }];
 }
 
+- (void)showAlertTitle:(NSString *)title message:(NSString *)message
+{
+    [[[UIAlertView alloc] initWithTitle:title
+                                message:message
+                               delegate:nil
+                      cancelButtonTitle:@"Okay"
+                      otherButtonTitles:nil] show];
+}
+
 - (void)deviceDisconnected
 {
     [self.connectionSwitch setOn:NO animated:YES];
@@ -327,7 +336,7 @@
         if (![[NSUserDefaults standardUserDefaults] objectForKey:@"ihaveseenguestmessage"]) {
             [[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"ihaveseenguestmessage"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            [[[UIAlertView alloc] initWithTitle:@"Notice" message:@"You have connected to a device being used by another app, so you are in GUEST mode.  If you wish to take control please press 'Reset To Factory Defaults', which will wipe the device clean." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+            [self showAlertTitle:@"Notice" message:@"You have connected to a device being used by another app, so you are in GUEST mode.  If you wish to take control please press 'Reset To Factory Defaults', which will wipe the device clean."];
         }
         [self reloadDataAnimated:YES];
         return;
@@ -454,8 +463,8 @@
             
             hud.mode = MBProgressHUDModeText;
             if (error) {
-                hud.labelText = error.localizedDescription;
-                [hud hide:YES afterDelay:2];
+                [self showAlertTitle:@"Error" message:error.localizedDescription];
+                [hud hide:NO];
             } else {
                 [self deviceConnected];
                 
@@ -469,8 +478,8 @@
             [self deviceDisconnected];
             hud.mode = MBProgressHUDModeText;
             if (error) {
-                hud.labelText = error.localizedDescription;
-                [hud hide:YES afterDelay:2];
+                [self showAlertTitle:@"Error" message:error.localizedDescription];
+                [hud hide:NO];
             } else {
                 hud.labelText = @"Disconnected!";
                 [hud hide:YES afterDelay:0.5];
@@ -518,11 +527,7 @@
         hud.mode = MBProgressHUDModeText;
         if (error) {
             NSLog(@"Firmware update error: %@", error.localizedDescription);
-            [[[UIAlertView alloc] initWithTitle:@"Update Error"
-                                        message:[@"Please re-connect and try again, if you can't connect, try MetaBoot Mode to recover.\nError: " stringByAppendingString:error.localizedDescription]
-                                       delegate:nil
-                              cancelButtonTitle:@"Okay"
-                              otherButtonTitles:nil] show];
+            [self showAlertTitle:@"Update Error" message:[@"Please re-connect and try again, if you can't connect, try MetaBoot Mode to recover.\nError: " stringByAppendingString:error.localizedDescription]];
             [hud hide:YES];
         } else {
             hud.labelText = @"Success!";
@@ -787,10 +792,10 @@
         // Popup the default share screen
         self.controller = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
         if (![self.controller presentOptionsMenuFromRect:self.view.bounds inView:self.view animated:YES]) {
-            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"No programs installed that could save document" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+            [self showAlertTitle:@"Error" message:@"No programs installed that could save document"];
         }
     } else {
-        [[[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+        [self showAlertTitle:@"Error" message:error.localizedDescription];
     }
 }
 
