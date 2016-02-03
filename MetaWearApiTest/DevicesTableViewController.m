@@ -36,11 +36,14 @@
 #import "DevicesTableViewController.h"
 #import "DeviceDetailViewController.h"
 #import "MBProgressHUD.h"
+#import "MovingAverage.h"
 #import <MetaWear/MetaWear.h>
 
 @interface DevicesTableViewController ()
-@property (nonatomic, strong) NSArray *devices;
-@property (strong, nonatomic) UIActivityIndicatorView *activity;
+@property (nonatomic) NSArray *devices;
+@property (nonatomic) NSMutableDictionary *rssiAverages;
+@property (nonatomic) NSMutableDictionary *previousRssi;
+@property (nonatomic) UIActivityIndicatorView *activity;
 
 @property (weak, nonatomic) IBOutlet UISwitch *scanningSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *metaBootSwitch;
@@ -52,6 +55,8 @@
 {
     [super viewDidLoad];
     
+    self.rssiAverages = [NSMutableDictionary dictionary];
+    self.previousRssi = [NSMutableDictionary dictionary];
     self.activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.activity.center = CGPointMake(95, 138);
     [self.tableView addSubview:self.activity];
@@ -82,6 +87,22 @@
             }];
         } else {
             [[MBLMetaWearManager sharedManager] startScanForMetaWearsAllowDuplicates:YES handler:^(NSArray *array) {
+                for (MBLMetaWear *device in array) {
+                    // Get or create a moving average for this device
+                    MovingAverage *average = self.rssiAverages[device.identifier];
+                    if (!average) {
+                        average = [[MovingAverage alloc] initWithPeriod:4];
+                        self.rssiAverages[device.identifier] = average;
+                        [average addDatum:@-60.0]; // Safe default value
+                    }
+                    // Only update the average if the value changed and is reasonable
+                    if (self.previousRssi[device.identifier] != device.discoveryTimeRSSI) {
+                        if (device.discoveryTimeRSSI.doubleValue < -15.0) {
+                            [average addDatum:device.discoveryTimeRSSI];
+                        }
+                    }
+                    self.previousRssi[device.identifier] = device.discoveryTimeRSSI;
+                }
                 self.devices = array;
                 [self.tableView reloadData];
             }];
@@ -149,6 +170,21 @@
     UILabel *name = (UILabel *)[cell viewWithTag:4];
     name.text = cur.name;
     
+    UIImageView *signal = (UIImageView *)[cell viewWithTag:5];
+    MovingAverage *average = self.rssiAverages[cur.identifier];
+    if (average.movingAverage < -80.0) {
+        signal.image = [UIImage imageNamed:@"wifi_d1"];
+    } else if (average.movingAverage < -70.0) {
+        signal.image = [UIImage imageNamed:@"wifi_d2"];
+    } else if (average.movingAverage < -60.0) {
+        signal.image = [UIImage imageNamed:@"wifi_d3"];
+    } else if (average.movingAverage < -50.0) {
+        signal.image = [UIImage imageNamed:@"wifi_d4"];
+    } else if (average.movingAverage < -40.0) {
+        signal.image = [UIImage imageNamed:@"wifi_d5"];
+    } else {
+        signal.image = [UIImage imageNamed:@"wifi_d6"];
+    }
     return cell;
 }
 
