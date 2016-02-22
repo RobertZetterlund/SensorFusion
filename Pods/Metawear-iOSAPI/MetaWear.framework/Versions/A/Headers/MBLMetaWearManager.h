@@ -35,6 +35,7 @@
 
 #import <MetaWear/MBLMetaWear.h>
 #import <MetaWear/MBLConstants.h>
+#import <Bolts/Bolts.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -48,7 +49,9 @@ typedef NS_ENUM(uint8_t, MBLFirmwareVersion) {
     MBLFirmwareVersion1_0_7,
     MBLFirmwareVersion1_1_0,
     MBLFirmwareVersion1_1_1,
-    MBLFirmwareVersion1_1_2
+    MBLFirmwareVersion1_1_2,
+    MBLFirmwareVersion1_2_0,
+    MBLFirmwareVersion1_2_1
 };
 
 /**
@@ -80,6 +83,14 @@ typedef NS_ENUM(uint8_t, MBLFirmwareVersion) {
  @warning You should not create an MBLMetaWearManager object, only used the sharedManager
  */
 + (instancetype)sharedManager;
+
+///----------------------------------
+/// @name Bluetooth State Watching
+///----------------------------------
+
+- (void)startBluetoothStateNotificationsWithHandler:(nonnull MBLCentralManagerStateHandler)handler;
+
+- (void)stopBluetoothStateNotifications;
 
 ///----------------------------------
 /// @name MetaWear Scanning and Finding
@@ -115,9 +126,10 @@ typedef NS_ENUM(uint8_t, MBLFirmwareVersion) {
 
 /**
  Returns a list of saved MetaWear objects, you add to this list by calling [MBLMetaWear rememberDevice]
- @param handler Callback to deliever list remembered MBLMetaWear objects
+ @returns Task whose result will be an array of remembered MBLMetaWear objects
  */
-- (void)retrieveSavedMetaWearsWithHandler:(MBLArrayHandler)handler;
+- (BFTask<NSArray<MBLMetaWear *> *> *)retrieveSavedMetaWearsAsync;
+- (void)retrieveSavedMetaWearsWithHandler:(MBLArrayHandler)handler DEPRECATED_MSG_ATTRIBUTE("Use retrieveSavedMetaWearsAsync instead");
 
 ///----------------------------------
 /// @name MetaBoot Recovery Scanning

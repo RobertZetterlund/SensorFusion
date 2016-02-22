@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cmc-k5-3Lq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cmc-k5-3Lq">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -155,7 +155,7 @@
             <objects>
                 <tableViewController id="and-78-Gqu" customClass="DeviceDetailViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="LpX-Mw-MAw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="6000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="8000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="n5K-wl-Hzf">
@@ -1087,10 +1087,214 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Accelerometer BMA255" id="zm1-Ul-TT1">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="816" id="9wS-jo-zb2">
+                                        <rect key="frame" x="0.0" y="3468" width="320" height="816"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9wS-jo-zb2" id="kQt-7c-QbA">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="815"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5o4-TG-jZw">
+                                                    <rect key="frame" x="65" y="8" width="241" height="29"/>
+                                                    <segments>
+                                                        <segment title="-2/+2"/>
+                                                        <segment title="-4/+4"/>
+                                                        <segment title="-8/+8"/>
+                                                        <segment title="-16/+16"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Scale:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edy-AH-8LQ">
+                                                    <rect key="frame" x="14" y="11" width="43" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sample frequency:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crP-G2-z7X">
+                                                    <rect key="frame" x="14" y="46" width="121" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uo4-Nf-Oqj">
+                                                    <rect key="frame" x="14" y="144" width="108" height="30"/>
+                                                    <state key="normal" title="Start Streaming">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="accelerometerBMA255StartStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="Eeb-4c-Xy6"/>
+                                                    </connections>
+                                                </button>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cqd-FR-A8k" customClass="APLGraphView">
+                                                    <rect key="frame" x="0.0" y="220" width="320" height="112"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="4" translatesAutoresizingMaskIntoConstraints="NO" id="yix-gA-GfO">
+                                                    <rect key="frame" x="14" y="65" width="293" height="29"/>
+                                                    <segments>
+                                                        <segment title="500"/>
+                                                        <segment title="250"/>
+                                                        <segment title="125"/>
+                                                        <segment title="62.5"/>
+                                                        <segment title="31.25"/>
+                                                        <segment title="15.62"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Accelerometer Data:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iOH-tR-ak1">
+                                                    <rect key="frame" x="82" y="115" width="157" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVL-Bj-tTT">
+                                                    <rect key="frame" x="14" y="182" width="93" height="30"/>
+                                                    <state key="normal" title="Start Logging">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="accelerometerBMA255StartLogPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="MSj-OY-pFU"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCI-bv-CR7">
+                                                    <rect key="frame" x="213" y="182" width="93" height="30"/>
+                                                    <state key="normal" title="Stop Logging">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="accelerometerBMA255StopLogPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="6x7-Ha-DwK"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsU-eV-SpL">
+                                                    <rect key="frame" x="123" y="340" width="74" height="30"/>
+                                                    <state key="normal" title="Send Data">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="accelerometerBMA255EmailDataPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="WDX-J4-BWL"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYT-MR-KZQ">
+                                                    <rect key="frame" x="13" y="447" width="134" height="30"/>
+                                                    <state key="normal" title="Start Tap Detection">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="accelerometerBMA255StartTapPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="U10-hm-KPg"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap Detection:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLg-cd-3uc">
+                                                    <rect key="frame" x="14" y="382" width="112" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap detection type:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ugt-h6-94v">
+                                                    <rect key="frame" x="19" y="416" width="126" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="54Q-HV-dOS">
+                                                    <rect key="frame" x="149" y="411" width="157" height="29"/>
+                                                    <segments>
+                                                        <segment title="Single"/>
+                                                        <segment title="Double"/>
+                                                        <segment title="Both"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVT-YI-dfJ">
+                                                    <rect key="frame" x="14" y="485" width="132" height="30"/>
+                                                    <state key="normal" title="Stop Tap Detection">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="accelerometerBMA255StopTapPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="TYg-Bq-JeF"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap Count: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAf-iB-HUR">
+                                                    <rect key="frame" x="168" y="470" width="138" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qrq-yK-b5L">
+                                                    <rect key="frame" x="14" y="566" width="134" height="30"/>
+                                                    <state key="normal" title="Start Flat Detection">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="accelerometerBMA255StartFlatPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="aB2-zS-lFA"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7p-lf-7jv">
+                                                    <rect key="frame" x="14" y="604" width="133" height="30"/>
+                                                    <state key="normal" title="Stop Flat Detection">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="accelerometerBMA255StopFlatPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="rqg-MS-ue0"/>
+                                                        <action selector="accelerometerBMI160StopFlatPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="uvy-Vg-fuT"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXXXXXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="176-Rj-h4g">
+                                                    <rect key="frame" x="168" y="591" width="138" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9B-Xq-THn">
+                                                    <rect key="frame" x="13" y="688" width="185" height="30"/>
+                                                    <state key="normal" title="Start Orientation Detection">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="accelerometerBMA255StartOrientPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="Y7p-L5-iO4"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5v-Vw-mka">
+                                                    <rect key="frame" x="14" y="726" width="183" height="30"/>
+                                                    <state key="normal" title="Stop Orientation Detection">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="accelerometerBMA255StopOrientPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="YYm-kI-dLu"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Flat Detection:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0R-ne-Gik">
+                                                    <rect key="frame" x="14" y="537" width="112" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Orientation Detection:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FbH-YM-tRN">
+                                                    <rect key="frame" x="14" y="659" width="169" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXXXXXXXXXXXXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOr-lW-yuZ">
+                                                    <rect key="frame" x="20" y="764" width="280" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eti-u0-uzm">
+                                                    <rect key="frame" x="199" y="144" width="107" height="30"/>
+                                                    <state key="normal" title="Stop Streaming">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="accelerometerBMA255StopStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="pQW-hI-p7d"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Gyro BMI160" id="ST1-89-IuJ">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="413" id="Z0i-aU-yuj">
-                                        <rect key="frame" x="0.0" y="3468" width="320" height="413"/>
+                                        <rect key="frame" x="0.0" y="4327" width="320" height="413"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z0i-aU-yuj" id="raD-Np-Tl3">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="412"/>
@@ -1191,7 +1395,7 @@
                             <tableViewSection headerTitle="Magnetometer BMM150" id="u7y-cw-Ssn" userLabel="Magnetometer BMM150">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="293" id="17s-iT-6rd" userLabel="Magnetometer BMM150 Cell">
-                                        <rect key="frame" x="0.0" y="3924" width="320" height="293"/>
+                                        <rect key="frame" x="0.0" y="4783" width="320" height="293"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="17s-iT-6rd" id="tAC-gv-LYI">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="292"/>
@@ -1260,7 +1464,7 @@
                             <tableViewSection headerTitle="GPIO" id="WAZ-gj-2YQ">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="444" id="yRW-sQ-jgf">
-                                        <rect key="frame" x="0.0" y="4260" width="320" height="444"/>
+                                        <rect key="frame" x="0.0" y="5119" width="320" height="444"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yRW-sQ-jgf" id="Phe-rA-6n1">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="443"/>
@@ -1430,7 +1634,7 @@
                             <tableViewSection headerTitle="Haptic/Buzzer" id="LZo-Av-eiC">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="139" id="iVV-zU-QrA">
-                                        <rect key="frame" x="0.0" y="4747" width="320" height="139"/>
+                                        <rect key="frame" x="0.0" y="5606" width="320" height="139"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iVV-zU-QrA" id="efj-Kw-F0V">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="138"/>
@@ -1484,7 +1688,7 @@
                             <tableViewSection headerTitle="iBeacon" id="esL-1P-kud">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="103" id="6NG-WJ-AbP">
-                                        <rect key="frame" x="0.0" y="4929" width="320" height="103"/>
+                                        <rect key="frame" x="0.0" y="5788" width="320" height="103"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6NG-WJ-AbP" id="AO0-SW-X8L">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
@@ -1522,7 +1726,7 @@
                             <tableViewSection headerTitle="Barometer BMP280" id="1pL-zp-K2o">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="278" id="36h-5y-INY">
-                                        <rect key="frame" x="0.0" y="5075" width="320" height="278"/>
+                                        <rect key="frame" x="0.0" y="5934" width="320" height="278"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="36h-5y-INY" id="ded-ph-96r">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="277"/>
@@ -1582,7 +1786,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="QZu-9s-cjU">
-                                                    <rect key="frame" x="14" y="148" width="292" height="29"/>
+                                                    <rect key="frame" x="14" y="148" width="298" height="29"/>
                                                     <segments>
                                                         <segment title="0.5"/>
                                                         <segment title="62.5"/>
@@ -1611,10 +1815,102 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Barometer BME280" id="0Ww-tE-HRx">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="278" id="Odj-7N-3bc">
+                                        <rect key="frame" x="0.0" y="6255" width="320" height="278"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Odj-7N-3bc" id="Q4M-N4-RTW">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="277"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="4" translatesAutoresizingMaskIntoConstraints="NO" id="Ah0-cf-0er">
+                                                    <rect key="frame" x="14" y="27" width="292" height="29"/>
+                                                    <segments>
+                                                        <segment title="Ultra Low"/>
+                                                        <segment title="Low"/>
+                                                        <segment title="Default"/>
+                                                        <segment title="High"/>
+                                                        <segment title="Ultra High"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Oversampling:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmZ-1Q-e7K">
+                                                    <rect key="frame" x="14" y="8" width="94" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Averaging:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbV-JN-2wo">
+                                                    <rect key="frame" x="14" y="68" width="69" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="4" translatesAutoresizingMaskIntoConstraints="NO" id="gH8-2y-XJy">
+                                                    <rect key="frame" x="14" y="87" width="292" height="29"/>
+                                                    <segments>
+                                                        <segment title="Off"/>
+                                                        <segment title="2X"/>
+                                                        <segment title="4X"/>
+                                                        <segment title="8X"/>
+                                                        <segment title="16X"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mHl-wk-Y9H">
+                                                    <rect key="frame" x="14" y="197" width="108" height="30"/>
+                                                    <state key="normal" title="Start Streaming">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="barometerBME280StartStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="p55-IL-XlI"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8RS-zu-h0y">
+                                                    <rect key="frame" x="199" y="197" width="107" height="30"/>
+                                                    <state key="normal" title="Stop Streaming">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="barometerBME280StopStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="oGY-t9-1Yp"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Standby Time (ms):" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21H-fI-QiF">
+                                                    <rect key="frame" x="14" y="128" width="126" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="Gee-Oq-kWO">
+                                                    <rect key="frame" x="14" y="148" width="298" height="29"/>
+                                                    <segments>
+                                                        <segment title="0.5"/>
+                                                        <segment title="10"/>
+                                                        <segment title="20"/>
+                                                        <segment title="62.5"/>
+                                                        <segment title="125"/>
+                                                        <segment title="250" width="40.857142857142854"/>
+                                                        <segment title="500"/>
+                                                        <segment title="1000"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Altitude (m)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8q-3G-9uI">
+                                                    <rect key="frame" x="14" y="235" width="90" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="X.XXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZx-1k-He7">
+                                                    <rect key="frame" x="199" y="235" width="107" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Ambient Light LTR329" id="k2T-az-d2v">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="285" id="dqJ-xr-btu">
-                                        <rect key="frame" x="0.0" y="5396" width="320" height="285"/>
+                                        <rect key="frame" x="0.0" y="6576" width="320" height="285"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dqJ-xr-btu" id="p8h-Zx-HB6">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="284"/>
@@ -1705,6 +2001,274 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Proximity TSL2671" id="7uB-NX-bxF">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="274" id="rz8-cd-Ntj">
+                                        <rect key="frame" x="0.0" y="6904" width="320" height="274"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rz8-cd-Ntj" id="sZS-LX-0v3">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="273"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MT4-p9-h3d">
+                                                    <rect key="frame" x="14" y="27" width="292" height="29"/>
+                                                    <segments>
+                                                        <segment title="12.5"/>
+                                                        <segment title="25"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Transmitter Drive (mA):" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIT-ca-vup">
+                                                    <rect key="frame" x="14" y="8" width="151" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Integration Time (ms):" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3v-al-O5X">
+                                                    <rect key="frame" x="14" y="70" width="143" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOd-mM-SrY">
+                                                    <rect key="frame" x="14" y="187" width="108" height="30"/>
+                                                    <state key="normal" title="Start Streaming">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="proximityTSL2671StartStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="2cM-C0-zVl"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QaJ-f9-Qag">
+                                                    <rect key="frame" x="199" y="187" width="107" height="30"/>
+                                                    <state key="normal" title="Stop Streaming">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="proximityTSL2671StopStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="OaW-IA-SPQ"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Light Pulse Count: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NLk-Uy-HgY">
+                                                    <rect key="frame" x="14" y="139" width="123" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sG-bI-JUL">
+                                                    <rect key="frame" x="199" y="225" width="107" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Proximity (counts)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cx5-q8-k7p">
+                                                    <rect key="frame" x="14" y="225" width="139" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2.72" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QiQ-ye-NNx">
+                                                    <rect key="frame" x="165" y="68" width="141" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" wraps="YES" value="1" minimumValue="1" maximumValue="31" translatesAutoresizingMaskIntoConstraints="NO" id="zvW-v8-heM">
+                                                    <rect key="frame" x="212" y="133" width="94" height="29"/>
+                                                    <connections>
+                                                        <action selector="proximityTSL2671PulseStepperChanged:" destination="and-78-Gqu" eventType="valueChanged" id="HQc-X6-4Ma"/>
+                                                    </connections>
+                                                </stepper>
+                                                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2.7200000000000002" minValue="2.7200000000000002" maxValue="696.32000000000005" translatesAutoresizingMaskIntoConstraints="NO" id="63Z-6g-7TS">
+                                                    <rect key="frame" x="24" y="92" width="284" height="31"/>
+                                                    <connections>
+                                                        <action selector="proximityTSL2671IntegrationSliderChanged:" destination="and-78-Gqu" eventType="valueChanged" id="ly0-6s-kLD"/>
+                                                    </connections>
+                                                </slider>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3D-do-ASN">
+                                                    <rect key="frame" x="141" y="137" width="28" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Photometer TCS3472" id="ESV-Dd-saT">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="361" id="Mxu-9y-Vis">
+                                        <rect key="frame" x="0.0" y="7221" width="320" height="361"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mxu-9y-Vis" id="OeA-y1-IfG">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="360"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gain:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ph5-9t-D8e">
+                                                    <rect key="frame" x="14" y="8" width="34" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Integration Time (ms):" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSv-Lw-hjq">
+                                                    <rect key="frame" x="14" y="70" width="143" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nkv-wZ-rKy">
+                                                    <rect key="frame" x="14" y="187" width="108" height="30"/>
+                                                    <state key="normal" title="Start Streaming">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="photometerTCS3472StartStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="LrF-Ta-8rx"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="no8-jf-a4n">
+                                                    <rect key="frame" x="199" y="187" width="107" height="30"/>
+                                                    <state key="normal" title="Stop Streaming">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="photometerTCS3472StopStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="dbn-4d-HGq"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LED Flash:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7v-pu-lpJ">
+                                                    <rect key="frame" x="14" y="139" width="68" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ebe-Av-LNk">
+                                                    <rect key="frame" x="165" y="227" width="107" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSe-NB-gSF">
+                                                    <rect key="frame" x="165" y="256" width="107" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOi-zJ-aCs">
+                                                    <rect key="frame" x="165" y="285" width="107" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XXXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08x-lm-5df">
+                                                    <rect key="frame" x="165" y="314" width="107" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="50.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hns-0Y-goE">
+                                                    <rect key="frame" x="165" y="68" width="141" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="2.3999999999999999" maxValue="614.39999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="3mK-V7-rqe">
+                                                    <rect key="frame" x="24" y="92" width="284" height="31"/>
+                                                    <connections>
+                                                        <action selector="photometerTCS3472IntegrationSliderChanged:" destination="and-78-Gqu" eventType="valueChanged" id="cRc-Wc-KXO"/>
+                                                    </connections>
+                                                </slider>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eia-as-BoE">
+                                                    <rect key="frame" x="14" y="27" width="292" height="29"/>
+                                                    <segments>
+                                                        <segment title="1X"/>
+                                                        <segment title="4X"/>
+                                                        <segment title="16X"/>
+                                                        <segment title="60X"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qqK-Ak-epS">
+                                                    <rect key="frame" x="257" y="132" width="51" height="31"/>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Red (counts):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gL-au-qLl">
+                                                    <rect key="frame" x="14" y="227" width="103" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Green (counts):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAh-J9-xM1">
+                                                    <rect key="frame" x="14" y="256" width="119" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Blue (counts):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzW-M2-KS2">
+                                                    <rect key="frame" x="14" y="285" width="106" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Clear (counts):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJV-TH-ddz">
+                                                    <rect key="frame" x="14" y="314" width="113" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Hygrometer BME280" id="iN1-yS-2b0">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="159" id="sUT-nh-l7m">
+                                        <rect key="frame" x="0.0" y="7625" width="320" height="159"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sUT-nh-l7m" id="Mkt-Pe-hHc">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="158"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Oversampling:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqT-7V-qcj">
+                                                    <rect key="frame" x="14" y="8" width="93" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yUx-wM-Dfy">
+                                                    <rect key="frame" x="14" y="27" width="292" height="29"/>
+                                                    <segments>
+                                                        <segment title="1X"/>
+                                                        <segment title="2X"/>
+                                                        <segment title="4X"/>
+                                                        <segment title="8X"/>
+                                                        <segment title="16X"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHv-TG-0ng">
+                                                    <rect key="frame" x="14" y="75" width="108" height="30"/>
+                                                    <state key="normal" title="Start Streaming">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="hygrometerBME280StartStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="K9E-0O-NOE"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yNi-jk-cqa">
+                                                    <rect key="frame" x="199" y="75" width="107" height="30"/>
+                                                    <state key="normal" title="Stop Streaming">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="hygrometerBME280StopStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="0A8-Pr-23Q"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XX.XX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWm-vq-Hlq">
+                                                    <rect key="frame" x="199" y="113" width="107" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Humidity (%)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bH-UT-5ff">
+                                                    <rect key="frame" x="14" y="113" width="98" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="and-78-Gqu" id="bbU-lc-BcB"/>
@@ -1714,8 +2278,26 @@
                     <navigationItem key="navigationItem" id="iog-jI-bt7"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="6000"/>
+                    <size key="freeformSize" width="320" height="8000"/>
                     <connections>
+                        <outlet property="accelerometerBMA255Cell" destination="9wS-jo-zb2" id="FBN-jV-O8N"/>
+                        <outlet property="accelerometerBMA255FlatLabel" destination="176-Rj-h4g" id="gyg-Ht-O3L"/>
+                        <outlet property="accelerometerBMA255Frequency" destination="yix-gA-GfO" id="bzy-FP-gbI"/>
+                        <outlet property="accelerometerBMA255Graph" destination="cqd-FR-A8k" id="DcY-3Q-h5n"/>
+                        <outlet property="accelerometerBMA255OrientLabel" destination="mOr-lW-yuZ" id="Rpr-94-YCr"/>
+                        <outlet property="accelerometerBMA255Scale" destination="5o4-TG-jZw" id="Z2y-JV-wBY"/>
+                        <outlet property="accelerometerBMA255StartFlat" destination="Qrq-yK-b5L" id="OQB-LN-AKL"/>
+                        <outlet property="accelerometerBMA255StartLog" destination="kVL-Bj-tTT" id="DUJ-eb-Ltx"/>
+                        <outlet property="accelerometerBMA255StartOrient" destination="G9B-Xq-THn" id="cj5-du-Dzv"/>
+                        <outlet property="accelerometerBMA255StartStream" destination="Uo4-Nf-Oqj" id="c2Z-xa-3bj"/>
+                        <outlet property="accelerometerBMA255StartTap" destination="cYT-MR-KZQ" id="5dG-7x-bZi"/>
+                        <outlet property="accelerometerBMA255StopFlat" destination="j7p-lf-7jv" id="Jmz-Qc-8WM"/>
+                        <outlet property="accelerometerBMA255StopLog" destination="MCI-bv-CR7" id="8Jw-3j-n8p"/>
+                        <outlet property="accelerometerBMA255StopOrient" destination="U5v-Vw-mka" id="cyW-jd-o2B"/>
+                        <outlet property="accelerometerBMA255StopStream" destination="Eti-u0-uzm" id="vK3-KU-zJQ"/>
+                        <outlet property="accelerometerBMA255StopTap" destination="UVT-YI-dfJ" id="RTz-fA-tOh"/>
+                        <outlet property="accelerometerBMA255TapLabel" destination="WAf-iB-HUR" id="SMI-jZ-XUf"/>
+                        <outlet property="accelerometerBMA255TapType" destination="54Q-HV-dOS" id="9KI-c5-PF9"/>
                         <outlet property="accelerometerBMI160Cell" destination="d1T-vb-s5i" id="Jta-FN-aoI"/>
                         <outlet property="accelerometerBMI160FlatLabel" destination="prL-bt-sO3" id="1wx-PJ-v0q"/>
                         <outlet property="accelerometerBMI160Frequency" destination="Bu2-hg-99r" id="LPW-Hv-E8T"/>
@@ -1749,6 +2331,13 @@
                         <outlet property="ambientLightLTR329StartStream" destination="DdB-VN-dbG" id="PTW-7z-2Af"/>
                         <outlet property="ambientLightLTR329StopStream" destination="yIq-Y5-tdj" id="1kZ-fB-1RM"/>
                         <outlet property="autoSleepSwitch" destination="xAw-mX-n43" id="F4P-ot-cdz"/>
+                        <outlet property="barometerBME280Altitude" destination="sZx-1k-He7" id="y5U-Mw-I63"/>
+                        <outlet property="barometerBME280Averaging" destination="gH8-2y-XJy" id="x2j-qY-fD7"/>
+                        <outlet property="barometerBME280Cell" destination="Odj-7N-3bc" id="ZaK-lp-lfm"/>
+                        <outlet property="barometerBME280Oversampling" destination="Ah0-cf-0er" id="nMz-qP-39a"/>
+                        <outlet property="barometerBME280Standby" destination="Gee-Oq-kWO" id="ffS-GN-hho"/>
+                        <outlet property="barometerBME280StartStream" destination="mHl-wk-Y9H" id="Wfm-eJ-orN"/>
+                        <outlet property="barometerBME280StopStream" destination="8RS-zu-h0y" id="ajS-eS-kJc"/>
                         <outlet property="barometerBMP280Altitude" destination="3fG-me-eCl" id="5ag-P5-yxc"/>
                         <outlet property="barometerBMP280Averaging" destination="3VO-lg-PcL" id="GDm-sE-SwA"/>
                         <outlet property="barometerBMP280Cell" destination="36h-5y-INY" id="aXM-he-7OF"/>
@@ -1789,6 +2378,11 @@
                         <outlet property="highPassFilterSwitch" destination="ikj-FS-Tf3" id="U0E-uj-qyM"/>
                         <outlet property="hpfCutoffFreq" destination="2Dz-V6-osR" id="eYT-Jo-Dbd"/>
                         <outlet property="hwRevLabel" destination="g4V-0N-UnL" id="zMx-Nu-bxj"/>
+                        <outlet property="hygrometerBME280Cell" destination="sUT-nh-l7m" id="p0v-Dy-r0z"/>
+                        <outlet property="hygrometerBME280Humidity" destination="JWm-vq-Hlq" id="BTi-3g-PT1"/>
+                        <outlet property="hygrometerBME280Oversample" destination="yUx-wM-Dfy" id="8OK-0E-7dc"/>
+                        <outlet property="hygrometerBME280StartStream" destination="rHv-TG-0ng" id="9J4-mj-xfc"/>
+                        <outlet property="hygrometerBME280StopStream" destination="yNi-jk-cqa" id="fId-B9-bvA"/>
                         <outlet property="iBeaconCell" destination="6NG-WJ-AbP" id="JT2-qC-kdh"/>
                         <outlet property="ledCell" destination="Nhr-ih-E25" id="hFa-he-xO8"/>
                         <outlet property="lowNoiseSwitch" destination="z7L-Af-YBm" id="9PX-qA-KxZ"/>
@@ -1804,6 +2398,26 @@
                         <outlet property="modelNumberLabel" destination="9Ta-UP-pE8" id="FNW-1n-tsi"/>
                         <outlet property="nameLabel" destination="hln-6r-c4X" id="Vjp-35-Xmt"/>
                         <outlet property="orientationLabel" destination="k5E-c8-4HS" id="b6J-ed-HOU"/>
+                        <outlet property="photometerTCS3472BlueColor" destination="jOi-zJ-aCs" id="Gf2-Ng-XEm"/>
+                        <outlet property="photometerTCS3472Cell" destination="Mxu-9y-Vis" id="rOn-bA-fo6"/>
+                        <outlet property="photometerTCS3472ClearColor" destination="08x-lm-5df" id="yaq-LJ-Ji9"/>
+                        <outlet property="photometerTCS3472Gain" destination="eia-as-BoE" id="3Wt-8H-TGZ"/>
+                        <outlet property="photometerTCS3472GreenColor" destination="VSe-NB-gSF" id="5qF-bE-SCW"/>
+                        <outlet property="photometerTCS3472IntegrationLabel" destination="hns-0Y-goE" id="SoF-oa-60p"/>
+                        <outlet property="photometerTCS3472IntegrationSlider" destination="3mK-V7-rqe" id="T79-Ys-Ej6"/>
+                        <outlet property="photometerTCS3472LedFlashSwitch" destination="qqK-Ak-epS" id="D01-fB-hiY"/>
+                        <outlet property="photometerTCS3472RedColor" destination="Ebe-Av-LNk" id="P6I-l2-oQA"/>
+                        <outlet property="photometerTCS3472StartStream" destination="Nkv-wZ-rKy" id="9xr-gc-oEV"/>
+                        <outlet property="photometerTCS3472StopStream" destination="no8-jf-a4n" id="0Ha-92-J6M"/>
+                        <outlet property="proximityTSL2671Cell" destination="rz8-cd-Ntj" id="LDV-q7-1N8"/>
+                        <outlet property="proximityTSL2671Drive" destination="MT4-p9-h3d" id="EOP-EQ-PVA"/>
+                        <outlet property="proximityTSL2671IntegrationLabel" destination="QiQ-ye-NNx" id="Hy6-Ue-guA"/>
+                        <outlet property="proximityTSL2671IntegrationSlider" destination="63Z-6g-7TS" id="8cQ-tr-tJS"/>
+                        <outlet property="proximityTSL2671Proximity" destination="3sG-bI-JUL" id="d00-mg-7vJ"/>
+                        <outlet property="proximityTSL2671PulseLabel" destination="I3D-do-ASN" id="lJt-Hq-0fe"/>
+                        <outlet property="proximityTSL2671PulseStepper" destination="zvW-v8-heM" id="4VH-LZ-dbp"/>
+                        <outlet property="proximityTSL2671StartStream" destination="dOd-mM-SrY" id="VW7-uy-A2b"/>
+                        <outlet property="proximityTSL2671StopStream" destination="QaJ-f9-Qag" id="4zQ-ZM-fZT"/>
                         <outlet property="readPinLabel" destination="UNd-5N-xFu" id="1DR-7y-H3t"/>
                         <outlet property="readPinTextField" destination="WHS-Dj-RKc" id="c3S-Yt-cl6"/>
                         <outlet property="rssiLevelLabel" destination="V4h-Ke-VK5" id="s4Z-lZ-51A"/>
@@ -1848,6 +2462,11 @@
                         <outletCollection property="allCells" destination="d1T-vb-s5i" id="smo-xl-7Tq"/>
                         <outletCollection property="allCells" destination="dqJ-xr-btu" id="fw2-Ej-ne5"/>
                         <outletCollection property="allCells" destination="17s-iT-6rd" id="B37-ex-PLz"/>
+                        <outletCollection property="allCells" destination="Odj-7N-3bc" id="gjV-eo-KKd"/>
+                        <outletCollection property="allCells" destination="rz8-cd-Ntj" id="5OG-n1-fVS"/>
+                        <outletCollection property="allCells" destination="Mxu-9y-Vis" id="j22-tG-2CQ"/>
+                        <outletCollection property="allCells" destination="sUT-nh-l7m" id="MLK-mw-mBG"/>
+                        <outletCollection property="allCells" destination="9wS-jo-zb2" id="KpP-u3-aRE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wq9-CB-brG" userLabel="First Responder" sceneMemberID="firstResponder"/>

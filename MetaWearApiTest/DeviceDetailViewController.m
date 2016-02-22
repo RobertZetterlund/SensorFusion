@@ -125,6 +125,27 @@
 @property (nonatomic) int accelerometerBMI160StepCount;
 @property (strong, nonatomic) NSArray *accelerometerBMI160Data;
 
+@property (weak, nonatomic) IBOutlet UITableViewCell *accelerometerBMA255Cell;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *accelerometerBMA255Scale;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *accelerometerBMA255Frequency;
+@property (weak, nonatomic) IBOutlet UIButton *accelerometerBMA255StartStream;
+@property (weak, nonatomic) IBOutlet UIButton *accelerometerBMA255StopStream;
+@property (weak, nonatomic) IBOutlet UIButton *accelerometerBMA255StartLog;
+@property (weak, nonatomic) IBOutlet UIButton *accelerometerBMA255StopLog;
+@property (weak, nonatomic) IBOutlet APLGraphView *accelerometerBMA255Graph;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *accelerometerBMA255TapType;
+@property (weak, nonatomic) IBOutlet UIButton *accelerometerBMA255StartTap;
+@property (weak, nonatomic) IBOutlet UIButton *accelerometerBMA255StopTap;
+@property (weak, nonatomic) IBOutlet UILabel *accelerometerBMA255TapLabel;
+@property (nonatomic) int accelerometerBMA255TapCount;
+@property (weak, nonatomic) IBOutlet UIButton *accelerometerBMA255StartFlat;
+@property (weak, nonatomic) IBOutlet UIButton *accelerometerBMA255StopFlat;
+@property (weak, nonatomic) IBOutlet UILabel *accelerometerBMA255FlatLabel;
+@property (weak, nonatomic) IBOutlet UIButton *accelerometerBMA255StartOrient;
+@property (weak, nonatomic) IBOutlet UIButton *accelerometerBMA255StopOrient;
+@property (weak, nonatomic) IBOutlet UILabel *accelerometerBMA255OrientLabel;
+@property (strong, nonatomic) NSArray *accelerometerBMA255Data;
+
 @property (weak, nonatomic) IBOutlet UITableViewCell *gyroBMI160Cell;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *gyroBMI160Scale;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *gyroBMI160Frequency;
@@ -170,6 +191,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *barometerBMP280StopStream;
 @property (weak, nonatomic) IBOutlet UILabel *barometerBMP280Altitude;
 
+@property (weak, nonatomic) IBOutlet UITableViewCell *barometerBME280Cell;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *barometerBME280Oversampling;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *barometerBME280Averaging;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *barometerBME280Standby;
+@property (weak, nonatomic) IBOutlet UIButton *barometerBME280StartStream;
+@property (weak, nonatomic) IBOutlet UIButton *barometerBME280StopStream;
+@property (weak, nonatomic) IBOutlet UILabel *barometerBME280Altitude;
+
 @property (weak, nonatomic) IBOutlet UITableViewCell *ambientLightLTR329Cell;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *ambientLightLTR329Gain;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *ambientLightLTR329Integration;
@@ -177,6 +206,37 @@
 @property (weak, nonatomic) IBOutlet UIButton *ambientLightLTR329StartStream;
 @property (weak, nonatomic) IBOutlet UIButton *ambientLightLTR329StopStream;
 @property (weak, nonatomic) IBOutlet UILabel *ambientLightLTR329Illuminance;
+
+@property (weak, nonatomic) IBOutlet UITableViewCell *proximityTSL2671Cell;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *proximityTSL2671Drive;
+@property (weak, nonatomic) IBOutlet UILabel *proximityTSL2671IntegrationLabel;
+@property (weak, nonatomic) IBOutlet UISlider *proximityTSL2671IntegrationSlider;
+@property (weak, nonatomic) IBOutlet UILabel *proximityTSL2671PulseLabel;
+@property (weak, nonatomic) IBOutlet UIStepper *proximityTSL2671PulseStepper;
+@property (weak, nonatomic) IBOutlet UIButton *proximityTSL2671StartStream;
+@property (weak, nonatomic) IBOutlet UIButton *proximityTSL2671StopStream;
+@property (weak, nonatomic) IBOutlet UILabel *proximityTSL2671Proximity;
+@property (nonatomic) MBLEvent<MBLNumericData *> *proximityTSL2671Event;
+
+@property (weak, nonatomic) IBOutlet UITableViewCell *photometerTCS3472Cell;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *photometerTCS3472Gain;
+@property (weak, nonatomic) IBOutlet UILabel *photometerTCS3472IntegrationLabel;
+@property (weak, nonatomic) IBOutlet UISlider *photometerTCS3472IntegrationSlider;
+@property (weak, nonatomic) IBOutlet UISwitch *photometerTCS3472LedFlashSwitch;
+@property (weak, nonatomic) IBOutlet UIButton *photometerTCS3472StartStream;
+@property (weak, nonatomic) IBOutlet UIButton *photometerTCS3472StopStream;
+@property (weak, nonatomic) IBOutlet UILabel *photometerTCS3472RedColor;
+@property (weak, nonatomic) IBOutlet UILabel *photometerTCS3472GreenColor;
+@property (weak, nonatomic) IBOutlet UILabel *photometerTCS3472BlueColor;
+@property (weak, nonatomic) IBOutlet UILabel *photometerTCS3472ClearColor;
+@property (nonatomic) MBLEvent<MBLRGBData *> *photometerTCS3472Event;
+
+@property (weak, nonatomic) IBOutlet UITableViewCell *hygrometerBME280Cell;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *hygrometerBME280Oversample;
+@property (weak, nonatomic) IBOutlet UIButton *hygrometerBME280StartStream;
+@property (weak, nonatomic) IBOutlet UIButton *hygrometerBME280StopStream;
+@property (weak, nonatomic) IBOutlet UILabel *hygrometerBME280Humidity;
+@property (nonatomic) MBLEvent<MBLNumericData *> *hygrometerBME280Event;
 
 
 @property (nonatomic, strong) NSMutableArray *streamingEvents;
@@ -384,6 +444,19 @@
             [self.accelerometerBMI160StartStream setEnabled:YES];
             [self.accelerometerBMI160StopStream setEnabled:NO];
         }
+    } else if ([self.device.accelerometer isKindOfClass:[MBLAccelerometerBMA255 class]]) {
+        [self cell:self.accelerometerBMA255Cell setHidden:NO];
+        if (self.device.accelerometer.dataReadyEvent.isLogging) {
+            [self.accelerometerBMA255StartLog setEnabled:NO];
+            [self.accelerometerBMA255StopLog setEnabled:YES];
+            [self.accelerometerBMA255StartStream setEnabled:NO];
+            [self.accelerometerBMA255StopStream setEnabled:NO];
+        } else {
+            [self.accelerometerBMA255StartLog setEnabled:YES];
+            [self.accelerometerBMA255StopLog setEnabled:NO];
+            [self.accelerometerBMA255StartStream setEnabled:YES];
+            [self.accelerometerBMA255StopStream setEnabled:NO];
+        }
     }
     
     if ([self.device.gyro isKindOfClass:[MBLGyroBMI160 class]]) {
@@ -438,10 +511,24 @@
     
     if ([self.device.barometer isKindOfClass:[MBLBarometerBMP280 class]]) {
         [self cell:self.barometerBMP280Cell setHidden:NO];
+    } else if ([self.device.barometer isKindOfClass:[MBLBarometerBME280 class]]) {
+        [self cell:self.barometerBME280Cell setHidden:NO];
     }
     
     if ([self.device.ambientLight isKindOfClass:[MBLAmbientLightLTR329 class]]) {
         [self cell:self.ambientLightLTR329Cell setHidden:NO];
+    }
+    
+    if ([self.device.proximity isKindOfClass:[MBLProximityTSL2671 class]]) {
+        [self cell:self.proximityTSL2671Cell setHidden:NO];
+    }
+
+    if ([self.device.photometer isKindOfClass:[MBLPhotometerTCS3472 class]]) {
+        [self cell:self.photometerTCS3472Cell setHidden:NO];
+    }
+
+    if ([self.device.hygrometer isKindOfClass:[MBLHygrometerBME280 class]]) {
+        [self cell:self.hygrometerBME280Cell setHidden:NO];
     }
     
     // Make the magic happen!
@@ -628,7 +715,7 @@
 - (IBAction)tempChannelSelectorPressed:(id)sender
 {
     MBLData *selected = self.device.temperature.channels[self.tempChannelSelector.selectedSegmentIndex];
-    if (selected == self.device.temperature.internal) {
+    if (selected == self.device.temperature.onDieThermistor) {
         self.channelTypeLabel.text = @"On-Die";
     } else if (selected == self.device.temperature.onboardThermistor) {
         self.channelTypeLabel.text = @"On-Board";
@@ -898,19 +985,19 @@
     MBLAccelerometerBMI160 *accelerometerBMI160 = (MBLAccelerometerBMI160 *)self.device.accelerometer;
     switch (self.accelerometerBMI160Scale.selectedSegmentIndex) {
         case 0:
-            accelerometerBMI160.fullScaleRange = MBLAccelerometerBMI160Range2G;
+            accelerometerBMI160.fullScaleRange = MBLAccelerometerBoschRange2G;
             self.accelerometerBMI160Graph.fullScale = 2;
             break;
         case 1:
-            accelerometerBMI160.fullScaleRange = MBLAccelerometerBMI160Range4G;
+            accelerometerBMI160.fullScaleRange = MBLAccelerometerBoschRange4G;
             self.accelerometerBMI160Graph.fullScale = 4;
             break;
         case 2:
-            accelerometerBMI160.fullScaleRange = MBLAccelerometerBMI160Range8G;
+            accelerometerBMI160.fullScaleRange = MBLAccelerometerBoschRange8G;
             self.accelerometerBMI160Graph.fullScale = 8;
             break;
         case 3:
-            accelerometerBMI160.fullScaleRange = MBLAccelerometerBMI160Range16G;
+            accelerometerBMI160.fullScaleRange = MBLAccelerometerBoschRange16G;
             self.accelerometerBMI160Graph.fullScale = 16;
             break;
         default:
@@ -1132,6 +1219,220 @@
     self.accelerometerBMI160StepCount = 0;
     self.accelerometerBMI160StepLabel.text = @"Step Count: 0";
 }
+
+
+- (void)updateaccelerometerBMA255Settings
+{
+    MBLAccelerometerBMA255 *accelerometerBMA255 = (MBLAccelerometerBMA255 *)self.device.accelerometer;
+    switch (self.accelerometerBMA255Scale.selectedSegmentIndex) {
+        case 0:
+            accelerometerBMA255.fullScaleRange = MBLAccelerometerBoschRange2G;
+            self.accelerometerBMA255Graph.fullScale = 2;
+            break;
+        case 1:
+            accelerometerBMA255.fullScaleRange = MBLAccelerometerBoschRange4G;
+            self.accelerometerBMA255Graph.fullScale = 4;
+            break;
+        case 2:
+            accelerometerBMA255.fullScaleRange = MBLAccelerometerBoschRange8G;
+            self.accelerometerBMA255Graph.fullScale = 8;
+            break;
+        case 3:
+            accelerometerBMA255.fullScaleRange = MBLAccelerometerBoschRange16G;
+            self.accelerometerBMA255Graph.fullScale = 16;
+            break;
+        default:
+            NSLog(@"Unexpected accelerometerBMA255Scale value");
+            break;
+    }
+    
+    accelerometerBMA255.sampleFrequency = [[self.accelerometerBMA255Frequency titleForSegmentAtIndex:self.accelerometerBMA255Frequency.selectedSegmentIndex] floatValue];
+    accelerometerBMA255.tapType = (int)self.tapDetectionType.selectedSegmentIndex;
+}
+
+- (IBAction)accelerometerBMA255StartStreamPressed:(id)sender
+{
+    [self.accelerometerBMA255StartStream setEnabled:NO];
+    [self.accelerometerBMA255StopStream setEnabled:YES];
+    [self.accelerometerBMA255StartLog setEnabled:NO];
+    [self.accelerometerBMA255StopLog setEnabled:NO];
+    
+    [self updateaccelerometerBMA255Settings];
+    
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:1000];
+    self.accelerometerBMA255Data = array;
+    
+    [self.streamingEvents addObject:self.device.accelerometer.dataReadyEvent];
+    [self.device.accelerometer.dataReadyEvent startNotificationsWithHandlerAsync:^(MBLAccelerometerData * _Nullable obj, NSError * _Nullable error) {
+        if (obj) {
+            [self.accelerometerBMA255Graph addX:obj.x y:obj.y z:obj.z];
+            [array addObject:obj];
+        }
+    }];
+}
+
+- (IBAction)accelerometerBMA255StopStreamPressed:(id)sender
+{
+    [self.accelerometerBMA255StartStream setEnabled:YES];
+    [self.accelerometerBMA255StopStream setEnabled:NO];
+    [self.accelerometerBMA255StartLog setEnabled:YES];
+    
+    [self.streamingEvents removeObject:self.device.accelerometer.dataReadyEvent];
+    [self.device.accelerometer.dataReadyEvent stopNotificationsAsync];
+}
+
+- (IBAction)accelerometerBMA255StartLogPressed:(id)sender
+{
+    [self.accelerometerBMA255StartLog setEnabled:NO];
+    [self.accelerometerBMA255StopLog setEnabled:YES];
+    [self.accelerometerBMA255StartStream setEnabled:NO];
+    [self.accelerometerBMA255StopStream setEnabled:NO];
+    
+    [self updateaccelerometerBMA255Settings];
+    
+    [self.device.accelerometer.dataReadyEvent startLoggingAsync];
+}
+
+- (IBAction)accelerometerBMA255StopLogPressed:(id)sender
+{
+    [self.accelerometerBMA255StartLog setEnabled:YES];
+    [self.accelerometerBMA255StopLog setEnabled:NO];
+    [self.accelerometerBMA255StartStream setEnabled:YES];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+    hud.labelText = @"Downloading...";
+    
+    [[[self.device.accelerometer.dataReadyEvent downloadLogAndStopLoggingAsync:YES progressHandler:^(float number) {
+        hud.progress = number;
+    }] success:^(NSArray<MBLAccelerometerData *> * _Nonnull array) {
+        self.accelerometerBMA255Data = array;
+        for (MBLAccelerometerData *obj in array) {
+            [self.accelerometerBMA255Graph addX:obj.x y:obj.y z:obj.z];
+        }
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.labelText = @"Clearing Log...";
+        [self logCleanup:^(NSError *error) {
+            [hud hide:YES];
+            if (error) {
+                [self connectDevice:NO];
+            }
+        }];
+    }] failure:^(NSError * _Nonnull error) {
+        [self connectDevice:NO];
+        [hud hide:YES];
+    }];
+}
+
+- (IBAction)accelerometerBMA255EmailDataPressed:(id)sender
+{
+    NSMutableData *accelerometerData = [NSMutableData data];
+    for (MBLAccelerometerData *dataElement in self.accelerometerBMA255Data) {
+        @autoreleasepool {
+            [accelerometerData appendData:[[NSString stringWithFormat:@"%f,%f,%f,%f\n",
+                                            dataElement.timestamp.timeIntervalSince1970,
+                                            dataElement.x,
+                                            dataElement.y,
+                                            dataElement.z] dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+    }
+    [self sendData:accelerometerData title:@"AccData"];
+}
+
+- (IBAction)accelerometerBMA255StartTapPressed:(id)sender
+{
+    [self.accelerometerBMA255StartTap setEnabled:NO];
+    [self.accelerometerBMA255StopTap setEnabled:YES];
+    
+    [self updateaccelerometerBMA255Settings];
+    
+    MBLAccelerometerBMA255 *accelerometerBMA255 = (MBLAccelerometerBMA255 *)self.device.accelerometer;
+    [self.streamingEvents addObject:accelerometerBMA255.tapEvent];
+    [accelerometerBMA255.tapEvent startNotificationsWithHandlerAsync:^(MBLDataSample * _Nullable obj, NSError * _Nullable error) {
+        if (obj) {
+            self.accelerometerBMA255TapLabel.text = [NSString stringWithFormat:@"Tap Count: %d", ++self.accelerometerBMA255TapCount];
+        }
+    }];
+}
+
+- (IBAction)accelerometerBMA255StopTapPressed:(id)sender
+{
+    [self.accelerometerBMA255StartTap setEnabled:YES];
+    [self.accelerometerBMA255StopTap setEnabled:NO];
+    
+    MBLAccelerometerBMA255 *accelerometerBMA255 = (MBLAccelerometerBMA255 *)self.device.accelerometer;
+    [self.streamingEvents removeObject:accelerometerBMA255.tapEvent];
+    [accelerometerBMA255.tapEvent stopNotificationsAsync];
+    self.accelerometerBMA255TapCount = 0;
+    self.accelerometerBMA255TapLabel.text = @"Tap Count: 0";
+}
+
+- (IBAction)accelerometerBMA255StartFlatPressed:(id)sender
+{
+    [self.accelerometerBMA255StartFlat setEnabled:NO];
+    [self.accelerometerBMA255StopFlat setEnabled:YES];
+    
+    [self updateaccelerometerBMA255Settings];
+    
+    MBLAccelerometerBMA255 *accelerometerBMA255 = (MBLAccelerometerBMA255 *)self.device.accelerometer;
+    [self.streamingEvents addObject:accelerometerBMA255.flatEvent];
+    [accelerometerBMA255.flatEvent startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
+        if (obj) {
+            self.accelerometerBMA255FlatLabel.text = obj.value.boolValue ? @"Flat" : @"Not Flat";
+        }
+    }];
+}
+
+- (IBAction)accelerometerBMA255StopFlatPressed:(id)sender
+{
+    [self.accelerometerBMA255StartFlat setEnabled:YES];
+    [self.accelerometerBMA255StopFlat setEnabled:NO];
+    
+    MBLAccelerometerBMA255 *accelerometerBMA255 = (MBLAccelerometerBMA255 *)self.device.accelerometer;
+    [self.streamingEvents removeObject:accelerometerBMA255.flatEvent];
+    [accelerometerBMA255.flatEvent stopNotificationsAsync];
+    self.accelerometerBMA255FlatLabel.text = @"XXXXXXX";
+}
+
+- (IBAction)accelerometerBMA255StartOrientPressed:(id)sender
+{
+    [self.accelerometerBMA255StartOrient setEnabled:NO];
+    [self.accelerometerBMA255StopOrient setEnabled:YES];
+    
+    [self updateaccelerometerBMA255Settings];
+    MBLAccelerometerBMA255 *accelerometerBMA255 = (MBLAccelerometerBMA255 *)self.device.accelerometer;
+    [self.streamingEvents addObject:accelerometerBMA255.orientationEvent];
+    [accelerometerBMA255.orientationEvent startNotificationsWithHandlerAsync:^(MBLOrientationData * _Nullable obj, NSError * _Nullable error) {
+        if (obj) {
+            switch (obj.orientation) {
+                case MBLAccelerometerOrientationPortrait:
+                    self.accelerometerBMA255OrientLabel.text = @"Portrait";
+                    break;
+                case MBLAccelerometerOrientationPortraitUpsideDown:
+                    self.accelerometerBMA255OrientLabel.text = @"PortraitUpsideDown";
+                    break;
+                case MBLAccelerometerOrientationLandscapeLeft:
+                    self.accelerometerBMA255OrientLabel.text = @"LandscapeLeft";
+                    break;
+                case MBLAccelerometerOrientationLandscapeRight:
+                    self.accelerometerBMA255OrientLabel.text = @"LandscapeRight";
+                    break;
+            }
+        }
+    }];
+}
+
+- (IBAction)accelerometerBMA255StopOrientPressed:(id)sender
+{
+    [self.accelerometerBMA255StartOrient setEnabled:YES];
+    [self.accelerometerBMA255StopOrient setEnabled:NO];
+    
+    MBLAccelerometerBMA255 *accelerometerBMA255 = (MBLAccelerometerBMA255 *)self.device.accelerometer;
+    [self.streamingEvents removeObject:accelerometerBMA255.orientationEvent];
+    [accelerometerBMA255.orientationEvent stopNotificationsAsync];
+    self.accelerometerBMA255OrientLabel.text = @"XXXXXXXXXXXXXX";
+}
+
 
 - (void)updateGyroBMI160Settings
 {
@@ -1494,27 +1795,27 @@
     
     MBLBarometerBMP280 *barometerBMP280 = (MBLBarometerBMP280 *)self.device.barometer;
     if (self.barometerBMP280Oversampling.selectedSegmentIndex == 0) {
-        barometerBMP280.pressureOversampling = MBLBarometerBMP280OversampleUltraLowPower;
+        barometerBMP280.pressureOversampling = MBLBarometerBoschOversampleUltraLowPower;
     } else if (self.barometerBMP280Oversampling.selectedSegmentIndex == 1) {
-        barometerBMP280.pressureOversampling = MBLBarometerBMP280OversampleLowPower;
+        barometerBMP280.pressureOversampling = MBLBarometerBoschOversampleLowPower;
     } else if (self.barometerBMP280Oversampling.selectedSegmentIndex == 2) {
-        barometerBMP280.pressureOversampling = MBLBarometerBMP280OversampleStandard;
+        barometerBMP280.pressureOversampling = MBLBarometerBoschOversampleStandard;
     } else if (self.barometerBMP280Oversampling.selectedSegmentIndex == 3) {
-        barometerBMP280.pressureOversampling = MBLBarometerBMP280OversampleHighResolution;
+        barometerBMP280.pressureOversampling = MBLBarometerBoschOversampleHighResolution;
     } else {
-        barometerBMP280.pressureOversampling = MBLBarometerBMP280OversampleUltraHighResolution;
+        barometerBMP280.pressureOversampling = MBLBarometerBoschOversampleUltraHighResolution;
     }
     
     if (self.barometerBMP280Averaging.selectedSegmentIndex == 0) {
-        barometerBMP280.hardwareAverageFilter = MBLBarometerBMP280FilterOff;
+        barometerBMP280.hardwareAverageFilter = MBLBarometerBoschFilterOff;
     } else if (self.barometerBMP280Averaging.selectedSegmentIndex == 1) {
-        barometerBMP280.hardwareAverageFilter = MBLBarometerBMP280FilterAverage2;
+        barometerBMP280.hardwareAverageFilter = MBLBarometerBoschFilterAverage2;
     } else if (self.barometerBMP280Averaging.selectedSegmentIndex == 2) {
-        barometerBMP280.hardwareAverageFilter = MBLBarometerBMP280FilterAverage4;
+        barometerBMP280.hardwareAverageFilter = MBLBarometerBoschFilterAverage4;
     } else if (self.barometerBMP280Averaging.selectedSegmentIndex == 3) {
-        barometerBMP280.hardwareAverageFilter = MBLBarometerBMP280FilterAverage8;
+        barometerBMP280.hardwareAverageFilter = MBLBarometerBoschFilterAverage8;
     } else {
-        barometerBMP280.hardwareAverageFilter = MBLBarometerBMP280FilterAverage16;
+        barometerBMP280.hardwareAverageFilter = MBLBarometerBoschFilterAverage16;
     }
     
     if (self.barometerBMP280Standby.selectedSegmentIndex == 0) {
@@ -1552,6 +1853,74 @@
     [self.streamingEvents removeObject:barometerBMP280.periodicAltitude];
     [barometerBMP280.periodicAltitude stopNotificationsAsync];
     self.barometerBMP280Altitude.text = @"X.XXX";
+}
+
+
+- (IBAction)barometerBME280StartStreamPressed:(id)sender
+{
+    [self.barometerBME280StartStream setEnabled:NO];
+    [self.barometerBME280StopStream setEnabled:YES];
+    
+    MBLBarometerBME280 *barometerBME280 = (MBLBarometerBME280 *)self.device.barometer;
+    if (self.barometerBMP280Oversampling.selectedSegmentIndex == 0) {
+        barometerBME280.pressureOversampling = MBLBarometerBoschOversampleUltraLowPower;
+    } else if (self.barometerBME280Oversampling.selectedSegmentIndex == 1) {
+        barometerBME280.pressureOversampling = MBLBarometerBoschOversampleLowPower;
+    } else if (self.barometerBME280Oversampling.selectedSegmentIndex == 2) {
+        barometerBME280.pressureOversampling = MBLBarometerBoschOversampleStandard;
+    } else if (self.barometerBME280Oversampling.selectedSegmentIndex == 3) {
+        barometerBME280.pressureOversampling = MBLBarometerBoschOversampleHighResolution;
+    } else {
+        barometerBME280.pressureOversampling = MBLBarometerBoschOversampleUltraHighResolution;
+    }
+    
+    if (self.barometerBME280Averaging.selectedSegmentIndex == 0) {
+        barometerBME280.hardwareAverageFilter = MBLBarometerBoschFilterOff;
+    } else if (self.barometerBME280Averaging.selectedSegmentIndex == 1) {
+        barometerBME280.hardwareAverageFilter = MBLBarometerBoschFilterAverage2;
+    } else if (self.barometerBME280Averaging.selectedSegmentIndex == 2) {
+        barometerBME280.hardwareAverageFilter = MBLBarometerBoschFilterAverage4;
+    } else if (self.barometerBME280Averaging.selectedSegmentIndex == 3) {
+        barometerBME280.hardwareAverageFilter = MBLBarometerBoschFilterAverage8;
+    } else {
+        barometerBME280.hardwareAverageFilter = MBLBarometerBoschFilterAverage16;
+    }
+    
+    if (self.barometerBME280Standby.selectedSegmentIndex == 0) {
+        barometerBME280.standbyTime = MBLBarometerBME280Standby0_5;
+    } else if (self.barometerBME280Standby.selectedSegmentIndex == 1) {
+        barometerBME280.standbyTime = MBLBarometerBME280Standby10;
+    } else if (self.barometerBME280Standby.selectedSegmentIndex == 2) {
+        barometerBME280.standbyTime = MBLBarometerBME280Standby20;
+    } else if (self.barometerBME280Standby.selectedSegmentIndex == 3) {
+        barometerBME280.standbyTime = MBLBarometerBME280Standby62_5;
+    } else if (self.barometerBME280Standby.selectedSegmentIndex == 4) {
+        barometerBME280.standbyTime = MBLBarometerBME280Standby125;
+    } else if (self.barometerBME280Standby.selectedSegmentIndex == 5) {
+        barometerBME280.standbyTime = MBLBarometerBME280Standby250;
+    } else if (self.barometerBME280Standby.selectedSegmentIndex == 6) {
+        barometerBME280.standbyTime = MBLBarometerBME280Standby500;
+    } else {
+        barometerBME280.standbyTime = MBLBarometerBME280Standby1000;
+    }
+    
+    [self.streamingEvents addObject:barometerBME280.periodicAltitude];
+    [barometerBME280.periodicAltitude startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
+        if (obj) {
+            self.barometerBME280Altitude.text = [NSString stringWithFormat:@"%.3f", obj.value.floatValue];
+        }
+    }];
+}
+
+- (IBAction)barometerBME280StopStreamPressed:(id)sender
+{
+    [self.barometerBME280StartStream setEnabled:YES];
+    [self.barometerBME280StopStream setEnabled:NO];
+    
+    MBLBarometerBME280 *barometerBME280 = (MBLBarometerBME280 *)self.device.barometer;
+    [self.streamingEvents removeObject:barometerBME280.periodicAltitude];
+    [barometerBME280.periodicAltitude stopNotificationsAsync];
+    self.barometerBME280Altitude.text = @"X.XXX";
 }
 
 
@@ -1647,6 +2016,165 @@
     [self.streamingEvents removeObject:ambientLightLTR329.periodicIlluminance];
     [ambientLightLTR329.periodicIlluminance stopNotificationsAsync];
     self.ambientLightLTR329Illuminance.text = @"X.XXX";
+}
+
+
+- (IBAction)proximityTSL2671IntegrationSliderChanged:(id)sender
+{
+    self.proximityTSL2671IntegrationLabel.text = [NSString stringWithFormat:@"%.2f", self.proximityTSL2671IntegrationSlider.value];
+}
+
+- (IBAction)proximityTSL2671PulseStepperChanged:(id)sender
+{
+    self.proximityTSL2671PulseLabel.text = [NSString stringWithFormat:@"%d", (int)round(self.proximityTSL2671PulseStepper.value)];
+}
+
+- (IBAction)proximityTSL2671StartStreamPressed:(id)sender
+{
+    [self.proximityTSL2671StartStream setEnabled:NO];
+    [self.proximityTSL2671StopStream setEnabled:YES];
+    [self.proximityTSL2671Drive setEnabled:NO];
+    [self.proximityTSL2671IntegrationSlider setEnabled:NO];
+    [self.proximityTSL2671PulseStepper setEnabled:NO];
+    
+    MBLProximityTSL2671 *proximityTSL2671 = (MBLProximityTSL2671 *)self.device.proximity;
+    switch (self.proximityTSL2671Drive.selectedSegmentIndex) {
+        case 0:
+            proximityTSL2671.drive = MBLProximityTSL2671TransmitterDrive12_5mA;
+            break;
+        default:
+            proximityTSL2671.drive = MBLProximityTSL2671TransmitterDrive25mA;
+            break;
+    }
+    proximityTSL2671.integrationTime = self.proximityTSL2671IntegrationSlider.value;
+    proximityTSL2671.proximityPulses = round(self.proximityTSL2671PulseStepper.value);
+    
+    self.proximityTSL2671Event = [proximityTSL2671.proximity periodicReadWithPeriod:700];
+    [self.streamingEvents addObject:self.proximityTSL2671Event];
+    [self.proximityTSL2671Event startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
+        if (obj) {
+            self.proximityTSL2671Proximity.text = [NSString stringWithFormat:@"%d", obj.value.intValue];
+        }
+    }];
+}
+
+- (IBAction)proximityTSL2671StopStreamPressed:(id)sender
+{
+    [self.proximityTSL2671StartStream setEnabled:YES];
+    [self.proximityTSL2671StopStream setEnabled:NO];
+    [self.proximityTSL2671Drive setEnabled:YES];
+    [self.proximityTSL2671IntegrationSlider setEnabled:YES];
+    [self.proximityTSL2671PulseStepper setEnabled:YES];
+    
+    [self.streamingEvents removeObject:self.proximityTSL2671Event];
+    [self.proximityTSL2671Event stopNotificationsAsync];
+    self.proximityTSL2671Proximity.text = @"XXXX";
+}
+
+
+- (IBAction)photometerTCS3472IntegrationSliderChanged:(id)sender
+{
+    self.photometerTCS3472IntegrationLabel.text = [NSString stringWithFormat:@"%.1f", self.photometerTCS3472IntegrationSlider.value];
+}
+
+- (IBAction)photometerTCS3472StartStreamPressed:(id)sender
+{
+    [self.photometerTCS3472StartStream setEnabled:NO];
+    [self.photometerTCS3472StopStream setEnabled:YES];
+    [self.photometerTCS3472Gain setEnabled:NO];
+    [self.photometerTCS3472IntegrationSlider setEnabled:NO];
+    [self.photometerTCS3472LedFlashSwitch setEnabled:NO];
+    
+    MBLPhotometerTCS3472 *photometerTCS3472 = (MBLPhotometerTCS3472 *)self.device.photometer;
+    switch (self.photometerTCS3472Gain.selectedSegmentIndex) {
+        case 0:
+            photometerTCS3472.gain = MBLPhotometerTCS3472Gain1X;
+            break;
+        case 1:
+            photometerTCS3472.gain = MBLPhotometerTCS3472Gain4X;
+            break;
+        case 2:
+            photometerTCS3472.gain = MBLPhotometerTCS3472Gain16X;
+            break;
+        default:
+            photometerTCS3472.gain = MBLPhotometerTCS3472Gain60X;
+            break;
+    }
+    photometerTCS3472.integrationTime = self.photometerTCS3472IntegrationSlider.value;
+    photometerTCS3472.ledFlash = self.photometerTCS3472LedFlashSwitch.on;
+    
+    self.photometerTCS3472Event = [photometerTCS3472.color periodicReadWithPeriod:700];
+    [self.streamingEvents addObject:self.photometerTCS3472Event];
+    [self.photometerTCS3472Event startNotificationsWithHandlerAsync:^(MBLRGBData * _Nullable obj, NSError * _Nullable error) {
+        if (obj) {
+            self.photometerTCS3472RedColor.text = [NSString stringWithFormat:@"%d", obj.red];
+            self.photometerTCS3472GreenColor.text = [NSString stringWithFormat:@"%d", obj.green];
+            self.photometerTCS3472BlueColor.text = [NSString stringWithFormat:@"%d", obj.blue];
+            self.photometerTCS3472ClearColor.text = [NSString stringWithFormat:@"%d", obj.clear];
+        }
+    }];
+}
+
+- (IBAction)photometerTCS3472StopStreamPressed:(id)sender
+{
+    [self.photometerTCS3472StartStream setEnabled:YES];
+    [self.photometerTCS3472StopStream setEnabled:NO];
+    [self.photometerTCS3472Gain setEnabled:YES];
+    [self.photometerTCS3472IntegrationSlider setEnabled:YES];
+    [self.photometerTCS3472LedFlashSwitch setEnabled:YES];
+    
+    [self.streamingEvents removeObject:self.photometerTCS3472Event];
+    [self.photometerTCS3472Event stopNotificationsAsync];
+    self.photometerTCS3472RedColor.text = @"XXXX";
+    self.photometerTCS3472GreenColor.text = @"XXXX";
+    self.photometerTCS3472BlueColor.text = @"XXXX";
+    self.photometerTCS3472ClearColor.text = @"XXXX";
+}
+
+
+- (IBAction)hygrometerBME280StartStreamPressed:(id)sender
+{
+    [self.hygrometerBME280StartStream setEnabled:NO];
+    [self.hygrometerBME280StopStream setEnabled:YES];
+    [self.hygrometerBME280Oversample setEnabled:NO];
+    
+    MBLHygrometerBME280 *hygrometerBME280 = (MBLHygrometerBME280 *)self.device.hygrometer;
+    switch (self.hygrometerBME280Oversample.selectedSegmentIndex) {
+        case 0:
+            hygrometerBME280.humidityOversampling = MBLHygrometerBME280Oversample1X;
+            break;
+        case 1:
+            hygrometerBME280.humidityOversampling = MBLHygrometerBME280Oversample2X;
+            break;
+        case 2:
+            hygrometerBME280.humidityOversampling = MBLHygrometerBME280Oversample4X;
+            break;
+        case 3:
+            hygrometerBME280.humidityOversampling = MBLHygrometerBME280Oversample8X;
+            break;
+        default:
+            hygrometerBME280.humidityOversampling = MBLHygrometerBME280Oversample16X;
+            break;
+    }
+    
+    self.hygrometerBME280Event = [self.device.hygrometer.humidity periodicReadWithPeriod:700];
+    [self.streamingEvents addObject:self.hygrometerBME280Event];
+    [self.hygrometerBME280Event startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
+        if (obj) {
+            self.hygrometerBME280Humidity.text = [NSString stringWithFormat:@"%.2f", obj.value.doubleValue];
+        }
+    }];
+}
+
+- (IBAction)hygrometerBME280StopStreamPressed:(id)sender
+{
+    [self.hygrometerBME280StartStream setEnabled:YES];
+    [self.hygrometerBME280StopStream setEnabled:NO];
+    [self.hygrometerBME280Oversample setEnabled:YES];
+    
+    [self.streamingEvents removeObject:self.hygrometerBME280Event];
+    [self.hygrometerBME280Event stopNotificationsAsync];
+    self.hygrometerBME280Humidity.text = @"XX.XX";
 }
 
 @end

@@ -35,8 +35,8 @@
 
 #import <MetaWear/MBLConstants.h>
 #import <Bolts/Bolts.h>
-@class MBLEvent MBL_GENERIC(MBLGenericType);
-@class MBLData MBL_GENERIC(MBLGenericType);
+@class MBLEvent<ResultType>;
+@class MBLData<ResultType>;
 @class MBLNumericData;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -103,20 +103,20 @@ typedef NS_ENUM(uint8_t, MBLPinChangeType) {
  value indicates what state the pin changed to, YES means set, NO means
  clear.
  */
-@property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLNumericData *) *changeEvent;
+@property (nonatomic, readonly) MBLEvent<MBLNumericData *> *changeEvent;
 /**
  Data representing the digital value of the pin.
  Event callbacks will be provided an MBLNumericData object whose bool
  value indicates what state the pin is in, YES means set, NO means clear.
  */
-@property (nonatomic, readonly) MBLData MBL_GENERIC(MBLNumericData *) *digitalValue;
+@property (nonatomic, readonly) MBLData<MBLNumericData *> *digitalValue;
 /**
  Data representing the analog value of the pin.
  Event callbacks will be provided an MBLNumericData object whose double
  value will be volts.
  @warning Not all pins support analog reads
  */
-@property (nonatomic, readonly) MBLData MBL_GENERIC(MBLNumericData *) *analogAbsolute;
+@property (nonatomic, readonly) MBLData<MBLNumericData *> *analogAbsolute;
 /**
  Data representing the analog value of the pin as a ratio of the supply voltage.
  Event callbacks will be provided an MBLNumericData object whose double value
@@ -124,7 +124,7 @@ typedef NS_ENUM(uint8_t, MBLPinChangeType) {
  ground, and 1.0 indicates pin is equal to supply voltage.
  @warning Not all pins support analog reads
  */
-@property (nonatomic, readonly) MBLData MBL_GENERIC(MBLNumericData *) *analogRatio;
+@property (nonatomic, readonly) MBLData<MBLNumericData *> *analogRatio;
 
 
 /**

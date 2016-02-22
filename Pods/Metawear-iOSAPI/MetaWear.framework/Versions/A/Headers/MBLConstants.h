@@ -105,14 +105,8 @@ extern NSInteger const kMBLErrorOperationInvalid;
 /*! @abstract 113: MetaWear had unexpected data */
 extern NSInteger const kMBLErrorUnexpectedData;
 
+/*! @abstract 114: Exception */
+extern NSInteger const kMBLErrorUnexpectedException;
 
-///--------------------------------------
-/// @name Obj-C Generics Macros
-///--------------------------------------
-
-#if __has_feature(objc_generics) || __has_extension(objc_generics)
-#  define MBL_GENERIC(...) <__VA_ARGS__>
-#else
-#  define MBL_GENERIC(...)
-#  define MBLGenericObject id
-#endif
+/*! @abstract 115: Core Bluetooth not powered on correctly */
+extern NSInteger const kMBLErrorBluetoothPoweredOff;

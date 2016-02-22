@@ -53,6 +53,9 @@
 @class MBLBarometer;
 @class MBLAmbientLight;
 @class MBLMagnetometer;
+@class MBLHygrometer;
+@class MBLPhotometer;
+@class MBLProximity;
 @class MBLSettings;
 @class MBLMetaWear;
 
@@ -171,6 +174,18 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  */
 @property (nonatomic, readonly, nullable) MBLMagnetometer *magnetometer;
 /**
+ MBLHygrometer object contains all methods for interacting with the humidity sensor
+ */
+@property (nonatomic, readonly, nullable) MBLHygrometer *hygrometer;
+/**
+ MBLPhotometer object contains all methods for interacting with the photometer (color) sensor
+ */
+@property (nonatomic, readonly, nullable) MBLPhotometer *photometer;
+/**
+ MBLProximity object contains all methods for interacting with the proximity sensor
+ */
+@property (nonatomic, readonly, nullable) MBLProximity *proximity;
+/**
  MBLSettings object contains all methods for interacting with MetaWear device settings
  */
 @property (nonatomic, readonly, nullable) MBLSettings *settings;
@@ -224,7 +239,11 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
 /**
  Stored value of signal strength at discovery time
  */
-@property (nonatomic, nullable) NSNumber *discoveryTimeRSSI;
+@property (nonatomic, readonly, nullable) NSNumber *discoveryTimeRSSI;
+/**
+ Smoothed out RSSI value, great for use with signal strength icons
+ */
+@property (nonatomic, readonly, nullable) NSNumber *averageRSSI;
 /**
  Advertised device name.  You can simply assign a new string
  if you wish to change the advertised name, max 8 characters!
@@ -337,15 +356,14 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
 
 
 ///----------------------------------
-/// @name Utility Methods
+/// @name Debug and Testing Utilities
 ///----------------------------------
 
-/**
- Get a callback after all commands have been sent to the MetaWear
- board and expected responses recieved.
- @param handler Callback once all commands are complete
+/*
+ This causues the device to immediately disconnect with an error.  Useful for testing
+ error handling flows.
  */
-- (void)waitForCommandCompletion:(MBLVoidHandler)handler;
+- (void)simulateDisconnect;
 
 @end
 

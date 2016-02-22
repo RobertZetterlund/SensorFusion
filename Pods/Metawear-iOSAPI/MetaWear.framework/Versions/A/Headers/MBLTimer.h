@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param repeatCount Number of times event will be triggered, 0xFFFF will repeat forever
  @returns New event that will trigger periodically
  */
-- (MBLEvent MBL_GENERIC(MBLDataSample *) *)eventWithPeriod:(uint32_t)period
+- (MBLEvent<MBLDataSample *> *)eventWithPeriod:(uint32_t)period
                                                repeatCount:(uint16_t)repeatCount;
 
 /**
@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param period Period time in mSec
  @returns New event that will trigger periodically
  */
-- (MBLEvent MBL_GENERIC(MBLDataSample *) *)eventWithPeriod:(uint32_t)period;
+- (MBLEvent<MBLDataSample *> *)eventWithPeriod:(uint32_t)period;
 
 @end
 

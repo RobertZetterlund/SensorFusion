@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
  will be provided an MBLNumericData object whose double value will be
  degrees Celsius.
  */
-@property (nonatomic, readonly) NSArray MBL_GENERIC(MBLData MBL_GENERIC(MBLNumericData *) *) *channels;
+@property (nonatomic, readonly) NSArray<MBLData<MBLNumericData *> *> *channels;
 
 ///----------------------------------
 /// @name Convenient Assessors - also available via channels[N]
@@ -65,7 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
  Event callbacks will be provided an MBLNumericData object whose double 
  value will be degrees Celsius.
  */
-@property (nonatomic, readonly) MBLData MBL_GENERIC(MBLNumericData *) *internal;
+@property (nonatomic, readonly) MBLData<MBLNumericData *> *onDieThermistor;
+@property (nonatomic, readonly) MBLData<MBLNumericData *> *internal DEPRECATED_MSG_ATTRIBUTE("Use onDieThermistor instead");
 
 /**
  Data representing the current temperate of the external thermistor, if
@@ -74,14 +75,14 @@ NS_ASSUME_NONNULL_BEGIN
  Event callbacks will be provided an MBLNumericData object whose double
  value will be degrees Celsius.
  */
-@property (nonatomic, readonly, nullable) MBLExternalThermistor MBL_GENERIC(MBLNumericData *) *externalThermistor;
+@property (nonatomic, readonly, nullable) MBLExternalThermistor<MBLNumericData *> *externalThermistor;
 
 /**
  Data representing the current temperate of the on-board thermistor, if
  equiped. Event callbacks will be provided an MBLNumericData object whose
  double value will be degrees Celsius.
  */
-@property (nonatomic, readonly, nullable) MBLData MBL_GENERIC(MBLNumericData *) *onboardThermistor;
+@property (nonatomic, readonly, nullable) MBLData<MBLNumericData *> *onboardThermistor;
 
 @end
 

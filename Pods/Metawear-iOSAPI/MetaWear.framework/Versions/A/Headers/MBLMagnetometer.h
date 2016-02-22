@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
  Event callbacks will be provided an MBLMagnetometerData object.
  NOT YET IMPLEMENTED
  */
-@property (nonatomic, readonly, nullable) MBLData MBL_GENERIC(MBLMagnetometerData *) *magneticField;
+@property (nonatomic, readonly, nullable) MBLData<MBLMagnetometerData *> *magneticField;
 
 @end
 

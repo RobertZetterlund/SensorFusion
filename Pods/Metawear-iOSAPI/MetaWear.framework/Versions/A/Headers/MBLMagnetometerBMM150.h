@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
  Data representing the periodic magnetic field measured by magnetometer. 
  Event callbacks will be provided an MBLMagnetometerData object.
  */
-@property (nonatomic, readonly) MBLEvent MBL_GENERIC(MBLMagnetometerData *) *periodicMagneticField;
+@property (nonatomic, readonly) MBLEvent<MBLMagnetometerData *> *periodicMagneticField;
 
 @end
 

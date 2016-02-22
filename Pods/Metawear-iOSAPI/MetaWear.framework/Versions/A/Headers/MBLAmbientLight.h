@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
  double value will be illuminance in lux.
  NOT YET IMPLEMENTED
  */
-@property (nonatomic, readonly, nullable) MBLData MBL_GENERIC(MBLNumericData *) *illuminance;
+@property (nonatomic, readonly, nullable) MBLData<MBLNumericData *> *illuminance;
 
 @end
 

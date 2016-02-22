@@ -36,8 +36,8 @@
 #import <MetaWear/MBLModule.h>
 #import <MetaWear/MBLConstants.h>
 #import <Bolts/Bolts.h>
-@class MBLEvent MBL_GENERIC(MBLGenericType);
-@class MBLData MBL_GENERIC(MBLGenericType);
+@class MBLEvent<ResultType>;
+@class MBLData<ResultType>;
 @class MBLStringData;
 @class MBLDataSample;
 @class MBLNumericData;
@@ -97,18 +97,18 @@ typedef NS_ENUM(uint8_t, MBLTransmitPower) {
  stream, but it's likely that programCommandsToRunOnEventAsync will have utility.
  Event callbacks will be provided an MBLDataSample object.
  */
-@property (nonatomic, readonly, nullable) MBLEvent MBL_GENERIC(MBLDataSample *) *disconnectEvent;
+@property (nonatomic, readonly, nullable) MBLEvent<MBLDataSample *> *disconnectEvent;
 
 /**
  Get the MAC address of the MetaWear
  Event callbacks will be provided an MBLStringData object.
  */
-@property (nonatomic, readonly, nullable) MBLData MBL_GENERIC(MBLStringData *) *macAddress;
+@property (nonatomic, readonly, nullable) MBLData<MBLStringData *> *macAddress;
 
 /**
  Percent remaining battery life, returns int between 0-100
  */
-@property (nonatomic, readonly, nullable) MBLData MBL_GENERIC(MBLNumericData *) *batteryRemaining;
+@property (nonatomic, readonly, nullable) MBLData<MBLNumericData *> *batteryRemaining;
 
 
 /**
@@ -163,7 +163,7 @@ typedef NS_ENUM(uint8_t, MBLTransmitPower) {
 /**
  Raw battery voltage in mV.  For enabling only, please use batteryRemaining instead.
  */
-@property (nonatomic, readonly, nullable) MBLData MBL_GENERIC(MBLNumericData *) *batteryVoltage;
+@property (nonatomic, readonly, nullable) MBLData<MBLNumericData *> *batteryVoltage;
 
 @end
 

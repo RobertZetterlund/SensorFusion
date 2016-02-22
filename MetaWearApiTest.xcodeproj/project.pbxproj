@@ -12,7 +12,6 @@
 		402D420F198843BE0011ADB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402D420E198843BE0011ADB1 /* Foundation.framework */; };
 		402D4211198843BE0011ADB1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402D4210198843BE0011ADB1 /* CoreGraphics.framework */; };
 		402D4213198843BE0011ADB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402D4212198843BE0011ADB1 /* UIKit.framework */; };
-		404271891C619DE900059C22 /* MovingAverage.m in Sources */ = {isa = PBXBuildFile; fileRef = 404271881C619DE900059C22 /* MovingAverage.m */; };
 		406FBD1D1C20D98E007DAEAD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406FBD1C1C20D98E007DAEAD /* CoreData.framework */; };
 		40A6847C199BD25F0054F49D /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A6847B199BD25F0054F49D /* StartViewController.m */; };
 		40D97BF619897CB400F55A09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D97BF119897CB400F55A09 /* AppDelegate.m */; };
@@ -35,8 +34,6 @@
 		402D420E198843BE0011ADB1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		402D4210198843BE0011ADB1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		402D4212198843BE0011ADB1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		404271871C619DE900059C22 /* MovingAverage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingAverage.h; sourceTree = "<group>"; };
-		404271881C619DE900059C22 /* MovingAverage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingAverage.m; sourceTree = "<group>"; };
 		406FBD1C1C20D98E007DAEAD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		40A6847A199BD25F0054F49D /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartViewController.h; path = MetaWearApiTest/StartViewController.h; sourceTree = "<group>"; };
 		40A6847B199BD25F0054F49D /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartViewController.m; path = MetaWearApiTest/StartViewController.m; sourceTree = "<group>"; };
@@ -86,7 +83,6 @@
 		402D4202198843BE0011ADB1 = {
 			isa = PBXGroup;
 			children = (
-				4042718A1C619DED00059C22 /* MovingAverage */,
 				4013B0CA198F18C5009925DA /* Accelerometer */,
 				40D97BFA19897CBB00F55A09 /* MetaWearApiTest */,
 				40D97C1119897DE100F55A09 /* Supporting Files */,
@@ -114,15 +110,6 @@
 				362524CD4D17712CD975B950 /* libPods-MetaWearApiTest.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		4042718A1C619DED00059C22 /* MovingAverage */ = {
-			isa = PBXGroup;
-			children = (
-				404271871C619DE900059C22 /* MovingAverage.h */,
-				404271881C619DE900059C22 /* MovingAverage.m */,
-			);
-			name = MovingAverage;
 			sourceTree = "<group>";
 		};
 		40D97BFA19897CBB00F55A09 /* MetaWearApiTest */ = {
@@ -305,7 +292,6 @@
 				40D97C1D1989CD1300F55A09 /* DeviceDetailViewController.m in Sources */,
 				4013B0D5198F1D1B009925DA /* APLGraphView.m in Sources */,
 				40D97C0F19897DD700F55A09 /* main.m in Sources */,
-				404271891C619DE900059C22 /* MovingAverage.m in Sources */,
 				40A6847C199BD25F0054F49D /* StartViewController.m in Sources */,
 				40D97BF719897CB400F55A09 /* DevicesTableViewController.m in Sources */,
 			);

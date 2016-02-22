@@ -1,11 +1,11 @@
 PODS:
   - Bolts/Tasks (1.6.0)
-  - Crashlytics (3.6.0):
+  - Crashlytics (3.7.0):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.4)
+  - Fabric (1.6.6)
   - MBProgressHUD (0.9.2)
-  - Metawear-iOSAPI (2.1.1):
-    - Bolts/Tasks (~> 1.5)
+  - Metawear-iOSAPI (2.2.0):
+    - Bolts/Tasks (~> 1.6)
   - StaticDataTableViewController (2.0.5)
 
 DEPENDENCIES:
@@ -17,10 +17,10 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
-  Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
-  Fabric: ed41fd62173c6bdea24ab02c9d7707161eabb750
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
+  Fabric: 1abc1e59f11fa39ede6f690ef7309d8563e3ec59
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
-  Metawear-iOSAPI: fc423550ba83ddf2cfe2e8c76dfac262613e1749
+  Metawear-iOSAPI: 1a1e28aabd6bbed364cc59713aab15f7430a66fa
   StaticDataTableViewController: 7ea8d7bc8c7f0a4e9255a320224462c7346c1d4a
 
 COCOAPODS: 0.39.0
