@@ -1,9 +1,9 @@
 /**
- * MBLGSR.h
+ * MBLTimerEvent.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 4/16/15.
- * Copyright 2014-2015 MbientLab Inc. All rights reserved.
+ * Created by Stephen Schiffli on 3/11/16.
+ * Copyright 2016 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
  * granted under the terms of a software license agreement between the user who
@@ -33,56 +33,16 @@
  * contact MbientLab via email: hello@mbientlab.com
  */
 
-#import <MetaWear/MBLModule.h>
-#import <Bolts/Bolts.h>
+#import <MetaWear/MBLEntityEvent.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- Gain applied in the GSR circuit
- */
-typedef NS_ENUM(uint8_t, MBLGSRGain) {
-    MBLGSRGain499K = 0,
-    MBLGSRGain1M = 1
-};
+@interface MBLTimerEvent<ResultType> : MBLEntityEvent<ResultType>
 
 /**
- Constant voltage applied on the GSR electrodes
+ Start the timer
  */
-typedef NS_ENUM(uint8_t, MBLGSRVoltage) {
-    MBLGSRVoltage500mV = 1,
-    MBLGSRVoltage250mV = 0
-};
-
-/**
- Interface to on-board GSR sensor
- */
-@interface MBLGSR : MBLModule
-
-/**
- Gain applied in the GSR circuit
- */
-@property (nonatomic) MBLGSRGain gain;
-/**
- Constant voltage applied on the GSR electrodes
- */
-@property (nonatomic) MBLGSRVoltage voltage;
-
-
-/**
- Array of MBLData objects. The index corresponds to the GSR channel
- number, for example, channels[0] returns an MBLData corresponding
- to channel 0, which can be used for perfoming single channel reads.
- Callbacks will be provided an MBLNumericData object.
- */
-@property (nonatomic, readonly) NSArray *channels;
-
-/**
- Perform automatic GSR calibration.  This should be called when
- temperature changes, or it can just be called periodically as
- it's low overhead.
- */
-- (BFTask *)calibrateAsync;
+- (BFTask *)start;
 
 @end
 

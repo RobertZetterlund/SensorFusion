@@ -49,7 +49,7 @@
 @class MBLANCS;
 @class MBLI2C;
 @class MBLTimer;
-@class MBLGSR;
+@class MBLConductance;
 @class MBLBarometer;
 @class MBLAmbientLight;
 @class MBLMagnetometer;
@@ -158,9 +158,9 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  */
 @property (nonatomic, readonly, nullable) MBLI2C *i2c;
 /**
- MBLGSR object contains all methods for perfoming GSR reads
+ MBLConductance object contains all methods for perfoming Conductance reads
  */
-@property (nonatomic, readonly, nullable) MBLGSR *gsr;
+@property (nonatomic, readonly, nullable) MBLConductance *conductance;
 /**
  MBLBarometer object contains all methods for interacting with the barometer sensor
  */

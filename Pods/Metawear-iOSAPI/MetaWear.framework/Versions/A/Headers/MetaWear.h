@@ -57,10 +57,11 @@
 #import <MetaWear/MBLDeviceInfo.h>
 #import <MetaWear/MBLEntityEvent.h>
 #import <MetaWear/MBLEvent.h>
+#import <MetaWear/MBLExternalThermistor.h>
 #import <MetaWear/MBLFilter.h>
 #import <MetaWear/MBLGPIO.h>
 #import <MetaWear/MBLGPIOPin.h>
-#import <MetaWear/MBLGSR.h>
+#import <MetaWear/MBLConductance.h>
 #import <MetaWear/MBLGyro.h>
 #import <MetaWear/MBLGyroBMI160.h>
 #import <MetaWear/MBLGyroData.h>
@@ -92,7 +93,7 @@
 #import <MetaWear/MBLSettings.h>
 #import <MetaWear/MBLStringData.h>
 #import <MetaWear/MBLTemperature.h>
-#import <MetaWear/MBLExternalThermistor.h>
 #import <MetaWear/MBLTimer.h>
+#import <MetaWear/MBLTimerEvent.h>
 
 #import <MetaWear/BFTask+MBLExtensions.h>

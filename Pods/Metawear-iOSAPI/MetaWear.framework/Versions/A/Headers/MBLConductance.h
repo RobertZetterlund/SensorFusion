@@ -1,8 +1,8 @@
 /**
- * MBLI2C.h
+ * MBLConductance.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 1/20/15.
+ * Created by Stephen Schiffli on 4/16/15.
  * Copyright 2014-2015 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
@@ -34,36 +34,74 @@
  */
 
 #import <MetaWear/MBLModule.h>
-#import <MetaWear/MBLI2CData.h>
-@class MBLDataSample;
+#import <Bolts/Bolts.h>
+@class MBLNumericData;
+@class MBLData<ResultType>;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- Interface for reading/writing externally connected I2C devices.
+ Gain applied in the Conductance circuit
  */
-@interface MBLI2C : MBLModule
+typedef NS_ENUM(uint8_t, MBLConductanceGain) {
+    MBLConductanceGain499K = 0,
+    MBLConductanceGain1M = 1
+};
 
 /**
- Create an I2C data endpoint.  The deivce and register address
- will be available in the data sheet of whatever device you connect.
- Event callbacks will be provided an MBLDataSample object whose data
- property can be used to access the data as bytes.
+ Constant voltage applied on the Conductance electrodes
  */
-- (MBLI2CData<MBLDataSample *> *)dataAtDeviceAddress:(uint8_t)deviceAddress
-                                     registerAddress:(uint8_t)registerAddress
-                                              length:(uint8_t)length;
+typedef NS_ENUM(uint8_t, MBLConductanceVoltage) {
+    MBLConductanceVoltage500mV = 1,
+    MBLConductanceVoltage250mV = 0
+};
 
 /**
- Create an I2C data endpoint.  The deivce and register address
- will be available in the data sheet of whatever device you connect.
- Event callbacks will be provided an MBLNumericData object whose value
- will contain the register value formatted as a number.
+ Valid measurment range voltage on the Conductance electrodes
  */
-- (MBLI2CData<MBLDataSample *> *)numberAtDeviceAddress:(uint8_t)deviceAddress
-                                       registerAddress:(uint8_t)registerAddress
-                                                length:(uint8_t)length
-                                              isSigned:(BOOL)isSigned;
+typedef NS_ENUM(uint8_t, MBLConductanceRange) {
+    MBLConductanceRange50uS = 0,
+    MBLConductanceRange100uS = 1,
+    MBLConductanceRange150uS = 2,
+    MBLConductanceRange200uS = 3
+};
+
+/**
+ Interface to on-board Conductance sensor
+ */
+@interface MBLConductance : MBLModule
+
+/**
+ Gain applied in the Conductance circuit 
+ @note Not avaliable in all implementations
+ */
+@property (nonatomic) MBLConductanceGain gain;
+/**
+ Constant voltage applied on the Conductance electrodes
+ @note Not avaliable in all implementations
+ */
+@property (nonatomic) MBLConductanceVoltage voltage;
+/**
+ Valid measurment range voltage on the Conductance electrodes
+ @note Not avaliable in all implementations
+ */
+@property (nonatomic) MBLConductanceRange range;
+
+
+/**
+ Array of MBLData objects. The index corresponds to the Conductance channel
+ number, for example, channels[0] returns an MBLData corresponding
+ to channel 0, which can be used for perfoming single channel reads.
+ Callbacks will be provided an MBLNumericData object whose uint32_t value
+ will be conductance in nS.
+ */
+@property (nonatomic, readonly) NSArray<MBLData<MBLNumericData *> *> *channels;
+
+/**
+ Perform automatic Conductance calibration.  This should be called when
+ temperature changes, or it can just be called periodically as it's low overhead.
+ */
+- (BFTask *)calibrateAsync;
 
 @end
 

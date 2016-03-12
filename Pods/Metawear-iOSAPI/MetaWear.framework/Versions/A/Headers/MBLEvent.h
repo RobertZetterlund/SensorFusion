@@ -68,7 +68,9 @@ typedef NS_ENUM(uint8_t, MBLArithmeticOperation) {
     MBLArithmeticOperationSquareRoot = 6,
     MBLArithmeticOperationLeftShift = 7,
     MBLArithmeticOperationRightShift = 8,
-    MBLArithmeticOperationSubtract = 9
+    MBLArithmeticOperationSubtract = 9,
+    MBLArithmeticOperationAbsoluteValue = 10,
+    MBLArithmeticOperationConstantOutput = 11
 };
 
 /**

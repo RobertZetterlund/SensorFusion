@@ -38,9 +38,25 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ Magnetometer power presets
+ */
+typedef NS_ENUM(uint8_t, MBLMagnetometerBMM150Preset) {
+    MBLMagnetometerBMM150PresetLowPower = 0,
+    MBLMagnetometerBMM150PresetRegular = 1,
+    MBLMagnetometerBMM150PresetEnhancedRegular = 2,
+    MBLMagnetometerBMM150PresetHighAccuracy = 3
+};
+
+/**
  Interface to a BMM150 magnetometer sensor
  */
 @interface MBLMagnetometerBMM150 : MBLMagnetometer
+
+/**
+ This affects the power, accuracy, and frequency of periodicMagneticField event
+ */
+@property (nonatomic) MBLMagnetometerBMM150Preset powerPreset;
+
 
 /**
  Data representing the periodic magnetic field measured by magnetometer. 

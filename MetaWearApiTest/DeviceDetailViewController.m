@@ -238,6 +238,24 @@
 @property (weak, nonatomic) IBOutlet UILabel *hygrometerBME280Humidity;
 @property (nonatomic) MBLEvent<MBLNumericData *> *hygrometerBME280Event;
 
+@property (weak, nonatomic) IBOutlet UITableViewCell *i2cCell;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *i2cSizeSelector;
+@property (weak, nonatomic) IBOutlet UITextField *i2cDeviceAddress;
+@property (weak, nonatomic) IBOutlet UITextField *i2cRegisterAddress;
+@property (weak, nonatomic) IBOutlet UILabel *i2cReadByteLabel;
+@property (weak, nonatomic) IBOutlet UITextField *i2cWriteByteField;
+
+
+@property (weak, nonatomic) IBOutlet UITableViewCell *conductanceCell;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *conductanceGain;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *conductanceVoltage;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *conductanceRange;
+@property (weak, nonatomic) IBOutlet UIStepper *conductanceChannelStepper;
+@property (weak, nonatomic) IBOutlet UILabel *conductanceChannelLabel;
+@property (weak, nonatomic) IBOutlet UIButton *conductanceStartStream;
+@property (weak, nonatomic) IBOutlet UIButton *conductanceStopStream;
+@property (weak, nonatomic) IBOutlet UILabel *conductanceLabel;
+@property (nonatomic) MBLEvent<MBLNumericData *> *conductanceEvent;
 
 @property (nonatomic, strong) NSMutableArray *streamingEvents;
 @property (nonatomic) BOOL isObserving;
@@ -529,6 +547,15 @@
 
     if ([self.device.hygrometer isKindOfClass:[MBLHygrometerBME280 class]]) {
         [self cell:self.hygrometerBME280Cell setHidden:NO];
+    }
+    
+    if (self.device.i2c) {
+        [self cell:self.i2cCell setHidden:NO];
+    }
+    
+    if (self.device.conductance) {
+        self.conductanceChannelStepper.maximumValue = self.device.conductance.channels.count - 10;
+        [self cell:self.conductanceCell setHidden:NO];
     }
     
     // Make the magic happen!
@@ -2176,5 +2203,106 @@
     [self.hygrometerBME280Event stopNotificationsAsync];
     self.hygrometerBME280Humidity.text = @"XX.XX";
 }
+
+
+- (IBAction)conductanceStartStreamPressed:(id)sender
+{
+    [self.conductanceStartStream setEnabled:NO];
+    [self.conductanceStopStream setEnabled:YES];
+    [self.conductanceGain setEnabled:NO];
+    [self.conductanceVoltage setEnabled:NO];
+    [self.conductanceRange setEnabled:NO];
+    [self.conductanceChannelStepper setEnabled:NO];
+    
+    self.device.conductance.gain = self.conductanceGain.selectedSegmentIndex;
+    self.device.conductance.voltage = self.conductanceVoltage.selectedSegmentIndex;
+    self.device.conductance.range = self.conductanceRange.selectedSegmentIndex;
+    uint8_t channel = round(self.conductanceChannelStepper.value);
+    
+    [self.device.conductance calibrateAsync];
+    self.conductanceEvent = [self.device.conductance.channels[channel] periodicReadWithPeriod:500];
+    [self.streamingEvents addObject:self.conductanceEvent];
+    [self.conductanceEvent startNotificationsWithHandlerAsync:^(MBLNumericData * _Nullable obj, NSError * _Nullable error) {
+        if (obj) {
+            self.conductanceLabel.text = [NSString stringWithFormat:@"%d", obj.value.unsignedIntValue];
+        }
+    }];
+}
+
+- (IBAction)conductanceStopStreamPressed:(id)sender
+{
+    [self.conductanceStartStream setEnabled:YES];
+    [self.conductanceStopStream setEnabled:NO];
+    [self.conductanceGain setEnabled:YES];
+    [self.conductanceVoltage setEnabled:YES];
+    [self.conductanceRange setEnabled:YES];
+    [self.conductanceChannelStepper setEnabled:YES];
+    
+    [self.streamingEvents removeObject:self.conductanceEvent];
+    [self.conductanceEvent stopNotificationsAsync];
+    self.conductanceLabel.text = @"XXXX";
+}
+
+- (IBAction)conductanceChannelChanged:(id)sender
+{
+    self.conductanceChannelLabel.text = [NSString stringWithFormat:@"%d", (int)round(self.conductanceChannelStepper.value)];
+}
+
+
+- (IBAction)i2cReadBytesPressed:(id)sender
+{
+    uint deviceAddress = 0;
+    NSScanner *deviceAddressScanner = [NSScanner scannerWithString:self.i2cDeviceAddress.text];
+    if ([deviceAddressScanner scanHexInt:&deviceAddress]) {
+        uint registerAddress = 0;
+        NSScanner *registerAddressScanner = [NSScanner scannerWithString:self.i2cRegisterAddress.text];
+        if ([registerAddressScanner scanHexInt:&registerAddress]) {
+            uint8_t length = 1;
+            if (self.i2cSizeSelector.selectedSegmentIndex == 1) {
+                length = 2;
+            } else if (self.i2cSizeSelector.selectedSegmentIndex == 2) {
+                length = 4;
+            }
+            MBLI2CData<MBLDataSample *> *reg = [self.device.i2c dataAtDeviceAddress:deviceAddress registerAddress:registerAddress length:length];
+            [[reg readAsync] success:^(MBLDataSample * _Nonnull result) {
+                self.i2cReadByteLabel.text = result.data.description;
+            }];
+        } else {
+            self.i2cRegisterAddress.text = @"";
+        }
+    } else {
+        self.i2cDeviceAddress.text = @"";
+    }
+}
+
+- (IBAction)i2cWriteBytesPressed:(id)sender
+{
+    uint deviceAddress = 0;
+    NSScanner *deviceAddressScanner = [NSScanner scannerWithString:self.i2cDeviceAddress.text];
+    if ([deviceAddressScanner scanHexInt:&deviceAddress]) {
+        uint registerAddress = 0;
+        NSScanner *registerAddressScanner = [NSScanner scannerWithString:self.i2cRegisterAddress.text];
+        if ([registerAddressScanner scanHexInt:&registerAddress]) {
+            uint writeData = 0;
+            NSScanner *writeDataScanner = [NSScanner scannerWithString:self.i2cWriteByteField.text];
+            if ([writeDataScanner scanHexInt:&writeData]) {
+                uint8_t length = 1;
+                if (self.i2cSizeSelector.selectedSegmentIndex == 1) {
+                    length = 2;
+                } else if (self.i2cSizeSelector.selectedSegmentIndex == 2) {
+                    length = 4;
+                }
+                MBLI2CData<MBLDataSample *> *reg = [self.device.i2c dataAtDeviceAddress:deviceAddress registerAddress:registerAddress length:length];
+                [reg writeDataAsync:[NSData dataWithBytes:&writeData length:length]];
+            }
+            self.i2cWriteByteField.text = @"";
+        } else {
+            self.i2cRegisterAddress.text = @"";
+        }
+    } else {
+        self.i2cDeviceAddress.text = @"";
+    }
+}
+
 
 @end
