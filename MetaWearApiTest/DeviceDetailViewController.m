@@ -554,7 +554,7 @@
     }
     
     if (self.device.conductance) {
-        self.conductanceChannelStepper.maximumValue = self.device.conductance.channels.count - 10;
+        self.conductanceChannelStepper.maximumValue = self.device.conductance.channels.count - 1;
         [self cell:self.conductanceCell setHidden:NO];
     }
     
