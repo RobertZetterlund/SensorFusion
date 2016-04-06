@@ -37,10 +37,11 @@
 #import "MBProgressHUD.h"
 #import "APLGraphView.h"
 
-@interface DeviceDetailViewController ()
+@interface DeviceDetailViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UISwitch *connectionSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *connectionStateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UIButton *setNameButton;
 
 @property (strong, nonatomic) IBOutletCollection(UITableViewCell) NSArray *allCells;
 
@@ -52,6 +53,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *modelNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *batteryLevelLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rssiLevelLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *txPowerSelector;
 @property (weak, nonatomic) IBOutlet UILabel *firmwareUpdateLabel;
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *mechanicalSwitchCell;
@@ -245,7 +247,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *i2cReadByteLabel;
 @property (weak, nonatomic) IBOutlet UITextField *i2cWriteByteField;
 
-
 @property (weak, nonatomic) IBOutlet UITableViewCell *conductanceCell;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *conductanceGain;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *conductanceVoltage;
@@ -256,6 +257,21 @@
 @property (weak, nonatomic) IBOutlet UIButton *conductanceStopStream;
 @property (weak, nonatomic) IBOutlet UILabel *conductanceLabel;
 @property (nonatomic) MBLEvent<MBLNumericData *> *conductanceEvent;
+
+@property (weak, nonatomic) IBOutlet UITableViewCell *neopixelCell;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *neopixelColor;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *neopixelSpeed;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *neopixelPin;
+@property (weak, nonatomic) IBOutlet UIStepper *neopixelLengthStepper;
+@property (weak, nonatomic) IBOutlet UILabel *neopixelLengthLabel;
+@property (weak, nonatomic) IBOutlet UIButton *neopixelSetRed;
+@property (weak, nonatomic) IBOutlet UIButton *neopixelSetGreen;
+@property (weak, nonatomic) IBOutlet UIButton *neopixelSetBlue;
+@property (weak, nonatomic) IBOutlet UIButton *neopixelSetRainbow;
+@property (weak, nonatomic) IBOutlet UIButton *neopixelRotateRight;
+@property (weak, nonatomic) IBOutlet UIButton *neopixelRotateLeft;
+@property (weak, nonatomic) IBOutlet UIButton *neopixelTurnOff;
+@property (nonatomic) MBLNeopixelStrand *neopixelStrand;
 
 @property (nonatomic, strong) NSMutableArray *streamingEvents;
 @property (nonatomic) BOOL isObserving;
@@ -281,7 +297,7 @@
     
     // Write in the 2 fields we know at time zero
     self.connectionStateLabel.text = [self nameForState];
-    self.nameLabel.text = self.device.name;
+    self.nameTextField.text = self.device.name;
     
     // Listen for state changes
     self.isObserving = YES;
@@ -400,6 +416,7 @@
     self.hwRevLabel.text = self.device.deviceInfo.hardwareRevision;
     self.fwRevLabel.text = self.device.deviceInfo.firmwareRevision;
     self.modelNumberLabel.text = self.device.deviceInfo.modelNumber;
+    self.txPowerSelector.selectedSegmentIndex = self.device.settings.transmitPower;
     // Automaticaly send off some reads
     [self readBatteryPressed:nil];
     [self readRSSIPressed:nil];
@@ -516,7 +533,8 @@
             [self.gpioPinSelector insertSegmentWithTitle:[NSString stringWithFormat:@"%d", i] atIndex:i animated:NO];
         }
         [self.gpioPinSelector setSelectedSegmentIndex:0];
-        [self gpioPinSelectorPressed:self.gpioPinSelector];
+        
+        
     }
     
     if (self.device.hapticBuzzer) {
@@ -556,6 +574,18 @@
     if (self.device.conductance) {
         self.conductanceChannelStepper.maximumValue = self.device.conductance.channels.count - 1;
         [self cell:self.conductanceCell setHidden:NO];
+    }
+    
+    if (self.device.neopixel) {
+        [self cell:self.neopixelCell setHidden:NO];
+        // The number of pins is variable
+        [self.neopixelPin removeAllSegments];
+        for (int i = 0; i < self.device.gpio.pins.count; i++) {
+            [self.neopixelPin insertSegmentWithTitle:[NSString stringWithFormat:@"%d", i] atIndex:i animated:NO];
+        }
+        [self.neopixelPin setSelectedSegmentIndex:0];
+        [self gpioPinSelectorPressed:self.gpioPinSelector];
+
     }
     
     // Make the magic happen!
@@ -608,6 +638,42 @@
     [self connectDevice:self.connectionSwitch.on];
 }
 
+- (IBAction)setNamePressed:(id)sender
+{
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"ihaveseennamemessage"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"ihaveseennamemessage"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self showAlertTitle:@"Notice" message:@"Because of how iOS caches names, you have to disconnect and re-connect a few times or force close and re-launch the app before you see the new name!"];
+    }
+    [self.nameTextField resignFirstResponder];
+    self.device.name = self.nameTextField.text;
+    self.setNameButton.enabled = NO;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    // return NO to not change text
+    self.setNameButton.enabled = YES;
+    
+    // Prevent Undo crashing bug
+    if (range.length + range.location > textField.text.length) {
+        return NO;
+    }
+    // Make sure it's no longer than 8 characters
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    if (newLength > 8) {
+        return NO;
+    }
+    // Make sure we only use ASCII characters
+    return [string dataUsingEncoding:NSASCIIStringEncoding] != nil;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    // called when 'return' key pressed. return NO to ignore.
+    [textField resignFirstResponder];
+    return YES;
+}
 
 - (IBAction)readBatteryPressed:(id)sender
 {
@@ -622,6 +688,12 @@
         self.rssiLevelLabel.text = [number stringValue];
     }];
 }
+
+- (IBAction)txPowerChanged:(id)sender
+{
+    self.device.settings.transmitPower = self.txPowerSelector.selectedSegmentIndex;
+}
+
 
 - (IBAction)checkForFirmwareUpdatesPressed:(id)sender
 {
@@ -2302,6 +2374,104 @@
     } else {
         self.i2cDeviceAddress.text = @"";
     }
+}
+
+
+- (IBAction)neopixelLengthChanged:(id)sender
+{
+    self.neopixelLengthLabel.text = [NSString stringWithFormat:@"%d", (int)round(self.neopixelLengthStepper.value)];
+}
+
+- (void)neopixelInitStrand
+{
+    if (self.neopixelStrand) {
+        return;
+    }
+    self.neopixelStrand = [self.device.neopixel strandWithColor:self.neopixelColor.selectedSegmentIndex
+                                                          speed:self.neopixelSpeed.selectedSegmentIndex
+                                                            pin:self.neopixelPin.selectedSegmentIndex
+                                                         length:(uint8_t)round(self.neopixelLengthStepper.value)];
+    [self.neopixelStrand initializeAsync];
+    
+    self.neopixelColor.enabled = NO;
+    self.neopixelSpeed.enabled = NO;
+    self.neopixelPin.enabled = NO;
+    self.neopixelLengthStepper.enabled = NO;
+}
+
+- (void)neopixelSetColor:(UIColor *)color
+{
+    const int max = round(self.neopixelLengthStepper.value);
+    for (int i = 0; i < max; i++) {
+        [self.neopixelStrand setPixelAsync:i color:color];
+    }
+}
+
+- (IBAction)neopixelSetRedPressed:(id)sender
+{
+    [self neopixelInitStrand];
+    [self neopixelSetColor:[UIColor redColor]];
+}
+
+- (IBAction)neopixelSetGreenPressed:(id)sender
+{
+    [self neopixelInitStrand];
+    [self neopixelSetColor:[UIColor greenColor]];
+}
+
+- (IBAction)neopixelSetBluePressed:(id)sender
+{
+    [self neopixelInitStrand];
+    [self neopixelSetColor:[UIColor blueColor]];
+}
+
+- (IBAction)neopixelSetRainbowPressed:(id)sender
+{
+    [self neopixelInitStrand];
+    [self.neopixelStrand setRainbowWithHoldAsync:NO];
+}
+
+- (IBAction)neopixelRotateLeftPressed:(id)sender
+{
+    [self neopixelInitStrand];
+    [self.neopixelStrand rotateStrandWithDirectionAsync:MBLRotationDirectionTowardsBoard repetitions:0xFF period:100];
+}
+
+- (IBAction)neopixelRotateRightPressed:(id)sender
+{
+    [self neopixelInitStrand];
+    [self.neopixelStrand rotateStrandWithDirectionAsync:MBLRotationDirectionAwayFromBoard repetitions:0xFF period:100];
+}
+
+- (IBAction)neopixelTurnOffPressed:(id)sender
+{
+    [self.neopixelStrand clearAllPixelsAsync];
+    
+    self.neopixelSetRed.enabled = NO;
+    self.neopixelSetGreen.enabled = NO;
+    self.neopixelSetBlue.enabled = NO;
+    self.neopixelSetRainbow.enabled = NO;
+    self.neopixelRotateRight.enabled = NO;
+    self.neopixelRotateLeft.enabled = NO;
+    self.neopixelTurnOff.enabled = NO;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.neopixelStrand deinitializeAsync];
+        self.neopixelStrand = nil;
+        
+        self.neopixelColor.enabled = YES;
+        self.neopixelSpeed.enabled = YES;
+        self.neopixelPin.enabled = YES;
+        self.neopixelLengthStepper.enabled = YES;
+        
+        self.neopixelSetRed.enabled = YES;
+        self.neopixelSetGreen.enabled = YES;
+        self.neopixelSetBlue.enabled = YES;
+        self.neopixelSetRainbow.enabled = YES;
+        self.neopixelRotateRight.enabled = YES;
+        self.neopixelRotateLeft.enabled = YES;
+        self.neopixelTurnOff.enabled = YES;
+    });
 }
 
 
