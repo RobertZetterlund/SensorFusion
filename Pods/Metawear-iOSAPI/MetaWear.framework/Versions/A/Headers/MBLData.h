@@ -45,11 +45,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface MBLData<ResultType> : MBLRegister
 
+typedef void (^MBLDataNotificationHandler)(ResultType __nullable obj, NSError *__nullable error);
+
 /**
  Perform a one time read of the current value, use the returned BFTask to get value.
  */
 - (BFTask<ResultType> *)readAsync;
-
 
 /**
  Create a new event that will periodically read this data a fixed number of times.
@@ -58,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
  @returns New event that will read this data periodically
  */
 - (MBLEvent<ResultType> *)periodicReadWithPeriod:(uint32_t)period
-                                                     repeatCount:(uint16_t)repeatCount;
+                                     repeatCount:(uint16_t)repeatCount;
 
 /**
  Create a new event that will periodically read this data until canceled.
@@ -66,6 +67,20 @@ NS_ASSUME_NONNULL_BEGIN
  @returns New event that will read this data periodically
  */
 - (MBLEvent<ResultType> *)periodicReadWithPeriod:(uint32_t)period;
+
+
+/**
+ Manually receive callbacks when this data is read, note you need to set up something 
+ else that will perform the actual reads. The type of the object that is passed to the
+ handler depends on the event being handled
+ @param handler Block invoked when this data is read
+ */
+- (void)addNotificationsHandler:(nullable MBLDataNotificationHandler)handler;
+
+/**
+ Remove all notification handlers for this data object
+ */
+- (void)removeNotificationHandlers;
 
 @end
 

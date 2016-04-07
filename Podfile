@@ -5,6 +5,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'MetaWearApiTest' do
 pod 'Metawear-iOSAPI'
+pod 'Bolts/Tasks'
 pod 'MBProgressHUD'
 pod 'StaticDataTableViewController'
 pod 'Fabric'

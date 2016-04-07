@@ -110,3 +110,9 @@ extern NSInteger const kMBLErrorUnexpectedException;
 
 /*! @abstract 115: Core Bluetooth not powered on correctly */
 extern NSInteger const kMBLErrorBluetoothPoweredOff;
+
+/*! @abstract 116: The platform doesn't support the Bluetooth Low Energy Central/Client role */
+extern NSInteger const kMBLErrorBluetoothUnsupported;
+
+/*! @abstract 117: The application is not authorized to use the Bluetooth Low Energy Central/Client role.*/
+extern NSInteger const kMBLErrorBluetoothUnauthorized;
