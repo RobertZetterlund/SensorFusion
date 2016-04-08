@@ -1622,9 +1622,18 @@
     [[[self.device.gyro.dataReadyEvent downloadLogAndStopLoggingAsync:YES progressHandler:^(float number) {
         hud.progress = number;
     }] success:^(NSArray<MBLGyroData *> * _Nonnull array) {
+        self.gyroBMI160Data = array;
         for (MBLGyroData *obj in array) {
             [self.gyroBMI160Graph addX:obj.x * .008 y:obj.y * .008 z:obj.z * .008];
         }
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.labelText = @"Clearing Log...";
+        [self logCleanup:^(NSError *error) {
+            [hud hide:YES];
+            if (error) {
+                [self connectDevice:NO];
+            }
+        }];
     }] failure:^(NSError * _Nonnull error) {
         [self connectDevice:NO];
         [hud hide:YES];
