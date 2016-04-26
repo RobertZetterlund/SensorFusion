@@ -8,7 +8,5 @@ pod 'Metawear-iOSAPI'
 pod 'Bolts/Tasks'
 pod 'MBProgressHUD'
 pod 'StaticDataTableViewController'
-pod 'Fabric'
-pod 'Crashlytics'
 end
 
