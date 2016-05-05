@@ -272,6 +272,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *neopixelRotateLeft;
 @property (weak, nonatomic) IBOutlet UIButton *neopixelTurnOff;
 @property (nonatomic) MBLNeopixelStrand *neopixelStrand;
+@property (nonatomic) BFTask *neopixelStrandInitTask;
 
 @property (nonatomic, strong) NSMutableArray *streamingEvents;
 @property (nonatomic) BOOL isObserving;
@@ -2391,21 +2392,22 @@
     self.neopixelLengthLabel.text = [NSString stringWithFormat:@"%d", (int)round(self.neopixelLengthStepper.value)];
 }
 
-- (void)neopixelInitStrand
+- (BFTask *)neopixelInitStrand
 {
-    if (self.neopixelStrand) {
-        return;
+    if (!self.neopixelStrand) {
+        self.neopixelStrand = [self.device.neopixel strandWithColor:self.neopixelColor.selectedSegmentIndex
+                                                              speed:self.neopixelSpeed.selectedSegmentIndex
+                                                                pin:self.neopixelPin.selectedSegmentIndex
+                                                             length:(uint8_t)round(self.neopixelLengthStepper.value)];
+        
+        self.neopixelStrandInitTask = [self.neopixelStrand initializeAsync];
+        
+        self.neopixelColor.enabled = NO;
+        self.neopixelSpeed.enabled = NO;
+        self.neopixelPin.enabled = NO;
+        self.neopixelLengthStepper.enabled = NO;
     }
-    self.neopixelStrand = [self.device.neopixel strandWithColor:self.neopixelColor.selectedSegmentIndex
-                                                          speed:self.neopixelSpeed.selectedSegmentIndex
-                                                            pin:self.neopixelPin.selectedSegmentIndex
-                                                         length:(uint8_t)round(self.neopixelLengthStepper.value)];
-    [self.neopixelStrand initializeAsync];
-    
-    self.neopixelColor.enabled = NO;
-    self.neopixelSpeed.enabled = NO;
-    self.neopixelPin.enabled = NO;
-    self.neopixelLengthStepper.enabled = NO;
+    return self.neopixelStrandInitTask;
 }
 
 - (void)neopixelSetColor:(UIColor *)color
@@ -2418,43 +2420,51 @@
 
 - (IBAction)neopixelSetRedPressed:(id)sender
 {
-    [self neopixelInitStrand];
-    [self neopixelSetColor:[UIColor redColor]];
+    [[self neopixelInitStrand] success:^(id  _Nonnull result) {
+        [self neopixelSetColor:[UIColor redColor]];
+    }];
 }
 
 - (IBAction)neopixelSetGreenPressed:(id)sender
 {
-    [self neopixelInitStrand];
-    [self neopixelSetColor:[UIColor greenColor]];
+    [[self neopixelInitStrand] success:^(id  _Nonnull result) {
+        [self neopixelSetColor:[UIColor greenColor]];
+    }];
 }
 
 - (IBAction)neopixelSetBluePressed:(id)sender
 {
-    [self neopixelInitStrand];
-    [self neopixelSetColor:[UIColor blueColor]];
+    [[self neopixelInitStrand] success:^(id  _Nonnull result) {
+        [self neopixelSetColor:[UIColor blueColor]];
+    }];
 }
 
 - (IBAction)neopixelSetRainbowPressed:(id)sender
 {
-    [self neopixelInitStrand];
-    [self.neopixelStrand setRainbowWithHoldAsync:NO];
+    [[self neopixelInitStrand] success:^(id  _Nonnull result) {
+        [self.neopixelStrand setRainbowWithHoldAsync:NO];
+    }];
 }
 
 - (IBAction)neopixelRotateLeftPressed:(id)sender
 {
-    [self neopixelInitStrand];
-    [self.neopixelStrand rotateStrandWithDirectionAsync:MBLRotationDirectionTowardsBoard repetitions:0xFF period:100];
+    [[self neopixelInitStrand] success:^(id  _Nonnull result) {
+        [self.neopixelStrand rotateStrandWithDirectionAsync:MBLRotationDirectionTowardsBoard repetitions:0xFF period:100];
+    }];
 }
 
 - (IBAction)neopixelRotateRightPressed:(id)sender
 {
-    [self neopixelInitStrand];
-    [self.neopixelStrand rotateStrandWithDirectionAsync:MBLRotationDirectionAwayFromBoard repetitions:0xFF period:100];
+    [[self neopixelInitStrand] success:^(id  _Nonnull result) {
+        [self.neopixelStrand rotateStrandWithDirectionAsync:MBLRotationDirectionAwayFromBoard repetitions:0xFF period:100];
+    }];
 }
 
 - (IBAction)neopixelTurnOffPressed:(id)sender
 {
-    [self.neopixelStrand clearAllPixelsAsync];
+    [[self neopixelInitStrand] success:^(id  _Nonnull result) {
+        [self.neopixelStrand clearAllPixelsAsync];
+    }];
     
     self.neopixelSetRed.enabled = NO;
     self.neopixelSetGreen.enabled = NO;
