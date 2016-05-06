@@ -679,14 +679,22 @@
 - (IBAction)readBatteryPressed:(id)sender
 {
     [self.device readBatteryLifeWithHandler:^(NSNumber *number, NSError *error) {
-        self.batteryLevelLabel.text = [number stringValue];
+        if (error) {
+            [self showAlertTitle:@"Error" message:error.localizedDescription];
+        } else {
+            self.batteryLevelLabel.text = [number stringValue];
+        }
     }];
 }
 
 - (IBAction)readRSSIPressed:(id)sender
 {
     [self.device readRSSIWithHandler:^(NSNumber *number, NSError *error) {
-        self.rssiLevelLabel.text = [number stringValue];
+        if (error) {
+            [self showAlertTitle:@"Error" message:error.localizedDescription];
+        } else {
+            self.rssiLevelLabel.text = [number stringValue];
+        }
     }];
 }
 
@@ -699,7 +707,11 @@
 - (IBAction)checkForFirmwareUpdatesPressed:(id)sender
 {
     [self.device checkForFirmwareUpdateWithHandler:^(BOOL isTrue, NSError *error) {
-        self.firmwareUpdateLabel.text = isTrue ? @"AVAILABLE!" : @"Up To Date";
+        if (error) {
+            [self showAlertTitle:@"Error" message:error.localizedDescription];
+        } else {
+            self.firmwareUpdateLabel.text = isTrue ? @"AVAILABLE!" : @"Up To Date";
+        }
     }];
 }
 

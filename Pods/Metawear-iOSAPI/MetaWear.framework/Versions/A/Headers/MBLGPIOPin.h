@@ -81,21 +81,10 @@ typedef NS_ENUM(uint8_t, MBLPinChangeType) {
  */
 @property (nonatomic) MBLPinConfiguration configuration;
 
-/**
- To save power, sensors connected to a GPIO pin may optionally have an
- "enable" switch connected to another pin.  Pulling up or down this
- enable pin can programmatically turn off the sensor to save power.
- By setting this value we will automatically enable the sensor just 
- long enought to get a sample.
- */
-@property (nonatomic, nullable) NSNumber *enablePin;
-/**
- Used when enablePin is set, YES means when enablePin is low the sensor
- will be on, NO means when enablePin is high the sensor will be on.
- */
-@property (nonatomic) BOOL enablePinActiveLow;
 
-
+///----------------------------------
+/// @name Reading Values
+///----------------------------------
 /**
  Event representing a change in the pin's digital value, you can choose
  what state transitions trigger this event using the changeType property.
@@ -126,12 +115,62 @@ typedef NS_ENUM(uint8_t, MBLPinChangeType) {
  */
 @property (nonatomic, readonly) MBLData<MBLNumericData *> *analogRatio;
 
+///----------------------------------
+/// @name Automatic Analog Sensor Enabling
+///----------------------------------
 
+// To save power, sensors connected to a GPIO pin may optionally have an
+// "enable" switch connected to another pin.  Pulling up or down these
+// enable pins can programmatically turn off the sensor to save power.
+// Use the follow functions to create a special MBLData object that will
+// automatically set the pullUp/pullDown pins, wait a certain amount of time,
+// perform the read, then set the pullUp/pullDown pins back to MBLPinConfigurationNopull.
+
+/**
+ Create a new analogRatio data object that automatically sets and clears
+ pull up/down pins.
+ @param pullUp Pin to set high just before analog read is started, nil if none
+ @param pullDown  Pin to set low just before analog read is started, nil if none
+ @param readDelay Time, in uSec, to delay the analog read after the pullUpPin and
+    pullDownPin have been set.  Note there is some delay by default
+    due to firmware code execution time, so this is in addtion to that.
+ @returns New analogRatio data
+ */
+- (MBLData<MBLNumericData *> *)analogRatioWithPullUp:(nullable NSNumber *)pullUp
+                                            pullDown:(nullable NSNumber *)pullDown
+                                           readDelay:(uint16_t)readDelay;
+
+/**
+ Create a new analogAbsolute data object that automatically sets and clears
+ pull up/down pins.
+ @param pullUp Pin to set high just before analog read is started, nil if none
+ @param pullDown  Pin to set low just before analog read is started, nil if none
+ @param readDelay Time, in uSec, to delay the analog read after the pullUpPin and
+ pullDownPin have been set.  Note there is some delay by default
+ due to firmware code execution time, so this is in addtion to that.
+ @returns New analogAbsolute data
+ */
+- (MBLData<MBLNumericData *> *)analogAbsoluteWithPullUp:(nullable NSNumber *)pullUp
+                                               pullDown:(nullable NSNumber *)pullDown
+                                              readDelay:(uint16_t)readDelay;
+
+///----------------------------------
+/// @name Setting Values
+///----------------------------------
 /**
  Set a digital output GPIO Pin to a 1 or 0.
  @param on YES sets pin to 1 (high), NO clears pin to 0 (low)
  */
 - (BFTask *)setToDigitalValueAsync:(BOOL)on;
+
+
+///----------------------------------
+/// @name Deprecated
+///----------------------------------
+// @deprecated
+@property (nonatomic, nullable) NSNumber *enablePin DEPRECATED_MSG_ATTRIBUTE("Use analogRatioWithPullUp:pullDown:readDelay or analogAbsoluteWithPullUp:pullDown:readDelay instead");
+// @deprecated
+@property (nonatomic) BOOL enablePinActiveLow DEPRECATED_MSG_ATTRIBUTE("Use analogRatioWithPullUp:pullDown:readDelay or analogAbsoluteWithPullUp:pullDown:readDelay instead");
 
 @end
 
