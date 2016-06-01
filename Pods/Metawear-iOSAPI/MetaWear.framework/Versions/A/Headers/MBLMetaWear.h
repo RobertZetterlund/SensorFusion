@@ -336,24 +336,20 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
 - (void)checkForFirmwareUpdateWithHandler:(MBLBoolHandler)handler;
 
 /**
- Updates the device to the latest firmware, or re-installs the latest firmware.
+ Download the latest firmware and put the device in bootloader mode.  Note that
+ you will need to use Nordic's DFU library to actaully perform the update:
+ https://github.com/NordicSemiconductor/IOS-Pods-DFU-Library
+ For example, you can see our sample app for how to integrate DFU into your own app:
+ https://github.com/mbientlab/Metawear-SampleiOSApp
  
- Please make sure the device is charged at 50% or above to prevent errors.
- Executes the progressHandler periodically with the firmware image uploading
- progress (0.0 - 1.0), once it's called with 1.0, you can still expect another 5
- seconds while we wait for the device to install the firmware and reboot.  After
- the reboot, handler will be called and passed an NSError object if the update
- failed or nil if the update was successful.
- 
+ Please make sure the device is plugged in or charged above 50% to prevent errors.
+
  This is one API you can call WITHOUT being connected, there are some cases where
  you can't connect because the firmware is too old, but you still need to be able
  to update it!
- @param handler Callback once update is complete
- @param progressHandler Periodically called while firmware upload is in progress
+ @param handler Callback once the device is ready for update
  */
-- (void)updateFirmwareWithHandler:(MBLErrorHandler)handler
-                  progressHandler:(nullable MBLFloatHandler)progressHandler;
-
+- (void)prepareForFirmwareUpdateWithHandler:(MBLFirmwareUpdateHandler)handler;
 
 ///----------------------------------
 /// @name Debug and Testing Utilities
@@ -364,6 +360,17 @@ typedef NS_ENUM(NSInteger, MBLConnectionState) {
  error handling flows.
  */
 - (void)simulateDisconnect;
+
+
+///----------------------------------
+/// @name Deprecated
+///----------------------------------
+
+/*
+ @deprecated
+ */
+- (void)updateFirmwareWithHandler:(MBLErrorHandler)handler
+                  progressHandler:(nullable MBLFloatHandler)progressHandler DEPRECATED_MSG_ATTRIBUTE("Use prepareForFirmwareUpdateWithHandler: instead");
 
 @end
 

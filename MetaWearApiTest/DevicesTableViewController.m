@@ -37,10 +37,13 @@
 #import "DeviceDetailViewController.h"
 #import "MBProgressHUD.h"
 #import <MetaWear/MetaWear.h>
+#import <iOSDFULibrary/iOSDFULibrary-Swift.h>
 
-@interface DevicesTableViewController ()
+@interface DevicesTableViewController () <DFUPeripheralSelector, LoggerDelegate, DFUServiceDelegate, DFUProgressDelegate>
 @property (nonatomic) NSArray *devices;
 @property (nonatomic) UIActivityIndicatorView *activity;
+@property (nonatomic) MBProgressHUD *hud;
+@property (nonatomic) MBLMetaWear *selected;
 
 @property (weak, nonatomic) IBOutlet UISwitch *scanningSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *metaBootSwitch;
@@ -175,17 +178,16 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    MBLMetaWear *selected = self.devices[indexPath.row];
+    self.selected = self.devices[indexPath.row];
     if (self.metaBootSwitch.on) {
         [self.scanningSwitch setOn:NO animated:YES];
         [self.metaBootSwitch setOn:NO animated:YES];
         [self metaBootSwitchPressed:self.metaBootSwitch];
         // Pause the screen while update is going on
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-        hud.labelText = @"Updating...";
-        [selected updateFirmwareWithHandler:^(NSError *error) {
-            hud.mode = MBProgressHUDModeText;
+        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+        self.hud.labelText = @"Updating...";
+        [self.selected prepareForFirmwareUpdateWithHandler:^(NSURL *firmwareUrl, CBPeripheral *target, CBCentralManager *centralManager, NSError *error) {
             if (error) {
                 NSLog(@"Firmware update error: %@", error.localizedDescription);
                 [[[UIAlertView alloc] initWithTitle:@"Update Error"
@@ -193,20 +195,28 @@
                                            delegate:nil
                                   cancelButtonTitle:@"Okay"
                                   otherButtonTitles:nil] show];
-                [hud hide:YES];
+                [self.hud hide:YES];
+                return;
+            }
+            DFUFirmware *selectedFirmware;
+            if ([firmwareUrl.pathExtension caseInsensitiveCompare:@"zip"] == NSOrderedSame) {
+                selectedFirmware = [[DFUFirmware alloc] initWithUrlToZipFile:firmwareUrl];
             } else {
-                hud.labelText = @"Success!";
-                [hud hide:YES afterDelay:2.0];
+                selectedFirmware = [[DFUFirmware alloc] initWithUrlToBinOrHexFile:firmwareUrl urlToDatFile:nil type:DFUFirmwareTypeApplication];
             }
-        } progressHandler:^(float number) {
-            hud.progress = number;
-            if (number == 1.0) {
-                hud.mode = MBProgressHUDModeIndeterminate;
-                hud.labelText = @"Resetting...";
-            }
+            
+            DFUServiceInitiator *initiator = [[DFUServiceInitiator alloc] initWithCentralManager:centralManager target:target];
+            [initiator withFirmwareFile:selectedFirmware];
+            initiator.forceDfu = YES; // We also have the DIS which confuses the DFU library
+            initiator.logger = self; // - to get log info
+            initiator.delegate = self; // - to be informed about current state and errors
+            initiator.progressDelegate = self; // - to show progress bar
+            initiator.peripheralSelector = self;
+            
+            [initiator start];
         }];
     } else {
-        [self performSegueWithIdentifier:@"DeviceDetails" sender:selected];
+        [self performSegueWithIdentifier:@"DeviceDetails" sender:nil];
     }
 }
 
@@ -221,7 +231,57 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     DeviceDetailViewController *destination = segue.destinationViewController;
-    destination.device = sender;
+    destination.device = self.selected;
+}
+
+#pragma mark - DFU Service delegate methods
+
+- (void)didStateChangedTo:(enum State)state
+{
+    if (state == StateCompleted) {
+        self.hud.mode = MBProgressHUDModeText;
+        self.hud.labelText = @"Success!";
+        [self.hud hide:YES afterDelay:2.0];
+    }
+}
+
+- (void)didErrorOccur:(enum DFUError)error withMessage:(NSString *)message
+{
+    NSLog(@"Firmware update error %ld: %@", (long) error, message);
+    [[[UIAlertView alloc] initWithTitle:@"Update Error"
+                                message:[@"Please re-connect and try again, if you can't connect, try MetaBoot Mode to recover.\nError: " stringByAppendingString:message]
+                               delegate:nil
+                      cancelButtonTitle:@"Okay"
+                      otherButtonTitles:nil] show];
+    [self.hud hide:YES];
+}
+
+- (void)onUploadProgress:(NSInteger)part
+             totalParts:(NSInteger)totalParts
+               progress:(NSInteger)percentage
+currentSpeedBytesPerSecond:(double)speed
+ avgSpeedBytesPerSecond:(double)avgSpeed
+{
+    self.hud.progress = (double)percentage / 100.0;
+}
+
+- (void)logWith:(enum LogLevel)level message:(NSString *)message
+{
+    if (level >= LogLevelApplication) {
+        NSLog(@"%d: %@", (int)level, message);
+    }
+}
+
+#pragma mark - DFUPeripheralSelector
+
+- (BOOL)select:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *, id> *)advertisementData RSSI:(NSNumber *)RSSI
+{
+    return [peripheral.identifier isEqual:self.selected.identifier];
+}
+
+- (NSArray<CBUUID *> *)filterBy
+{
+    return nil;
 }
 
 @end

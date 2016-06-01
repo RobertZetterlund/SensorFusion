@@ -58,6 +58,7 @@ typedef void (^MBLFloatHandler)(float number);
 typedef void (^MBLStringHandler)(NSString *__nullable string);
 typedef void (^MBLFirmwareBuildHandler)(MBLFirmwareBuild *__nullable firmware, NSError *__nullable error);
 typedef void (^MBLUrlHandler)(NSURL *__nullable url, NSError *__nullable error);
+typedef void (^MBLFirmwareUpdateHandler)(NSURL *__nullable firmwareUrl, CBPeripheral *__nullable target, CBCentralManager *__nullable centralManager, NSError *__nullable error);
 
 #pragma mark - Errors
 
