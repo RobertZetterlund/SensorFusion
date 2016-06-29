@@ -410,7 +410,13 @@
     [self.connectionSwitch setOn:YES animated:YES];
     // Perform all device specific setup
  
-    NSLog(@"ID: %@", self.device.identifier.UUIDString);
+    if (self.device.settings.macAddress) {
+        [[self.device.settings.macAddress readAsync] success:^(MBLStringData * _Nonnull result) {
+            NSLog(@"ID: %@ MAC: %@", self.device.identifier.UUIDString, result.value);
+        }];
+    } else {
+        NSLog(@"ID: %@", self.device.identifier.UUIDString);
+    }
     
     // We always have the info and state features
     [self cells:self.infoAndStateCells setHidden:NO];

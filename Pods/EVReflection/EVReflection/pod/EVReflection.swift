@@ -65,7 +65,7 @@ final public class EVReflection {
                     let mapping = keyMapping[k as? String ?? ""]
                     let useKey: String = (mapping ?? k ?? "") as? String ?? ""
                     let original: NSObject? = getValue(anyObject, key: useKey)
-                    let (dictValue, valid) = dictionaryAndArrayConversion(anyObject, key: k as? String ?? "", fieldType: types[useKey] as? String, original: original, theDictValue: v, conversionOptions: conversionOptions)
+                    let (dictValue, valid) = dictionaryAndArrayConversion(anyObject, key: k as? String ?? "", fieldType: types[k as? String ?? ""] as? String ?? types[useKey] as? String, original: original, theDictValue: v, conversionOptions: conversionOptions)
                     if dictValue != nil {
                         if let key: String = keyMapping[k as? String ?? ""] as? String {
                             setObjectValue(anyObject, key: key, theValue: (valid ? dictValue: v), typeInObject: types[key] as? String, valid: valid, conversionOptions: conversionOptions)
@@ -597,6 +597,12 @@ final public class EVReflection {
                 print("WARNING: An object with a property of type Array with optional objects should implement the EVArrayConvertable protocol. type = \(valueType) for key \(key)")
                 return (NSNull(), "NSNull", false)
             }
+        } else if mi.displayStyle == .Dictionary {
+            valueType = "\(mi.subjectType)"
+            if let dictionaryConverter = parentObject as? EVDictionaryConvertable {
+                let convertedValue = dictionaryConverter.convertDictionary(key!, dict: theValue)
+                return (convertedValue, valueType, false)
+            }
         } else if mi.displayStyle == .Struct {
             valueType = "\(mi.subjectType)"
             if valueType.containsString("_NativeDictionaryStorage") {
@@ -662,7 +668,8 @@ final public class EVReflection {
             if valueType.containsString("<") {
                 return (theValue as! NSObject, swiftStringFromClass(theValue as! NSObject), true)
             }
-            return (theValue as! NSObject, valueType, true)
+            // isObject is false to prevent parsing of objects like CKRecord, CKRecordId and other objects.
+            return (theValue as! NSObject, valueType, false)
         }
         (parentObject as? EVObject)?.addStatusMessage(.InvalidType, message: "valueForAny unkown type \(valueType) for value: \(theValue).")
         print("ERROR: valueForAny unkown type \(valueType) for value: \(theValue).")
@@ -735,7 +742,7 @@ final public class EVReflection {
             
             // Call your own object validators that comply to the format: validate<Key>:Error:
             do {
-               var setValue: AnyObject? = value
+                var setValue: AnyObject? = value
                 try anyObject.validateValue(&setValue, forKey: key)
                 anyObject.setValue(setValue, forKey: key)
             } catch _ {
@@ -961,7 +968,7 @@ final public class EVReflection {
      */
     private class func dictToObject<T where T:NSObject>(type: String, original: T?, dict: NSDictionary, conversionOptions: ConversionOptions = .DefaultDeserialize) -> (T?, Bool) {
         if var returnObject = original {
-            if returnObject is EVObject {
+            if type != "NSNumber" && type != "NSString" && type != "NSDate" && !type.containsString("Dictionary<") {
                 returnObject = setPropertiesfromDictionary(dict, anyObject: returnObject, conversionOptions: conversionOptions)
             } else {
                 (original as? EVObject)?.addStatusMessage(.InvalidClass, message: "Cannot set values on type \(type) from dictionary \(dict)")
