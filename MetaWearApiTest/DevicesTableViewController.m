@@ -186,7 +186,7 @@
         // Pause the screen while update is going on
         self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-        self.hud.labelText = @"Updating...";
+        self.hud.label.text = @"Updating...";
         [self.selected prepareForFirmwareUpdateWithHandler:^(NSURL *firmwareUrl, CBPeripheral *target, CBCentralManager *centralManager, NSError *error) {
             if (error) {
                 NSLog(@"Firmware update error: %@", error.localizedDescription);
@@ -195,7 +195,7 @@
                                            delegate:nil
                                   cancelButtonTitle:@"Okay"
                                   otherButtonTitles:nil] show];
-                [self.hud hide:YES];
+                [self.hud hideAnimated:YES];
                 return;
             }
             DFUFirmware *selectedFirmware;
@@ -240,8 +240,8 @@
 {
     if (state == StateCompleted) {
         self.hud.mode = MBProgressHUDModeText;
-        self.hud.labelText = @"Success!";
-        [self.hud hide:YES afterDelay:2.0];
+        self.hud.label.text = @"Success!";
+        [self.hud hideAnimated:YES afterDelay:2.0];
     }
 }
 
@@ -253,7 +253,7 @@
                                delegate:nil
                       cancelButtonTitle:@"Okay"
                       otherButtonTitles:nil] show];
-    [self.hud hide:YES];
+    [self.hud hideAnimated:YES];
 }
 
 - (void)onUploadProgress:(NSInteger)part

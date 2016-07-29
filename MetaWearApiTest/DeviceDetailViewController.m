@@ -576,7 +576,7 @@
         [self cell:self.hygrometerBME280Cell setHidden:NO];
     }
     
-    if (self.device.i2c) {
+    if (self.device.serial) {
         [self cell:self.i2cCell setHidden:NO];
     }
     
@@ -605,10 +605,10 @@
 {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     if (on) {
-        hud.labelText = @"Connecting...";
+        hud.label.text = @"Connecting...";
         [self.device connectWithTimeout:15 handler:^(NSError *error) {
             if ([error.domain isEqualToString:kMBLErrorDomain] && error.code == kMBLErrorOutdatedFirmware) {
-                [hud hide:YES];
+                [hud hideAnimated:YES];
                 self.firmwareUpdateLabel.text = @"Force Update";
                 [self updateFirmware:nil];
                 return;
@@ -617,25 +617,25 @@
             hud.mode = MBProgressHUDModeText;
             if (error) {
                 [self showAlertTitle:@"Error" message:error.localizedDescription];
-                [hud hide:NO];
+                [hud hideAnimated:NO];
             } else {
                 [self deviceConnected];
                 
-                hud.labelText = @"Connected!";
-                [hud hide:YES afterDelay:0.5];
+                hud.label.text = @"Connected!";
+                [hud hideAnimated:YES afterDelay:0.5];
             }
         }];
     } else {
-        hud.labelText = @"Disconnecting...";
+        hud.label.text = @"Disconnecting...";
         [self.device disconnectWithHandler:^(NSError *error) {
             [self deviceDisconnected];
             hud.mode = MBProgressHUDModeText;
             if (error) {
                 [self showAlertTitle:@"Error" message:error.localizedDescription];
-                [hud hide:NO];
+                [hud hideAnimated:NO];
             } else {
-                hud.labelText = @"Disconnected!";
-                [hud hide:YES afterDelay:0.5];
+                hud.label.text = @"Disconnected!";
+                [hud hideAnimated:YES afterDelay:0.5];
             }
         }];
     }
@@ -728,7 +728,7 @@
     // Pause the screen while update is going on
     self.hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-    self.hud.labelText = @"Updating...";
+    self.hud.label.text = @"Updating...";
     
     [self.device prepareForFirmwareUpdateWithHandler:^(NSURL *firmwareUrl, CBPeripheral *target, CBCentralManager *centralManager, NSError *error) {
         if (error) {
@@ -738,7 +738,7 @@
                                        delegate:nil
                               cancelButtonTitle:@"Okay"
                               otherButtonTitles:nil] show];
-            [self.hud hide:YES];
+            [self.hud hideAnimated:YES];
             return;
         }
         DFUFirmware *selectedFirmware;
@@ -959,7 +959,7 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-    hud.labelText = @"Downloading...";
+    hud.label.text = @"Downloading...";
     
     [[[self.device.accelerometer.dataReadyEvent downloadLogAndStopLoggingAsync:YES progressHandler:^(float number) {
         hud.progress = number;
@@ -969,16 +969,16 @@
             [self.accelerometerGraph addX:acceleration.x y:acceleration.y z:acceleration.z];
         }
         hud.mode = MBProgressHUDModeIndeterminate;
-        hud.labelText = @"Clearing Log...";
+        hud.label.text = @"Clearing Log...";
         [self logCleanup:^(NSError *error) {
-            [hud hide:YES];
+            [hud hideAnimated:YES];
             if (error) {
                 [self connectDevice:NO];
             }
         }];
     }] failure:^(NSError * _Nonnull error) {
         [self connectDevice:NO];
-        [hud hide:YES];
+        [hud hideAnimated:YES];
     }];
 }
 
@@ -1191,7 +1191,7 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-    hud.labelText = @"Downloading...";
+    hud.label.text = @"Downloading...";
     
     [[[self.device.accelerometer.dataReadyEvent downloadLogAndStopLoggingAsync:YES progressHandler:^(float number) {
         hud.progress = number;
@@ -1201,16 +1201,16 @@
             [self.accelerometerBMI160Graph addX:obj.x y:obj.y z:obj.z];
         }
         hud.mode = MBProgressHUDModeIndeterminate;
-        hud.labelText = @"Clearing Log...";
+        hud.label.text = @"Clearing Log...";
         [self logCleanup:^(NSError *error) {
-            [hud hide:YES];
+            [hud hideAnimated:YES];
             if (error) {
                 [self connectDevice:NO];
             }
         }];
     }] failure:^(NSError * _Nonnull error) {
         [self connectDevice:NO];
-        [hud hide:YES];
+        [hud hideAnimated:YES];
     }];
 }
 
@@ -1432,7 +1432,7 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-    hud.labelText = @"Downloading...";
+    hud.label.text = @"Downloading...";
     
     [[[self.device.accelerometer.dataReadyEvent downloadLogAndStopLoggingAsync:YES progressHandler:^(float number) {
         hud.progress = number;
@@ -1442,16 +1442,16 @@
             [self.accelerometerBMA255Graph addX:obj.x y:obj.y z:obj.z];
         }
         hud.mode = MBProgressHUDModeIndeterminate;
-        hud.labelText = @"Clearing Log...";
+        hud.label.text = @"Clearing Log...";
         [self logCleanup:^(NSError *error) {
-            [hud hide:YES];
+            [hud hideAnimated:YES];
             if (error) {
                 [self connectDevice:NO];
             }
         }];
     }] failure:^(NSError * _Nonnull error) {
         [self connectDevice:NO];
-        [hud hide:YES];
+        [hud hideAnimated:YES];
     }];
 }
 
@@ -1649,7 +1649,7 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-    hud.labelText = @"Downloading...";
+    hud.label.text = @"Downloading...";
     
     [[[self.device.gyro.dataReadyEvent downloadLogAndStopLoggingAsync:YES progressHandler:^(float number) {
         hud.progress = number;
@@ -1659,16 +1659,16 @@
             [self.gyroBMI160Graph addX:obj.x * .008 y:obj.y * .008 z:obj.z * .008];
         }
         hud.mode = MBProgressHUDModeIndeterminate;
-        hud.labelText = @"Clearing Log...";
+        hud.label.text = @"Clearing Log...";
         [self logCleanup:^(NSError *error) {
-            [hud hide:YES];
+            [hud hideAnimated:YES];
             if (error) {
                 [self connectDevice:NO];
             }
         }];
     }] failure:^(NSError * _Nonnull error) {
         [self connectDevice:NO];
-        [hud hide:YES];
+        [hud hideAnimated:YES];
     }];
 }
 
@@ -1743,7 +1743,7 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-    hud.labelText = @"Downloading...";
+    hud.label.text = @"Downloading...";
     
     MBLMagnetometerBMM150 *magnetometerBMM150 = (MBLMagnetometerBMM150 *)self.device.magnetometer;
     [[[magnetometerBMM150.periodicMagneticField downloadLogAndStopLoggingAsync:YES progressHandler:^(float number) {
@@ -1754,16 +1754,16 @@
             [self.magnetometerBMM150Graph addX:obj.x * 20000.0 y:obj.y * 20000.0 z:obj.z * 20000.0];
         }
         hud.mode = MBProgressHUDModeIndeterminate;
-        hud.labelText = @"Clearing Log...";
+        hud.label.text = @"Clearing Log...";
         [self logCleanup:^(NSError *error) {
-            [hud hide:YES];
+            [hud hideAnimated:YES];
             if (error) {
                 [self connectDevice:NO];
             }
         }];
     }] failure:^(NSError * _Nonnull error) {
         [self connectDevice:NO];
-        [hud hide:YES];
+        [hud hideAnimated:YES];
     }];
 }
 
@@ -2376,7 +2376,7 @@
             } else if (self.i2cSizeSelector.selectedSegmentIndex == 2) {
                 length = 4;
             }
-            MBLI2CData<MBLDataSample *> *reg = [self.device.i2c dataAtDeviceAddress:deviceAddress registerAddress:registerAddress length:length];
+            MBLI2CData<MBLDataSample *> *reg = [self.device.serial dataAtDeviceAddress:deviceAddress registerAddress:registerAddress length:length];
             [[reg readAsync] success:^(MBLDataSample * _Nonnull result) {
                 self.i2cReadByteLabel.text = result.data.description;
             }];
@@ -2405,7 +2405,7 @@
                 } else if (self.i2cSizeSelector.selectedSegmentIndex == 2) {
                     length = 4;
                 }
-                MBLI2CData<MBLDataSample *> *reg = [self.device.i2c dataAtDeviceAddress:deviceAddress registerAddress:registerAddress length:length];
+                MBLI2CData<MBLDataSample *> *reg = [self.device.serial dataAtDeviceAddress:deviceAddress registerAddress:registerAddress length:length];
                 [reg writeDataAsync:[NSData dataWithBytes:&writeData length:length]];
             }
             self.i2cWriteByteField.text = @"";
@@ -2530,8 +2530,8 @@
 {
     if (state == StateCompleted) {
         self.hud.mode = MBProgressHUDModeText;
-        self.hud.labelText = @"Success!";
-        [self.hud hide:YES afterDelay:2.0];
+        self.hud.label.text = @"Success!";
+        [self.hud hideAnimated:YES afterDelay:2.0];
     }
 }
 
@@ -2543,7 +2543,7 @@
                                delegate:nil
                       cancelButtonTitle:@"Okay"
                       otherButtonTitles:nil] show];
-    [self.hud hide:YES];
+    [self.hud hideAnimated:YES];
 }
 
 - (void)onUploadProgress:(NSInteger)part
