@@ -1,12 +1,10 @@
 PODS:
   - Bolts/Tasks (1.8.4)
-  - EVReflection (2.42.2)
   - FastCoding (3.2.1)
-  - iOSDFULibrary (0.1.9):
-    - EVReflection (~> 2.6)
+  - iOSDFULibrary (1.0.8):
     - Zip (~> 0.3)
   - MBProgressHUD (1.0.0)
-  - Metawear-iOSAPI (2.6.0):
+  - Metawear-iOSAPI (2.6.1):
     - Bolts/Tasks (~> 1.8.4)
     - FastCoding (~> 3.2.1)
   - StaticDataTableViewController (2.0.5)
@@ -20,11 +18,10 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  EVReflection: 82ca5595f84e51474017eb11ebecc4a67bb151cb
   FastCoding: ed46c83ba23d048aafa0251972a1e1fc1cfc58ed
-  iOSDFULibrary: 3f5081faeb578bd31ea90c1d70a76c0d686382f4
+  iOSDFULibrary: 2610baf49af454a1bdc6cc25088e3b815eb5b5a2
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  Metawear-iOSAPI: 99c09b236f6081956a817d6d67d5f93f0ff07f5b
+  Metawear-iOSAPI: e911bd9875b758e60a64be9fba44eda8846ac159
   StaticDataTableViewController: 7ea8d7bc8c7f0a4e9255a320224462c7346c1d4a
   Zip: 670419a5ba9faaf5f24ed3650c4c38b4136e996b
 
