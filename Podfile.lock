@@ -11,10 +11,23 @@ PODS:
   - Zip (0.4.3)
 
 DEPENDENCIES:
-  - iOSDFULibrary
+  - iOSDFULibrary (= 1.0.8)
   - MBProgressHUD
   - Metawear-iOSAPI
   - StaticDataTableViewController
+  - Zip (from `https://github.com/marmelroy/Zip.git`, branch `swift2.3`)
+
+EXTERNAL SOURCES:
+  Zip:
+    :branch: swift2.3
+    :git: https://github.com/marmelroy/Zip.git
+    :submodules: true
+
+CHECKOUT OPTIONS:
+  Zip:
+    :commit: 88ba969d0b12fea5ba4d213229c4d7d8c540ee23
+    :git: https://github.com/marmelroy/Zip.git
+    :submodules: true
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -25,6 +38,6 @@ SPEC CHECKSUMS:
   StaticDataTableViewController: 7ea8d7bc8c7f0a4e9255a320224462c7346c1d4a
   Zip: 670419a5ba9faaf5f24ed3650c4c38b4136e996b
 
-PODFILE CHECKSUM: bcc549732074fa42bbe7cc0acb1e6a9464c482cf
+PODFILE CHECKSUM: a2bff636c31218c20fa62e11515b239fd2cc1ea4
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.rc.2
