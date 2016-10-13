@@ -372,19 +372,17 @@
     // In order for the device to actaully erase the flash memory we can't be in a connection
     // so temporally disconnect to allow flash to erase.
     self.isObserving = NO;
-    [self.device disconnectWithHandler:^(NSError *error) {
+    [[[self.device disconnectAsync] continueOnDispatchWithBlock:^id _Nullable(BFTask<MBLMetaWear *> * _Nonnull t) {
         self.isObserving = YES;
-        if (error) {
-            if (handler) {
-                handler(error);
-            }
-        } else {
-            [self.device connectWithTimeout:15 handler:^(NSError *error) {
-                if (handler) {
-                    handler(error);
-                }
-            }];
+        if (t.error) {
+            return t;
         }
+        return [self.device connectWithTimeoutAsync:15];
+    }] continueOnDispatchWithBlock:^id _Nullable(BFTask<MBLMetaWear *> * _Nonnull t) {
+        if (handler) {
+            handler(t.error);
+        }
+        return nil;
     }];
 }
 
@@ -606,17 +604,17 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     if (on) {
         hud.label.text = @"Connecting...";
-        [self.device connectWithTimeout:15 handler:^(NSError *error) {
-            if ([error.domain isEqualToString:kMBLErrorDomain] && error.code == kMBLErrorOutdatedFirmware) {
+        [[self.device connectWithTimeoutAsync:15] continueOnDispatchWithBlock:^id _Nullable(BFTask<MBLMetaWear *> * _Nonnull t) {
+            if ([t.error.domain isEqualToString:kMBLErrorDomain] && t.error.code == kMBLErrorOutdatedFirmware) {
                 [hud hideAnimated:YES];
                 self.firmwareUpdateLabel.text = @"Force Update";
                 [self updateFirmware:nil];
-                return;
+                return nil;
             }
             
             hud.mode = MBProgressHUDModeText;
-            if (error) {
-                [self showAlertTitle:@"Error" message:error.localizedDescription];
+            if (t.error) {
+                [self showAlertTitle:@"Error" message:t.error.localizedDescription];
                 [hud hideAnimated:NO];
             } else {
                 [self deviceConnected];
@@ -624,19 +622,21 @@
                 hud.label.text = @"Connected!";
                 [hud hideAnimated:YES afterDelay:0.5];
             }
+            return nil;
         }];
     } else {
         hud.label.text = @"Disconnecting...";
-        [self.device disconnectWithHandler:^(NSError *error) {
+        [[self.device disconnectAsync] continueOnDispatchWithBlock:^id _Nullable(BFTask<MBLMetaWear *> * _Nonnull t) {
             [self deviceDisconnected];
             hud.mode = MBProgressHUDModeText;
-            if (error) {
-                [self showAlertTitle:@"Error" message:error.localizedDescription];
+            if (t.error) {
+                [self showAlertTitle:@"Error" message:t.error.localizedDescription];
                 [hud hideAnimated:NO];
             } else {
                 hud.label.text = @"Disconnected!";
                 [hud hideAnimated:YES afterDelay:0.5];
             }
+            return nil;
         }];
     }
 }
@@ -686,23 +686,19 @@
 
 - (IBAction)readBatteryPressed:(id)sender
 {
-    [self.device readBatteryLifeWithHandler:^(NSNumber *number, NSError *error) {
-        if (error) {
-            [self showAlertTitle:@"Error" message:error.localizedDescription];
-        } else {
-            self.batteryLevelLabel.text = [number stringValue];
-        }
+    [[[self.device readBatteryLifeAsync] success:^(NSNumber * _Nonnull result) {
+        self.batteryLevelLabel.text = result.stringValue;
+    }] failure:^(NSError * _Nonnull error) {
+        [self showAlertTitle:@"Error" message:error.localizedDescription];
     }];
 }
 
 - (IBAction)readRSSIPressed:(id)sender
 {
-    [self.device readRSSIWithHandler:^(NSNumber *number, NSError *error) {
-        if (error) {
-            [self showAlertTitle:@"Error" message:error.localizedDescription];
-        } else {
-            self.rssiLevelLabel.text = [number stringValue];
-        }
+    [[[self.device readRSSIAsync] success:^(NSNumber * _Nonnull result) {
+        self.rssiLevelLabel.text = result.stringValue;
+    }] failure:^(NSError * _Nonnull error) {
+        [self showAlertTitle:@"Error" message:error.localizedDescription];
     }];
 }
 
@@ -714,12 +710,10 @@
 
 - (IBAction)checkForFirmwareUpdatesPressed:(id)sender
 {
-    [self.device checkForFirmwareUpdateWithHandler:^(BOOL isTrue, NSError *error) {
-        if (error) {
-            [self showAlertTitle:@"Error" message:error.localizedDescription];
-        } else {
-            self.firmwareUpdateLabel.text = isTrue ? @"AVAILABLE!" : @"Up To Date";
-        }
+    [[[self.device checkForFirmwareUpdateAsync] success:^(NSNumber * _Nonnull result) {
+        self.firmwareUpdateLabel.text = result.boolValue ? @"AVAILABLE!" : @"Up To Date";
+    }] failure:^(NSError * _Nonnull error) {
+        [self showAlertTitle:@"Error" message:error.localizedDescription];
     }];
 }
 
@@ -730,25 +724,15 @@
     self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
     self.hud.label.text = @"Updating...";
     
-    [self.device prepareForFirmwareUpdateWithHandler:^(NSURL *firmwareUrl, CBPeripheral *target, CBCentralManager *centralManager, NSError *error) {
-        if (error) {
-            NSLog(@"Firmware update error: %@", error.localizedDescription);
-            [[[UIAlertView alloc] initWithTitle:@"Update Error"
-                                        message:[@"Please re-connect and try again, if you can't connect, try MetaBoot Mode to recover.\nError: " stringByAppendingString:error.localizedDescription]
-                                       delegate:nil
-                              cancelButtonTitle:@"Okay"
-                              otherButtonTitles:nil] show];
-            [self.hud hideAnimated:YES];
-            return;
-        }
+    [[[self.device prepareForFirmwareUpdateAsync] success:^(MBLFirmwareUpdateInfo * _Nonnull result) {
         DFUFirmware *selectedFirmware;
-        if ([firmwareUrl.pathExtension caseInsensitiveCompare:@"zip"] == NSOrderedSame) {
-            selectedFirmware = [[DFUFirmware alloc] initWithUrlToZipFile:firmwareUrl];
+        if ([result.firmwareUrl.pathExtension caseInsensitiveCompare:@"zip"] == NSOrderedSame) {
+            selectedFirmware = [[DFUFirmware alloc] initWithUrlToZipFile:result.firmwareUrl];
         } else {
-            selectedFirmware = [[DFUFirmware alloc] initWithUrlToBinOrHexFile:firmwareUrl urlToDatFile:nil type:DFUFirmwareTypeApplication];
+            selectedFirmware = [[DFUFirmware alloc] initWithUrlToBinOrHexFile:result.firmwareUrl urlToDatFile:nil type:DFUFirmwareTypeApplication];
         }
         
-        DFUServiceInitiator *initiator = [[DFUServiceInitiator alloc] initWithCentralManager:centralManager target:target];
+        DFUServiceInitiator *initiator = [[DFUServiceInitiator alloc] initWithCentralManager:result.centralManager target:result.target];
         [initiator withFirmwareFile:selectedFirmware];
         initiator.forceDfu = YES; // We also have the DIS which confuses the DFU library
         initiator.logger = self; // - to get log info
@@ -757,6 +741,14 @@
         initiator.peripheralSelector = self;
         
         [initiator start];
+    }] failure:^(NSError * _Nonnull error) {
+        NSLog(@"Firmware update error: %@", error.localizedDescription);
+        [[[UIAlertView alloc] initWithTitle:@"Update Error"
+                                    message:[@"Please re-connect and try again, if you can't connect, try MetaBoot Mode to recover.\nError: " stringByAppendingString:error.localizedDescription]
+                                   delegate:nil
+                          cancelButtonTitle:@"Okay"
+                          otherButtonTitles:nil] show];
+        [self.hud hideAnimated:YES];
     }];
 }
 
@@ -776,7 +768,7 @@
     // In case any pairing information is on the device mark it for removal too
     [self.device.settings deleteAllBondsAsync];
     // Setting a nil configuration removes state perisited in flash memory
-    [self.device setConfiguration:nil handler:nil];
+    [self.device setConfigurationAsync:nil];
 }
 
 

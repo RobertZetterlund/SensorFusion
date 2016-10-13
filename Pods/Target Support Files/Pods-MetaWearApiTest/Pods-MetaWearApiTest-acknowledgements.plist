@@ -79,7 +79,7 @@ freely, subject to the following restrictions:
 			<key>License</key>
 			<string>zlib</string>
 			<key>Title</key>
-			<string>FastCoding</string>
+			<string>FastCoding+tvOS</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
@@ -117,7 +117,7 @@ THE SOFTWARE.</string>
 			<key>License</key>
 			<string>Commercial</string>
 			<key>Title</key>
-			<string>Metawear-iOSAPI</string>
+			<string>MetaWear</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

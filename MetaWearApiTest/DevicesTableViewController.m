@@ -187,25 +187,15 @@
         self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
         self.hud.label.text = @"Updating...";
-        [self.selected prepareForFirmwareUpdateWithHandler:^(NSURL *firmwareUrl, CBPeripheral *target, CBCentralManager *centralManager, NSError *error) {
-            if (error) {
-                NSLog(@"Firmware update error: %@", error.localizedDescription);
-                [[[UIAlertView alloc] initWithTitle:@"Update Error"
-                                            message:[@"Please re-connect and try again, if you can't connect, try MetaBoot Mode to recover.\nError: " stringByAppendingString:error.localizedDescription]
-                                           delegate:nil
-                                  cancelButtonTitle:@"Okay"
-                                  otherButtonTitles:nil] show];
-                [self.hud hideAnimated:YES];
-                return;
-            }
+        [[[self.selected prepareForFirmwareUpdateAsync] success:^(MBLFirmwareUpdateInfo * _Nonnull result) {
             DFUFirmware *selectedFirmware;
-            if ([firmwareUrl.pathExtension caseInsensitiveCompare:@"zip"] == NSOrderedSame) {
-                selectedFirmware = [[DFUFirmware alloc] initWithUrlToZipFile:firmwareUrl];
+            if ([result.firmwareUrl.pathExtension caseInsensitiveCompare:@"zip"] == NSOrderedSame) {
+                selectedFirmware = [[DFUFirmware alloc] initWithUrlToZipFile:result.firmwareUrl];
             } else {
-                selectedFirmware = [[DFUFirmware alloc] initWithUrlToBinOrHexFile:firmwareUrl urlToDatFile:nil type:DFUFirmwareTypeApplication];
+                selectedFirmware = [[DFUFirmware alloc] initWithUrlToBinOrHexFile:result.firmwareUrl urlToDatFile:nil type:DFUFirmwareTypeApplication];
             }
             
-            DFUServiceInitiator *initiator = [[DFUServiceInitiator alloc] initWithCentralManager:centralManager target:target];
+            DFUServiceInitiator *initiator = [[DFUServiceInitiator alloc] initWithCentralManager:result.centralManager target:result.target];
             [initiator withFirmwareFile:selectedFirmware];
             initiator.forceDfu = YES; // We also have the DIS which confuses the DFU library
             initiator.logger = self; // - to get log info
@@ -214,6 +204,14 @@
             initiator.peripheralSelector = self;
             
             [initiator start];
+        }] failure:^(NSError * _Nonnull error) {
+            NSLog(@"Firmware update error: %@", error.localizedDescription);
+            [[[UIAlertView alloc] initWithTitle:@"Update Error"
+                                        message:[@"Please re-connect and try again, if you can't connect, try MetaBoot Mode to recover.\nError: " stringByAppendingString:error.localizedDescription]
+                                       delegate:nil
+                              cancelButtonTitle:@"Okay"
+                              otherButtonTitles:nil] show];
+            [self.hud hideAnimated:YES];
         }];
     } else {
         [self performSegueWithIdentifier:@"DeviceDetails" sender:nil];
