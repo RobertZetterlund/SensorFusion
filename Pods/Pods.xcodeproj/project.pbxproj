@@ -48,14 +48,12 @@
 		19D654E55089C94725027A3DB288C632 /* MBLFirmwareBuild.h in Headers */ = {isa = PBXBuildFile; fileRef = 475FD0FCD0176F69E803BE7A1087D2C7 /* MBLFirmwareBuild.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		19D892A82CC9C181EADBFEB320548F82 /* MBLBarometerBoschPeriodicAltitudeEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = AA6268DFCC24D9C2F5897883E215FF00 /* MBLBarometerBoschPeriodicAltitudeEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1A6DC925079AA4D2918AF783A49DD2C9 /* MBLEntityModule.h in Headers */ = {isa = PBXBuildFile; fileRef = D28C4106D16E4CC3CEB639C1D2C3B5A2 /* MBLEntityModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1AB37F29E1EE2AE5644DBA573D6E1258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DA0E9210B60C62D86361E1BDBE2D6 /* Foundation.framework */; };
 		1B36D6AC18FC87D6B61EFE83EB80E0EC /* MBLGPIOPinChangeEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 94F61C96DE50E6655A5213B4C910446D /* MBLGPIOPinChangeEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1BCE7F5EDB600300194A6641D21350D0 /* MBLDispatchQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F00FF0F9A5FA1C73E65B2AC4E8A1D9 /* MBLDispatchQueue.m */; };
 		1BCF372042265468C0B0E1DF139DB03D /* DFUServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B34BB850099D9C2C81E883E9E792656 /* DFUServiceDelegate.swift */; };
 		1CCBD70235CB84E2E5C3E7BED3DF72D3 /* MBLConductanceData.m in Sources */ = {isa = PBXBuildFile; fileRef = D6408DF7D564FB07069827FB08F1C3C5 /* MBLConductanceData.m */; };
 		1E5A28EB0561F3A1AD67EC6D5605B651 /* MBLTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F74F22B7374929E4D4D48FD0712B2A6 /* MBLTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F3154EA495156768983EA10CF333D15 /* MBLTemperature+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 362827C519C41A6B0294A5DB511DC6E6 /* MBLTemperature+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		1F7DAE53FF47D2CFB5881575A89A78C2 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67FB7772CD37694E63D7D24945DF76AD /* CoreBluetooth.framework */; };
 		1FE8CBB6E14F01F42A3DC3C7387A63BE /* MBLAccelerometerBoschPackedDataReadyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 35C6123EB039A31E9A5630CCDF8AA4C6 /* MBLAccelerometerBoschPackedDataReadyEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		217EA401F3FA475F92962E6D581E9533 /* MBLHapticBuzzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1796B425B0A22E38669703487899F311 /* MBLHapticBuzzer.m */; };
 		21890D61454A0D131A065B541967E9B4 /* MBLAccelerometer.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C28D506E23FD87C014660AA2406AA9 /* MBLAccelerometer.m */; };
@@ -69,11 +67,12 @@
 		23CE72B8E8D5864574E130979460C7FC /* MBLHygrometerBME280PeriodicHumidityEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 377D3C4D240D39DA94C800D85D9D2D4D /* MBLHygrometerBME280PeriodicHumidityEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		23F41A326C5B249E9CD7367AF300CE80 /* MBLBarometerBoschPeriodicAltitudeEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F5CC1DC229EA7B7E6E601F3F6EC791 /* MBLBarometerBoschPeriodicAltitudeEvent.m */; };
 		246FAC512045827C0647D65824AF9B72 /* MBLMechanicalSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 416E295A37178E7D22738A2ECA302AAD /* MBLMechanicalSwitch.m */; };
+		2514026C36CA3C24F935F1509280C617 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E7F0FE4A39EB5F6D659955119AF759 /* Foundation.framework */; };
 		25B1E7E4361556BA298CD30FA354EFE9 /* MBLGyroBMI160AxisReadyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = E03DBCE239D8EBB5149758967932DDB1 /* MBLGyroBMI160AxisReadyEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		2627880F487685FBED6FD5FFC2E6B379 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E7F0FE4A39EB5F6D659955119AF759 /* Foundation.framework */; };
 		27A491881B0D9CC696FD51BD4430290D /* MBLAccelerometerTapEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 557BDBF1AAC9F9D4FC182E15FB93731A /* MBLAccelerometerTapEvent.m */; };
 		2802CE407E70BF3430834C0AC48302B6 /* MBLI2C.m in Sources */ = {isa = PBXBuildFile; fileRef = 35AB4E701DF68B74D5C68262A686E91C /* MBLI2C.m */; };
 		281157C173C2FDAA3AEB1AE4D7AB217B /* MBLBarometerBME280.h in Headers */ = {isa = PBXBuildFile; fileRef = EB0BF2AB3071568E012E6305428BE37A /* MBLBarometerBME280.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		28765B10E7DCB9D8DF17F0F480743152 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D94B45CEC86372C0059F2AD6249FA40 /* CoreGraphics.framework */; };
 		2982B5280730B0FBDBFD9676E354BA1A /* MBLBluetoothPeripheral.h in Headers */ = {isa = PBXBuildFile; fileRef = 829E2D39B480866E3040102F7CF46F63 /* MBLBluetoothPeripheral.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		29920EBFC8C71F102F9C09BCB9E7FC9F /* MBLDependentData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2569B75DEB0D361DCB94D9716DC7AA66 /* MBLDependentData.m */; };
 		2A6F06D5BDBE56E402A4E35576691495 /* MBLANCSEventData.h in Headers */ = {isa = PBXBuildFile; fileRef = 8989E90992D09F5D1A6AFF9F1C3BF060 /* MBLANCSEventData.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -81,7 +80,6 @@
 		2ABCA1B16F44EB29C95DFBC2469F3047 /* fileenc.c in Sources */ = {isa = PBXBuildFile; fileRef = 015962A0DA525DB484B0524E46ECCA29 /* fileenc.c */; };
 		2B14BB780780E94124F574EE5AA77DD6 /* MBLDataSample+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 50BA4C983E7D610B7465FADF19A8A570 /* MBLDataSample+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		2B2BD7A153301FFF49E6412130D73533 /* MBLTriggeredRead.h in Headers */ = {isa = PBXBuildFile; fileRef = B3352D4C280FCA1A4B07A84899212809 /* MBLTriggeredRead.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		2C8BBC301561ED5A9BBE0CDF3B8D2597 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EC101406B7EC8860D9D0FE87EB9C63 /* CoreData.framework */; };
 		2C9A3C540B376B0164BF4118637DED6F /* MBLTestDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA05601EBA10E84E94538426D8B29EC /* MBLTestDebug.m */; };
 		2D2E95F1A9D5FA5571742430793C3D91 /* MBLData.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF10A596F3698AB495FDAC3DEBD6925 /* MBLData.m */; };
 		2D4A3028C653A4058BB78BB2001537A9 /* MBLLED+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 2998EEE6FEFDB5A6F4122AFE829BAB81 /* MBLLED+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -95,7 +93,6 @@
 		33BE7C23F390FA2A0087C9A5F663C71A /* MBLBluetoothCentral.h in Headers */ = {isa = PBXBuildFile; fileRef = C5C69116C7A5F426CC48BAAF98642888 /* MBLBluetoothCentral.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		34AD0C118B1ACEF9AD24EDA9196615F2 /* FastCoding_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1DC4489C0679DF89590D205D501C95 /* FastCoding_tvOS.framework */; };
 		34BA0B571DD958F595117F93D988B586 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC84711CF4F75BA31309F97AED607BB /* Double.swift */; };
-		352F05770794695E1218143605F37758 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DA0E9210B60C62D86361E1BDBE2D6 /* Foundation.framework */; };
 		368E72D78612D014039659D3EEA392C0 /* DFUPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52780D178B328DE1D2879A7C55B954B /* DFUPacket.swift */; };
 		37C3A5D9F80035CFB59B09B38F8DFBCD /* MBLEntityModule+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = CF46DB4D8B2CF2E256FC45CD555965F3 /* MBLEntityModule+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		39DA67C2A5E62408FA3285CB112AC94E /* MBLTimerEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE1828A3CFE1333CB00C0FFA2DC89 /* MBLTimerEvent.m */; };
@@ -113,7 +110,6 @@
 		40B267B8AE492609A2BFFF6C21B2D9F6 /* MBLRGBData.h in Headers */ = {isa = PBXBuildFile; fileRef = 00A8CE3B35178F186EF4D473AA3B836E /* MBLRGBData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40B3316A93C4B240BD1EFC8A74112471 /* MBLExternalThermistor0.h in Headers */ = {isa = PBXBuildFile; fileRef = DD431D4E2498399856862FDECBAA528D /* MBLExternalThermistor0.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		40C79EEE5E48129C69016ACA632DAA37 /* MBLMagnetometer+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CF0B153EFCD86E082034B3E1C02CF39 /* MBLMagnetometer+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		41637DA371D84C3DD6CE1A2BAD23DFE2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8121E00AB5DE17DFBC472D4C53AE16D /* QuartzCore.framework */; };
 		43B84E4974654F80088B8BD60900AE20 /* MBLMetaWear.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E79858961A02FB4E687296E0FB7B9F6 /* MBLMetaWear.m */; };
 		448F17A3016377BDBCA2F2A8BFBF85A0 /* MBLEntityModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 69CB671AC0A6090097E1FD9A298EEEBC /* MBLEntityModule.m */; };
 		45887DDD202D35612B820D55CAF60578 /* MBLGyro.m in Sources */ = {isa = PBXBuildFile; fileRef = E57CDF2F5A3DB0250008F8F5A377085F /* MBLGyro.m */; };
@@ -125,6 +121,7 @@
 		49C220FFA386B43657E989E170CB134F /* MBLGPIOData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9B92CDE5E111AD581E2136A3E14C30 /* MBLGPIOData.m */; };
 		4ADC540A19EB65D16DAD4FEEA804160A /* MBLEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 851184EA1223FB3490B86FBE7F79E87A /* MBLEvent.m */; };
 		4B7D764A492220621EDFA8226FA8D615 /* MBLBarometer.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A8CAE72ACE33F907D74AE2D17F90E3 /* MBLBarometer.m */; };
+		4B81574CB5997812686820F55BDDCC9F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EE46C82BDB36862E4FDBC99A1B7A4D4 /* CoreBluetooth.framework */; };
 		4BDE8D827699EF5E0B53A26E9661C28C /* Zip-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CD6F31C251009F89C645D5FF73F116 /* Zip-dummy.m */; };
 		4CB661379F77369F76095329A628F440 /* MBLMetaWearManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3C9526B714133C714AC653E7D51475 /* MBLMetaWearManager.m */; };
 		4CFE3BA1DF03671955E47AE8F7D5ED69 /* MBLGyroBMI160.h in Headers */ = {isa = PBXBuildFile; fileRef = E326C0AF528BAAF25E936EAB0FB4B6D6 /* MBLGyroBMI160.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -152,7 +149,7 @@
 		57734B7A72B9084DEE3AE4D6C37BAF8E /* MBLConstants+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = C8B2958C654827DF1BA41E02D732C9EE /* MBLConstants+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		5822409550B11CD650B73ED78633AE13 /* MBLNumericData.h in Headers */ = {isa = PBXBuildFile; fileRef = E2798C3A7BC83FB97A79CB762BA45F62 /* MBLNumericData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5A37B7C6DEF065A27208051B327FEF3B /* MetaWear-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 571CFC1FB7460364BA78AB1C10BC1EAE /* MetaWear-dummy.m */; };
-		5B32EA8AB19F49234A383200A5135921 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DA0E9210B60C62D86361E1BDBE2D6 /* Foundation.framework */; };
+		5B0EF0B5A966A3A6047C85FAF5FB0391 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E7F0FE4A39EB5F6D659955119AF759 /* Foundation.framework */; };
 		5B4F16DD12C4FE6582CBC37EE1B0A6A3 /* BFCancellationTokenSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B45764991086AC5DEB80244C5C92BEA /* BFCancellationTokenSource.m */; };
 		5C7C60B0D9D2D3C5C50DD431319CA7E8 /* MBLAccelerometerBMA255MotionEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 255B5815D7ACA1904587CD8C0A9B0302 /* MBLAccelerometerBMA255MotionEvent.m */; };
 		5CB3EDA858E9290820FF4E9F4E22A8C5 /* prng.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E3F78BB144D1753C7C1CB78BBE8B9ED /* prng.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -164,6 +161,7 @@
 		6234AF81B504748042BDAEE088BB5BCC /* BFCancellationTokenRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = 761DE031ED38AA2DF62929AB99450C34 /* BFCancellationTokenRegistration.m */; };
 		64FA9F443EFF33CC60FEB79F83C9345F /* MBLAccelerometerMMA8452QRMSFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = F74A7E16D233B6EE9D08953111C7A0B0 /* MBLAccelerometerMMA8452QRMSFormat.m */; };
 		655BCF51AAD63DFB0DCA3D981308B59A /* MBLNeopixel+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E4E6A5E263ECC2AF7391F191445747F5 /* MBLNeopixel+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		66B0040D4E477508B8D068492CA88BA9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E7F0FE4A39EB5F6D659955119AF759 /* Foundation.framework */; };
 		66FD42ABF7EBE238F977FED142E896D7 /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DB21F52CFD165CEEC18D27CE87FB7D1 /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		678F6745972B2ED866299D9EB36A6207 /* MBLHygrometerBME280.m in Sources */ = {isa = PBXBuildFile; fileRef = EE59BBEC21E52CA6A2A1C8F742E52EB6 /* MBLHygrometerBME280.m */; };
 		680BFDFB3F02FE8FF11B9927703EE644 /* MBLModule+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C57AF77167E77023ECA157A1FAA9B06 /* MBLModule+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -180,6 +178,7 @@
 		6D8FCD295C4E2C535AD074763707A343 /* BFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD017C499F5E31AA19294C2C0D23533 /* BFExecutor.m */; };
 		6EE9CA6D9B69C742C39317BF574C53C7 /* MBLMagnetometerData+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = FD94EDACB276DFF43E52A0BA20F69909 /* MBLMagnetometerData+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		6EEC620985F995D9FE818B4D1C1431E7 /* MBLNumericFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 407C70CD1FE7DB04CF00BB4E409404FA /* MBLNumericFormatter.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6F66A3EFF0317FB88337424991D00859 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E7F0FE4A39EB5F6D659955119AF759 /* Foundation.framework */; };
 		7041759083D808715DC7800BFF4CE16E /* Bolts-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A96FB91029AF9C9DBFE432016C95AAB /* Bolts-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		70647291DC6D402101FACB4B5484FD05 /* MBLAccelerometerBMA255MotionEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD145E9702F16CC4477CB13E888FBE0 /* MBLAccelerometerBMA255MotionEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		70E3D7E777692F8E876B88B5B8E8B015 /* aestab.c in Sources */ = {isa = PBXBuildFile; fileRef = 09274CAFBD7C5215F8F04F77BD3242B2 /* aestab.c */; };
@@ -200,6 +199,7 @@
 		7964919C710183A7E6A11A535DA3DC8A /* MBLAccelerometerBoschFlatFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3503AD724D6447ABA202BC86BD6C7D6F /* MBLAccelerometerBoschFlatFormat.m */; };
 		79A4B2750FB7D757E55F5325EFA1E9B0 /* MBLMetaWear.h in Headers */ = {isa = PBXBuildFile; fileRef = DD14A247E05F22692E6AFD5A8BA7CE46 /* MBLMetaWear.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		79D476D2BB131B5A11F47B962448554E /* brg_types.h in Headers */ = {isa = PBXBuildFile; fileRef = BF1F6E80B21A252F7ACF3997C44A214D /* brg_types.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7A42269597BB5A0276FF2E11C02F1E57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E7F0FE4A39EB5F6D659955119AF759 /* Foundation.framework */; };
 		7B170E59C8CA2C2FE1A5C8A32466F95F /* aes.h in Headers */ = {isa = PBXBuildFile; fileRef = D3B14A350F6E58E80F7993F9742851CD /* aes.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		7BC610B656E67562BBC8E3811DC6251D /* unzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AD65C530867A87F5F1B6D01731E14C5 /* unzip.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		7BD203AF078A116ACCD463BFA7982D75 /* MBLAmbientLight+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 12CF52A0EA5B1E6A19C2E21D2A9AC5E3 /* MBLAmbientLight+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -241,7 +241,6 @@
 		8DC8997747A135F282ED69EB18560F6A /* DFUExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAA8109691095A0F0869183C51F2777 /* DFUExecutor.swift */; };
 		8E15388680844C7C0C2DC044A8C6AB02 /* DFUControlPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59ECFADFE9A9B601386CD830001AE437 /* DFUControlPoint.swift */; };
 		8E26C79AAEADEEEF7834F92A1AE30358 /* MBLNumericFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = EC635A79F3150875E7EB2F41F7E18B70 /* MBLNumericFormatter.m */; };
-		8E94E3CC35B3AE4F5D4BC3A4063FD57F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DA0E9210B60C62D86361E1BDBE2D6 /* Foundation.framework */; };
 		904114F2DEC327F2A82580B339319D0B /* LoggerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C092A22845E1DB566853755368917A5 /* LoggerDelegate.swift */; };
 		90B9EC4BDB371CBFBA378AB971285229 /* MBLOnDieTemperature0.h in Headers */ = {isa = PBXBuildFile; fileRef = FE129437D178320B0E10F1C061FFE4C7 /* MBLOnDieTemperature0.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		9153E8E9C9C5835813CC72ABDBD1C024 /* MBLCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 702F79E4D824A0E880A2B3D6EBF16A22 /* MBLCommand.m */; };
@@ -278,12 +277,13 @@
 		A1318F0763BBE97AFB19E7563AE4F9A1 /* MBLFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5E90A8E4D66F128C67C3A137B7B26D /* MBLFilter.m */; };
 		A14CEE586FFE9C48CE8776BFDE89693C /* MBLTimer+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 65143BC3DE745E6C56FF66A1546166C3 /* MBLTimer+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		A1FD731CFCAE8415252C257F3660339E /* MBLAccelerometerBoschAxisReadyEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F2513DACFF2929A2E70F7CFAA51C1E /* MBLAccelerometerBoschAxisReadyEvent.m */; };
-		A22E4C817D9989539A1BF786A557ADF5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DA0E9210B60C62D86361E1BDBE2D6 /* Foundation.framework */; };
 		A29C73AEE4D78D507CFE940C7C813553 /* aes_via_ace.h in Headers */ = {isa = PBXBuildFile; fileRef = DC11776AD0FFBD055ACE154E46513DDA /* aes_via_ace.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A32277EA8000D99F92250A37A3E3ACD8 /* crypt.h in Headers */ = {isa = PBXBuildFile; fileRef = 87D70BA07ACEB64D2CF5C2F529697865 /* crypt.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A3B1E9CE059596BA20B5ECDC8753312A /* MBLLoggingV2.h in Headers */ = {isa = PBXBuildFile; fileRef = 66D3F2A1E429FC1A2D66579C5AAD2DFC /* MBLLoggingV2.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		A3E57334B4E731BD0F4AB9907FCDB32C /* BFTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 35F7561E90D1D690F9D272CF0E4D7DFE /* BFTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A444BD3899DE99C516E3884768DDD275 /* MBLMetaWear+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D31D3935C0815B40E01C4CD479A058C /* MBLMetaWear+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		A44E63EBF84C801EE447CFB5D10E4688 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E7F0FE4A39EB5F6D659955119AF759 /* Foundation.framework */; };
+		A4A142C0BBBDB0B20A7F4CCE3F4922D8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0E7F0FE4A39EB5F6D659955119AF759 /* Foundation.framework */; };
 		A53A923EDEA3C74542B864147D4EB6F2 /* DFUStreamHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEE1D6A7730C7C9A957058583D16073 /* DFUStreamHex.swift */; };
 		A55E7A81AFC1F72D5CD58D89C7B95D0C /* MBLMagnetometerBMM150.m in Sources */ = {isa = PBXBuildFile; fileRef = 06DAB4DBD36970C3B939E398D6F2CD6D /* MBLMagnetometerBMM150.m */; };
 		A5F4C487C3166E496EC082FD9A969325 /* MBLiBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 3146B84F8DAA1FC47C991CB4F66E2968 /* MBLiBeacon.m */; };
@@ -309,6 +309,7 @@
 		B2FF72D777F647CF2E44A96D451C18B0 /* MBLAccelerometerBosch+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 44925D1CB2D830FF80E424F88F25D38E /* MBLAccelerometerBosch+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B31C85B5636163997C2A062BC68BF4E4 /* MBLGyroBMI160Format.h in Headers */ = {isa = PBXBuildFile; fileRef = B6BA2043F3ED8E69761B846A466CEAD7 /* MBLGyroBMI160Format.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B431CC731EBF2AFB623F4FF44E910BB4 /* MBLMagnetometerBMM150Format.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D2E3889B66694C032A5FD097CAED46 /* MBLMagnetometerBMM150Format.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		B486D1D4CCB44FA0466FAD7185AAB306 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94BF28C76815ACE29056B119D973F36E /* CoreData.framework */; };
 		B555A542B08A96CAB2E91D16C5425C3E /* MBLBarometerBMP280.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A20C461B7EEAF50B722343330B44B6 /* MBLBarometerBMP280.m */; };
 		B570934E137434C40C5C43425C12F46F /* MBLGyroBMI160Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5FCC22277D130D97F9DAFFA6FA13D4 /* MBLGyroBMI160Format.m */; };
 		B5A0259FC1200DFD5E3B36DB02B4E461 /* MBLNeopixelStrand+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A1399E752AF2022E211CC6D84A2B394B /* MBLNeopixelStrand+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -342,7 +343,6 @@
 		C448B515D493D12E30661E0A76F63B92 /* MBLProximityTSL2671.m in Sources */ = {isa = PBXBuildFile; fileRef = 46709BAADFDE3A1BE028C03704FC16CB /* MBLProximityTSL2671.m */; };
 		C752D8CBDEF6477E9DE81DDD2B7A5B32 /* MBLCategoryLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F502C65DF88EB9175966B6593547A6 /* MBLCategoryLoader.m */; };
 		C76C35A56689F24487CBDB5E70737D2E /* MBLDownloadOnlyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E6954A13677FD43434E91F6E6391AE8 /* MBLDownloadOnlyEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		C8A98A7A9A9ED89C51D18937CBF2F90E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DA0E9210B60C62D86361E1BDBE2D6 /* Foundation.framework */; };
 		CA617E27A835CFEF0B8E9A63298A3B6D /* DFUServiceInitiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542BA918C6DBDF76C7BD13193E956157 /* DFUServiceInitiator.swift */; };
 		CA6AB6204BAC8E2A908F4BD06AF2284B /* MBLBarometer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AB26ED9C18AB108BB4631EEA25D85EE /* MBLBarometer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB20B50EE7CD81F5B2DC3B8524BF6028 /* BFCancellationTokenRegistration.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C34740810F021172D132A56D258B438 /* BFCancellationTokenRegistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -352,7 +352,6 @@
 		CE16FE3553DDB914F2B0CA142C15686F /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = FCE1F2EBD9A9563A6B67133EC71A68E7 /* ioapi.c */; };
 		CF4C7F4096C55B567676EC7C1E8E1759 /* MBLAccelerometerBoschDataReadyEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0558412662BA1367F172A11463FCDB33 /* MBLAccelerometerBoschDataReadyEvent.m */; };
 		CFB68DFCF9F5B51FD179DD71F24B0BF1 /* MBLRegister+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E68B8438B15707E3AF1DFBFE80151BB /* MBLRegister+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		D056F29D509128E13ABBA5248BBEF58C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DA0E9210B60C62D86361E1BDBE2D6 /* Foundation.framework */; };
 		D083A135B3435A5E22764A4E2654F131 /* MBLAccelerometerBoschFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E7C7724E7819AC133FE76082D08AC2 /* MBLAccelerometerBoschFormat.m */; };
 		D1AD8B1629B0D2B6DD1520B7CA73081D /* MBLExternalThermistor1.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8DAAC2CD48C1B7A61BBC9DD0663067 /* MBLExternalThermistor1.m */; };
 		D1DA92F83748D77EC3E051EA472E71BD /* MBLNeopixelStrand.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BBD8D398B154559987143A2D44C2C5C /* MBLNeopixelStrand.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -412,12 +411,12 @@
 		EA116BC6A204CBC1A284B7522B433730 /* MBLLED.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD5D53F4F7E5581BED7A739193FCBAE /* MBLLED.m */; };
 		EAB1C3D8158BA0597B9F81727EF716D5 /* MBLGPIO+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 16D83ED5BAFC96DE47C6A596AE0819D3 /* MBLGPIO+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		EAF4063C5D3C8C1AE3C7513759BA9D0B /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = C5457F9007A486C1DB158F189D657021 /* MBProgressHUD.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EB143D828AE2511EA8A374CC2AE67C97 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4BCEC64E738887F04A69957F8FA102 /* QuartzCore.framework */; };
 		EBF32A42B6EC0312A1D882510D12D785 /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ABCEB75A8F1C5DA97E49FC851988C44 /* Bolts.m */; };
 		EBF958AE6AF4D8BEC3181D312DBD6306 /* MBLTemperatureV1.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0357146E92064AEDD0EA46D71554E5 /* MBLTemperatureV1.m */; };
 		EC2920CF5D63C9F98B4606A237F7102E /* DFUFirmware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984462B347575003A4A09621034BE1E4 /* DFUFirmware.swift */; };
 		EC703210C78D2332FE36DD3CA9F6A510 /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = C37BEDB3AF6BA9841F9247FAEB015011 /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EC804A94D0DBBDE73A912E0BA43E9C6F /* MBLFirmwareUpdateManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 382575E7403662373E36B4916967B1EE /* MBLFirmwareUpdateManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		ECBBB56FD1B58C8C0CAD680DBAA51DCF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8DA0E9210B60C62D86361E1BDBE2D6 /* Foundation.framework */; };
 		ECEA63F29E5EA1B2A71D4CFE1482B36E /* entropy.c in Sources */ = {isa = PBXBuildFile; fileRef = 32A1EC533F5886BA30AD98C421F212D6 /* entropy.c */; };
 		EE598267E6A6E1CEDF4BF91323AD35A9 /* iOSDFULibrary-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F012C865D110F927F7751080FBBD65BA /* iOSDFULibrary-dummy.m */; };
 		EEBE08C5C4A4B165CD180FE337900F58 /* MBLAccelerometerShakeEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B4220CB8E6269D107D4EC99D1DC83C /* MBLAccelerometerShakeEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -445,6 +444,7 @@
 		FDD44F64F417C14AB9785968D1239A66 /* MBLModuleInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = DE044E144EC0204C2B4BBFE02FD6384D /* MBLModuleInfo.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		FE1DF3AA9C7E6DF0A9123947963A89E9 /* MBLHygrometer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A212CE561B13BEAA10454F83237A835 /* MBLHygrometer.m */; };
 		FE5D4F937BB05632E42670844C44E5F4 /* MBLMagnetometerData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD41D0091E1C2D1C4A77B53533AA3C1 /* MBLMagnetometerData.m */; };
+		FF14D87F04AE35E38824F7875E52D8F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5C755162EF2EB3C566D38F720CF005C /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -528,7 +528,6 @@
 		017211A2287596FD2EA72D0BCA6AE47B /* MBLCategoryLoader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLCategoryLoader.h; path = MetaWear/Internal/Categories/MBLCategoryLoader.h; sourceTree = "<group>"; };
 		01E7418A54E62EAEA9D747A9BD415BBB /* QuickZip.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QuickZip.swift; path = Zip/QuickZip.swift; sourceTree = "<group>"; };
 		030ACE70E1D3E29577C9DF2FAAAA6256 /* MBLAccelerometerDataReadyEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLAccelerometerDataReadyEvent.m; path = MetaWear/Internal/Modules/Accelerometer/MMA8452Q/MBLAccelerometerDataReadyEvent.m; sourceTree = "<group>"; };
-		03EC101406B7EC8860D9D0FE87EB9C63 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		03F4ACE21414932600CC1D91A7EF8943 /* MBLGPIOData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLGPIOData.h; path = MetaWear/Internal/Modules/GPIO/MBLGPIOData.h; sourceTree = "<group>"; };
 		04071B6FEF22BE9AF0C8CEEE438E28BD /* Pods-MetaWearApiTest-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MetaWearApiTest-dummy.m"; sourceTree = "<group>"; };
 		048ACE8801CFC4DE2B85059F28DCA846 /* MBLEntityEvent+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLEntityEvent+Private.h"; path = "MetaWear/Internal/Core/MBLEntityEvent+Private.h"; sourceTree = "<group>"; };
@@ -634,7 +633,6 @@
 		3B831B60C1742DA4FFF80225A13615BB /* MBLANCSEventData+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLANCSEventData+Private.h"; path = "MetaWear/Internal/Modules/ANCS/MBLANCSEventData+Private.h"; sourceTree = "<group>"; };
 		3C2C45A964EE2B415C633CBCFF069333 /* MBLAccelerometerMMA8452Q.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLAccelerometerMMA8452Q.m; path = MetaWear/Classes/Modules/Accelerometer/MMA8452Q/MBLAccelerometerMMA8452Q.m; sourceTree = "<group>"; };
 		3CF0B153EFCD86E082034B3E1C02CF39 /* MBLMagnetometer+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLMagnetometer+Private.h"; path = "MetaWear/Internal/Modules/Magnetometer/MBLMagnetometer+Private.h"; sourceTree = "<group>"; };
-		3D94B45CEC86372C0059F2AD6249FA40 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		3DAA8109691095A0F0869183C51F2777 /* DFUExecutor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DFUExecutor.swift; path = iOSDFULibrary/Classes/Utilities/DFU/DFUExecutor.swift; sourceTree = "<group>"; };
 		3DADEB485AA5708112AF07C3DB980190 /* Zip.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Zip.swift; path = Zip/Zip.swift; sourceTree = "<group>"; };
 		3DD060531176ABB100C3F3AB26E38B55 /* MetaWear-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MetaWear-prefix.pch"; sourceTree = "<group>"; };
@@ -674,7 +672,7 @@
 		4CA2B420B31E5C43232B368BE20A3CA6 /* MBLNeopixel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLNeopixel.h; path = MetaWear/Classes/Modules/Neopixel/MBLNeopixel.h; sourceTree = "<group>"; };
 		4D23ADBF856B43C07966F56F6EA6B620 /* MBLAccelerometerBoschRMSFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBoschRMSFormat.h; path = MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschRMSFormat.h; sourceTree = "<group>"; };
 		4E7597CB5E60E2DA670665CA0E8FBD56 /* MBLAccelerometerData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerData.h; path = MetaWear/Classes/Modules/Accelerometer/MBLAccelerometerData.h; sourceTree = "<group>"; };
-		4E8DA0E9210B60C62D86361E1BDBE2D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		4EE46C82BDB36862E4FDBC99A1B7A4D4 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
 		4F15394F1E6A049FB902EECEE047E0F9 /* MBLAccelerometerAxisReadyEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLAccelerometerAxisReadyEvent.m; path = MetaWear/Internal/Modules/Accelerometer/MMA8452Q/MBLAccelerometerAxisReadyEvent.m; sourceTree = "<group>"; };
 		4F173104EE8253EC35B138A8E0280C80 /* MBLDependentData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLDependentData.h; path = MetaWear/Internal/Core/MBLDependentData.h; sourceTree = "<group>"; };
 		4FD145CAD30A3D32DB56CC67A128EFFD /* MBLRMSAccelerometerDataFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLRMSAccelerometerDataFilter.h; path = MetaWear/Internal/Modules/Accelerometer/MMA8452Q/MBLRMSAccelerometerDataFilter.h; sourceTree = "<group>"; };
@@ -716,7 +714,6 @@
 		65CF61BA23A180B6DD0E9B6A9E75C8D2 /* MBLHygrometerBME280.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLHygrometerBME280.h; path = MetaWear/Classes/Modules/Hygrometer/HygrometerBME280/MBLHygrometerBME280.h; sourceTree = "<group>"; };
 		66D3F2A1E429FC1A2D66579C5AAD2DFC /* MBLLoggingV2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLLoggingV2.h; path = MetaWear/Internal/Modules/Logging/MBLLoggingV2.h; sourceTree = "<group>"; };
 		67E6C92C888A1688E43981380F4B39FB /* MBLPhotometer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLPhotometer.h; path = MetaWear/Classes/Modules/Photometer/MBLPhotometer.h; sourceTree = "<group>"; };
-		67FB7772CD37694E63D7D24945DF76AD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
 		683C3D55AB83947B7BCD265AF1D893C4 /* MBLTemperature.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLTemperature.m; path = MetaWear/Classes/Modules/Temperature/MBLTemperature.m; sourceTree = "<group>"; };
 		687633D2E686859FFE86FCF300BE5415 /* StaticDataTableViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "StaticDataTableViewController-prefix.pch"; sourceTree = "<group>"; };
 		6966882E99C3BC5F7A2C3E5292911D72 /* mma8452q.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = mma8452q.h; path = MetaWear/Internal/Modules/Accelerometer/MMA8452Q/mma8452q.h; sourceTree = "<group>"; };
@@ -775,6 +772,7 @@
 		8B45764991086AC5DEB80244C5C92BEA /* BFCancellationTokenSource.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BFCancellationTokenSource.m; path = Bolts/Common/BFCancellationTokenSource.m; sourceTree = "<group>"; };
 		8B5FCC22277D130D97F9DAFFA6FA13D4 /* MBLGyroBMI160Format.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLGyroBMI160Format.m; path = MetaWear/Internal/Modules/Gyro/GyroBMI160/MBLGyroBMI160Format.m; sourceTree = "<group>"; };
 		8BBD8D398B154559987143A2D44C2C5C /* MBLNeopixelStrand.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLNeopixelStrand.h; path = MetaWear/Classes/Modules/Neopixel/MBLNeopixelStrand.h; sourceTree = "<group>"; };
+		8C4BCEC64E738887F04A69957F8FA102 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		8CD41D0091E1C2D1C4A77B53533AA3C1 /* MBLMagnetometerData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLMagnetometerData.m; path = MetaWear/Classes/Modules/Magnetometer/MBLMagnetometerData.m; sourceTree = "<group>"; };
 		8DB21F52CFD165CEEC18D27CE87FB7D1 /* BFTaskCompletionSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BFTaskCompletionSource.h; path = Bolts/Common/BFTaskCompletionSource.h; sourceTree = "<group>"; };
 		8DD9CD1E7BBA1D814FAF56E6A597E7DB /* MBLAmbientLight.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAmbientLight.h; path = MetaWear/Classes/Modules/AmbientLight/MBLAmbientLight.h; sourceTree = "<group>"; };
@@ -790,6 +788,7 @@
 		93E9C040CCCA18AE517514117261A71D /* MBLData+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLData+Private.h"; path = "MetaWear/Internal/Core/MBLData+Private.h"; sourceTree = "<group>"; };
 		945965FDE7847F94D799B14715C19AE7 /* unzip.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = unzip.c; path = Zip/minizip/unzip.c; sourceTree = "<group>"; };
 		947C317CFE485E177774A52DC9BBB1EB /* MBLBarometerBME280.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLBarometerBME280.m; path = MetaWear/Classes/Modules/Barometer/BarometerBosch/BarometerBME280/MBLBarometerBME280.m; sourceTree = "<group>"; };
+		94BF28C76815ACE29056B119D973F36E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		94F61C96DE50E6655A5213B4C910446D /* MBLGPIOPinChangeEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLGPIOPinChangeEvent.h; path = MetaWear/Internal/Modules/GPIO/MBLGPIOPinChangeEvent.h; sourceTree = "<group>"; };
 		95F5C1A792FFFDB3B90ECEBED5467B98 /* MBLAccelerometerBoschFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBoschFormat.h; path = MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschFormat.h; sourceTree = "<group>"; };
 		972043637F221CD58ECC603AB46F23C2 /* MBLStringData+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLStringData+Private.h"; path = "MetaWear/Internal/Core/MBLStringData+Private.h"; sourceTree = "<group>"; };
@@ -880,10 +879,10 @@
 		C52780D178B328DE1D2879A7C55B954B /* DFUPacket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DFUPacket.swift; path = iOSDFULibrary/Classes/Implementation/Characteristics/DFUPacket.swift; sourceTree = "<group>"; };
 		C5457F9007A486C1DB158F189D657021 /* MBProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		C5C69116C7A5F426CC48BAAF98642888 /* MBLBluetoothCentral.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLBluetoothCentral.h; path = MetaWear/Internal/Mocks/MBLBluetoothCentral.h; sourceTree = "<group>"; };
+		C5C755162EF2EB3C566D38F720CF005C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		C7CC0A4A0109458669CF434E88463E0C /* MBLConductance.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLConductance.m; path = MetaWear/Classes/Modules/Conductance/MBLConductance.m; sourceTree = "<group>"; };
 		C8016BD67E832A22A9E4D6A9E7464285 /* MBLAccelerometerBoschFlatEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLAccelerometerBoschFlatEvent.m; path = MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschFlatEvent.m; sourceTree = "<group>"; };
 		C8104D0D8BFBBDD299B6D9F56017316B /* MBLMagnetometer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLMagnetometer.m; path = MetaWear/Classes/Modules/Magnetometer/MBLMagnetometer.m; sourceTree = "<group>"; };
-		C8121E00AB5DE17DFBC472D4C53AE16D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		C8B2958C654827DF1BA41E02D732C9EE /* MBLConstants+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLConstants+Private.h"; path = "MetaWear/Internal/Core/MBLConstants+Private.h"; sourceTree = "<group>"; };
 		C90CA01F70DF221D3AF2A3AACF9400A6 /* MBLGyroBMI160PackedDataReadyEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLGyroBMI160PackedDataReadyEvent.m; path = MetaWear/Internal/Modules/Gyro/GyroBMI160/MBLGyroBMI160PackedDataReadyEvent.m; sourceTree = "<group>"; };
 		C954448E43F277F957CFF8DABB89468E /* MBLOrientationData+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLOrientationData+Private.h"; path = "MetaWear/Internal/Modules/Accelerometer/MBLOrientationData+Private.h"; sourceTree = "<group>"; };
@@ -937,6 +936,7 @@
 		E028AD3CCD998F6D43D07BE71D7450FA /* MBLFirmwareUpdateInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLFirmwareUpdateInfo.h; path = MetaWear/Classes/Core/MBLFirmwareUpdateInfo.h; sourceTree = "<group>"; };
 		E03DBCE239D8EBB5149758967932DDB1 /* MBLGyroBMI160AxisReadyEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLGyroBMI160AxisReadyEvent.h; path = MetaWear/Internal/Modules/Gyro/GyroBMI160/MBLGyroBMI160AxisReadyEvent.h; sourceTree = "<group>"; };
 		E08F7337E8962BD33A130F63A54A3CF4 /* Pods-MetaWearApiTest.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-MetaWearApiTest.modulemap"; sourceTree = "<group>"; };
+		E0E7F0FE4A39EB5F6D659955119AF759 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		E10535E3136B55422B6FB25E07307916 /* MBLMetaWearManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLMetaWearManager.h; path = MetaWear/Classes/Core/MBLMetaWearManager.h; sourceTree = "<group>"; };
 		E1161400052D7EEF5C0EE01591E2A00A /* MBLEntityEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLEntityEvent.h; path = MetaWear/Classes/Core/MBLEntityEvent.h; sourceTree = "<group>"; };
 		E1ACCD1075EA42C7E635295EE995FC6B /* MBLAccelerometerBoschDataReadyEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBoschDataReadyEvent.h; path = MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschDataReadyEvent.h; sourceTree = "<group>"; };
@@ -1004,7 +1004,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AB37F29E1EE2AE5644DBA573D6E1258 /* Foundation.framework in Frameworks */,
+				7A42269597BB5A0276FF2E11C02F1E57 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1012,7 +1012,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E94E3CC35B3AE4F5D4BC3A4063FD57F /* Foundation.framework in Frameworks */,
+				2514026C36CA3C24F935F1509280C617 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1020,9 +1020,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28765B10E7DCB9D8DF17F0F480743152 /* CoreGraphics.framework in Frameworks */,
-				5B32EA8AB19F49234A383200A5135921 /* Foundation.framework in Frameworks */,
-				41637DA371D84C3DD6CE1A2BAD23DFE2 /* QuartzCore.framework in Frameworks */,
+				FF14D87F04AE35E38824F7875E52D8F8 /* CoreGraphics.framework in Frameworks */,
+				A4A142C0BBBDB0B20A7F4CCE3F4922D8 /* Foundation.framework in Frameworks */,
+				EB143D828AE2511EA8A374CC2AE67C97 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1030,7 +1030,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8A98A7A9A9ED89C51D18937CBF2F90E /* Foundation.framework in Frameworks */,
+				66B0040D4E477508B8D068492CA88BA9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1038,7 +1038,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECBBB56FD1B58C8C0CAD680DBAA51DCF /* Foundation.framework in Frameworks */,
+				A44E63EBF84C801EE447CFB5D10E4688 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1047,10 +1047,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0BF175AB30C6B5BD55BABBCFA2DE63C /* Bolts.framework in Frameworks */,
-				1F7DAE53FF47D2CFB5881575A89A78C2 /* CoreBluetooth.framework in Frameworks */,
-				2C8BBC301561ED5A9BBE0CDF3B8D2597 /* CoreData.framework in Frameworks */,
+				4B81574CB5997812686820F55BDDCC9F /* CoreBluetooth.framework in Frameworks */,
+				B486D1D4CCB44FA0466FAD7185AAB306 /* CoreData.framework in Frameworks */,
 				34AD0C118B1ACEF9AD24EDA9196615F2 /* FastCoding_tvOS.framework in Frameworks */,
-				352F05770794695E1218143605F37758 /* Foundation.framework in Frameworks */,
+				2627880F487685FBED6FD5FFC2E6B379 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1058,7 +1058,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A22E4C817D9989539A1BF786A557ADF5 /* Foundation.framework in Frameworks */,
+				6F66A3EFF0317FB88337424991D00859 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1066,7 +1066,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D056F29D509128E13ABBA5248BBEF58C /* Foundation.framework in Frameworks */,
+				5B0EF0B5A966A3A6047C85FAF5FB0391 /* Foundation.framework in Frameworks */,
 				E32EE994F994962CAA48E5CFDE09D6D4 /* Zip.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1094,7 +1094,7 @@
 				5B1E52F5FC85EFA3ED66ED001CCDC8EF /* Bolts.framework */,
 				AB1DC4489C0679DF89590D205D501C95 /* FastCoding_tvOS.framework */,
 				7C37702F4CCA3D35C9D7B71DACDC3599 /* Zip.framework */,
-				5F7A6B9FA495F567BDC9730611FB9498 /* iOS */,
+				8C9E34F55E8C50559A4D6F90B1179639 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1205,18 +1205,6 @@
 			path = "../Target Support Files/Zip";
 			sourceTree = "<group>";
 		};
-		5F7A6B9FA495F567BDC9730611FB9498 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				67FB7772CD37694E63D7D24945DF76AD /* CoreBluetooth.framework */,
-				03EC101406B7EC8860D9D0FE87EB9C63 /* CoreData.framework */,
-				3D94B45CEC86372C0059F2AD6249FA40 /* CoreGraphics.framework */,
-				4E8DA0E9210B60C62D86361E1BDBE2D6 /* Foundation.framework */,
-				C8121E00AB5DE17DFBC472D4C53AE16D /* QuartzCore.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
 		6537FB6AFC48C8AFA9358358B085D3BC /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -1281,6 +1269,18 @@
 				9ABCEB75A8F1C5DA97E49FC851988C44 /* Bolts.m */,
 			);
 			name = Tasks;
+			sourceTree = "<group>";
+		};
+		8C9E34F55E8C50559A4D6F90B1179639 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4EE46C82BDB36862E4FDBC99A1B7A4D4 /* CoreBluetooth.framework */,
+				94BF28C76815ACE29056B119D973F36E /* CoreData.framework */,
+				C5C755162EF2EB3C566D38F720CF005C /* CoreGraphics.framework */,
+				E0E7F0FE4A39EB5F6D659955119AF759 /* Foundation.framework */,
+				8C4BCEC64E738887F04A69957F8FA102 /* QuartzCore.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		B9AB268AEB126F4C8101AD796B97A463 /* MetaWear */ = {

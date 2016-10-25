@@ -355,7 +355,7 @@
 {
     switch (self.device.state) {
         case MBLConnectionStateConnected:
-            return self.device.isGuestConnection ? @"Connected (GUEST)" : @"Connected";
+            return self.device.programedByOtherApp ? @"Connected (LIMITED)" : @"Connected";
         case MBLConnectionStateConnecting:
             return @"Connecting";
         case MBLConnectionStateDisconnected:
@@ -433,12 +433,12 @@
         [self cell:self.ledCell setHidden:NO];
     }
     
-    // Only allow LED module if we are a guest
-    if (self.device.isGuestConnection) {
-        if (![[NSUserDefaults standardUserDefaults] objectForKey:@"ihaveseenguestmessage"]) {
-            [[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"ihaveseenguestmessage"];
+    // Only allow LED module if the device is in use by other app
+    if (self.device.programedByOtherApp) {
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:@"ihaveseenprogramedByOtherAppmessage"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@1 forKey:@"ihaveseenprogramedByOtherAppmessage"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            [self showAlertTitle:@"Notice" message:@"You have connected to a device being used by another app, so you are in GUEST mode.  If you wish to take control please press 'Reset To Factory Defaults', which will wipe the device clean."];
+            [self showAlertTitle:@"WARNING" message:@"You have connected to a device being used by another app.  To prevent errors and data loss for the other application we are only showing a limited number of features.  If you wish to take control please press 'Reset To Factory Defaults', which will wipe the device clean."];
         }
         [self reloadDataAnimated:YES];
         return;
@@ -689,7 +689,9 @@
     [[[self.device readBatteryLifeAsync] success:^(NSNumber * _Nonnull result) {
         self.batteryLevelLabel.text = result.stringValue;
     }] failure:^(NSError * _Nonnull error) {
-        [self showAlertTitle:@"Error" message:error.localizedDescription];
+        if (sender) {
+            [self showAlertTitle:@"Error" message:error.localizedDescription];
+        }
     }];
 }
 
@@ -698,7 +700,9 @@
     [[[self.device readRSSIAsync] success:^(NSNumber * _Nonnull result) {
         self.rssiLevelLabel.text = result.stringValue;
     }] failure:^(NSError * _Nonnull error) {
-        [self showAlertTitle:@"Error" message:error.localizedDescription];
+        if (sender) {
+            [self showAlertTitle:@"Error" message:error.localizedDescription];
+        }
     }];
 }
 
@@ -713,7 +717,9 @@
     [[[self.device checkForFirmwareUpdateAsync] success:^(NSNumber * _Nonnull result) {
         self.firmwareUpdateLabel.text = result.boolValue ? @"AVAILABLE!" : @"Up To Date";
     }] failure:^(NSError * _Nonnull error) {
-        [self showAlertTitle:@"Error" message:error.localizedDescription];
+        if (sender) {
+            [self showAlertTitle:@"Error" message:error.localizedDescription];
+        }
     }];
 }
 
