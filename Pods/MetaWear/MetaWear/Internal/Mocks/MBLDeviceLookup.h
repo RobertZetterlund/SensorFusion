@@ -1,8 +1,8 @@
 /**
- * MBLTimerEvent.m
+ * MBLDeviceLookup.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 3/11/16.
+ * Created by Stephen Schiffli on 3/22/16.
  * Copyright 2016 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
@@ -33,46 +33,14 @@
  * contact MbientLab via email: hello@mbientlab.com
  */
 
-#import "MBLTimerEvent+Private.h"
-#import "MBLEntityEvent+Private.h"
-#import "MBLEvent+Private.h"
-#import "BFTask+MBLPrivate.h"
-#import "MBLTimer+Private.h"
+#import <MetaWear/MetaWear.h>
 
-@interface MBLTimerEvent ()
-@property (nonatomic) BOOL autoStart;
-@end
+@interface MBLDeviceLookup : NSObject
 
-@implementation MBLTimerEvent
-
-- (instancetype)initWithModule:(MBLEntityModule *)module
-                    registerId:(uint8_t)registerId
-           addEntityParameters:(NSData *)addEntityParameters
-                        format:(MBLFormat *)format
-                     autoStart:(BOOL)autoStart
-{
-    self = [super initWithModule:module registerId:registerId addEntityParameters:addEntityParameters format:format];
-    if (self) {
-        self.autoStart = autoStart;
-    }
-    return self;
-}
-
-- (BFTask *)performAsyncActivation
-{
-    return self.autoStart ? [self start] : [BFTask taskWithResult:nil];
-}
-
-- (BFTask *)start
-{
-    MBLTimer *timer = (MBLTimer *)self.module;
-    return [timer startTimer:self];
-}
-
-- (BFTask *)stop
-{
-    MBLTimer *timer = (MBLTimer *)self.module;
-    return [timer stopTimer:self];
-}
++ (NSString *)metawearModelString;
++ (MBLModel)metawearModel;
++ (NSString *)metawearUid;
++ (BFTask<MBLMetaWear *> *)deviceForTestWithTimeout:(NSTimeInterval)timeout;
++ (BFTask<MBLMetaWear *> *)connectDevice:(MBLMetaWear *)device timeout:(NSTimeInterval)timeout forceClear:(BOOL)forceClear;
 
 @end

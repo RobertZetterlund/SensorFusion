@@ -13,17 +13,23 @@ PODS:
 DEPENDENCIES:
   - iOSDFULibrary (= 1.0.8)
   - MBProgressHUD
-  - MetaWear
+  - MetaWear (from `https://github.com/mbientlab/MetaWear-SDK-iOS-macOS-tvOS.git`, branch `develop`)
   - StaticDataTableViewController
   - Zip (from `https://github.com/marmelroy/Zip.git`, branch `swift2.3`)
 
 EXTERNAL SOURCES:
+  MetaWear:
+    :branch: develop
+    :git: https://github.com/mbientlab/MetaWear-SDK-iOS-macOS-tvOS.git
   Zip:
     :branch: swift2.3
     :git: https://github.com/marmelroy/Zip.git
     :submodules: true
 
 CHECKOUT OPTIONS:
+  MetaWear:
+    :commit: a9b241e408cfb1e79e4f911f7de1794413cd5dca
+    :git: https://github.com/mbientlab/MetaWear-SDK-iOS-macOS-tvOS.git
   Zip:
     :commit: 88ba969d0b12fea5ba4d213229c4d7d8c540ee23
     :git: https://github.com/marmelroy/Zip.git
@@ -38,6 +44,6 @@ SPEC CHECKSUMS:
   StaticDataTableViewController: 7ea8d7bc8c7f0a4e9255a320224462c7346c1d4a
   Zip: 670419a5ba9faaf5f24ed3650c4c38b4136e996b
 
-PODFILE CHECKSUM: a2c980b5a1ff4484f0b7ec244a99b5243af1aa0c
+PODFILE CHECKSUM: d6df8f5451756be7caddbb4c282ea324b5862652
 
 COCOAPODS: 1.1.1

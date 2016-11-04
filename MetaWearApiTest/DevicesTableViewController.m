@@ -91,11 +91,7 @@
         }
     } else {
         [self.activity stopAnimating];
-        if (self.metaBootSwitch.on) {
-            [[MBLMetaWearManager sharedManager] stopScanForMetaBoots];
-        } else {
-            [[MBLMetaWearManager sharedManager] stopScanForMetaWears];
-        }
+        [[MBLMetaWearManager sharedManager] stopScan];
     }
 }
 
@@ -106,11 +102,7 @@
 
 - (IBAction)metaBootSwitchPressed:(id)sender
 {
-    if (self.metaBootSwitch.on) {
-        [[MBLMetaWearManager sharedManager] stopScanForMetaWears];
-    } else {
-        [[MBLMetaWearManager sharedManager] stopScanForMetaBoots];
-    }
+    [[MBLMetaWearManager sharedManager] stopScan];
     // Wait a split second for any final callbacks to fire before starting up scanning again
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.devices = nil;
@@ -240,6 +232,7 @@
         self.hud.mode = MBProgressHUDModeText;
         self.hud.label.text = @"Success!";
         [self.hud hideAnimated:YES afterDelay:2.0];
+        [[MBLMetaWearManager sharedManager] clearDiscoveredDevices];
     }
 }
 

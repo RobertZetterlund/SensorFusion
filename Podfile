@@ -3,7 +3,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MetaWearApiTest' do
-  pod 'MetaWear'
+  pod 'MetaWear', :git => 'https://github.com/mbientlab/MetaWear-SDK-iOS-macOS-tvOS.git', :branch => 'develop'
   pod 'MBProgressHUD'
   pod 'StaticDataTableViewController'
   pod 'Zip', git: 'https://github.com/marmelroy/Zip.git', branch: 'swift2.3', submodules: true

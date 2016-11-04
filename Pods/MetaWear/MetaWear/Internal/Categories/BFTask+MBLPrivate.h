@@ -52,12 +52,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^MBLPrivateSuccessBlock)(ResultType result);
 typedef void (^MBLPrivateErrorBlock)(NSError *error);
+typedef __nullable id(^MBLPrivateContinuationBlock)(BFTask<ResultType> *t);
 
-- (instancetype)successOnMetaWear:(MBLPrivateSuccessBlock)block;
-- (instancetype)failureOnMetaWear:(MBLPrivateErrorBlock)block;
+- (BFTask *)successOnMetaWear:(MBLPrivateSuccessBlock)block NS_SWIFT_NAME(successOnMetaWear(block:));
+- (BFTask *)failureOnMetaWear:(MBLPrivateErrorBlock)block NS_SWIFT_NAME(failureOnMetaWear(block:));
 
-- (instancetype)continueOnMetaWearWithSuccessBlock:(BFContinuationBlock)block;
-- (instancetype)continueOnMetaWearWithBlock:(BFContinuationBlock)block;
+- (BFTask *)continueOnMetaWearWithSuccessBlock:(MBLPrivateContinuationBlock)block NS_SWIFT_NAME(continueOnMetaWearWithSuccess(block:));
+- (BFTask *)continueOnMetaWearWithBlock:(MBLPrivateContinuationBlock)block NS_SWIFT_NAME(continueOnMetaWear(block:));
 
 + (instancetype)taskFromMetaWearWithBlock:(id (^)())block;
 + (instancetype)taskFromSimulatorWithBlock:(id (^)())block;
