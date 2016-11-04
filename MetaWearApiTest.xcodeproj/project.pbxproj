@@ -9,18 +9,17 @@
 /* Begin PBXBuildFile section */
 		4013B0CF198F18C5009925DA /* AccelerometerFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4013B0CC198F18C5009925DA /* AccelerometerFilter.m */; };
 		4013B0D5198F1D1B009925DA /* APLGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4013B0D4198F1D1B009925DA /* APLGraphView.m */; };
+		402307AD1DCBE74200DB6D35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402307AC1DCBE74200DB6D35 /* AppDelegate.swift */; };
+		402307AF1DCBE7A100DB6D35 /* DeviceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402307AE1DCBE7A100DB6D35 /* DeviceDetailViewController.swift */; };
 		402D420F198843BE0011ADB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402D420E198843BE0011ADB1 /* Foundation.framework */; };
 		402D4211198843BE0011ADB1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402D4210198843BE0011ADB1 /* CoreGraphics.framework */; };
 		402D4213198843BE0011ADB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402D4212198843BE0011ADB1 /* UIKit.framework */; };
 		406FBD1D1C20D98E007DAEAD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 406FBD1C1C20D98E007DAEAD /* CoreData.framework */; };
-		40A6847C199BD25F0054F49D /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A6847B199BD25F0054F49D /* StartViewController.m */; };
-		40D97BF619897CB400F55A09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D97BF119897CB400F55A09 /* AppDelegate.m */; };
-		40D97BF719897CB400F55A09 /* DevicesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D97BF319897CB400F55A09 /* DevicesTableViewController.m */; };
+		40B34B941DCA5F15003CB981 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B34B931DCA5F15003CB981 /* StartViewController.swift */; };
+		40B34B971DCA6123003CB981 /* DevicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B34B961DCA6123003CB981 /* DevicesTableViewController.swift */; };
 		40D97BF819897CB400F55A09 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40D97BF419897CB400F55A09 /* Images.xcassets */; };
 		40D97BF919897CB400F55A09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40D97BF519897CB400F55A09 /* Main.storyboard */; };
-		40D97C0F19897DD700F55A09 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D97C0B19897DD700F55A09 /* main.m */; };
 		40D97C1619897F0100F55A09 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40D97C1219897E1000F55A09 /* InfoPlist.strings */; };
-		40D97C1D1989CD1300F55A09 /* DeviceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D97C1C1989CD1300F55A09 /* DeviceDetailViewController.m */; };
 		D8826CC4B40E67BDDB12AFA6 /* Pods_MetaWearApiTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCCEDDD19FF274C96CB3222E /* Pods_MetaWearApiTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,25 +28,20 @@
 		4013B0CC198F18C5009925DA /* AccelerometerFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccelerometerFilter.m; sourceTree = "<group>"; };
 		4013B0D3198F1D1B009925DA /* APLGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLGraphView.h; sourceTree = "<group>"; };
 		4013B0D4198F1D1B009925DA /* APLGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLGraphView.m; sourceTree = "<group>"; };
+		402307AC1DCBE74200DB6D35 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = MetaWearApiTest/AppDelegate.swift; sourceTree = "<group>"; };
+		402307AE1DCBE7A100DB6D35 /* DeviceDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceDetailViewController.swift; path = MetaWearApiTest/DeviceDetailViewController.swift; sourceTree = "<group>"; };
+		402307D11DCD081300DB6D35 /* MetaWearApiTest-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MetaWearApiTest-Bridging-Header.h"; path = "MetaWearApiTest/MetaWearApiTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		402D420B198843BE0011ADB1 /* MetaWearApiTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetaWearApiTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		402D420E198843BE0011ADB1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		402D4210198843BE0011ADB1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		402D4212198843BE0011ADB1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		406FBD1C1C20D98E007DAEAD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		40A6847A199BD25F0054F49D /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartViewController.h; path = MetaWearApiTest/StartViewController.h; sourceTree = "<group>"; };
-		40A6847B199BD25F0054F49D /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartViewController.m; path = MetaWearApiTest/StartViewController.m; sourceTree = "<group>"; };
-		40D97BF019897CB400F55A09 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = MetaWearApiTest/AppDelegate.h; sourceTree = "<group>"; };
-		40D97BF119897CB400F55A09 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = MetaWearApiTest/AppDelegate.m; sourceTree = "<group>"; };
-		40D97BF219897CB400F55A09 /* DevicesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DevicesTableViewController.h; path = MetaWearApiTest/DevicesTableViewController.h; sourceTree = "<group>"; };
-		40D97BF319897CB400F55A09 /* DevicesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DevicesTableViewController.m; path = MetaWearApiTest/DevicesTableViewController.m; sourceTree = "<group>"; };
+		40B34B931DCA5F15003CB981 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartViewController.swift; path = MetaWearApiTest/StartViewController.swift; sourceTree = "<group>"; };
+		40B34B961DCA6123003CB981 /* DevicesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DevicesTableViewController.swift; path = MetaWearApiTest/DevicesTableViewController.swift; sourceTree = "<group>"; };
 		40D97BF419897CB400F55A09 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MetaWearApiTest/Images.xcassets; sourceTree = "<group>"; };
 		40D97BF519897CB400F55A09 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = MetaWearApiTest/Main.storyboard; sourceTree = "<group>"; };
-		40D97C0B19897DD700F55A09 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MetaWearApiTest/main.m; sourceTree = "<group>"; };
 		40D97C0C19897DD700F55A09 /* MetaWearApiTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "MetaWearApiTest-Info.plist"; path = "MetaWearApiTest/MetaWearApiTest-Info.plist"; sourceTree = "<group>"; };
-		40D97C0D19897DD700F55A09 /* MetaWearApiTest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MetaWearApiTest-Prefix.pch"; path = "MetaWearApiTest/MetaWearApiTest-Prefix.pch"; sourceTree = "<group>"; };
 		40D97C1319897E1000F55A09 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = MetaWearApiTest/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		40D97C1B1989CD1300F55A09 /* DeviceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceDetailViewController.h; path = MetaWearApiTest/DeviceDetailViewController.h; sourceTree = "<group>"; };
-		40D97C1C1989CD1300F55A09 /* DeviceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceDetailViewController.m; path = MetaWearApiTest/DeviceDetailViewController.m; sourceTree = "<group>"; };
 		8167A3603BC62F462BDBBD09 /* Pods-MetaWearApiTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MetaWearApiTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MetaWearApiTest/Pods-MetaWearApiTest.debug.xcconfig"; sourceTree = "<group>"; };
 		B2554051DDF833E032C10842 /* Pods-MetaWearApiTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MetaWearApiTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-MetaWearApiTest/Pods-MetaWearApiTest.release.xcconfig"; sourceTree = "<group>"; };
 		BCCEDDD19FF274C96CB3222E /* Pods_MetaWearApiTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MetaWearApiTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,14 +109,11 @@
 		40D97BFA19897CBB00F55A09 /* MetaWearApiTest */ = {
 			isa = PBXGroup;
 			children = (
-				40A6847A199BD25F0054F49D /* StartViewController.h */,
-				40A6847B199BD25F0054F49D /* StartViewController.m */,
-				40D97BF219897CB400F55A09 /* DevicesTableViewController.h */,
-				40D97BF319897CB400F55A09 /* DevicesTableViewController.m */,
-				40D97C1B1989CD1300F55A09 /* DeviceDetailViewController.h */,
-				40D97C1C1989CD1300F55A09 /* DeviceDetailViewController.m */,
-				40D97BF019897CB400F55A09 /* AppDelegate.h */,
-				40D97BF119897CB400F55A09 /* AppDelegate.m */,
+				402307D11DCD081300DB6D35 /* MetaWearApiTest-Bridging-Header.h */,
+				402307AC1DCBE74200DB6D35 /* AppDelegate.swift */,
+				40B34B931DCA5F15003CB981 /* StartViewController.swift */,
+				40B34B961DCA6123003CB981 /* DevicesTableViewController.swift */,
+				402307AE1DCBE7A100DB6D35 /* DeviceDetailViewController.swift */,
 				40D97BF519897CB400F55A09 /* Main.storyboard */,
 				40D97BF419897CB400F55A09 /* Images.xcassets */,
 			);
@@ -134,8 +125,6 @@
 			children = (
 				40D97C0C19897DD700F55A09 /* MetaWearApiTest-Info.plist */,
 				40D97C1219897E1000F55A09 /* InfoPlist.strings */,
-				40D97C0B19897DD700F55A09 /* main.m */,
-				40D97C0D19897DD700F55A09 /* MetaWearApiTest-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -178,11 +167,13 @@
 		402D4203198843BE0011ADB1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = MbientLab;
 				TargetAttributes = {
 					402D420A198843BE0011ADB1 = {
 						DevelopmentTeam = S2273LZ6GL;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -201,6 +192,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 402D4202198843BE0011ADB1;
 			productRefGroup = 402D420C198843BE0011ADB1 /* Products */;
@@ -278,13 +270,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40D97BF619897CB400F55A09 /* AppDelegate.m in Sources */,
+				402307AD1DCBE74200DB6D35 /* AppDelegate.swift in Sources */,
+				40B34B971DCA6123003CB981 /* DevicesTableViewController.swift in Sources */,
+				402307AF1DCBE7A100DB6D35 /* DeviceDetailViewController.swift in Sources */,
 				4013B0CF198F18C5009925DA /* AccelerometerFilter.m in Sources */,
-				40D97C1D1989CD1300F55A09 /* DeviceDetailViewController.m in Sources */,
 				4013B0D5198F1D1B009925DA /* APLGraphView.m in Sources */,
-				40D97C0F19897DD700F55A09 /* main.m in Sources */,
-				40A6847C199BD25F0054F49D /* StartViewController.m in Sources */,
-				40D97BF719897CB400F55A09 /* DevicesTableViewController.m in Sources */,
+				40B34B941DCA5F15003CB981 /* StartViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +334,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MetaWearApiTest/MetaWearApiTest-Bridging-Header.h";
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
@@ -379,6 +373,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MetaWearApiTest/MetaWearApiTest-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0.1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -389,17 +387,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = S2273LZ6GL;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MetaWearApiTest/MetaWearApiTest-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = "MetaWearApiTest/MetaWearApiTest-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mbientlab.MetaWearAPITest;
 				PRODUCT_NAME = MetaWearApiTest;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -410,17 +411,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = S2273LZ6GL;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MetaWearApiTest/MetaWearApiTest-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = "MetaWearApiTest/MetaWearApiTest-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mbientlab.MetaWearAPITest;
 				PRODUCT_NAME = MetaWearApiTest;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
