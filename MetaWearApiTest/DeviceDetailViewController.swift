@@ -394,7 +394,9 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         device.readRSSIAsync().success { result in
             self.rssiLevelLabel.text = result.stringValue
         }
-        //check(forFirmwareUpdatesPressed: nil)
+        device.checkForFirmwareUpdateAsync().success { result in
+            self.firmwareUpdateLabel.text = result.boolValue ? "AVAILABLE!" : "Up To Date"
+        }
         
         if device.led != nil {
             cell(ledCell, setHidden: false)
@@ -2259,13 +2261,11 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         
         task?.failure { error in
             // Currently can't recover nicely from this error
-            self.device.resetDevice()
-            self.showAlertTitle("Error", message: error.localizedDescription)
-            self.sensorFusionStartStream.isEnabled = true
-            self.sensorFusionStopStream.isEnabled = false
-            self.sensorFusionStartLog.isEnabled = true
-            self.sensorFusionMode.isEnabled = true
-            self.sensorFusionOutput.isEnabled = true
+            let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Okay", style: .default) { alert in
+                self.device.resetDevice()
+            })
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     
