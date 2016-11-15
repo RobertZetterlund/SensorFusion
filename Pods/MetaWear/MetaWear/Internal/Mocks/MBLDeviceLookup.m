@@ -68,6 +68,8 @@
         model = MBLModelMetaWearHR;
     } else if ([modelString isEqualToString:@"PPG"]) {
         model = MBLModelMetaWearPPG;
+    } else if ([modelString isEqualToString:@"TRAK"]) {
+        model = MBLModelMetaTracker;
     } else if ([modelString isEqualToString:@"MOT_R"]) {
         model = MBLModelMetaMotionR;
     } else if ([modelString isEqualToString:@"MOT_C"]) {
@@ -106,7 +108,7 @@
         [[MBLMetaWearManager sharedManager] startScanForMetaWearsAllowDuplicates:NO handler:^(NSArray *array) {
             for (MBLMetaWear *cur in array) {
                 if ([cur.identifier.UUIDString isEqualToString:deviceUid]) {
-                    [[MBLMetaWearManager sharedManager] stopScanForMetaWears];
+                    [[MBLMetaWearManager sharedManager] stopScan];
                     [cur rememberDevice];
                     [source trySetResult:cur];
                 }

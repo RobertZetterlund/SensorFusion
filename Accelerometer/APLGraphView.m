@@ -441,6 +441,14 @@ void DrawGridlines(CGContextRef context, CGFloat x, CGFloat width)
     }
 }
 
+-(double)scale:(double)value min:(double)min max:(double)max
+{
+    value = MIN(value, max);
+    value = MAX(value, min);
+    double percent = (value - min) / (max - min);
+    return (self.fullScale * 2 * percent) - self.fullScale;
+}
+
 /*
  kSegmentInitialPosition defines the initial position of a segment that is meant to be displayed on the left side of the graph.
  This positioning is meant so that a few entries must be added to the segment's history before it becomes visible to the user. This value could be tweaked a little bit with varying results, but the X coordinate should never be larger than 16 (the center of the text view) or the zero values in the segment's history will be exposed to the user.

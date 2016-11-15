@@ -172,7 +172,7 @@
             <objects>
                 <tableViewController id="and-78-Gqu" customClass="DeviceDetailViewController" customModule="MetaWearApiTest" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="LpX-Mw-MAw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="9000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="9500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="n5K-wl-Hzf">
@@ -433,7 +433,7 @@
                             <tableViewSection headerTitle="Mechanical Switch" id="Nor-Fg-DeV">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="95" id="Rbc-DC-udN">
-                                        <rect key="frame" x="0.0" y="758" width="320" height="95"/>
+                                        <rect key="frame" x="0.0" y="759" width="320" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rbc-DC-udN" id="780-oz-a5b">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
@@ -483,7 +483,7 @@
                             <tableViewSection headerTitle="LED" id="Km7-7G-J5I">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="169" id="Nhr-ih-E25">
-                                        <rect key="frame" x="0.0" y="901" width="320" height="169"/>
+                                        <rect key="frame" x="0.0" y="903" width="320" height="169"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nhr-ih-E25" id="3ur-B8-wZt">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
@@ -567,7 +567,7 @@
                             <tableViewSection headerTitle="Temperature" id="n7U-wn-3YN">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="173" id="1SG-Sy-JO7">
-                                        <rect key="frame" x="0.0" y="1118" width="320" height="173"/>
+                                        <rect key="frame" x="0.0" y="1121" width="320" height="173"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1SG-Sy-JO7" id="aQO-Wn-aLz">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="172"/>
@@ -652,10 +652,111 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Sensor Fusion" id="Osc-Tr-7Fe">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="378" id="MKr-zp-JDf">
+                                        <rect key="frame" x="0.0" y="1343" width="320" height="378"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MKr-zp-JDf" id="4M3-aE-xqf">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="377"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sensor Fusion Mode:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CA2-fO-X7B">
+                                                    <rect key="frame" x="14" y="8" width="150" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Output Type:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zre-Cu-wdT">
+                                                    <rect key="frame" x="14" y="63" width="85" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mB2-Z1-3pY">
+                                                    <rect key="frame" x="14" y="27" width="292" height="29"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <segments>
+                                                        <segment title="NDoF"/>
+                                                        <segment title="IMUPlus"/>
+                                                        <segment title="Compass"/>
+                                                        <segment title="M4G"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="g7G-o4-mk6">
+                                                    <rect key="frame" x="14" y="83" width="292" height="29"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <segments>
+                                                        <segment title="Euler"/>
+                                                        <segment title="Quat"/>
+                                                        <segment title="Gravity"/>
+                                                        <segment title="Lin-accel"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyX-O7-jVq">
+                                                    <rect key="frame" x="213" y="167" width="93" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Stop Logging">
+                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="sensorFusionStopLogPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="uqT-GX-Lg0"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ndr-BW-vBl">
+                                                    <rect key="frame" x="123" y="325" width="74" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Send Data">
+                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="sensorFusionSendDataPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="foz-xF-Lit"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fmk-WM-oGH">
+                                                    <rect key="frame" x="14" y="129" width="108" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Start Streaming">
+                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="sensorFusionStartStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="aDX-uy-nqM"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rM8-Hm-RDt">
+                                                    <rect key="frame" x="14" y="167" width="93" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Start Logging">
+                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="sensorFusionStartLogPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="vos-eT-ltH"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2q-UC-C5P">
+                                                    <rect key="frame" x="199" y="129" width="107" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Stop Streaming">
+                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="sensorFusionStopStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="NTC-NB-Vc6"/>
+                                                    </connections>
+                                                </button>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b7Q-oV-8W4" customClass="APLGraphView">
+                                                    <rect key="frame" x="0.0" y="205" width="320" height="112"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </view>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Accelerometer MMA8452Q" id="sFy-ZU-XxF">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="1207" id="W1j-fD-Ckz">
-                                        <rect key="frame" x="0.0" y="1339" width="320" height="1207"/>
+                                        <rect key="frame" x="0.0" y="1770" width="320" height="1207"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W1j-fD-Ckz" id="s64-d3-odd">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="1206"/>
@@ -994,7 +1095,7 @@
                             <tableViewSection headerTitle="Accelerometer BMI160" id="qdX-ee-nUu">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="928" id="d1T-vb-s5i">
-                                        <rect key="frame" x="0.0" y="2594" width="320" height="928"/>
+                                        <rect key="frame" x="0.0" y="3026" width="320" height="928"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d1T-vb-s5i" id="M7f-rd-YfY">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="927"/>
@@ -1256,7 +1357,7 @@
                             <tableViewSection headerTitle="Accelerometer BMA255" id="zm1-Ul-TT1">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="816" id="9wS-jo-zb2">
-                                        <rect key="frame" x="0.0" y="3570" width="320" height="816"/>
+                                        <rect key="frame" x="0.0" y="4003" width="320" height="816"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9wS-jo-zb2" id="kQt-7c-QbA">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="815"/>
@@ -1485,7 +1586,7 @@
                             <tableViewSection headerTitle="Gyro BMI160" id="ST1-89-IuJ">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="413" id="Z0i-aU-yuj">
-                                        <rect key="frame" x="0.0" y="4434" width="320" height="413"/>
+                                        <rect key="frame" x="0.0" y="4868" width="320" height="413"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z0i-aU-yuj" id="raD-Np-Tl3">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="412"/>
@@ -1597,7 +1698,7 @@
                             <tableViewSection headerTitle="Magnetometer BMM150" id="u7y-cw-Ssn" userLabel="Magnetometer BMM150">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="293" id="17s-iT-6rd" userLabel="Magnetometer BMM150 Cell">
-                                        <rect key="frame" x="0.0" y="4895" width="320" height="293"/>
+                                        <rect key="frame" x="0.0" y="5330" width="320" height="293"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="17s-iT-6rd" id="tAC-gv-LYI">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="292"/>
@@ -1673,7 +1774,7 @@
                             <tableViewSection headerTitle="GPIO" id="WAZ-gj-2YQ">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="444" id="yRW-sQ-jgf">
-                                        <rect key="frame" x="0.0" y="5236" width="320" height="444"/>
+                                        <rect key="frame" x="0.0" y="5672" width="320" height="444"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yRW-sQ-jgf" id="Phe-rA-6n1">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="443"/>
@@ -1863,7 +1964,7 @@
                             <tableViewSection headerTitle="Haptic/Buzzer" id="LZo-Av-eiC">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="139" id="iVV-zU-QrA">
-                                        <rect key="frame" x="0.0" y="5728" width="320" height="139"/>
+                                        <rect key="frame" x="0.0" y="6165" width="320" height="139"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iVV-zU-QrA" id="efj-Kw-F0V">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="138"/>
@@ -1923,7 +2024,7 @@
                             <tableViewSection headerTitle="iBeacon" id="esL-1P-kud">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="103" id="6NG-WJ-AbP">
-                                        <rect key="frame" x="0.0" y="5915" width="320" height="103"/>
+                                        <rect key="frame" x="0.0" y="6353" width="320" height="103"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6NG-WJ-AbP" id="AO0-SW-X8L">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="102"/>
@@ -1964,7 +2065,7 @@
                             <tableViewSection headerTitle="Barometer BMP280" id="1pL-zp-K2o">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="278" id="36h-5y-INY">
-                                        <rect key="frame" x="0.0" y="6066" width="320" height="278"/>
+                                        <rect key="frame" x="0.0" y="6505" width="320" height="278"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="36h-5y-INY" id="ded-ph-96r">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="277"/>
@@ -2066,7 +2167,7 @@
                             <tableViewSection headerTitle="Barometer BME280" id="0Ww-tE-HRx">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="278" id="Odj-7N-3bc">
-                                        <rect key="frame" x="0.0" y="6392" width="320" height="278"/>
+                                        <rect key="frame" x="0.0" y="6832" width="320" height="278"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Odj-7N-3bc" id="Q4M-N4-RTW">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="277"/>
@@ -2168,7 +2269,7 @@
                             <tableViewSection headerTitle="Ambient Light LTR329" id="k2T-az-d2v">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="285" id="dqJ-xr-btu">
-                                        <rect key="frame" x="0.0" y="6718" width="320" height="285"/>
+                                        <rect key="frame" x="0.0" y="7159" width="320" height="285"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dqJ-xr-btu" id="p8h-Zx-HB6">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="284"/>
@@ -2272,7 +2373,7 @@
                             <tableViewSection headerTitle="Proximity TSL2671" id="7uB-NX-bxF">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="274" id="rz8-cd-Ntj">
-                                        <rect key="frame" x="0.0" y="7051" width="320" height="274"/>
+                                        <rect key="frame" x="0.0" y="7493" width="320" height="274"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rz8-cd-Ntj" id="sZS-LX-0v3">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="273"/>
@@ -2374,7 +2475,7 @@
                             <tableViewSection headerTitle="Photometer TCS3472" id="ESV-Dd-saT">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="361" id="Mxu-9y-Vis">
-                                        <rect key="frame" x="0.0" y="7373" width="320" height="361"/>
+                                        <rect key="frame" x="0.0" y="7816" width="320" height="361"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mxu-9y-Vis" id="OeA-y1-IfG">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="360"/>
@@ -2510,7 +2611,7 @@
                             <tableViewSection headerTitle="Hygrometer BME280" id="iN1-yS-2b0">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="159" id="sUT-nh-l7m">
-                                        <rect key="frame" x="0.0" y="7782" width="320" height="159"/>
+                                        <rect key="frame" x="0.0" y="8226" width="320" height="159"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sUT-nh-l7m" id="Mkt-Pe-hHc">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="158"/>
@@ -2575,7 +2676,7 @@
                             <tableViewSection headerTitle="Conductance" id="9Wq-Qa-mpK">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="323" id="New-1L-S1s">
-                                        <rect key="frame" x="0.0" y="7989" width="320" height="323"/>
+                                        <rect key="frame" x="0.0" y="8434" width="320" height="323"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="New-1L-S1s" id="PqL-Zz-R0h">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="322"/>
@@ -2687,7 +2788,7 @@
                             <tableViewSection headerTitle="I2C" id="JAS-bf-17C">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="252" id="ylv-JV-I3f">
-                                        <rect key="frame" x="0.0" y="8360" width="320" height="252"/>
+                                        <rect key="frame" x="0.0" y="8806" width="320" height="252"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ylv-JV-I3f" id="lZX-8x-eQC">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="251"/>
@@ -2775,7 +2876,7 @@
                             <tableViewSection headerTitle="NeoPixel" id="EeS-h0-zwc">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="394" id="vdT-aN-DGo">
-                                        <rect key="frame" x="0.0" y="8660" width="320" height="394"/>
+                                        <rect key="frame" x="0.0" y="9107" width="320" height="394"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vdT-aN-DGo" id="AQq-g5-d6Z">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="393"/>
@@ -2935,7 +3036,7 @@
                     <navigationItem key="navigationItem" id="iog-jI-bt7"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="9000"/>
+                    <size key="freeformSize" width="320" height="9500"/>
                     <connections>
                         <outlet property="accelerometerBMA255Cell" destination="9wS-jo-zb2" id="FBN-jV-O8N"/>
                         <outlet property="accelerometerBMA255FlatLabel" destination="176-Rj-h4g" id="gyg-Ht-O3L"/>
@@ -3107,6 +3208,14 @@
                         <outlet property="readPinTextField" destination="WHS-Dj-RKc" id="c3S-Yt-cl6"/>
                         <outlet property="rssiLevelLabel" destination="V4h-Ke-VK5" id="s4Z-lZ-51A"/>
                         <outlet property="sampleFrequency" destination="l7I-Yr-l6k" id="NpX-P4-hIX"/>
+                        <outlet property="sensorFusionCell" destination="MKr-zp-JDf" id="QMM-QZ-2GK"/>
+                        <outlet property="sensorFusionGraph" destination="b7Q-oV-8W4" id="Ot0-wd-PVG"/>
+                        <outlet property="sensorFusionMode" destination="mB2-Z1-3pY" id="Bp7-WO-90y"/>
+                        <outlet property="sensorFusionOutput" destination="g7G-o4-mk6" id="Mt8-tS-VgG"/>
+                        <outlet property="sensorFusionStartLog" destination="rM8-Hm-RDt" id="y7B-M6-tps"/>
+                        <outlet property="sensorFusionStartStream" destination="fmk-WM-oGH" id="3xa-7a-tYN"/>
+                        <outlet property="sensorFusionStopLog" destination="vyX-O7-jVq" id="424-JJ-1qS"/>
+                        <outlet property="sensorFusionStopStream" destination="P2q-UC-C5P" id="9Cz-Bb-61M"/>
                         <outlet property="serialNumLabel" destination="vgz-xO-J7a" id="QBy-Rv-Oeq"/>
                         <outlet property="setNameButton" destination="mCO-hn-9bg" id="Ms4-63-AEa"/>
                         <outlet property="shakeLabel" destination="e11-ds-hDJ" id="DIn-XG-h6l"/>
@@ -3157,6 +3266,7 @@
                         <outletCollection property="allCells" destination="ylv-JV-I3f" collectionClass="NSMutableArray" id="95I-I8-7t9"/>
                         <outletCollection property="allCells" destination="New-1L-S1s" collectionClass="NSMutableArray" id="Bc4-GH-DPZ"/>
                         <outletCollection property="allCells" destination="vdT-aN-DGo" collectionClass="NSMutableArray" id="m66-8d-IJ9"/>
+                        <outletCollection property="allCells" destination="MKr-zp-JDf" collectionClass="NSMutableArray" id="shI-ee-dsB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wq9-CB-brG" userLabel="First Responder" sceneMemberID="firstResponder"/>

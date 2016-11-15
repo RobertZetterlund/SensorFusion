@@ -56,5 +56,6 @@
 
 @property float fullScale;
 -(void)addX:(double)x y:(double)y z:(double)z;
+-(double)scale:(double)value min:(double)min max:(double)max;
 
 @end

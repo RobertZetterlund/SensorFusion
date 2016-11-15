@@ -257,6 +257,16 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     var neopixelStrand: MBLNeopixelStrand!
     var neopixelStrandInitTask: BFTask<AnyObject>!
     
+    @IBOutlet weak var sensorFusionCell: UITableViewCell!
+    @IBOutlet weak var sensorFusionMode: UISegmentedControl!
+    @IBOutlet weak var sensorFusionOutput: UISegmentedControl!
+    @IBOutlet weak var sensorFusionStartStream: UIButton!
+    @IBOutlet weak var sensorFusionStopStream: UIButton!
+    @IBOutlet weak var sensorFusionStartLog: UIButton!
+    @IBOutlet weak var sensorFusionStopLog: UIButton!
+    @IBOutlet weak var sensorFusionGraph: APLGraphView!
+    var sensorFusionData = Data()
+    
     var streamingEvents = [MBLEvent<AnyObject>]()
     var isObserving = false {
         didSet {
@@ -376,7 +386,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         hwRevLabel.text = device.deviceInfo?.hardwareRevision
         fwRevLabel.text = device.deviceInfo?.firmwareRevision
         modelNumberLabel.text = device.deviceInfo?.modelNumber
-        //txPowerSelector.selectedSegmentIndex = Int(device.settings!.transmitPower.rawValue)
+        txPowerSelector.selectedSegmentIndex = Int(device.settings!.transmitPower.rawValue)
         // Automaticaly send off some reads
         device.readBatteryLifeAsync().success { result in
             self.batteryLevelLabel.text = result.stringValue
@@ -549,6 +559,39 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             }
             neopixelPin.selectedSegmentIndex = 0
             gpioPinSelectorPressed(self.gpioPinSelector)
+        }
+        
+        if let sensorFusion = device.sensorFusion {
+            cell(sensorFusionCell, setHidden: false)
+            var isLogging = true
+            if sensorFusion.eulerAngle.isLogging() {
+                sensorFusionMode.selectedSegmentIndex = 0
+            } else if sensorFusion.quaternion.isLogging() {
+                sensorFusionMode.selectedSegmentIndex = 1
+            } else if sensorFusion.gravity.isLogging() {
+                sensorFusionMode.selectedSegmentIndex = 2
+            } else if sensorFusion.linearAcceleration.isLogging() {
+                sensorFusionMode.selectedSegmentIndex = 3
+            } else {
+                isLogging = false
+            }
+            sensorFusionOutput.selectedSegmentIndex = max(Int(sensorFusion.mode.rawValue) - 1, 0)
+            
+            if isLogging {
+                sensorFusionStartLog.isEnabled = false
+                sensorFusionStopLog.isEnabled = true
+                sensorFusionStartStream.isEnabled = false
+                sensorFusionStopStream.isEnabled = false
+                sensorFusionMode.isEnabled = false
+                sensorFusionOutput.isEnabled = false
+            } else {
+                sensorFusionStartLog.isEnabled = true
+                sensorFusionStopLog.isEnabled = false
+                sensorFusionStartStream.isEnabled = true
+                sensorFusionStopStream.isEnabled = false
+                sensorFusionMode.isEnabled = true
+                sensorFusionOutput.isEnabled = true
+            }
         }
         
         // Make the magic happen!
@@ -893,13 +936,13 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         dateFormatter.dateFormat = "MM_dd_yyyy-HH_mm_ss"
         let dateString = dateFormatter.string(from: Date())
         let name = "\(title)_\(dateString).csv"
-        let fileURL = URL(fileURLWithPath: URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(name).absoluteString)
+        let fileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(name)
         do {
             try data.write(to: fileURL, options: .atomic)
             // Popup the default share screen
             self.controller = UIDocumentInteractionController(url: fileURL)
             if !self.controller.presentOptionsMenu(from: view.bounds, in: view, animated: true) {
-                self.showAlertTitle("Error", message: "No programs installed that could save document")
+                self.showAlertTitle("Error", message: "No programs installed that could save the file")
             }
         } catch let error {
             self.showAlertTitle("Error", message: error.localizedDescription)
@@ -2144,6 +2187,210 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             self.neopixelRotateLeft.isEnabled = true
             self.neopixelTurnOff.isEnabled = true
         }
+    }
+    
+    func updateSensorFusionSettings() {
+        device.sensorFusion!.mode = MBLSensorFusionMode(rawValue: UInt8(sensorFusionMode.selectedSegmentIndex) + 1)!
+        sensorFusionMode.isEnabled = false
+        sensorFusionOutput.isEnabled = false
+        sensorFusionData = Data()
+        sensorFusionGraph.fullScale = 8
+    }
+    
+    func trim(_ maxValue: Double, minValue: Double) {
+        
+        
+    }
+    
+    @IBAction func sensorFusionStartStreamPressed(_ sender: Any) {
+        sensorFusionStartStream.isEnabled = false
+        sensorFusionStopStream.isEnabled = true
+        sensorFusionStartLog.isEnabled = false
+        sensorFusionStopLog.isEnabled = false
+        updateSensorFusionSettings()
+        
+        var task: BFTask<AnyObject>?
+        switch sensorFusionOutput.selectedSegmentIndex {
+        case 0:
+            streamingEvents.append(device.sensorFusion!.eulerAngle as! MBLEvent<AnyObject>)
+            task = device.sensorFusion!.eulerAngle.startNotificationsAsync { (obj, error) in
+                if let obj = obj {
+                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.p, min: -180, max: 180), y: self.sensorFusionGraph.scale(obj.r, min: -90, max: 90), z: self.sensorFusionGraph.scale(obj.y, min: 0, max: 360))
+                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.p),\(obj.r),\(obj.y)\n".data(using: String.Encoding.utf8)!)
+                }
+            }
+        case 1:
+            streamingEvents.append(device.sensorFusion!.quaternion as! MBLEvent<AnyObject>)
+            task = device.sensorFusion!.quaternion.startNotificationsAsync { (obj, error) in
+                if let obj = obj {
+                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.w, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0))
+                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.w),\(obj.x),\(obj.y)\n".data(using: String.Encoding.utf8)!)
+                }
+            }
+        case 2:
+            streamingEvents.append(device.sensorFusion!.gravity as! MBLEvent<AnyObject>)
+            task = device.sensorFusion!.gravity.startNotificationsAsync { (obj, error) in
+                if let obj = obj {
+                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0))
+                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
+                }
+            }
+        case 3:
+            streamingEvents.append(device.sensorFusion!.linearAcceleration as! MBLEvent<AnyObject>)
+            switch (device.accelerometer as! MBLAccelerometerBosch).fullScaleRange {
+            case .range2G:
+                sensorFusionGraph.fullScale = 2.0
+            case .range4G:
+                sensorFusionGraph.fullScale = 4.0
+            case .range8G:
+                sensorFusionGraph.fullScale = 8.0
+            case.range16G:
+                sensorFusionGraph.fullScale = 16.0
+            }
+            task = device.sensorFusion!.linearAcceleration.startNotificationsAsync { (obj, error) in
+                if let obj = obj {
+                    self.sensorFusionGraph.addX(obj.x, y: obj.y, z: obj.z)
+                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
+                }
+            }
+        default:
+            assert(false, "Added a new sensor fusion output?")
+        }
+        
+        task?.failure { error in
+            // Currently can't recover nicely from this error
+            self.device.resetDevice()
+            self.showAlertTitle("Error", message: error.localizedDescription)
+            self.sensorFusionStartStream.isEnabled = true
+            self.sensorFusionStopStream.isEnabled = false
+            self.sensorFusionStartLog.isEnabled = true
+            self.sensorFusionMode.isEnabled = true
+            self.sensorFusionOutput.isEnabled = true
+        }
+    }
+    
+    @IBAction func sensorFusionStopStreamPressed(_ sender: Any) {
+        sensorFusionStartStream.isEnabled = true
+        sensorFusionStopStream.isEnabled = false
+        sensorFusionStartLog.isEnabled = true
+        sensorFusionMode.isEnabled = true
+        sensorFusionOutput.isEnabled = true
+        
+        switch sensorFusionOutput.selectedSegmentIndex {
+        case 0:
+            streamingEvents.remove(at: streamingEvents.index(of: device.sensorFusion!.eulerAngle as! MBLEvent<AnyObject>)!)
+            device.sensorFusion!.eulerAngle.stopNotificationsAsync()
+        case 1:
+            streamingEvents.remove(at: streamingEvents.index(of: device.sensorFusion!.quaternion as! MBLEvent<AnyObject>)!)
+            device.sensorFusion!.quaternion.stopNotificationsAsync()
+        case 2:
+            streamingEvents.remove(at: streamingEvents.index(of: device.sensorFusion!.gravity as! MBLEvent<AnyObject>)!)
+            device.sensorFusion!.gravity.stopNotificationsAsync()
+        case 3:
+            streamingEvents.remove(at: streamingEvents.index(of: device.sensorFusion!.linearAcceleration as! MBLEvent<AnyObject>)!)
+            device.sensorFusion!.linearAcceleration.stopNotificationsAsync()
+        default:
+            assert(false, "Added a new sensor fusion output?")
+        }
+    }
+    
+    @IBAction func sensorFusionStartLogPressed(_ sender: Any) {
+        sensorFusionStartLog.isEnabled = false
+        sensorFusionStopLog.isEnabled = true
+        sensorFusionStartStream.isEnabled = false
+        sensorFusionStopStream.isEnabled = false
+        updateSensorFusionSettings()
+
+        switch sensorFusionOutput.selectedSegmentIndex {
+        case 0:
+            device.sensorFusion!.eulerAngle.startLoggingAsync()
+        case 1:
+            device.sensorFusion!.quaternion.startLoggingAsync()
+        case 2:
+            device.sensorFusion!.gravity.startLoggingAsync()
+        case 3:
+            switch (device.accelerometer as! MBLAccelerometerBosch).fullScaleRange {
+            case .range2G:
+                sensorFusionGraph.fullScale = 2.0
+            case .range4G:
+                sensorFusionGraph.fullScale = 4.0
+            case .range8G:
+                sensorFusionGraph.fullScale = 8.0
+            case.range16G:
+                sensorFusionGraph.fullScale = 16.0
+            }
+            device.sensorFusion!.linearAcceleration.startLoggingAsync()
+        default:
+            assert(false, "Added a new sensor fusion output?")
+        }
+    }
+
+    @IBAction func sensorFusionStopLogPressed(_ sender: Any) {
+        sensorFusionStartLog.isEnabled = true
+        sensorFusionStopLog.isEnabled = false
+        sensorFusionStartStream.isEnabled = true
+        sensorFusionMode.isEnabled = true
+        sensorFusionOutput.isEnabled = true
+        
+        let hud = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
+        hud.mode = .determinateHorizontalBar
+        hud.label.text = "Downloading..."
+        
+        var task: BFTask<AnyObject>?
+        let hudProgress: MetaWear.MBLFloatHandler = { number in
+            hud.progress = number
+        }
+        
+        switch sensorFusionOutput.selectedSegmentIndex {
+        case 0:
+            task = device.sensorFusion!.eulerAngle.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
+                for obj in array as! [MBLEulerAngleData] {
+                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.p, min: -180, max: 180), y: self.sensorFusionGraph.scale(obj.r, min: -90, max: 90), z: self.sensorFusionGraph.scale(obj.y, min: 0, max: 360))
+                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.p),\(obj.r),\(obj.y)\n".data(using: String.Encoding.utf8)!)
+                }
+            }
+        case 1:
+            task = device.sensorFusion!.quaternion.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
+                for obj in array as! [MBLQuaternionData] {
+                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.w, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0))
+                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.w),\(obj.x),\(obj.y)\n".data(using: String.Encoding.utf8)!)
+                }
+            }
+        case 2:
+            task = device.sensorFusion!.gravity.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
+                for obj in array as! [MBLAccelerometerData] {
+                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0))
+                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
+                }
+            }
+        case 3:
+            task = device.sensorFusion!.linearAcceleration.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
+                for obj in array as! [MBLAccelerometerData] {
+                    self.sensorFusionGraph.addX(obj.x, y: obj.y, z: obj.z)
+                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
+                }
+            }
+        default:
+            assert(false, "Added a new sensor fusion output?")
+        }
+        
+        task?.success { array in
+            hud.mode = .indeterminate
+            hud.label.text! = "Clearing Log..."
+            self.logCleanup { error in
+                hud.hide(animated: true)
+                if error != nil {
+                    self.connectDevice(false)
+                }
+            }
+        }.failure { error in
+            self.connectDevice(false)
+            hud.hide(animated: true)
+        }
+    }
+    
+    @IBAction func sensorFusionSendDataPressed(_ sender: Any) {
+        send(sensorFusionData, title: "SensorFusion")
     }
     
     // MARK: - DFU Service delegate methods

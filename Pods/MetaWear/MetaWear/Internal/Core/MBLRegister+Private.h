@@ -49,6 +49,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) uint8_t index;
 @property (nonatomic) MBLFormat *format;
 
+@property (nonatomic) int16_t initializeCount;
+@property (nonatomic) int16_t activateCount;
+
 // State Accessors
 @property (nonatomic) BOOL needsResponse;
 @property (nonatomic) BOOL writeResponds;
@@ -73,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeNotificationHandlers;
 
 // conflicts with the paramerized types on MBLEvent
-- (BFTask *)startNotificationsWithHandlerAsync:(nullable MBLObjectHandler)handler NS_SWIFT_NAME(startRegisterNotificationsAsync(handler:));
+- (BFTask *)startNotificationsWithHandlerAsync:(nullable MBLObjectHandler)handler;
 - (BFTask *)startNotificationsWithExecutorAsync:(BFExecutor *)executor withHandler:(nullable MBLObjectHandler)handler NS_SWIFT_NAME(startRegisterNotificationsAsync(executor:handler:));
 - (BFTask *)stopNotificationsAsync NS_SWIFT_NAME(stopRegisterNotificationsAsync());
 
