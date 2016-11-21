@@ -3,7 +3,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MetaWearApiTest' do
-  pod 'MetaWear', :git => 'https://github.com/mbientlab/MetaWear-SDK-iOS-macOS-tvOS.git', :branch => 'develop'
+  pod 'MetaWear'
   pod 'MBProgressHUD'
   pod 'StaticDataTableViewController'
   pod 'iOSDFULibrary'

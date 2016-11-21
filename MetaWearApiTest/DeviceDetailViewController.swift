@@ -2225,8 +2225,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             streamingEvents.append(device.sensorFusion!.quaternion as! MBLEvent<AnyObject>)
             task = device.sensorFusion!.quaternion.startNotificationsAsync { (obj, error) in
                 if let obj = obj {
-                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.w, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0))
-                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.w),\(obj.x),\(obj.y)\n".data(using: String.Encoding.utf8)!)
+                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0))
+                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
                 }
             }
         case 2:
@@ -2352,8 +2352,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         case 1:
             task = device.sensorFusion!.quaternion.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
                 for obj in array as! [MBLQuaternionData] {
-                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.w, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0))
-                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.w),\(obj.x),\(obj.y)\n".data(using: String.Encoding.utf8)!)
+                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0))
+                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
                 }
             }
         case 2:

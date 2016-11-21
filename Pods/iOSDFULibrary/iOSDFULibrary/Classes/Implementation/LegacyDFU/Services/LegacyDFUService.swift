@@ -330,7 +330,7 @@ internal typealias ErrorCallback = (_ error:DFUError, _ withMessage:String) -> V
                             // Each time a PRN is received, send next bunch of packets
                             if !self.paused && !self.aborted {
                                 let bytesSent = self.dfuPacketCharacteristic!.bytesSent
-                                if bytesSent == bytesReceived || bytesSent == (bytesReceived + 0x10000) {
+                                if bytesSent == bytesReceived {
                                     self.dfuPacketCharacteristic!.sendNext(number, packetsOf: firmware, andReportProgressTo: progressDelegate)
                                 } else {
                                     // Target device deported invalid number of bytes received
