@@ -148,11 +148,12 @@ class DevicesTableViewController: UITableViewController, DFUServiceDelegate, DFU
                 } else {
                     selectedFirmware = DFUFirmware(urlToBinOrHexFile: result.firmwareUrl, urlToDatFile: nil, type: .application)
                 }
-                self.initiator = DFUServiceInitiator(centralManager: result.centralManager, target: result.target)
-                let _ = self.initiator?.withFirmwareFile(selectedFirmware!)
+                self.initiator = LegacyDFUServiceInitiator(centralManager: result.centralManager, target: result.target)
+                let _ = self.initiator?.with(firmware: selectedFirmware!)
                 self.initiator?.forceDfu = true; // We also have the DIS which confuses the DFU library
                 self.initiator?.logger = self; // - to get log info
                 self.initiator?.delegate = self; // - to be informed about current state and errors
+                //self.initiator?.peripheralSelector = self DFUPeripheralSelectorDelegate
                 self.initiator?.progressDelegate = self; // - to show progress bar
                 
                 self.dfuController = self.initiator?.start()
@@ -180,7 +181,7 @@ class DevicesTableViewController: UITableViewController, DFUServiceDelegate, DFU
     
     // MARK: - DFU Service delegate methods
     
-    func didStateChangedTo(_ state: DFUState) {
+    func dfuStateDidChange(to state: DFUState) {
         if state == .completed {
             hud?.mode = .text
             hud?.label.text = "Success!"
@@ -189,7 +190,7 @@ class DevicesTableViewController: UITableViewController, DFUServiceDelegate, DFU
         }
     }
     
-    func didErrorOccur(_ error: DFUError, withMessage message: String) {
+    func dfuError(_ error: DFUError, didOccurWithMessage message: String) {
         print("Firmware update error \(error): \(message)")
         
         let alertController = UIAlertController(title: "Update Error", message: "Please re-connect and try again, if you can't connect, try MetaBoot Mode to recover.\nError: \(message)", preferredStyle: .alert)
@@ -199,7 +200,8 @@ class DevicesTableViewController: UITableViewController, DFUServiceDelegate, DFU
         hud?.hide(animated: true)
     }
     
-    func onUploadProgress(_ part: Int, totalParts: Int, progress: Int, currentSpeedBytesPerSecond: Double, avgSpeedBytesPerSecond: Double) {
+    func dfuProgressDidChange(for part: Int, outOf totalParts: Int, to progress: Int,
+                              currentSpeedBytesPerSecond: Double, avgSpeedBytesPerSecond: Double) {
         hud?.progress = Float(progress) / 100.0
     }
     
@@ -208,4 +210,12 @@ class DevicesTableViewController: UITableViewController, DFUServiceDelegate, DFU
             print("\(level): \(message)")
         }
     }
+    
+//    func select(_ peripheral:CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) -> Bool {
+//        
+//    }
+//    
+//    func filterBy(hint dfuServiceUUID: CBUUID) -> [CBUUID]? {
+//        
+//    }
 }

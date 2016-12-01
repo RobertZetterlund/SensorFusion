@@ -719,7 +719,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                 selectedFirmware = DFUFirmware(urlToBinOrHexFile: result.firmwareUrl, urlToDatFile: nil, type: .application)
             }
             self.initiator = DFUServiceInitiator(centralManager: result.centralManager, target: result.target)
-            let _ = self.initiator?.withFirmwareFile(selectedFirmware!)
+            let _ = self.initiator?.with(firmware: selectedFirmware!)
             self.initiator?.forceDfu = true; // We also have the DIS which confuses the DFU library
             self.initiator?.logger = self; // - to get log info
             self.initiator?.delegate = self; // - to be informed about current state and errors
@@ -2395,7 +2395,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     
     // MARK: - DFU Service delegate methods
     
-    func didStateChangedTo(_ state: DFUState) {
+    func dfuStateDidChange(to state: DFUState) {
         if state == .completed {
             hud?.mode = .text
             hud?.label.text = "Success!"
@@ -2403,7 +2403,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         }
     }
     
-    func didErrorOccur(_ error: DFUError, withMessage message: String) {
+    func dfuError(_ error: DFUError, didOccurWithMessage message: String) {
         print("Firmware update error \(error): \(message)")
         
         let alertController = UIAlertController(title: "Update Error", message: "Please re-connect and try again, if you can't connect, try MetaBoot Mode to recover.\nError: \(message)", preferredStyle: .alert)
@@ -2413,7 +2413,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         hud?.hide(animated: true)
     }
     
-    func onUploadProgress(_ part: Int, totalParts: Int, progress: Int, currentSpeedBytesPerSecond: Double, avgSpeedBytesPerSecond: Double) {
+    func dfuProgressDidChange(for part: Int, outOf totalParts: Int, to progress: Int,
+                              currentSpeedBytesPerSecond: Double, avgSpeedBytesPerSecond: Double) {
         hud?.progress = Float(progress) / 100.0
     }
     

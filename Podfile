@@ -6,6 +6,6 @@ target 'MetaWearApiTest' do
   pod 'MetaWear'
   pod 'MBProgressHUD'
   pod 'StaticDataTableViewController'
-  pod 'iOSDFULibrary'
+  pod 'iOSDFULibrary', :git => 'https://github.com/NordicSemiconductor/IOS-Pods-DFU-Library.git', :branch => 'Version3'
 end
 
