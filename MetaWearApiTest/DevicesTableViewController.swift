@@ -11,7 +11,7 @@ import MetaWear
 import MBProgressHUD
 import iOSDFULibrary
 
-class DevicesTableViewController: UITableViewController, DFUServiceDelegate, DFUProgressDelegate, LoggerDelegate {
+class DevicesTableViewController: UITableViewController, DFUServiceDelegate, DFUProgressDelegate, LoggerDelegate, DFUPeripheralSelectorDelegate {
     var devices: [MBLMetaWear]?
     var activity: UIActivityIndicatorView!
     var hud: MBProgressHUD?
@@ -150,11 +150,11 @@ class DevicesTableViewController: UITableViewController, DFUServiceDelegate, DFU
                 }
                 self.initiator = LegacyDFUServiceInitiator(centralManager: result.centralManager, target: result.target)
                 let _ = self.initiator?.with(firmware: selectedFirmware!)
-                self.initiator?.forceDfu = true; // We also have the DIS which confuses the DFU library
-                self.initiator?.logger = self; // - to get log info
-                self.initiator?.delegate = self; // - to be informed about current state and errors
-                //self.initiator?.peripheralSelector = self DFUPeripheralSelectorDelegate
-                self.initiator?.progressDelegate = self; // - to show progress bar
+                self.initiator?.forceDfu = true // We also have the DIS which confuses the DFU library
+                self.initiator?.logger = self // - to get log info
+                self.initiator?.delegate = self // - to be informed about current state and errors
+                self.initiator?.peripheralSelector = self
+                self.initiator?.progressDelegate = self // - to show progress bar
                 
                 self.dfuController = self.initiator?.start()
             }.failure { error in
@@ -211,11 +211,11 @@ class DevicesTableViewController: UITableViewController, DFUServiceDelegate, DFU
         }
     }
     
-//    func select(_ peripheral:CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) -> Bool {
-//        
-//    }
-//    
-//    func filterBy(hint dfuServiceUUID: CBUUID) -> [CBUUID]? {
-//        
-//    }
+    func select(_ peripheral:CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) -> Bool {
+        return peripheral.identifier == selected?.identifier
+    }
+    
+    func filterBy(hint dfuServiceUUID: CBUUID) -> [CBUUID]? {
+        return nil
+    }
 }

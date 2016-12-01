@@ -23,7 +23,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   iOSDFULibrary:
-    :commit: 9d69424f5d73daaf4404110ca284ab4ca2338d84
+    :commit: 305522d2ece7b6cbaddd46fa3b654f20a99d41d2
     :git: https://github.com/NordicSemiconductor/IOS-Pods-DFU-Library.git
 
 SPEC CHECKSUMS:

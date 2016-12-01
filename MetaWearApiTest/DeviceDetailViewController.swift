@@ -18,7 +18,7 @@ extension String {
     var drop0xPrefix:          String { return hasPrefix("0x") ? String(characters.dropFirst(2)) : self }
 }
 
-class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDelegate, DFUProgressDelegate, LoggerDelegate {
+class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDelegate, DFUProgressDelegate, LoggerDelegate, DFUPeripheralSelectorDelegate {
     var device: MBLMetaWear!
     
     @IBOutlet weak var connectionSwitch: UISwitch!
@@ -720,10 +720,11 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             }
             self.initiator = DFUServiceInitiator(centralManager: result.centralManager, target: result.target)
             let _ = self.initiator?.with(firmware: selectedFirmware!)
-            self.initiator?.forceDfu = true; // We also have the DIS which confuses the DFU library
-            self.initiator?.logger = self; // - to get log info
-            self.initiator?.delegate = self; // - to be informed about current state and errors
-            self.initiator?.progressDelegate = self; // - to show progress bar
+            self.initiator?.forceDfu = true // We also have the DIS which confuses the DFU library
+            self.initiator?.logger = self // - to get log info
+            self.initiator?.delegate = self // - to be informed about current state and errors
+            self.initiator?.peripheralSelector = self
+            self.initiator?.progressDelegate = self // - to show progress bar
             
             self.dfuController = self.initiator?.start()
         }.failure { error in
@@ -2422,5 +2423,13 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         if level.rawValue >= LogLevel.application.rawValue {
             print("\(level): \(message)")
         }
+    }
+    
+    func select(_ peripheral:CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) -> Bool {
+        return peripheral.identifier == device.identifier
+    }
+    
+    func filterBy(hint dfuServiceUUID: CBUUID) -> [CBUUID]? {
+        return nil
     }
 }
