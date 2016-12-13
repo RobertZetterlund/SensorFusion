@@ -346,7 +346,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         isObserving = false
         device.disconnectAsync().continueOnDispatch { t in
             self.isObserving = true
-            if t.error != nil {
+            guard t.error == nil else {
                 return t
             }
             return self.device.connect(withTimeoutAsync: 15)
@@ -371,12 +371,11 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     func deviceConnected() {
         connectionSwitch.setOn(true, animated: true)
         // Perform all device specific setup
-        if device.settings?.macAddress != nil {
-            device.settings!.macAddress!.readAsync().success { result in
+        if let mac = device.settings?.macAddress {
+            mac.readAsync().success { result in
                 print("ID: \(self.device.identifier.uuidString) MAC: \(result.value)")
             }
-        }
-        else {
+        } else {
             print("ID: \(device.identifier.uuidString)")
         }
         // We always have the info and state features
@@ -1664,12 +1663,16 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     }
     
     @IBAction func startHapticDriverPressed(_ sender: UIButton) {
-        var dcycle = UInt8(hapticDutyCycle.text!)!
+        var dcycle = UInt8(hapticDutyCycle.text!) ?? 248
         dcycle = min(dcycle, 248)
         dcycle = max(dcycle, 0)
-        var pwidth = UInt16(hapticPulseWidth.text!)!
+        hapticDutyCycle.text = String(dcycle)
+        
+        var pwidth = UInt16(hapticPulseWidth.text!) ?? 500
         pwidth = min(pwidth, 10000)
         pwidth = max(pwidth, 0)
+        hapticPulseWidth.text = String(pwidth)
+        
         sender.isEnabled = false
         device.hapticBuzzer!.startHapticAsync(dutyCycle: dcycle, pulseWidth: pwidth) {
             sender.isEnabled = true
@@ -1677,9 +1680,11 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     }
     
     @IBAction func startBuzzerDriverPressed(_ sender: UIButton) {
-        var pwidth = UInt16(hapticPulseWidth.text!)!
+        var pwidth = UInt16(hapticPulseWidth.text!) ?? 500
         pwidth = min(pwidth, 10000)
         pwidth = max(pwidth, 0)
+        hapticPulseWidth.text = String(pwidth)
+
         sender.isEnabled = false
         device.hapticBuzzer?.startBuzzerAsync(pulseWidth: pwidth) {
             sender.isEnabled = true
@@ -1743,8 +1748,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         
         streamingEvents.append(barometerBMP280.periodicAltitude as! MBLEvent<AnyObject>)
         barometerBMP280.periodicAltitude.startNotificationsAsync { (obj, error) in
-            if obj != nil {
-                self.barometerBMP280Altitude.text = String(format: "%.3f", obj!.value.doubleValue)
+            if let obj = obj {
+                self.barometerBMP280Altitude.text = String(format: "%.3f", obj.value.doubleValue)
             }
         }
     }
@@ -1806,8 +1811,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         
         streamingEvents.append(barometerBME280.periodicAltitude as! MBLEvent<AnyObject>)
         barometerBME280.periodicAltitude.startNotificationsAsync { (obj, error) in
-            if obj != nil {
-                self.barometerBME280Altitude.text = String(format: "%.3f", obj!.value.doubleValue)
+            if let obj = obj {
+                self.barometerBME280Altitude.text = String(format: "%.3f", obj.value.doubleValue)
             }
         }
     }
@@ -1876,8 +1881,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         
         streamingEvents.append(ambientLightLTR329.periodicIlluminance as! MBLEvent<AnyObject>)
         ambientLightLTR329.periodicIlluminance.startNotificationsAsync { (obj, error) in
-            if obj != nil {
-                self.ambientLightLTR329Illuminance.text = String(format: "%.3f", obj!.value.doubleValue)
+            if let obj = obj {
+                self.ambientLightLTR329Illuminance.text = String(format: "%.3f", obj.value.doubleValue)
             }
         }
     }
@@ -1918,8 +1923,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         proximityTSL2671Event = proximityTSL2671.proximity!.periodicRead(withPeriod: 700)
         streamingEvents.append(proximityTSL2671Event as! MBLEvent<AnyObject>)
         proximityTSL2671Event.startNotificationsAsync { (obj, error) in
-            if obj != nil {
-                self.proximityTSL2671Proximity.text = obj!.value.stringValue
+            if let obj = obj {
+                self.proximityTSL2671Proximity.text = obj.value.stringValue
             }
         }
     }
@@ -2006,8 +2011,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         hygrometerBME280Event = device.hygrometer!.humidity!.periodicRead(withPeriod: 700)
         streamingEvents.append(hygrometerBME280Event as! MBLEvent<AnyObject>)
         hygrometerBME280Event.startNotificationsAsync { (obj, error) in
-            if obj != nil {
-                self.hygrometerBME280Humidity.text = String(format: "%.2f", obj!.value.doubleValue)
+            if let obj = obj {
+                self.hygrometerBME280Humidity.text = String(format: "%.2f", obj.value.doubleValue)
             }
         }
     }
@@ -2037,8 +2042,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         conductanceEvent = device.conductance!.channels[channel].periodicRead(withPeriod: 500)
         streamingEvents.append(conductanceEvent as! MBLEvent<AnyObject>)
         conductanceEvent.startNotificationsAsync { (obj, error) in
-            if obj != nil {
-                self.conductanceLabel.text = obj!.value.stringValue
+            if let obj = obj {
+                self.conductanceLabel.text = obj.value.stringValue
             }
         }
     }
