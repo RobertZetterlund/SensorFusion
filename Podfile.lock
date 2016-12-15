@@ -1,7 +1,7 @@
 PODS:
   - Bolts/Tasks (1.8.4)
   - FastCoding+tvOS (3.2.1)
-  - iOSDFULibrary (2.1.6):
+  - iOSDFULibrary (3.0.0):
     - Zip (~> 0.6)
   - MBProgressHUD (1.0.0)
   - MetaWear (2.8.1):
@@ -11,30 +11,20 @@ PODS:
   - Zip (0.6.0)
 
 DEPENDENCIES:
-  - iOSDFULibrary (from `https://github.com/NordicSemiconductor/IOS-Pods-DFU-Library.git`, branch `Version3`)
+  - iOSDFULibrary
   - MBProgressHUD
   - MetaWear
   - StaticDataTableViewController
 
-EXTERNAL SOURCES:
-  iOSDFULibrary:
-    :branch: Version3
-    :git: https://github.com/NordicSemiconductor/IOS-Pods-DFU-Library.git
-
-CHECKOUT OPTIONS:
-  iOSDFULibrary:
-    :commit: 305522d2ece7b6cbaddd46fa3b654f20a99d41d2
-    :git: https://github.com/NordicSemiconductor/IOS-Pods-DFU-Library.git
-
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FastCoding+tvOS: d314b6daa8389ec790ab362f973f53a5657292bd
-  iOSDFULibrary: 1d597b90fed43a68aba886443a0045d900e622d9
+  iOSDFULibrary: 201dec70ae2d7e1cfbdc3cd8005b163f009c9dea
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MetaWear: 7e38bc43af0fba22473c3b8dc2bc35af31416450
   StaticDataTableViewController: 7ea8d7bc8c7f0a4e9255a320224462c7346c1d4a
   Zip: 805fc2fa9d2f05bbb7762d982d7a42ccdcc51f42
 
-PODFILE CHECKSUM: b1d8f5c1d7926df237a7d471d2b54af3efd72101
+PODFILE CHECKSUM: 9c4367628fdfa5ee18a27547a04f4f22f37ed47d
 
 COCOAPODS: 1.2.0.beta.1

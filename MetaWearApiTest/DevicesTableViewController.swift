@@ -148,7 +148,7 @@ class DevicesTableViewController: UITableViewController, DFUServiceDelegate, DFU
                 } else {
                     selectedFirmware = DFUFirmware(urlToBinOrHexFile: result.firmwareUrl, urlToDatFile: nil, type: .application)
                 }
-                self.initiator = LegacyDFUServiceInitiator(centralManager: result.centralManager, target: result.target)
+                self.initiator = DFUServiceInitiator(centralManager: result.centralManager, target: result.target)
                 let _ = self.initiator?.with(firmware: selectedFirmware!)
                 self.initiator?.forceDfu = true // We also have the DIS which confuses the DFU library
                 self.initiator?.logger = self // - to get log info
