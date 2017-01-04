@@ -267,7 +267,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet weak var sensorFusionGraph: APLGraphView!
     var sensorFusionData = Data()
     
-    var streamingEvents = [MBLEvent<AnyObject>]()
+    var streamingEvents: Set<NSObject> = [] // Can't use proper type due to compiler seg fault
     var isObserving = false {
         didSet {
             if self.isObserving {
@@ -292,7 +292,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         
         // Use this array to keep track of all streaming events, so turn them off
         // in case the user isn't so responsible
-        streamingEvents = [MBLEvent<AnyObject>]()
+        streamingEvents = []
         // Hide every section in the beginning
         hideSectionsWithHiddenRows = true
         cells(self.allCells, setHidden: true)
@@ -310,8 +310,10 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         super.viewWillDisappear(animated)
         
         isObserving = false
-        for event in streamingEvents {
-            event.stopNotificationsAsync()
+        for obj in streamingEvents {
+            if let event = obj as? MBLEvent<AnyObject> {
+                event.stopNotificationsAsync()
+            }
         }
         streamingEvents.removeAll()
     }
@@ -758,10 +760,10 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBAction func startSwitchNotifyPressed(_ sender: Any) {
         startSwitch.isEnabled = false
         stopSwitch.isEnabled = true
-        streamingEvents.append(device.mechanicalSwitch!.switchUpdateEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(device.mechanicalSwitch!.switchUpdateEvent)
         device.mechanicalSwitch!.switchUpdateEvent.startNotificationsAsync { (obj, error) in
-            if obj != nil {
-                self.mechanicalSwitchLabel.text = obj!.value.boolValue ? "Down" : "Up"
+            if let obj = obj {
+                self.mechanicalSwitchLabel.text = obj.value.boolValue ? "Down" : "Up"
             }
         }
     }
@@ -769,7 +771,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBAction func stopSwitchNotifyPressed(_ sender: Any) {
         startSwitch.isEnabled = true
         stopSwitch.isEnabled = false
-        streamingEvents.remove(at: (streamingEvents.index(of: device.mechanicalSwitch!.switchUpdateEvent as! MBLEvent<AnyObject>))!)
+        streamingEvents.remove(device.mechanicalSwitch!.switchUpdateEvent)
         device.mechanicalSwitch!.switchUpdateEvent.stopNotificationsAsync()
     }
     
@@ -869,7 +871,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         // These variables are used for data recording
         var array = [MBLAccelerometerData]() /* capacity: 1000 */
         accelerometerDataArray = array
-        streamingEvents.append(device.accelerometer!.dataReadyEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(device.accelerometer!.dataReadyEvent)
         device.accelerometer!.dataReadyEvent.startNotificationsAsync { (acceleration, error) in
             if let acceleration = acceleration {
                 self.accelerometerGraph.addX(acceleration.x, y: acceleration.y, z: acceleration.z)
@@ -883,7 +885,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         startAccelerometer.isEnabled = true
         stopAccelerometer.isEnabled = false
         startLog.isEnabled = true
-        streamingEvents.remove(at: self.streamingEvents.index(of: device.accelerometer!.dataReadyEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(device.accelerometer!.dataReadyEvent)
         device.accelerometer!.dataReadyEvent.stopNotificationsAsync()
     }
     
@@ -956,7 +958,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         stopTap.isEnabled = true
         updateAccelerometerSettings()
         let accelerometerMMA8452Q = device.accelerometer as! MBLAccelerometerMMA8452Q
-        streamingEvents.append(accelerometerMMA8452Q.tapEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(accelerometerMMA8452Q.tapEvent)
         accelerometerMMA8452Q.tapEvent.startNotificationsAsync { (obj, error) in
             if obj != nil {
                 self.tapCount += 1
@@ -969,7 +971,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         startTap.isEnabled = true
         stopTap.isEnabled = false
         let accelerometerMMA8452Q = device.accelerometer as! MBLAccelerometerMMA8452Q
-        streamingEvents.remove(at: streamingEvents.index(of: accelerometerMMA8452Q.tapEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(accelerometerMMA8452Q.tapEvent)
         accelerometerMMA8452Q.tapEvent.stopNotificationsAsync()
         tapCount = 0
         tapLabel.text = "Tap Count: 0"
@@ -980,7 +982,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         stopShake.isEnabled = true
         updateAccelerometerSettings()
         let accelerometerMMA8452Q = device.accelerometer as! MBLAccelerometerMMA8452Q
-        streamingEvents.append(accelerometerMMA8452Q.shakeEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(accelerometerMMA8452Q.shakeEvent)
         accelerometerMMA8452Q.shakeEvent.startNotificationsAsync { (obj, error) in
             if obj != nil {
                 self.shakeCount += 1
@@ -993,7 +995,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         startShake.isEnabled = true
         stopShake.isEnabled = false
         let accelerometerMMA8452Q = device.accelerometer as! MBLAccelerometerMMA8452Q
-        streamingEvents.remove(at: streamingEvents.index(of: accelerometerMMA8452Q.shakeEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(accelerometerMMA8452Q.shakeEvent)
         accelerometerMMA8452Q.shakeEvent.stopNotificationsAsync()
         shakeCount = 0
         shakeLabel.text = "Shakes: 0"
@@ -1004,10 +1006,10 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         stopOrientation.isEnabled = true
         updateAccelerometerSettings()
         let accelerometerMMA8452Q = device.accelerometer as! MBLAccelerometerMMA8452Q
-        streamingEvents.append(accelerometerMMA8452Q.orientationEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(accelerometerMMA8452Q.orientationEvent)
         accelerometerMMA8452Q.orientationEvent.startNotificationsAsync { (obj, error) in
-            if obj != nil {
-                switch obj!.orientation {
+            if let obj = obj {
+                switch obj.orientation {
                 case .portrait:
                     self.orientationLabel.text = "Portrait"
                 case .portraitUpsideDown:
@@ -1025,7 +1027,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         startOrientation.isEnabled = true
         stopOrientation.isEnabled = false
         let accelerometerMMA8452Q = device.accelerometer as! MBLAccelerometerMMA8452Q
-        streamingEvents.remove(at: streamingEvents.index(of: accelerometerMMA8452Q.orientationEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(accelerometerMMA8452Q.orientationEvent)
         accelerometerMMA8452Q.orientationEvent.stopNotificationsAsync()
         self.orientationLabel.text = "XXXXXXXXXXXXXX"
     }
@@ -1061,7 +1063,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         updateAccelerometerBMI160Settings()
         var array = [MBLAccelerometerData]() /* capacity: 1000 */
         accelerometerBMI160Data = array
-        streamingEvents.append(device.accelerometer!.dataReadyEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(device.accelerometer!.dataReadyEvent)
         device.accelerometer!.dataReadyEvent.startNotificationsAsync { (obj, error) in
             if let obj = obj {
                 self.accelerometerBMI160Graph.addX(obj.x, y: obj.y, z: obj.z)
@@ -1074,7 +1076,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMI160StartStream.isEnabled = true
         accelerometerBMI160StopStream.isEnabled = false
         accelerometerBMI160StartLog.isEnabled = true
-        streamingEvents.remove(at: streamingEvents.index(of: device.accelerometer!.dataReadyEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(device.accelerometer!.dataReadyEvent)
         device.accelerometer!.dataReadyEvent.stopNotificationsAsync()
     }
     
@@ -1128,7 +1130,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMI160StopTap.isEnabled = true
         updateAccelerometerBMI160Settings()
         let accelerometerBMI160 = self.device.accelerometer as! MBLAccelerometerBMI160
-        streamingEvents.append(accelerometerBMI160.tapEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(accelerometerBMI160.tapEvent)
         accelerometerBMI160.tapEvent.startNotificationsAsync { (obj, error) in
             if obj != nil {
                 self.accelerometerBMI160TapCount += 1
@@ -1141,7 +1143,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMI160StartTap.isEnabled = true
         accelerometerBMI160StopTap.isEnabled = false
         let accelerometerBMI160 = self.device.accelerometer as! MBLAccelerometerBMI160
-        streamingEvents.remove(at: streamingEvents.index(of: accelerometerBMI160.tapEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(accelerometerBMI160.tapEvent)
         accelerometerBMI160.tapEvent.stopNotificationsAsync()
         self.accelerometerBMI160TapCount = 0
         self.accelerometerBMI160TapLabel.text = "Tap Count: 0"
@@ -1152,10 +1154,10 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMI160StopFlat.isEnabled = true
         updateAccelerometerBMI160Settings()
         let accelerometerBMI160 = self.device.accelerometer as! MBLAccelerometerBMI160
-        streamingEvents.append(accelerometerBMI160.flatEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(accelerometerBMI160.flatEvent)
         accelerometerBMI160.flatEvent.startNotificationsAsync { (obj, error) in
-            if obj != nil {
-                self.accelerometerBMI160FlatLabel.text = obj!.value.boolValue ? "Flat" : "Not Flat"
+            if let obj = obj {
+                self.accelerometerBMI160FlatLabel.text = obj.value.boolValue ? "Flat" : "Not Flat"
             }
         }
     }
@@ -1164,7 +1166,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMI160StartFlat.isEnabled = true
         accelerometerBMI160StopFlat.isEnabled = false
         let accelerometerBMI160 = self.device.accelerometer as! MBLAccelerometerBMI160
-        streamingEvents.remove(at: streamingEvents.index(of: accelerometerBMI160.flatEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(accelerometerBMI160.flatEvent)
         accelerometerBMI160.flatEvent.stopNotificationsAsync()
         accelerometerBMI160FlatLabel.text = "XXXXXXX"
     }
@@ -1174,10 +1176,10 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMI160StopOrient.isEnabled = true
         updateAccelerometerBMI160Settings()
         let accelerometerBMI160 = self.device.accelerometer as! MBLAccelerometerBMI160
-        streamingEvents.append(accelerometerBMI160.orientationEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(accelerometerBMI160.orientationEvent)
         accelerometerBMI160.orientationEvent.startNotificationsAsync { (obj, error) in
-            if obj != nil {
-                switch obj!.orientation {
+            if let obj = obj {
+                switch obj.orientation {
                 case .portrait:
                     self.accelerometerBMI160OrientLabel.text = "Portrait"
                 case .portraitUpsideDown:
@@ -1195,7 +1197,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMI160StartOrient.isEnabled = true
         accelerometerBMI160StopOrient.isEnabled = false
         let accelerometerBMI160 = self.device.accelerometer as! MBLAccelerometerBMI160
-        streamingEvents.remove(at: streamingEvents.index(of: accelerometerBMI160.orientationEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(accelerometerBMI160.orientationEvent)
         accelerometerBMI160.orientationEvent.stopNotificationsAsync()
         accelerometerBMI160OrientLabel.text = "XXXXXXXXXXXXXX"
     }
@@ -1205,7 +1207,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMI160StopStep.isEnabled = true
         updateAccelerometerBMI160Settings()
         let accelerometerBMI160 = self.device.accelerometer as! MBLAccelerometerBMI160
-        streamingEvents.append(accelerometerBMI160.stepEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(accelerometerBMI160.stepEvent)
         accelerometerBMI160.stepEvent.startNotificationsAsync { (obj, error) in
             if obj != nil {
                 self.accelerometerBMI160StepCount += 1
@@ -1218,7 +1220,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMI160StartStep.isEnabled = true
         accelerometerBMI160StopStep.isEnabled = false
         let accelerometerBMI160 = self.device.accelerometer as! MBLAccelerometerBMI160
-        streamingEvents.remove(at: streamingEvents.index(of: accelerometerBMI160.stepEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(accelerometerBMI160.stepEvent)
         accelerometerBMI160.stepEvent.stopNotificationsAsync()
         accelerometerBMI160StepCount = 0
         accelerometerBMI160StepLabel.text = "Step Count: 0"
@@ -1255,7 +1257,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         updateAccelerometerBMA255Settings()
         var array = [MBLAccelerometerData]() /* capacity: 1000 */
         accelerometerBMA255Data = array
-        streamingEvents.append(device.accelerometer!.dataReadyEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(device.accelerometer!.dataReadyEvent)
         device.accelerometer!.dataReadyEvent.startNotificationsAsync { (obj, error) in
             if let obj = obj {
                 self.accelerometerBMA255Graph.addX(obj.x, y: obj.y, z: obj.z)
@@ -1268,7 +1270,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMA255StartStream.isEnabled = true
         accelerometerBMA255StopStream.isEnabled = false
         accelerometerBMA255StartLog.isEnabled = true
-        streamingEvents.remove(at: streamingEvents.index(of: device.accelerometer!.dataReadyEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(device.accelerometer!.dataReadyEvent)
         device.accelerometer!.dataReadyEvent.stopNotificationsAsync()
     }
     
@@ -1322,7 +1324,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMA255StopTap.isEnabled = true
         updateAccelerometerBMA255Settings()
         let accelerometerBMA255 = device.accelerometer as! MBLAccelerometerBMA255
-        streamingEvents.append(accelerometerBMA255.tapEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(accelerometerBMA255.tapEvent)
         accelerometerBMA255.tapEvent.startNotificationsAsync { (obj, error) in
             if obj != nil {
                 self.accelerometerBMA255TapCount += 1
@@ -1335,7 +1337,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMA255StartTap.isEnabled = true
         accelerometerBMA255StopTap.isEnabled = false
         let accelerometerBMA255 = device.accelerometer as! MBLAccelerometerBMA255
-        streamingEvents.remove(at: streamingEvents.index(of: accelerometerBMA255.tapEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(accelerometerBMA255.tapEvent)
         accelerometerBMA255.tapEvent.stopNotificationsAsync()
         accelerometerBMA255TapCount = 0
         accelerometerBMA255TapLabel.text = "Tap Count: 0"
@@ -1346,10 +1348,10 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMA255StopFlat.isEnabled = true
         updateAccelerometerBMA255Settings()
         let accelerometerBMA255 = device.accelerometer as! MBLAccelerometerBMA255
-        streamingEvents.append(accelerometerBMA255.flatEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(accelerometerBMA255.flatEvent)
         accelerometerBMA255.flatEvent.startNotificationsAsync { (obj, error) in
-            if obj != nil {
-                self.accelerometerBMA255FlatLabel.text = obj!.value.boolValue ? "Flat" : "Not Flat"
+            if let obj = obj {
+                self.accelerometerBMA255FlatLabel.text = obj.value.boolValue ? "Flat" : "Not Flat"
             }
         }
     }
@@ -1358,7 +1360,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMA255StartFlat.isEnabled = true
         accelerometerBMA255StopFlat.isEnabled = false
         let accelerometerBMA255 = device.accelerometer as! MBLAccelerometerBMA255
-        streamingEvents.remove(at: streamingEvents.index(of: accelerometerBMA255.flatEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(accelerometerBMA255.flatEvent)
         accelerometerBMA255.flatEvent.stopNotificationsAsync()
         accelerometerBMA255FlatLabel.text = "XXXXXXX"
     }
@@ -1368,10 +1370,10 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMA255StopOrient.isEnabled = true
         updateAccelerometerBMA255Settings()
         let accelerometerBMA255 = device.accelerometer as! MBLAccelerometerBMA255
-        streamingEvents.append(accelerometerBMA255.orientationEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(accelerometerBMA255.orientationEvent)
         accelerometerBMA255.orientationEvent.startNotificationsAsync { (obj, error) in
-            if obj != nil {
-                switch obj!.orientation {
+            if let obj = obj {
+                switch obj.orientation {
                 case .portrait:
                     self.accelerometerBMA255OrientLabel.text = "Portrait"
                 case .portraitUpsideDown:
@@ -1389,7 +1391,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMA255StartOrient.isEnabled = true
         accelerometerBMA255StopOrient.isEnabled = false
         let accelerometerBMA255 = device.accelerometer as! MBLAccelerometerBMA255
-        streamingEvents.remove(at: streamingEvents.index(of: accelerometerBMA255.orientationEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(accelerometerBMA255.orientationEvent)
         accelerometerBMA255.orientationEvent.stopNotificationsAsync()
         accelerometerBMA255OrientLabel.text = "XXXXXXXXXXXXXX"
     }
@@ -1427,7 +1429,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         updateGyroBMI160Settings()
         var array = [MBLGyroData]() /* capacity: 1000 */
         gyroBMI160Data = array
-        streamingEvents.append(device.gyro!.dataReadyEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(device.gyro!.dataReadyEvent)
         device.gyro!.dataReadyEvent.startNotificationsAsync { (obj, error) in
             if let obj = obj {
                 // TODO: Come up with a better graph interface, we need to scale value
@@ -1442,7 +1444,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         gyroBMI160StartStream.isEnabled = true
         gyroBMI160StopStream.isEnabled = false
         gyroBMI160StartLog.isEnabled = true
-        streamingEvents.remove(at: streamingEvents.index(of: device.gyro!.dataReadyEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(device.gyro!.dataReadyEvent)
         device.gyro!.dataReadyEvent.stopNotificationsAsync()
     }
     
@@ -1500,7 +1502,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         magnetometerBMM150Data = array
         magnetometerBMM150Graph.fullScale = 4
         let magnetometerBMM150 = device.magnetometer as! MBLMagnetometerBMM150
-        streamingEvents.append(magnetometerBMM150.periodicMagneticField as! MBLEvent<AnyObject>)
+        streamingEvents.insert(magnetometerBMM150.periodicMagneticField)
         magnetometerBMM150.periodicMagneticField.startNotificationsAsync { (obj, error) in
             if let obj = obj {
                 // TODO: Come up with a better graph interface, we need to scale value
@@ -1516,7 +1518,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         magnetometerBMM150StopStream.isEnabled = false
         magnetometerBMM150StartLog.isEnabled = true
         let magnetometerBMM150 = device.magnetometer as! MBLMagnetometerBMM150
-        streamingEvents.remove(at: streamingEvents.index(of: magnetometerBMM150.periodicMagneticField as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(magnetometerBMM150.periodicMagneticField)
         magnetometerBMM150.periodicMagneticField.stopNotificationsAsync()
     }
     
@@ -1622,7 +1624,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             pin.changeType = .any
         }
         
-        streamingEvents.append(pin.changeEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(pin.changeEvent!)
         pin.changeEvent?.startNotificationsAsync { (obj, error) in
             if obj != nil {
                 self.gpioPinChangeCount += 1
@@ -1635,7 +1637,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         gpioStartPinChange.isEnabled = true
         gpioStopPinChange.isEnabled = false
         let pin = device.gpio!.pins[gpioPinSelector.selectedSegmentIndex]
-        streamingEvents.remove(at: streamingEvents.index(of: pin.changeEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(pin.changeEvent!)
         pin.changeEvent!.stopNotificationsAsync()
         gpioPinChangeCount = 0
         gpioPinChangeLabel.text = "Change Count: 0"
@@ -1746,7 +1748,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             barometerBMP280.standbyTime = .standby4000
         }
         
-        streamingEvents.append(barometerBMP280.periodicAltitude as! MBLEvent<AnyObject>)
+        streamingEvents.insert(barometerBMP280.periodicAltitude)
         barometerBMP280.periodicAltitude.startNotificationsAsync { (obj, error) in
             if let obj = obj {
                 self.barometerBMP280Altitude.text = String(format: "%.3f", obj.value.doubleValue)
@@ -1758,7 +1760,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         barometerBMP280StartStream.isEnabled = true
         barometerBMP280StopStream.isEnabled = false
         let barometerBMP280 = device.barometer as! MBLBarometerBMP280
-        streamingEvents.remove(at: streamingEvents.index(of: barometerBMP280.periodicAltitude as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(barometerBMP280.periodicAltitude)
         barometerBMP280.periodicAltitude.stopNotificationsAsync()
         barometerBMP280Altitude.text = "X.XXX"
     }
@@ -1809,7 +1811,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             barometerBME280.standbyTime = .standby1000
         }
         
-        streamingEvents.append(barometerBME280.periodicAltitude as! MBLEvent<AnyObject>)
+        streamingEvents.insert(barometerBME280.periodicAltitude)
         barometerBME280.periodicAltitude.startNotificationsAsync { (obj, error) in
             if let obj = obj {
                 self.barometerBME280Altitude.text = String(format: "%.3f", obj.value.doubleValue)
@@ -1821,7 +1823,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         barometerBME280StartStream.isEnabled = true
         barometerBME280StopStream.isEnabled = false
         let barometerBME280 = device.barometer as! MBLBarometerBME280
-        streamingEvents.remove(at: streamingEvents.index(of: barometerBME280.periodicAltitude as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(barometerBME280.periodicAltitude)
         barometerBME280.periodicAltitude.stopNotificationsAsync()
         barometerBME280Altitude.text = "X.XXX"
     }
@@ -1879,7 +1881,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             ambientLightLTR329.measurementRate = .rate2000ms
         }
         
-        streamingEvents.append(ambientLightLTR329.periodicIlluminance as! MBLEvent<AnyObject>)
+        streamingEvents.insert(ambientLightLTR329.periodicIlluminance)
         ambientLightLTR329.periodicIlluminance.startNotificationsAsync { (obj, error) in
             if let obj = obj {
                 self.ambientLightLTR329Illuminance.text = String(format: "%.3f", obj.value.doubleValue)
@@ -1891,7 +1893,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         ambientLightLTR329StartStream.isEnabled = true
         ambientLightLTR329StopStream.isEnabled = false
         let ambientLightLTR329 = device.ambientLight as! MBLAmbientLightLTR329
-        streamingEvents.remove(at: streamingEvents.index(of: ambientLightLTR329.periodicIlluminance as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(ambientLightLTR329.periodicIlluminance)
         ambientLightLTR329.periodicIlluminance.stopNotificationsAsync()
         ambientLightLTR329Illuminance.text = "X.XXX"
     }
@@ -1921,7 +1923,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         proximityTSL2671.integrationTime = Double(proximityTSL2671IntegrationSlider.value)
         proximityTSL2671.proximityPulses = UInt8(round(proximityTSL2671PulseStepper.value))
         proximityTSL2671Event = proximityTSL2671.proximity!.periodicRead(withPeriod: 700)
-        streamingEvents.append(proximityTSL2671Event as! MBLEvent<AnyObject>)
+        streamingEvents.insert(proximityTSL2671Event)
         proximityTSL2671Event.startNotificationsAsync { (obj, error) in
             if let obj = obj {
                 self.proximityTSL2671Proximity.text = obj.value.stringValue
@@ -1935,7 +1937,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         proximityTSL2671Drive.isEnabled = true
         proximityTSL2671IntegrationSlider.isEnabled = true
         proximityTSL2671PulseStepper.isEnabled = true
-        streamingEvents.remove(at: streamingEvents.index(of: proximityTSL2671Event as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(proximityTSL2671Event)
         proximityTSL2671Event.stopNotificationsAsync()
         proximityTSL2671Proximity.text = "XXXX"
     }
@@ -1965,7 +1967,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         photometerTCS3472.integrationTime = Double(photometerTCS3472IntegrationSlider.value)
         photometerTCS3472.ledFlash = photometerTCS3472LedFlashSwitch.isOn
         photometerTCS3472Event = photometerTCS3472.color!.periodicRead(withPeriod: 700)
-        streamingEvents.append(photometerTCS3472Event as! MBLEvent<AnyObject>)
+        streamingEvents.insert(photometerTCS3472Event)
         photometerTCS3472Event.startNotificationsAsync { (obj, error) in
             if let obj = obj {
                 self.photometerTCS3472RedColor.text = "\(obj.red)"
@@ -1982,7 +1984,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         photometerTCS3472Gain.isEnabled = true
         photometerTCS3472IntegrationSlider.isEnabled = true
         photometerTCS3472LedFlashSwitch.isEnabled = true
-        streamingEvents.remove(at: streamingEvents.index(of: photometerTCS3472Event as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(photometerTCS3472Event)
         photometerTCS3472Event.stopNotificationsAsync()
         photometerTCS3472RedColor.text = "XXXX"
         photometerTCS3472GreenColor.text = "XXXX"
@@ -2009,7 +2011,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         }
         
         hygrometerBME280Event = device.hygrometer!.humidity!.periodicRead(withPeriod: 700)
-        streamingEvents.append(hygrometerBME280Event as! MBLEvent<AnyObject>)
+        streamingEvents.insert(hygrometerBME280Event)
         hygrometerBME280Event.startNotificationsAsync { (obj, error) in
             if let obj = obj {
                 self.hygrometerBME280Humidity.text = String(format: "%.2f", obj.value.doubleValue)
@@ -2021,7 +2023,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         hygrometerBME280StartStream.isEnabled = true
         hygrometerBME280StopStream.isEnabled = false
         hygrometerBME280Oversample.isEnabled = true
-        streamingEvents.remove(at: streamingEvents.index(of: hygrometerBME280Event as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(hygrometerBME280Event)
         hygrometerBME280Event.stopNotificationsAsync()
         hygrometerBME280Humidity.text = "XX.XX"
     }
@@ -2040,7 +2042,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         let channel = Int(round(conductanceChannelStepper.value))
         device.conductance!.calibrateAsync()
         conductanceEvent = device.conductance!.channels[channel].periodicRead(withPeriod: 500)
-        streamingEvents.append(conductanceEvent as! MBLEvent<AnyObject>)
+        streamingEvents.insert(conductanceEvent)
         conductanceEvent.startNotificationsAsync { (obj, error) in
             if let obj = obj {
                 self.conductanceLabel.text = obj.value.stringValue
@@ -2055,7 +2057,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         conductanceVoltage.isEnabled = true
         conductanceRange.isEnabled = true
         conductanceChannelStepper.isEnabled = true
-        streamingEvents.remove(at: streamingEvents.index(of: conductanceEvent as! MBLEvent<AnyObject>)!)
+        streamingEvents.remove(conductanceEvent)
         conductanceEvent.stopNotificationsAsync()
         conductanceLabel.text = "XXXX"
     }
@@ -2220,7 +2222,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         var task: BFTask<AnyObject>?
         switch sensorFusionOutput.selectedSegmentIndex {
         case 0:
-            streamingEvents.append(device.sensorFusion!.eulerAngle as! MBLEvent<AnyObject>)
+            streamingEvents.insert(device.sensorFusion!.eulerAngle)
             task = device.sensorFusion!.eulerAngle.startNotificationsAsync { (obj, error) in
                 if let obj = obj {
                     self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.p, min: -180, max: 180), y: self.sensorFusionGraph.scale(obj.r, min: -90, max: 90), z: self.sensorFusionGraph.scale(obj.y, min: 0, max: 360))
@@ -2228,7 +2230,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                 }
             }
         case 1:
-            streamingEvents.append(device.sensorFusion!.quaternion as! MBLEvent<AnyObject>)
+            streamingEvents.insert(device.sensorFusion!.quaternion)
             task = device.sensorFusion!.quaternion.startNotificationsAsync { (obj, error) in
                 if let obj = obj {
                     self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0))
@@ -2236,7 +2238,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                 }
             }
         case 2:
-            streamingEvents.append(device.sensorFusion!.gravity as! MBLEvent<AnyObject>)
+            streamingEvents.insert(device.sensorFusion!.gravity)
             task = device.sensorFusion!.gravity.startNotificationsAsync { (obj, error) in
                 if let obj = obj {
                     self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0))
@@ -2244,7 +2246,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                 }
             }
         case 3:
-            streamingEvents.append(device.sensorFusion!.linearAcceleration as! MBLEvent<AnyObject>)
+            streamingEvents.insert(device.sensorFusion!.linearAcceleration)
             switch (device.accelerometer as! MBLAccelerometerBosch).fullScaleRange {
             case .range2G:
                 sensorFusionGraph.fullScale = 2.0
@@ -2284,16 +2286,16 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         
         switch sensorFusionOutput.selectedSegmentIndex {
         case 0:
-            streamingEvents.remove(at: streamingEvents.index(of: device.sensorFusion!.eulerAngle as! MBLEvent<AnyObject>)!)
+            streamingEvents.remove(device.sensorFusion!.eulerAngle)
             device.sensorFusion!.eulerAngle.stopNotificationsAsync()
         case 1:
-            streamingEvents.remove(at: streamingEvents.index(of: device.sensorFusion!.quaternion as! MBLEvent<AnyObject>)!)
+            streamingEvents.remove(device.sensorFusion!.quaternion)
             device.sensorFusion!.quaternion.stopNotificationsAsync()
         case 2:
-            streamingEvents.remove(at: streamingEvents.index(of: device.sensorFusion!.gravity as! MBLEvent<AnyObject>)!)
+            streamingEvents.remove(device.sensorFusion!.gravity)
             device.sensorFusion!.gravity.stopNotificationsAsync()
         case 3:
-            streamingEvents.remove(at: streamingEvents.index(of: device.sensorFusion!.linearAcceleration as! MBLEvent<AnyObject>)!)
+            streamingEvents.remove(device.sensorFusion!.linearAcceleration)
             device.sensorFusion!.linearAcceleration.stopNotificationsAsync()
         default:
             assert(false, "Added a new sensor fusion output?")

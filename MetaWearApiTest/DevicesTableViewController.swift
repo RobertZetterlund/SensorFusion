@@ -44,12 +44,12 @@ class DevicesTableViewController: UITableViewController, DFUServiceDelegate, DFU
             activity.startAnimating()
             if metaBootSwitch.isOn {
                 MBLMetaWearManager.shared().startScan(forMetaBootsAllowDuplicates: true, handler: { array in
-                    self.devices = array as? [MBLMetaWear]
+                    self.devices = array
                     self.tableView.reloadData()
                 })
             } else {
                 MBLMetaWearManager.shared().startScan(forMetaWearsAllowDuplicates: true, handler: { array in
-                    self.devices = array as? [MBLMetaWear]
+                    self.devices = array
                     self.tableView.reloadData()
                 })
             }
