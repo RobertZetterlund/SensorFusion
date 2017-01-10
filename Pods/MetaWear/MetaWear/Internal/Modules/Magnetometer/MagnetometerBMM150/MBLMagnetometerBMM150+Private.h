@@ -1,9 +1,9 @@
 /**
- * MBLOrientationData+Private.h
+ * MBLMagnetometerBMM150+Private.h
  * MetaWear
  *
- * Created by Stephen Schiffli on 10/15/14.
- * Copyright 2014-2015 MbientLab Inc. All rights reserved.
+ * Created by Stephen Schiffli on 1/6/16.
+ * Copyright 2016 MbientLab Inc. All rights reserved.
  *
  * IMPORTANT: Your use of this Software is limited to those specific rights
  * granted under the terms of a software license agreement between the user who
@@ -33,17 +33,31 @@
  * contact MbientLab via email: hello@mbientlab.com
  */
 
-#import "MBLOrientationData.h"
+#import "MBLMagnetometerBMM150.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MBLOrientationData (Private)
+/**
+ Magnetometer sample frequencies
+ */
+typedef NS_ENUM(uint8_t, MBLMagnetometerBMM150SampleFrequency) {
+    MBLMagnetometerBMM150SampleFrequency2Hz = 1,
+    MBLMagnetometerBMM150SampleFrequency6Hz = 2,
+    MBLMagnetometerBMM150SampleFrequency8Hz = 3,
+    MBLMagnetometerBMM150SampleFrequency10Hz = 0,
+    MBLMagnetometerBMM150SampleFrequency15Hz = 4,
+    MBLMagnetometerBMM150SampleFrequency20Hz = 5,
+    MBLMagnetometerBMM150SampleFrequency25Hz = 6,
+    MBLMagnetometerBMM150SampleFrequency30Hz = 7
+};
 
-- (instancetype)initWithOrientation:(MBLAccelerometerOrientation)orientation timestamp:(NSDate *)timestamp;
+@interface MBLMagnetometerBMM150 (Private)
 
-- (instancetype)initWithOrientation:(MBLAccelerometerOrientation)orientation
-                    facingDirection:(MBLAccelerometerFacingDirection)facingDirection
-                          timestamp:(NSDate *)timestamp;
+/**
+ @warning This is changed any time the powerPreset property changes, so set
+ powerPreset first and then override the sampleFrequency if needed
+ */
+@property (nonatomic) MBLMagnetometerBMM150SampleFrequency sampleFrequency;
 
 @end
 

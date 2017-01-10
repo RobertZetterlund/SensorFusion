@@ -382,11 +382,11 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         }
         // We always have the info and state features
         cells(self.infoAndStateCells, setHidden: false)
-        mfgNameLabel.text = device.deviceInfo?.manufacturerName
-        serialNumLabel.text = device.deviceInfo?.serialNumber
-        hwRevLabel.text = device.deviceInfo?.hardwareRevision
-        fwRevLabel.text = device.deviceInfo?.firmwareRevision
-        modelNumberLabel.text = device.deviceInfo?.modelNumber
+        mfgNameLabel.text = device.deviceInfo?.manufacturerName ?? "N/A"
+        serialNumLabel.text = device.deviceInfo?.serialNumber ?? "N/A"
+        hwRevLabel.text = device.deviceInfo?.hardwareRevision ?? "N/A"
+        fwRevLabel.text = device.deviceInfo?.firmwareRevision ?? "N/A"
+        modelNumberLabel.text = "\(device.deviceInfo?.modelNumber ?? "N/A") (\(MBLModelString(device.model)))"
         txPowerSelector.selectedSegmentIndex = Int(device.settings!.transmitPower.rawValue)
         // Automaticaly send off some reads
         device.readBatteryLifeAsync().success { result in
@@ -2428,7 +2428,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     
     func logWith(_ level: LogLevel, message: String) {
         if level.rawValue >= LogLevel.application.rawValue {
-            print("\(level): \(message)")
+            print("\(level.name()): \(message)")
         }
     }
     

@@ -142,7 +142,7 @@ void DrawGridlines(CGContextRef context, CGFloat x, CGFloat width)
  The GraphViewSegment manages up to 32 values and a CALayer that it updates with the segment of the graph that those values represent.
  */
 
-@interface APLGraphViewSegment : NSObject
+@interface APLGraphViewSegment : NSObject <CALayerDelegate>
 
 
 // Returns true if adding this value fills the segment, which is necessary for properly updating the segments.
