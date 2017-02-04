@@ -1052,7 +1052,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         }
         
         accelerometerBMI160.sampleFrequency = Double(self.accelerometerBMI160Frequency.titleForSegment(at: self.accelerometerBMI160Frequency.selectedSegmentIndex)!)!
-        accelerometerBMI160.tapType = MBLAccelerometerTapType(rawValue: UInt8(self.tapDetectionType.selectedSegmentIndex))!
+        accelerometerBMI160.tapEvent.type = MBLAccelerometerTapType(rawValue: UInt8(self.tapDetectionType.selectedSegmentIndex))!
     }
     
     @IBAction func accelerometerBMI160StartStreamPressed(_ sender: Any) {
@@ -1157,7 +1157,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         streamingEvents.insert(accelerometerBMI160.flatEvent)
         accelerometerBMI160.flatEvent.startNotificationsAsync { (obj, error) in
             if let obj = obj {
-                self.accelerometerBMI160FlatLabel.text = obj.value.boolValue ? "Flat" : "Not Flat"
+                self.accelerometerBMI160FlatLabel.text = obj.isFlat ? "Flat" : "Not Flat"
             }
         }
     }
@@ -1246,7 +1246,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         }
         
         accelerometerBMA255.sampleFrequency = Double(accelerometerBMA255Frequency.titleForSegment(at: accelerometerBMA255Frequency.selectedSegmentIndex)!)!
-        accelerometerBMA255.tapType = MBLAccelerometerTapType(rawValue: UInt8(tapDetectionType.selectedSegmentIndex))!
+        accelerometerBMA255.tapEvent.type = MBLAccelerometerTapType(rawValue: UInt8(tapDetectionType.selectedSegmentIndex))!
     }
     
     @IBAction func accelerometerBMA255StartStreamPressed(_ sender: Any) {
@@ -1351,7 +1351,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         streamingEvents.insert(accelerometerBMA255.flatEvent)
         accelerometerBMA255.flatEvent.startNotificationsAsync { (obj, error) in
             if let obj = obj {
-                self.accelerometerBMA255FlatLabel.text = obj.value.boolValue ? "Flat" : "Not Flat"
+                self.accelerometerBMA255FlatLabel.text = obj.isFlat ? "Flat" : "Not Flat"
             }
         }
     }
