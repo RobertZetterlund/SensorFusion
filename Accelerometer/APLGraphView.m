@@ -93,6 +93,16 @@ CGColorRef graphLineColor()
     return c;
 }
 
+CGColorRef graphWColor()
+{
+    static CGColorRef c = NULL;
+    if (c == NULL)
+    {
+        c = CreateDeviceRGBColor(1.0, 1.0, 0.0, 1.0);
+    }
+    return c;
+}
+
 CGColorRef graphXColor()
 {
     static CGColorRef c = NULL;
@@ -146,7 +156,7 @@ void DrawGridlines(CGContextRef context, CGFloat x, CGFloat width)
 
 
 // Returns true if adding this value fills the segment, which is necessary for properly updating the segments.
--(BOOL)addX:(double)x y:(double)y z:(double)z;
+-(BOOL)addX:(double)x y:(double)y z:(double)z w:(double)w;
 
 /*
  When this object gets recycled (when it falls off the end of the graph) -reset is sent to clear values and prepare for reuse.
@@ -162,6 +172,8 @@ void DrawGridlines(CGContextRef context, CGFloat x, CGFloat width)
 // The layer that this segment is drawing into.
 @property(nonatomic, readonly) CALayer *layer;
 
+@property(nonatomic) BOOL hasW;
+
 @end
 
 
@@ -171,6 +183,7 @@ void DrawGridlines(CGContextRef context, CGFloat x, CGFloat width)
     double xhistory[33];
     double yhistory[33];
     double zhistory[33];
+    double whistory[33];
     int index;
 }
 
@@ -198,6 +211,7 @@ void DrawGridlines(CGContextRef context, CGFloat x, CGFloat width)
          Index represents how many slots are left to be filled in the graph, which is also +1 compared to the array index that a new entry will be added.
          */
         index = 33;
+        self.hasW = false;
     }
     return self;
 }
@@ -209,6 +223,7 @@ void DrawGridlines(CGContextRef context, CGFloat x, CGFloat width)
     memset(xhistory, 0, sizeof(xhistory));
     memset(yhistory, 0, sizeof(yhistory));
     memset(zhistory, 0, sizeof(zhistory));
+    memset(whistory, 0, sizeof(whistory));
     index = 33;
     // Inform Core Animation that this layer needs to be redrawn.
     [self.layer setNeedsDisplay];
@@ -229,7 +244,7 @@ void DrawGridlines(CGContextRef context, CGFloat x, CGFloat width)
 }
 
 
--(BOOL)addX:(double)x y:(double)y z:(double)z
+-(BOOL)addX:(double)x y:(double)y z:(double)z w:(double)w
 {
     // If this segment is not full, add a new value to the history.
     if (index > 0)
@@ -239,6 +254,7 @@ void DrawGridlines(CGContextRef context, CGFloat x, CGFloat width)
         xhistory[index] = x;
         yhistory[index] = y;
         zhistory[index] = z;
+        whistory[index] = w;
         // And inform Core Animation to redraw the layer.
         [self.layer setNeedsDisplay];
     }
@@ -288,6 +304,17 @@ void DrawGridlines(CGContextRef context, CGFloat x, CGFloat width)
     }
     CGContextSetStrokeColorWithColor(context, graphZColor());
     CGContextStrokeLineSegments(context, lines, 64);
+    
+    // W
+    if (self.hasW) {
+        for (i = 0; i < 32; ++i)
+        {
+            lines[i*2].y = -whistory[i] * scaleFactor;
+            lines[i*2+1].y = -whistory[i+1] * scaleFactor;
+        }
+        CGContextSetStrokeColorWithColor(context, graphWColor());
+        CGContextStrokeLineSegments(context, lines, 64);
+    }
 }
 
 
@@ -415,20 +442,25 @@ void DrawGridlines(CGContextRef context, CGFloat x, CGFloat width)
     _current = [self addSegment];
 }
 
-
 -(void)addX:(double)x y:(double)y z:(double)z
 {
+    [self addX:x y:y z:z w:-1.0];
+}
+
+-(void)addX:(double)x y:(double)y z:(double)z w:(double)w;
+{
     scaleFactor = 48.0 / self.fullScale;
-    
+    self.current.hasW = self.hasW;
     // First, add the new value to the current segment.
-    if ([self.current addX:x y:y z:z])
+    if ([self.current addX:x y:y z:z w:w])
     {
         /*
          If after doing that we've filled up the current segment, then we need to determine the next current segment.
          */
         [self recycleSegment];
         // To keep the graph looking continuous, add the value to the new segment as well.
-        [self.current addX:x y:y z:z];
+        self.current.hasW = self.hasW;
+        [self.current addX:x y:y z:z w:w];
     }
     /*
      After adding a new data point, advance the x-position of all the segment layers by 1 to create the illusion that the graph is advancing.

@@ -55,7 +55,9 @@
 @interface APLGraphView : UIView
 
 @property float fullScale;
+@property BOOL hasW;
 -(void)addX:(double)x y:(double)y z:(double)z;
+-(void)addX:(double)x y:(double)y z:(double)z w:(double)w;
 -(double)scale:(double)value min:(double)min max:(double)max;
 
 @end

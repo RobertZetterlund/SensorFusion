@@ -2207,11 +2207,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         sensorFusionGraph.fullScale = 8
     }
     
-    func trim(_ maxValue: Double, minValue: Double) {
-        
-        
-    }
-    
     @IBAction func sensorFusionStartStreamPressed(_ sender: Any) {
         sensorFusionStartStream.isEnabled = false
         sensorFusionStopStream.isEnabled = true
@@ -2223,22 +2218,25 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         switch sensorFusionOutput.selectedSegmentIndex {
         case 0:
             streamingEvents.insert(device.sensorFusion!.eulerAngle)
+            sensorFusionGraph.hasW = true
             task = device.sensorFusion!.eulerAngle.startNotificationsAsync { (obj, error) in
                 if let obj = obj {
-                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.p, min: -180, max: 180), y: self.sensorFusionGraph.scale(obj.r, min: -90, max: 90), z: self.sensorFusionGraph.scale(obj.y, min: 0, max: 360))
-                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.p),\(obj.r),\(obj.y)\n".data(using: String.Encoding.utf8)!)
+                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.p, min: -180, max: 180), y: self.sensorFusionGraph.scale(obj.r, min: -90, max: 90), z: self.sensorFusionGraph.scale(obj.y, min: 0, max: 360), w: self.sensorFusionGraph.scale(obj.h, min: 0, max: 360))
+                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.p),\(obj.r),\(obj.y),\(obj.h)\n".data(using: String.Encoding.utf8)!)
                 }
             }
         case 1:
             streamingEvents.insert(device.sensorFusion!.quaternion)
+            sensorFusionGraph.hasW = true
             task = device.sensorFusion!.quaternion.startNotificationsAsync { (obj, error) in
                 if let obj = obj {
-                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0))
-                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
+                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0), w: self.sensorFusionGraph.scale(obj.w, min: -1.0, max: 1.0))
+                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.w),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
                 }
             }
         case 2:
             streamingEvents.insert(device.sensorFusion!.gravity)
+            sensorFusionGraph.hasW = false
             task = device.sensorFusion!.gravity.startNotificationsAsync { (obj, error) in
                 if let obj = obj {
                     self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0))
@@ -2257,6 +2255,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             case.range16G:
                 sensorFusionGraph.fullScale = 16.0
             }
+            sensorFusionGraph.hasW = false
             task = device.sensorFusion!.linearAcceleration.startNotificationsAsync { (obj, error) in
                 if let obj = obj {
                     self.sensorFusionGraph.addX(obj.x, y: obj.y, z: obj.z)
@@ -2351,20 +2350,23 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         
         switch sensorFusionOutput.selectedSegmentIndex {
         case 0:
+            sensorFusionGraph.hasW = true
             task = device.sensorFusion!.eulerAngle.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
                 for obj in array as! [MBLEulerAngleData] {
-                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.p, min: -180, max: 180), y: self.sensorFusionGraph.scale(obj.r, min: -90, max: 90), z: self.sensorFusionGraph.scale(obj.y, min: 0, max: 360))
-                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.p),\(obj.r),\(obj.y)\n".data(using: String.Encoding.utf8)!)
+                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.p, min: -180, max: 180), y: self.sensorFusionGraph.scale(obj.r, min: -90, max: 90), z: self.sensorFusionGraph.scale(obj.y, min: 0, max: 360), w: self.sensorFusionGraph.scale(obj.h, min: 0, max: 360))
+                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.p),\(obj.r),\(obj.y),\(obj.h)\n".data(using: String.Encoding.utf8)!)
                 }
             }
         case 1:
+            sensorFusionGraph.hasW = true
             task = device.sensorFusion!.quaternion.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
                 for obj in array as! [MBLQuaternionData] {
-                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0))
-                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
+                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0), w: self.sensorFusionGraph.scale(obj.w, min: -1.0, max: 1.0))
+                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.w),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
                 }
             }
         case 2:
+            sensorFusionGraph.hasW = false
             task = device.sensorFusion!.gravity.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
                 for obj in array as! [MBLAccelerometerData] {
                     self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0))
@@ -2372,6 +2374,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                 }
             }
         case 3:
+            sensorFusionGraph.hasW = false
             task = device.sensorFusion!.linearAcceleration.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
                 for obj in array as! [MBLAccelerometerData] {
                     self.sensorFusionGraph.addX(obj.x, y: obj.y, z: obj.z)
