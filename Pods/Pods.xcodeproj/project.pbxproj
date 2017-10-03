@@ -27,11 +27,11 @@
 		0856F3318BA8A584A3568ED3CE299586 /* MBLAccelerometerBoschAxisReadyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FFC60E99081AC6EEDF60D5E180492D3 /* MBLAccelerometerBoschAxisReadyEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0865205E98EA538E57B35E5EE7E52D72 /* MBLHapticBuzzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C794527767241E15485C757BD3BC808 /* MBLHapticBuzzer.m */; };
 		08D3D4D431D8061146222274BB46D8DD /* MBLTemperatureV1.m in Sources */ = {isa = PBXBuildFile; fileRef = D09C23EC6552CFB75D6A979BCE14A1B7 /* MBLTemperatureV1.m */; };
-		0946806167A04CDC73709FE86536BC1B /* Zip-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FF5F3E1E09704D5FE0EA7231F70126E /* Zip-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0968524ED4DE8DF7834055C5B6089D72 /* MBProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAEDB564434191481A79461AC9BD135 /* MBProgressHUD-dummy.m */; };
 		0978B645253FC5B6B44F18F82F0D46F2 /* MBLAccelerometerMMA8452QRMSFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = 862CF98C78A811FB238C3663DC71CBDC /* MBLAccelerometerMMA8452QRMSFormat.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		098EA1C961FF0A005E9664F8CE1E4E3E /* DFUServiceSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA4DE293B352BF90E7F7A659D16C59 /* DFUServiceSelector.swift */; };
 		09D989729CDA545DA618FB6EC52B3569 /* MBLAccelerometerBMA255MotionEvent+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 72DB7C49E91DA501F665C60EBA519E17 /* MBLAccelerometerBMA255MotionEvent+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		0A8CC78B7D5522AFDB7660C919492110 /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ABAFF002571963505836B97DAB2D246 /* ioapi.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		0AA3408D09489670A97AA25CD6A6A7D5 /* Bolts-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D88A8CDFFCE0E7EA3C4D8E369DFAB10 /* Bolts-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0BB820BAA80EB2C634973BDFFDDCC0F7 /* BFTask+Exceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AA42E6D732206EA126ACA15AB81443A /* BFTask+Exceptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0BF0CF94BB698AFA0F6C9CF586A8EE53 /* MBLDataProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 2567BB84DFA2282E9646339E1F523797 /* MBLDataProcessor.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -68,7 +68,7 @@
 		1A4A5CE453661DBF9579A52DF25463A1 /* MBLRGBData.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C2D090185CA5C14D71E4335EEC7BAEC /* MBLRGBData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5FA86FA766042106C4747ED5D87129 /* MBLGyroBMI160AxisReadyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A531B8E7559D31E2A82A96248C69404 /* MBLGyroBMI160AxisReadyEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		1C54A6B77203286061C3EA6504E8C610 /* ManifestFirmwareInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DAFE27359B720D3C195EF6B98605E2 /* ManifestFirmwareInfo.swift */; };
-		1C845F8441007558AE7386064FE833AD /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EFC1E4EF4F5C7E454DFB27D834EA6CF /* zip.c */; };
+		1C845F8441007558AE7386064FE833AD /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 19F41E11AF66038E42E4C1CE98929000 /* zip.c */; };
 		1CFFC4588C483753A4812AFDEE54BF1E /* bmi160.h in Headers */ = {isa = PBXBuildFile; fileRef = B01C46C9A8635E3328258DD56E4D9461 /* bmi160.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1D114AE6CAF357EBD6B1C627BDE687DE /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E7DF541C14DAD0E6D9596AE2F7F8205 /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1D211C6E2E62B2C4FDFFE337D5C6D487 /* MBLAccelerometer.h in Headers */ = {isa = PBXBuildFile; fileRef = 49B843CCBF9133AD1D6EFBF2B4BB3A9B /* MBLAccelerometer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -119,6 +119,7 @@
 		3B17C5F1A1917F588A273EA5292A7025 /* MBLAccelerometerBMI160StepEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4D5B53DAD0651AF5A5E0A0306CA2E1 /* MBLAccelerometerBMI160StepEvent.m */; };
 		3B294EA858DAA0DEFAEBAFE90FD48654 /* MBLEvent+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = B58114A92A8EB31B4952A034D496281E /* MBLEvent+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3BD76FA489FA8785496F168C9F6A57BA /* MBLTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D41E0B331A4C9BC9BD97B3DD63B084C /* MBLTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3D78A91C00E60807EE6B3B67D33A6E21 /* zip.h in Headers */ = {isa = PBXBuildFile; fileRef = 80489E01A4B5417CE7AFCA1B41F0F130 /* zip.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		3DD67CB241ED3BD3C3DC99747484BF8F /* MetaWear.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F39E9D4C62F1DBCC6764274B237275B /* MetaWear.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E664AE7EBED811309B6AD647D4E7C4F /* MBLDeviceLookup.h in Headers */ = {isa = PBXBuildFile; fileRef = B3C53480648DBDAE5573E023263FF649 /* MBLDeviceLookup.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3F3D366F064169371B4FC1E4BCFFCB59 /* MBLAccelerometerData.m in Sources */ = {isa = PBXBuildFile; fileRef = 549E95C622B401F807EB93ABD2F60F08 /* MBLAccelerometerData.m */; };
@@ -129,13 +130,13 @@
 		4201B2DC318BCC76D32BF103654D4D60 /* MBLSettings+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 57CA5FB6B5CEAFCDB7DA19976EFC9790 /* MBLSettings+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		450D31F83DE198FBE41A5E02E14E71C1 /* MBLFirmwareUpdateManager.h in Headers */ = {isa = PBXBuildFile; fileRef = CD6762AADF54A36CA8871573F5CBC904 /* MBLFirmwareUpdateManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		47EE6D42DA83A4533D41588D115E8728 /* MBLAccelerometerOrientationEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 80F3E593E08033050F727D7FFB533B64 /* MBLAccelerometerOrientationEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		48EE55BDBD977CF0E0B59A56C6329901 /* Zip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F684205C37DDBE1C506317ED8B3C0 /* Zip.swift */; };
+		48EE55BDBD977CF0E0B59A56C6329901 /* Zip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4860E3D87A6F819CE1F94CF70C656C /* Zip.swift */; };
 		4995B4BB04C0DDD32B3CC30E0F1BDF3F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8FCC51B94D8DB291932CC2467B1C497 /* CoreData.framework */; };
 		49C262456829DA9A6F9EA41698211F4C /* MBLSPIData.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A2CAE3C2AB6DDD4A2A1780073D7EC0C /* MBLSPIData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		49D2910B8EFAF0674B1364BB57A141D6 /* MBLFirmwareUpdateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A430CE8A401C92715ADE6493821C8F /* MBLFirmwareUpdateInfo.m */; };
 		4A6DA7E312EC9468F6195EBF2EC05A33 /* BFCancellationTokenRegistration.h in Headers */ = {isa = PBXBuildFile; fileRef = 164CBD2DE719D2D2F26D4837549E14BE /* BFCancellationTokenRegistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AFF715729E0AB8D686F1A14F8116270 /* MBLGPIOPinChangeEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EC85A44273BF2858485DE628E24477C /* MBLGPIOPinChangeEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		4B12C32A76B1CE1E3EBA3FE5EF36FDD3 /* QuickZip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CE332EAC2E3615CCFF935F8AF2081C /* QuickZip.swift */; };
+		4B12C32A76B1CE1E3EBA3FE5EF36FDD3 /* QuickZip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E974F08A50AA3D9233E2C6E21FCB1BFB /* QuickZip.swift */; };
 		4B816E4E80A0460812C84810E3262DAB /* MBLAccelerometerData.h in Headers */ = {isa = PBXBuildFile; fileRef = A6462B96CB979CDDD8B229F3F9FFC2BB /* MBLAccelerometerData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4C1D16ED78D8CA691392DEC321F80DC5 /* MBLGyroBMI160DataReadyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = DB83D172F2EDCA40E253538E1D665AC1 /* MBLGyroBMI160DataReadyEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		4C4631819EB425062704F3509EED770B /* MBLDispatchQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BB30B038FCA32241B65A0E6D83B0EBFC /* MBLDispatchQueue.m */; };
@@ -151,6 +152,7 @@
 		4F91D01EEC0CD45DD09A13BF0DAE68D8 /* MBLExternalThermistor1.m in Sources */ = {isa = PBXBuildFile; fileRef = 64682CDA2148C700DD8F8F1C09863B8C /* MBLExternalThermistor1.m */; };
 		5012274F20B7DCAD407188E6654C215D /* MBLNeopixel+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CD4309804BB16472F910CECD27818D9 /* MBLNeopixel+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		50D18CDC8CB1F47E501C5BDEED4B536F /* SecureDFUPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = D033DFAE96D6EB5ADE79DF2FC75DA253 /* SecureDFUPeripheral.swift */; };
+		51E9BD655294E26BAC914FA7C601E7A0 /* unzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 4012C26BDD4F73982C0331069F881763 /* unzip.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		523603B1E614C5663C00772B393CA807 /* MBLMovingAverage.h in Headers */ = {isa = PBXBuildFile; fileRef = B67988F6347A6854DD4A3484297A259B /* MBLMovingAverage.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		523862621CAB8215C370A0AA22CBCA92 /* MBLProximity.m in Sources */ = {isa = PBXBuildFile; fileRef = 177160A382E8FD137A0A33F1E36F25E6 /* MBLProximity.m */; };
 		523E999816F70DB5ACFFA9F77A0F014D /* LoggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEE2E9DDE0740370096AE4C593DDD7C /* LoggerHelper.swift */; };
@@ -160,8 +162,8 @@
 		5456FB5468C7D561F447B33DBA333B59 /* MBLTemperatureV0.m in Sources */ = {isa = PBXBuildFile; fileRef = D20C6BA64BCC20B931B053FCBF43AA98 /* MBLTemperatureV0.m */; };
 		5506C7092C6A6F96793FAAF73EE20BF8 /* MBLAccelerometerBoschRMSFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = 275E01FB3213CD9E028CC474E801196A /* MBLAccelerometerBoschRMSFormat.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		5570C47222653EDB69311F7E8CFA93B6 /* MBLAccelerometerAxisReadyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 546C126CDA9AA49928F53E6BBD9ACB68 /* MBLAccelerometerAxisReadyEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		55BBC80EE019F2A32FB5A4B547FF57ED /* unzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 044E266836AC2B22D9D3F6E01818C8B8 /* unzip.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		57D76CD522BDDE0D73C75E84318493CB /* MBLHygrometerBME280PeriodicHumidityEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = D01EC6E7C82E5F096C16333A8A0FE699 /* MBLHygrometerBME280PeriodicHumidityEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		58C632C23C48C8DFE9E53A2C5E4BAEC5 /* Zip-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C2870725D110B944B77A873D84D5A2F6 /* Zip-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5915A7587857801CBA10C26C6473CFCF /* MBLAccelerometerBoschDataReadyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = B55929535EF4539AA579FD1F0F94BEDE /* MBLAccelerometerBoschDataReadyEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		5936D11D600F5E748E461FD90DD60957 /* MBLData.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5A6CF83E9600BB19C951C90B36BDF9 /* MBLData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5968E0A37D0C00D835899654FB4BFCA3 /* MBLLED.h in Headers */ = {isa = PBXBuildFile; fileRef = EDC67B8492F0E5985E8895140B8B1DFB /* MBLLED.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -193,7 +195,6 @@
 		665430B48AED9B7D007875892F76AA8A /* MBLRMSAccelerometerData+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E2CFAB37F63715BDCBFCE12E1C4AC642 /* MBLRMSAccelerometerData+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		675C58D4B17DD9FEB7E3F887D035B73D /* MBLData.m in Sources */ = {isa = PBXBuildFile; fileRef = 54027F401ADDDAD62C115A2B2768222F /* MBLData.m */; };
 		67AB71BF1160FB92FD9B5130A67A75BA /* BFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4C0FE513ED8E36173A9E23994782B7 /* BFExecutor.m */; };
-		67B775CA7879DD54C05469989DF6CAA2 /* crypt.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A18DDE684AD9C2B6A080A8DCF431C7E /* crypt.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		6825CC86CC0EDA2AD69D4EF2DC225E56 /* MBLNeopixelStrand.h in Headers */ = {isa = PBXBuildFile; fileRef = 539838F5D69715D918C734601974019B /* MBLNeopixelStrand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6936ABD9578939C8FDC90F180EF5B8F5 /* MBLOrientationData+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B030040EDC7E2F0CC3A43EB1E556252 /* MBLOrientationData+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		69552472DBFDD7697E0FD99BD398A44E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF656F9F19831D1533460B4AEB9726E /* Foundation.framework */; };
@@ -232,6 +233,7 @@
 		7B60AB578542BA12EB0964BA81AF528A /* MBLGyroBMI160Format.h in Headers */ = {isa = PBXBuildFile; fileRef = D54AA0D4D5DF7BECBC7EB011E211601D /* MBLGyroBMI160Format.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		7BFD0DFB048C33DF66BBDE9A9FADABD5 /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B1C268FACE62C95314E605DBACEC2C6E /* BFTask.m */; };
 		7C23B87D1D226CF5E7D3E94949CFEB3E /* DFUServiceInitiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0438BD311CB87F11271A7C7B5A0F18 /* DFUServiceInitiator.swift */; };
+		7E5A8BA2A7944437068EE379EDD9DF11 /* crypt.h in Headers */ = {isa = PBXBuildFile; fileRef = 4107B34CDC321DD9823513DB24F8166A /* crypt.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		7E97BB788A68F44FAB4EA4993A96601F /* StaticDataTableViewController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D38D7CA8C0E52A6120D09D65C1912D2 /* StaticDataTableViewController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F8A51F94C313ABB7F9C3A4FA8DF7A43 /* MBLLED.m in Sources */ = {isa = PBXBuildFile; fileRef = AC7930A06A35164B31665807709D091D /* MBLLED.m */; };
 		80B343567836C2BC879FDDFC1C5EC771 /* MBLBarometerBosch.h in Headers */ = {isa = PBXBuildFile; fileRef = F31926E4BB3799B6B44B624B31C40E5F /* MBLBarometerBosch.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -263,7 +265,6 @@
 		9085AC533014FF8C4F0FD4D0099AC5CA /* MBLAccelerometerBoschFlatEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2B5DA8BD629D8B1B1EB02F41A43270 /* MBLAccelerometerBoschFlatEvent.m */; };
 		913CEFDB2FB70C6C6CF5B70DCEEA0C29 /* MBLEulerAngleData.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C347EBD08F0DD5EAC26A33988884A0 /* MBLEulerAngleData.m */; };
 		91568FBDF71262AFE1691D4AA9433D9F /* MBLBarometerBoschPeriodicPressureEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = AF9C43D2C8A28393788CC72A293E416B /* MBLBarometerBoschPeriodicPressureEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		9193F47F8252B8BB75D248B49D888D78 /* Zip.h in Headers */ = {isa = PBXBuildFile; fileRef = 52102A8FD6D1764AE051ADC3686B6236 /* Zip.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92AF8FE2B66730D81C9328A3D1D3A267 /* MBLMagnetometerBMM150.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCE4E1B5355BD58C27E632A35EC9EF8 /* MBLMagnetometerBMM150.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92E216342CF0D92A1448D902361604BA /* MBLAccelerometerBoschFlatFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C33D76D2AF9A91D50A965B6EFF3816D /* MBLAccelerometerBoschFlatFormat.m */; };
 		932C615C839DE30D2ED0337F01415819 /* MBLBluetoothCentralMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 93F70220F0E61DE54246B23B711825AB /* MBLBluetoothCentralMock.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -329,16 +330,16 @@
 		B4A9D83BDEFBF09F3BE7849B496ED091 /* BFTask+MBLPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = E89F2FA132B011284B42A70C8D2598B5 /* BFTask+MBLPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B4FD35227C1800C253425D8271FC2DB8 /* DFUVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B19C394FB2B81002433BDB0C644C0 /* DFUVersion.swift */; };
 		B514A34C1748F9A5506A20D79AA21E2F /* MBLAccelerometerDataReadyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 76F16DB3C18E381226CEAACAE2D67591 /* MBLAccelerometerDataReadyEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		B5252700B06A7CEE763E68B5ECF69C78 /* Zip-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B7B45E5BD3253E3BED49C93023D2AC /* Zip-dummy.m */; };
+		B5252700B06A7CEE763E68B5ECF69C78 /* Zip-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8DEE9ABB385A53B029EAA35416A0DD /* Zip-dummy.m */; };
 		B558799F54D300560925FF70BCEABC0F /* MBLBarometerBMP280.h in Headers */ = {isa = PBXBuildFile; fileRef = 54548B7714F389698169E16DBCBA6935 /* MBLBarometerBMP280.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B65D98B4A11228C59DCF99A9CB4BD827 /* MBLI2C.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D09ED050A797FBC2A08567507F15185 /* MBLI2C.m */; };
 		B703D50AE19721945254D8E5967712DE /* MBLAccelerometerBosch.m in Sources */ = {isa = PBXBuildFile; fileRef = BA970AA72D2996CFDDE177AB3A329890 /* MBLAccelerometerBosch.m */; };
 		B71FF6F10463DFB426550911C04658F4 /* BFCancellationTokenSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7676C4AFA97354ACA365856FA73059A9 /* BFCancellationTokenSource.m */; };
 		B79A1E26C4B787F1D9C63DE9780D5487 /* MBLModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CCED738D3F56B2DAA65DA081EF45E63 /* MBLModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B7F73EF253E5BEECEB1AEA339C728489 /* zip.h in Headers */ = {isa = PBXBuildFile; fileRef = 51075A2E98924509846238F0CAFAA90C /* zip.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		B85AAD471DA55AAC6BD017A4E3D083BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF656F9F19831D1533460B4AEB9726E /* Foundation.framework */; };
-		B8819E4624E16D8177A9899E340C35AA /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 73E6F1A731F9FC9BA5BACE4F2C5C1692 /* ioapi.c */; };
+		B8819E4624E16D8177A9899E340C35AA /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = BB9C105066B10756D2067015EBE57A59 /* ioapi.c */; };
 		BA0F89D4313CF4720846C01C51E0B5B6 /* MBLAccelerometerFreeFallEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = B9FA4F0205F6C5F1DC15CD5DF8772C91 /* MBLAccelerometerFreeFallEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		BACB9922ECE93352DFA4E17C4BB93AD9 /* Zip.h in Headers */ = {isa = PBXBuildFile; fileRef = 89E106F6E20AA6E0495BA527B6C0E9F8 /* Zip.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BAEDD83765354A98E349548D4F30E077 /* MBLNeopixelStrand+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 73F803B92FA3A209CB674E112AB8D6D9 /* MBLNeopixelStrand+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BBAFE4F59D77BBB47416B321D95DFF38 /* MBLOrientationData.m in Sources */ = {isa = PBXBuildFile; fileRef = E9B0395B1DD72E135D9F689F93DDAE5D /* MBLOrientationData.m */; };
 		BBF10223BBE7FA3BC2A166AE047CD744 /* crc32.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ED852A2DC3ABBD34FE04E3B76FAAC3 /* crc32.swift */; };
@@ -370,7 +371,6 @@
 		C9D3B65A1C347267F1CEE0CA2D262792 /* MBLPhotometerTCS3472Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A79C67377E342D5AADE133E70494018 /* MBLPhotometerTCS3472Format.m */; };
 		CBCA409BD248633DCF445B92635BC808 /* MBLMagnetometerBMM150PackedPeriodicMagneticFieldEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 907D9379B9C99CAFA8F65974074538EA /* MBLMagnetometerBMM150PackedPeriodicMagneticFieldEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		CBEFD1F901ADC495605D418511F7B2FC /* MBLMagnetometerData.h in Headers */ = {isa = PBXBuildFile; fileRef = B7D079DC1EB333638B9C17ED913BC18D /* MBLMagnetometerData.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CC0AF1383226FC45CB3A3B7C1CC5C9DF /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 42FB5B63B3C3A8D598392C63A9A5D727 /* ioapi.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		CCDD5D4D03B97193674C6498C2EE5142 /* MBLEntityEvent+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 72AF60AAC0A2FC95A44C88C5FAE03A99 /* MBLEntityEvent+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		CDE945B458C75E65496ABC5243CFB020 /* MBLHygrometer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C99FE6B80BDE040409D64BA14188910 /* MBLHygrometer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CF8782F1BC16C1C775A8F13EF363EB03 /* MBLAccelerometerBoschRMSFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 35F25439172B50A176C97A308D4A10B5 /* MBLAccelerometerBoschRMSFormat.m */; };
@@ -382,7 +382,7 @@
 		D01FA66A03F2A533DBE9415A45403DB3 /* FastCoding+tvOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 32DD5A9882FB195E4AD684A8F9893A54 /* FastCoding+tvOS-dummy.m */; };
 		D03D78951B5209CDF3B2961B01FF19F0 /* MBLLoggingV0.m in Sources */ = {isa = PBXBuildFile; fileRef = C235F8661663576EB1971342D951A7D8 /* MBLLoggingV0.m */; };
 		D1BC7345ED7CE4B9EA1A42F3C54F1411 /* MBLDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BBAB28B389C62AFA9BBB92F015BDBC /* MBLDataProcessor.m */; };
-		D2B25EDC91A9E93A3A099B1EB385E320 /* ZipUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAE2301D6A9C7FAF0C1A2CA4D6B6088 /* ZipUtilities.swift */; };
+		D2B25EDC91A9E93A3A099B1EB385E320 /* ZipUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE1C02465D137AD6A94F99CD6A16AF7 /* ZipUtilities.swift */; };
 		D31D4AF1AEBDF68EB0EB53418A09DAE1 /* MBLMockUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F06A85FC2ACE42190F4E6DB4BF9A6A7E /* MBLMockUtils.m */; };
 		D362EE0B08BF24F1449D2CCABBF1FA23 /* MBLGPIOPin+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DB084A3D23823C5D39CA38E1F9FBDD3 /* MBLGPIOPin+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D386D06A977B4E22997BFE99F3EC9FD9 /* MBLModuleInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 8824397CE23A3D08612A8B1FF8181526 /* MBLModuleInfo.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -392,7 +392,7 @@
 		D4FD90E887A8351323E14A1E5A1C58CC /* MBLHygrometerBME280.m in Sources */ = {isa = PBXBuildFile; fileRef = 461DDB71C859196576D27B4FE3498C31 /* MBLHygrometerBME280.m */; };
 		D5BDBBEFA97F9619774EE0C99EC4702E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF656F9F19831D1533460B4AEB9726E /* Foundation.framework */; };
 		D6DBCE8F0AECAE3F69CFE5E1EBF2BB63 /* MBLPhotometerTCS3472.h in Headers */ = {isa = PBXBuildFile; fileRef = 474BDC477F2506F1781730807BB7F9D9 /* MBLPhotometerTCS3472.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D755535B0DF8EE88DBCCA40AF73A8CBE /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = B5A9B359D1574C18EB2EA551F527821E /* unzip.c */; };
+		D755535B0DF8EE88DBCCA40AF73A8CBE /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = A8A4E8969C7E798DEB9065B76158E1C0 /* unzip.c */; };
 		D7CDB243CF9ADD67C78E33360C511734 /* MBLDependentData.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB78E3235D05A17D2E2304A3B006355 /* MBLDependentData.m */; };
 		DAA43C95E583ED44E7ED9F3989493242 /* MBLDeviceInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 93260FB62E23FAAE2C95B28C33EC5A03 /* MBLDeviceInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB055A95992C433CF0EE048A8DD3D9BE /* MBLAccelerometerBoschOrientationEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D4B1C5569BD66F171B4B3759103562F /* MBLAccelerometerBoschOrientationEvent.m */; };
@@ -553,7 +553,6 @@
 		0337AA831DDE195646E59A58B149F514 /* MBLCommand.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLCommand.m; path = MetaWear/Internal/Modules/Command/MBLCommand.m; sourceTree = "<group>"; };
 		035E43AB7AA5E7A0C31EEDD0D8FD25DA /* MBLAccelerometerBMI160MotionEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBMI160MotionEvent.h; path = MetaWear/Classes/Modules/Accelerometer/AccelerometerBosch/AccelerometerBMI160/MBLAccelerometerBMI160MotionEvent.h; sourceTree = "<group>"; };
 		04071B6FEF22BE9AF0C8CEEE438E28BD /* Pods-MetaWearApiTest-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MetaWearApiTest-dummy.m"; sourceTree = "<group>"; };
-		044E266836AC2B22D9D3F6E01818C8B8 /* unzip.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = unzip.h; path = Zip/minizip/unzip.h; sourceTree = "<group>"; };
 		046D2178509C28D9B132294D04646982 /* MBLDownloadOnlyEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLDownloadOnlyEvent.h; path = MetaWear/Internal/Core/MBLDownloadOnlyEvent.h; sourceTree = "<group>"; };
 		04A7BEA34948FE8F9415B3A576083772 /* MBLQuaternionData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLQuaternionData.h; path = MetaWear/Classes/Modules/SensorFusion/MBLQuaternionData.h; sourceTree = "<group>"; };
 		04D941AADED2A8578F5565DB460B59D4 /* MBLMacAddressFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLMacAddressFormat.h; path = MetaWear/Internal/Core/MBLMacAddressFormat.h; sourceTree = "<group>"; };
@@ -567,7 +566,6 @@
 		088F3F6902FFC8615F2E776F458B57B8 /* MBLAccelerometerMMA8452QOrientationFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerMMA8452QOrientationFormat.h; path = MetaWear/Internal/Modules/Accelerometer/MMA8452Q/MBLAccelerometerMMA8452QOrientationFormat.h; sourceTree = "<group>"; };
 		0940C0617D2B018105CCD9149255AED2 /* MBLRegister+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLRegister+Private.h"; path = "MetaWear/Internal/Core/MBLRegister+Private.h"; sourceTree = "<group>"; };
 		09B9F8538F63736B2C116228E166ACC0 /* MBLSerial.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLSerial.h; path = MetaWear/Classes/Modules/Serial/MBLSerial.h; sourceTree = "<group>"; };
-		0A18DDE684AD9C2B6A080A8DCF431C7E /* crypt.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypt.h; path = Zip/minizip/crypt.h; sourceTree = "<group>"; };
 		0A4BE0B3039204C0E6C6015945D8CE22 /* MBLProximityTSL2671.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLProximityTSL2671.m; path = MetaWear/Classes/Modules/Proximity/ProximityTSL2671/MBLProximityTSL2671.m; sourceTree = "<group>"; };
 		0B113A1BDEA6851068F3098C15F61FB3 /* MBLTemperature+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLTemperature+Private.h"; path = "MetaWear/Internal/Modules/Temperature/MBLTemperature+Private.h"; sourceTree = "<group>"; };
 		0C2AD58E21C07AC8D4A7EF618FA72F3F /* MBLTemperatureV0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLTemperatureV0.h; path = MetaWear/Internal/Modules/Temperature/MBLTemperatureV0.h; sourceTree = "<group>"; };
@@ -586,17 +584,17 @@
 		135AA4A954DB8BDA7791C79621271620 /* Pods-MetaWearApiTest-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MetaWearApiTest-acknowledgements.markdown"; sourceTree = "<group>"; };
 		15BD995AE78F4992EBF29316CF3E8E19 /* MBLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLLogger.h; path = MetaWear/Internal/Core/MBLLogger.h; sourceTree = "<group>"; };
 		15F6DF77ACF0BDCE4E91B3F6BBA8E298 /* MBLBarometerBosch+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLBarometerBosch+Private.h"; path = "MetaWear/Internal/Modules/Barometer/BarometerBosch/MBLBarometerBosch+Private.h"; sourceTree = "<group>"; };
+		1648EFBCFFF194FC40CC2491AF05ECA4 /* Zip-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Zip-prefix.pch"; sourceTree = "<group>"; };
 		164CBD2DE719D2D2F26D4837549E14BE /* BFCancellationTokenRegistration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BFCancellationTokenRegistration.h; path = Bolts/Common/BFCancellationTokenRegistration.h; sourceTree = "<group>"; };
 		168394AA3512A4EEB429D3F3D434E144 /* MBLANCS.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLANCS.m; path = MetaWear/Classes/Modules/ANCS/MBLANCS.m; sourceTree = "<group>"; };
 		177160A382E8FD137A0A33F1E36F25E6 /* MBLProximity.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLProximity.m; path = MetaWear/Classes/Modules/Proximity/MBLProximity.m; sourceTree = "<group>"; };
 		1850AE362E4DED498F329B8E1427EE4E /* MBLAccelerometerBoschDataReadyEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLAccelerometerBoschDataReadyEvent.m; path = MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschDataReadyEvent.m; sourceTree = "<group>"; };
-		187F684205C37DDBE1C506317ED8B3C0 /* Zip.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Zip.swift; path = Zip/Zip.swift; sourceTree = "<group>"; };
 		1891FA5BB06CCC59E1726E8EEAE1F8B1 /* MBLMagnetometerBMM150.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLMagnetometerBMM150.m; path = MetaWear/Classes/Modules/Magnetometer/MagnetometerBMM150/MBLMagnetometerBMM150.m; sourceTree = "<group>"; };
 		19459446274ACF90F8A4E982290FAA43 /* MBLSettings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLSettings.h; path = MetaWear/Classes/Modules/Settings/MBLSettings.h; sourceTree = "<group>"; };
 		19506C7E8611C4C8F2924F17760FCDCF /* SecureDFUPeripheralDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SecureDFUPeripheralDelegate.swift; path = iOSDFULibrary/Classes/Implementation/SecureDFU/Peripheral/SecureDFUPeripheralDelegate.swift; sourceTree = "<group>"; };
 		19EACF806E556A210C388AAD0D785D35 /* MBLGyro+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLGyro+Private.h"; path = "MetaWear/Internal/Modules/Gyro/MBLGyro+Private.h"; sourceTree = "<group>"; };
+		19F41E11AF66038E42E4C1CE98929000 /* zip.c */ = {isa = PBXFileReference; includeInIndex = 1; name = zip.c; path = Zip/minizip/zip.c; sourceTree = "<group>"; };
 		1A0EDC57C8BC1EFB744375E67C52BCF8 /* MBLDataSwitch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLDataSwitch.m; path = MetaWear/Classes/Core/MBLDataSwitch.m; sourceTree = "<group>"; };
-		1A6544CF13E34D4F2C4C635E7412D761 /* Zip.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Zip.xcconfig; sourceTree = "<group>"; };
 		1AA4C727F45DF82DAD7392CA41F7ABCB /* DFUExecutor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DFUExecutor.swift; path = iOSDFULibrary/Classes/Implementation/GenericDFU/DFUExecutor.swift; sourceTree = "<group>"; };
 		1B3E61D4D9A66D8E1D5C2B1091825C11 /* MBLNumericData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLNumericData.h; path = MetaWear/Classes/Core/MBLNumericData.h; sourceTree = "<group>"; };
 		1B55CA1D1001B8810EF1A2359730A648 /* MBLAccelerometerBoschFlatFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBoschFlatFormat.h; path = MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschFlatFormat.h; sourceTree = "<group>"; };
@@ -612,7 +610,6 @@
 		20F93F7198D35DE328E861C03B20B666 /* FastCoding+tvOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FastCoding+tvOS-umbrella.h"; sourceTree = "<group>"; };
 		2111F2078B7618CA76CE1ADBEAA19AF0 /* mma8452q.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = mma8452q.h; path = MetaWear/Internal/Modules/Accelerometer/MMA8452Q/mma8452q.h; sourceTree = "<group>"; };
 		21C79FF5E7BC238E9A54A40EEFC663A0 /* MBLDependentData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLDependentData.h; path = MetaWear/Internal/Core/MBLDependentData.h; sourceTree = "<group>"; };
-		226A26CA3CC20369C0D30DDD4E0E2CAA /* Zip-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Zip-prefix.pch"; sourceTree = "<group>"; };
 		22B3F35D3172F83E6295B294228131B7 /* MBLLoggingV1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLLoggingV1.h; path = MetaWear/Internal/Modules/Logging/MBLLoggingV1.h; sourceTree = "<group>"; };
 		231FB0A0B467AF252706B10D6C02921B /* MBLAccelerometerBMA255.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBMA255.h; path = MetaWear/Classes/Modules/Accelerometer/AccelerometerBosch/AccelerometerBMA255/MBLAccelerometerBMA255.h; sourceTree = "<group>"; };
 		241F491CC46B8FC7D4EBEFDBF7A3490D /* MBLAccelerometerMMA8452QFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerMMA8452QFormat.h; path = MetaWear/Internal/Modules/Accelerometer/MMA8452Q/MBLAccelerometerMMA8452QFormat.h; sourceTree = "<group>"; };
@@ -623,6 +620,7 @@
 		2567BB84DFA2282E9646339E1F523797 /* MBLDataProcessor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLDataProcessor.h; path = MetaWear/Internal/Modules/DataProcessor/MBLDataProcessor.h; sourceTree = "<group>"; };
 		275E01FB3213CD9E028CC474E801196A /* MBLAccelerometerBoschRMSFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBoschRMSFormat.h; path = MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschRMSFormat.h; sourceTree = "<group>"; };
 		279BAD0E7A8DB8F72216216954CCB8BF /* MBLPhotometer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLPhotometer.m; path = MetaWear/Classes/Modules/Photometer/MBLPhotometer.m; sourceTree = "<group>"; };
+		27ACB5131BFAED755996005CCC294F3F /* Zip.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Zip.modulemap; sourceTree = "<group>"; };
 		28C347EBD08F0DD5EAC26A33988884A0 /* MBLEulerAngleData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLEulerAngleData.m; path = MetaWear/Classes/Modules/SensorFusion/MBLEulerAngleData.m; sourceTree = "<group>"; };
 		290229BBD8981141F5D3F5E224378C31 /* MBLRMSAccelerometerData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLRMSAccelerometerData.m; path = MetaWear/Classes/Modules/Accelerometer/MBLRMSAccelerometerData.m; sourceTree = "<group>"; };
 		2942ACFC04D6A7437211893D4A31DE1C /* MBLRegister.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLRegister.h; path = MetaWear/Classes/Core/MBLRegister.h; sourceTree = "<group>"; };
@@ -637,7 +635,6 @@
 		2DDCC04C0219ABE69A7B1CB96B006297 /* MBLNumericData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLNumericData.m; path = MetaWear/Classes/Core/MBLNumericData.m; sourceTree = "<group>"; };
 		2EBEA047FBE5BDDA9503D5F9D71D6EEB /* MBLBarometerBoschPeriodicPressureEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLBarometerBoschPeriodicPressureEvent.m; path = MetaWear/Internal/Modules/Barometer/BarometerBosch/MBLBarometerBoschPeriodicPressureEvent.m; sourceTree = "<group>"; };
 		2EC5C0B3C9C05E0D019D0CD5C2D5E442 /* MBLAccelerometerBoschFlatEvent+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLAccelerometerBoschFlatEvent+Private.h"; path = "MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschFlatEvent+Private.h"; sourceTree = "<group>"; };
-		2FF5F3E1E09704D5FE0EA7231F70126E /* Zip-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Zip-umbrella.h"; sourceTree = "<group>"; };
 		3218F6AF2A0B0E2AB30A47181DCABFE1 /* MBLAccelerometerBosch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBosch.h; path = MetaWear/Classes/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBosch.h; sourceTree = "<group>"; };
 		323FD9BFF2CD1AF4301E1F981EA83719 /* MBLSensorFusion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLSensorFusion.h; path = MetaWear/Classes/Modules/SensorFusion/MBLSensorFusion.h; sourceTree = "<group>"; };
 		32DD5A9882FB195E4AD684A8F9893A54 /* FastCoding+tvOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FastCoding+tvOS-dummy.m"; sourceTree = "<group>"; };
@@ -651,6 +648,7 @@
 		37C88C546982A0B57F6B8AF2B30A14CC /* MBLAmbientLight.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAmbientLight.h; path = MetaWear/Classes/Modules/AmbientLight/MBLAmbientLight.h; sourceTree = "<group>"; };
 		38D05D992FE0987A7C191F23F3C61399 /* SecureDFUServiceInitiator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SecureDFUServiceInitiator.swift; path = iOSDFULibrary/Classes/Implementation/SecureDFU/DFU/SecureDFUServiceInitiator.swift; sourceTree = "<group>"; };
 		3A773EE04705479D5396343550B54171 /* StaticDataTableViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = StaticDataTableViewController.framework; path = StaticDataTableViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ABAFF002571963505836B97DAB2D246 /* ioapi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ioapi.h; path = Zip/minizip/ioapi.h; sourceTree = "<group>"; };
 		3C611A49C1FEC30323CD6FF94E39B226 /* iOSDFULibrary-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "iOSDFULibrary-dummy.m"; sourceTree = "<group>"; };
 		3CCE04379EC8F2689CFDBC5C546602BC /* MBLSerial.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLSerial.m; path = MetaWear/Classes/Modules/Serial/MBLSerial.m; sourceTree = "<group>"; };
 		3D347CFE152F14F6E34E76948C76E600 /* MBLExternalThermistor1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLExternalThermistor1.h; path = MetaWear/Internal/Modules/Temperature/MBLExternalThermistor1.h; sourceTree = "<group>"; };
@@ -659,12 +657,13 @@
 		3F28F99C608D57A7456AF32D63929D97 /* MBLTriggeredRead.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLTriggeredRead.m; path = MetaWear/Internal/Core/MBLTriggeredRead.m; sourceTree = "<group>"; };
 		3F9B1AB28770526F6FEFEBDAED58861D /* MBLMovingAverage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLMovingAverage.m; path = MetaWear/Internal/Core/MBLMovingAverage.m; sourceTree = "<group>"; };
 		3FF656F9F19831D1533460B4AEB9726E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		4012C26BDD4F73982C0331069F881763 /* unzip.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = unzip.h; path = Zip/minizip/unzip.h; sourceTree = "<group>"; };
 		4021A1E7C8FF370654978D2EA1491FEC /* MBLExternalThermistor0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLExternalThermistor0.h; path = MetaWear/Internal/Modules/Temperature/MBLExternalThermistor0.h; sourceTree = "<group>"; };
+		4107B34CDC321DD9823513DB24F8166A /* crypt.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypt.h; path = Zip/minizip/crypt.h; sourceTree = "<group>"; };
 		41A95BE023C63F0A35B628F825AB3515 /* iOSDFULibrary.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = iOSDFULibrary.xcconfig; sourceTree = "<group>"; };
 		41ED852A2DC3ABBD34FE04E3B76FAAC3 /* crc32.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = crc32.swift; path = iOSDFULibrary/Classes/Utilities/crc32.swift; sourceTree = "<group>"; };
 		42085482DA1762628C394A17A356DC88 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42C02ACC976C786243D1BDDC803B868E /* MBProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-prefix.pch"; sourceTree = "<group>"; };
-		42FB5B63B3C3A8D598392C63A9A5D727 /* ioapi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ioapi.h; path = Zip/minizip/ioapi.h; sourceTree = "<group>"; };
 		437685DE62D9D0D6E5A18DCDC0232560 /* MBLBluetoothCentralMock.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLBluetoothCentralMock.m; path = MetaWear/Internal/Mocks/MBLBluetoothCentralMock.m; sourceTree = "<group>"; };
 		4415D0C6241DEE72F90AD4FDB03FE69C /* MBLOnDieTemperature0.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLOnDieTemperature0.m; path = MetaWear/Internal/Modules/Temperature/MBLOnDieTemperature0.m; sourceTree = "<group>"; };
 		44FA541AFE0248D4307407370ABE360D /* FastCoding+tvOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "FastCoding+tvOS.modulemap"; sourceTree = "<group>"; };
@@ -688,15 +687,12 @@
 		4DCB3D1021C46EA32F26406B0AAD1A5B /* Bolts-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Bolts-dummy.m"; sourceTree = "<group>"; };
 		4DD32429F676C58CE103E4D0D7897C71 /* FastCoding+tvOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FastCoding+tvOS-prefix.pch"; sourceTree = "<group>"; };
 		4EC85A44273BF2858485DE628E24477C /* MBLGPIOPinChangeEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLGPIOPinChangeEvent.h; path = MetaWear/Internal/Modules/GPIO/MBLGPIOPinChangeEvent.h; sourceTree = "<group>"; };
-		4EFC1E4EF4F5C7E454DFB27D834EA6CF /* zip.c */ = {isa = PBXFileReference; includeInIndex = 1; name = zip.c; path = Zip/minizip/zip.c; sourceTree = "<group>"; };
 		4F111CD6983569DCDE3B1E57EF460AB2 /* MBLBluetoothPeripheralMock.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLBluetoothPeripheralMock.h; path = MetaWear/Internal/Mocks/MBLBluetoothPeripheralMock.h; sourceTree = "<group>"; };
 		4F478416D9439878CEF71458005FB266 /* DFUPeripheralDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DFUPeripheralDelegate.swift; path = iOSDFULibrary/Classes/Implementation/GenericDFU/DFUPeripheralDelegate.swift; sourceTree = "<group>"; };
 		4F530446B813BC857734CAC1162C1942 /* MBLMetaWear+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLMetaWear+Private.h"; path = "MetaWear/Internal/Core/MBLMetaWear+Private.h"; sourceTree = "<group>"; };
 		4FFC60E99081AC6EEDF60D5E180492D3 /* MBLAccelerometerBoschAxisReadyEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBoschAxisReadyEvent.h; path = MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschAxisReadyEvent.h; sourceTree = "<group>"; };
 		5050B33463BF6BC21E655D1A7840D12E /* MBLMagnetometerBMM150PackedPeriodicMagneticFieldEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLMagnetometerBMM150PackedPeriodicMagneticFieldEvent.m; path = MetaWear/Internal/Modules/Magnetometer/MagnetometerBMM150/MBLMagnetometerBMM150PackedPeriodicMagneticFieldEvent.m; sourceTree = "<group>"; };
 		506E966F78D27E47813BAF33C8C16ED7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		51075A2E98924509846238F0CAFAA90C /* zip.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = zip.h; path = Zip/minizip/zip.h; sourceTree = "<group>"; };
-		52102A8FD6D1764AE051ADC3686B6236 /* Zip.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Zip.h; path = Zip/Zip.h; sourceTree = "<group>"; };
 		5242314719A8A75524241952124E519F /* MBLEntityEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLEntityEvent.m; path = MetaWear/Classes/Core/MBLEntityEvent.m; sourceTree = "<group>"; };
 		5244D8814522CAB2AE623886BF00A2F7 /* DFUStreamBin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DFUStreamBin.swift; path = iOSDFULibrary/Classes/Utilities/Streams/DFUStreamBin.swift; sourceTree = "<group>"; };
 		5287536E409100B58F7DBEE96F89F6C5 /* MBLOnDieTemperature0.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLOnDieTemperature0.h; path = MetaWear/Internal/Modules/Temperature/MBLOnDieTemperature0.h; sourceTree = "<group>"; };
@@ -725,10 +721,10 @@
 		5B1E52F5FC85EFA3ED66ED001CCDC8EF /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B63684D40E010B89D1116D586C9B115 /* MBLNeopixel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLNeopixel.m; path = MetaWear/Classes/Modules/Neopixel/MBLNeopixel.m; sourceTree = "<group>"; };
 		5B65CF7AAB33762C898A666BE728BBEC /* BFTask+MBLExtensions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "BFTask+MBLExtensions.h"; path = "MetaWear/Classes/Categories/BFTask+MBLExtensions.h"; sourceTree = "<group>"; };
-		5BAE2301D6A9C7FAF0C1A2CA4D6B6088 /* ZipUtilities.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZipUtilities.swift; path = Zip/ZipUtilities.swift; sourceTree = "<group>"; };
 		5BCE6D764125E2B20D50DD02920A440B /* MBLConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLConstants.h; path = MetaWear/Classes/Core/MBLConstants.h; sourceTree = "<group>"; };
 		5BFB2991712DADF0164D93827A4A60CB /* MBLDispatchQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLDispatchQueue.h; path = MetaWear/Internal/Core/MBLDispatchQueue.h; sourceTree = "<group>"; };
 		5D16B8B18DE1F814331BE7DB8F03E5DE /* MBLFirmwareUpdateInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLFirmwareUpdateInfo.h; path = MetaWear/Classes/Core/MBLFirmwareUpdateInfo.h; sourceTree = "<group>"; };
+		5D4860E3D87A6F819CE1F94CF70C656C /* Zip.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Zip.swift; path = Zip/Zip.swift; sourceTree = "<group>"; };
 		5D8A898EFF70B420EE14B616A1F7A0EA /* MBLProximity.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLProximity.h; path = MetaWear/Classes/Modules/Proximity/MBLProximity.h; sourceTree = "<group>"; };
 		5E7DF541C14DAD0E6D9596AE2F7F8205 /* BFTaskCompletionSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BFTaskCompletionSource.h; path = Bolts/Common/BFTaskCompletionSource.h; sourceTree = "<group>"; };
 		5F5BBB06A2CEFFB0AC5A00B36E939DC6 /* MBLNonVolatileState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLNonVolatileState.h; path = MetaWear/Internal/Core/MBLNonVolatileState.h; sourceTree = "<group>"; };
@@ -761,11 +757,11 @@
 		6FCE4E1B5355BD58C27E632A35EC9EF8 /* MBLMagnetometerBMM150.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLMagnetometerBMM150.h; path = MetaWear/Classes/Modules/Magnetometer/MagnetometerBMM150/MBLMagnetometerBMM150.h; sourceTree = "<group>"; };
 		6FFA4DE293B352BF90E7F7A659D16C59 /* DFUServiceSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DFUServiceSelector.swift; path = iOSDFULibrary/Classes/Implementation/DFUSelector/DFUServiceSelector.swift; sourceTree = "<group>"; };
 		706D230D1FE5D6B6EC73B55DA9449DF6 /* MBLEulerFormat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLEulerFormat.m; path = MetaWear/Internal/Modules/SensorFusion/MBLEulerFormat.m; sourceTree = "<group>"; };
+		7190174CF748D7F9F6BC052C127952E8 /* Zip.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Zip.xcconfig; sourceTree = "<group>"; };
 		72AF60AAC0A2FC95A44C88C5FAE03A99 /* MBLEntityEvent+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLEntityEvent+Private.h"; path = "MetaWear/Internal/Core/MBLEntityEvent+Private.h"; sourceTree = "<group>"; };
 		72DB7C49E91DA501F665C60EBA519E17 /* MBLAccelerometerBMA255MotionEvent+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLAccelerometerBMA255MotionEvent+Private.h"; path = "MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/AccelerometerBMA255/MBLAccelerometerBMA255MotionEvent+Private.h"; sourceTree = "<group>"; };
 		735AAEDC835E59BD310BE2E66E0ABBEA /* MBLEntityModule.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLEntityModule.h; path = MetaWear/Classes/Core/MBLEntityModule.h; sourceTree = "<group>"; };
 		736317B70D71845448F80584F213D842 /* MBLBarometerBMP280.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLBarometerBMP280.m; path = MetaWear/Classes/Modules/Barometer/BarometerBosch/BarometerBMP280/MBLBarometerBMP280.m; sourceTree = "<group>"; };
-		73E6F1A731F9FC9BA5BACE4F2C5C1692 /* ioapi.c */ = {isa = PBXFileReference; includeInIndex = 1; name = ioapi.c; path = Zip/minizip/ioapi.c; sourceTree = "<group>"; };
 		73F803B92FA3A209CB674E112AB8D6D9 /* MBLNeopixelStrand+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLNeopixelStrand+Private.h"; path = "MetaWear/Internal/Modules/Neopixel/MBLNeopixelStrand+Private.h"; sourceTree = "<group>"; };
 		7611224BB55A940658E8F30EBB4F0E6F /* MBLAmbientLightLTR329.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAmbientLightLTR329.h; path = MetaWear/Classes/Modules/AmbientLight/AmbientLightLTR329/MBLAmbientLightLTR329.h; sourceTree = "<group>"; };
 		7676C4AFA97354ACA365856FA73059A9 /* BFCancellationTokenSource.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BFCancellationTokenSource.m; path = Bolts/Common/BFCancellationTokenSource.m; sourceTree = "<group>"; };
@@ -789,6 +785,7 @@
 		7F6E7D2EE5BE1F495FFFFEB0B7EBDE86 /* MBLTimerEvent+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLTimerEvent+Private.h"; path = "MetaWear/Internal/Modules/Timer/MBLTimerEvent+Private.h"; sourceTree = "<group>"; };
 		7F8CE1282F14E0C334AD12A9763D8DEF /* MBLBluetoothCentral.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLBluetoothCentral.h; path = MetaWear/Internal/Mocks/MBLBluetoothCentral.h; sourceTree = "<group>"; };
 		7FBBA374B5D3EA0A6A56B75F45C8A7F8 /* MBLBarometer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLBarometer.h; path = MetaWear/Classes/Modules/Barometer/MBLBarometer.h; sourceTree = "<group>"; };
+		80489E01A4B5417CE7AFCA1B41F0F130 /* zip.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = zip.h; path = Zip/minizip/zip.h; sourceTree = "<group>"; };
 		80F3E593E08033050F727D7FFB533B64 /* MBLAccelerometerOrientationEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerOrientationEvent.h; path = MetaWear/Internal/Modules/Accelerometer/MMA8452Q/MBLAccelerometerOrientationEvent.h; sourceTree = "<group>"; };
 		81A5A05A0F9568E895507A3E33DB4E64 /* MBLANCS.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLANCS.h; path = MetaWear/Classes/Modules/ANCS/MBLANCS.h; sourceTree = "<group>"; };
 		831510B0BDAF865C1F1169ABF8EFFE4D /* MBLTestDebug.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLTestDebug.m; path = MetaWear/Internal/Modules/TestDebug/MBLTestDebug.m; sourceTree = "<group>"; };
@@ -803,6 +800,7 @@
 		88DAF2218ACE2C38B65DCD67DC4F233F /* MBLAccelerometerBoschPackedDataReadyEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBoschPackedDataReadyEvent.h; path = MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschPackedDataReadyEvent.h; sourceTree = "<group>"; };
 		890AB1B58DA792B9B9EB7330B31E61D8 /* MBLSettings.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLSettings.m; path = MetaWear/Classes/Modules/Settings/MBLSettings.m; sourceTree = "<group>"; };
 		89ACBA92DCA89A60679C7F02984AA67B /* StaticDataTableViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = StaticDataTableViewController.h; sourceTree = "<group>"; };
+		89E106F6E20AA6E0495BA527B6C0E9F8 /* Zip.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Zip.h; path = Zip/Zip.h; sourceTree = "<group>"; };
 		8A57DF410DAFC276C572466204B86C5D /* FastCoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FastCoder.m; path = FastCoder/FastCoder.m; sourceTree = "<group>"; };
 		8A8326823B99E74C6A18D9B560AD48F5 /* MBLPhotometer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLPhotometer.h; path = MetaWear/Classes/Modules/Photometer/MBLPhotometer.h; sourceTree = "<group>"; };
 		8AF7568CB444DA570519EEEC8E82699C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -844,6 +842,7 @@
 		9B9F32FA898BA0529B36E1B91E203829 /* MBLHygrometerBME280PeriodicHumidityEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLHygrometerBME280PeriodicHumidityEvent.m; path = MetaWear/Internal/Modules/Hygrometer/HygrometerBME280/MBLHygrometerBME280PeriodicHumidityEvent.m; sourceTree = "<group>"; };
 		9C8F6D361ED69173AC8E86443E48303F /* DFUPeripheralSelector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DFUPeripheralSelector.swift; path = iOSDFULibrary/Classes/Implementation/DFUPeripheralSelector.swift; sourceTree = "<group>"; };
 		9D4A39DC161D74A8C22CD1FBEFA6EDC5 /* MBLSerial+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLSerial+Private.h"; path = "MetaWear/Internal/Modules/Serial/MBLSerial+Private.h"; sourceTree = "<group>"; };
+		9D8DEE9ABB385A53B029EAA35416A0DD /* Zip-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Zip-dummy.m"; sourceTree = "<group>"; };
 		9D95E1E0EE4D0AB55B1A14A60296D76C /* MBLMagnetometerData+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLMagnetometerData+Private.h"; path = "MetaWear/Internal/Modules/Magnetometer/MBLMagnetometerData+Private.h"; sourceTree = "<group>"; };
 		9E7F7D1DFE78F2F5C298704B4C83AF77 /* MBLBluetoothPeripheral.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLBluetoothPeripheral.h; path = MetaWear/Internal/Mocks/MBLBluetoothPeripheral.h; sourceTree = "<group>"; };
 		9E933B391E8A897EE5EB02524439F1F9 /* MBLAccelerometerPackedDataReadyEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLAccelerometerPackedDataReadyEvent.m; path = MetaWear/Internal/Modules/Accelerometer/MMA8452Q/MBLAccelerometerPackedDataReadyEvent.m; sourceTree = "<group>"; };
@@ -863,6 +862,7 @@
 		A7C2C8D0ECE656F69442AA02A2F729FD /* MBLI2CData+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLI2CData+Private.h"; path = "MetaWear/Internal/Modules/Serial/MBLI2CData+Private.h"; sourceTree = "<group>"; };
 		A82B21F282AC755E6764FBECE1C9088C /* MBLNumericFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLNumericFormatter.h; path = MetaWear/Internal/Core/MBLNumericFormatter.h; sourceTree = "<group>"; };
 		A86D8193DDE4DC2765D26447CF22FF53 /* MBLMockPeripheralFactory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLMockPeripheralFactory.h; path = MetaWear/Internal/Mocks/MBLMockPeripheralFactory.h; sourceTree = "<group>"; };
+		A8A4E8969C7E798DEB9065B76158E1C0 /* unzip.c */ = {isa = PBXFileReference; includeInIndex = 1; name = unzip.c; path = Zip/minizip/unzip.c; sourceTree = "<group>"; };
 		A8B5FB7D60522827E6074998E0412A9E /* BFExecutor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BFExecutor.h; path = Bolts/Common/BFExecutor.h; sourceTree = "<group>"; };
 		A8B6B4774441E5233B47A56A528DD01A /* MBLDownloadOnlyEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLDownloadOnlyEvent.m; path = MetaWear/Internal/Core/MBLDownloadOnlyEvent.m; sourceTree = "<group>"; };
 		A8D797049E6CC489D784CC75F960F17F /* MBLiBeacon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLiBeacon.m; path = MetaWear/Classes/Modules/iBeacon/MBLiBeacon.m; sourceTree = "<group>"; };
@@ -893,13 +893,12 @@
 		B3C53480648DBDAE5573E023263FF649 /* MBLDeviceLookup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLDeviceLookup.h; path = MetaWear/Internal/Mocks/MBLDeviceLookup.h; sourceTree = "<group>"; };
 		B55929535EF4539AA579FD1F0F94BEDE /* MBLAccelerometerBoschDataReadyEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBoschDataReadyEvent.h; path = MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschDataReadyEvent.h; sourceTree = "<group>"; };
 		B58114A92A8EB31B4952A034D496281E /* MBLEvent+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLEvent+Private.h"; path = "MetaWear/Internal/Core/MBLEvent+Private.h"; sourceTree = "<group>"; };
-		B5A9B359D1574C18EB2EA551F527821E /* unzip.c */ = {isa = PBXFileReference; includeInIndex = 1; name = unzip.c; path = Zip/minizip/unzip.c; sourceTree = "<group>"; };
 		B67988F6347A6854DD4A3484297A259B /* MBLMovingAverage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLMovingAverage.h; path = MetaWear/Internal/Core/MBLMovingAverage.h; sourceTree = "<group>"; };
 		B68A719EB3095983A4BED537980172E7 /* MBLNeopixel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLNeopixel.h; path = MetaWear/Classes/Modules/Neopixel/MBLNeopixel.h; sourceTree = "<group>"; };
-		B6B7B45E5BD3253E3BED49C93023D2AC /* Zip-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Zip-dummy.m"; sourceTree = "<group>"; };
 		B6BAD7EF3895DE23B611E4127D3119EA /* ZipArchive.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZipArchive.swift; path = iOSDFULibrary/Classes/Utilities/ZipArchive.swift; sourceTree = "<group>"; };
 		B7842B08074C4B292426919AE23FCFA0 /* MBLAccelerometerMMA8452QFormat.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLAccelerometerMMA8452QFormat.m; path = MetaWear/Internal/Modules/Accelerometer/MMA8452Q/MBLAccelerometerMMA8452QFormat.m; sourceTree = "<group>"; };
 		B7D079DC1EB333638B9C17ED913BC18D /* MBLMagnetometerData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLMagnetometerData.h; path = MetaWear/Classes/Modules/Magnetometer/MBLMagnetometerData.h; sourceTree = "<group>"; };
+		B83B07992220DD9E67BEB8DF3E237BB2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8641D6F0E58BEA7EF86FF6ED01B52D8 /* DFUFirmware.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DFUFirmware.swift; path = iOSDFULibrary/Classes/Implementation/Firmware/DFUFirmware.swift; sourceTree = "<group>"; };
 		B904B713233B9523CB846FAFF3652E01 /* Pods-MetaWearApiTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MetaWearApiTest.release.xcconfig"; sourceTree = "<group>"; };
 		B9ED70D031568D4800F1DA61CDFCB371 /* MBLAccelerometerBoschFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBoschFormat.h; path = MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschFormat.h; sourceTree = "<group>"; };
@@ -912,6 +911,7 @@
 		BAE035B6E4C9C720814CDCFFB76E470C /* DFUServiceDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DFUServiceDelegate.swift; path = iOSDFULibrary/Classes/Implementation/DFUServiceDelegate.swift; sourceTree = "<group>"; };
 		BB1DD69E5A2C7F64AC4F369AD78B7526 /* MBLAnalytics.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLAnalytics.m; path = MetaWear/Internal/Core/MBLAnalytics.m; sourceTree = "<group>"; };
 		BB30B038FCA32241B65A0E6D83B0EBFC /* MBLDispatchQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLDispatchQueue.m; path = MetaWear/Internal/Core/MBLDispatchQueue.m; sourceTree = "<group>"; };
+		BB9C105066B10756D2067015EBE57A59 /* ioapi.c */ = {isa = PBXFileReference; includeInIndex = 1; name = ioapi.c; path = Zip/minizip/ioapi.c; sourceTree = "<group>"; };
 		BBA6F9CFEBEE6700A313B463820A1753 /* MBLAccelerometerBoschTapEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBoschTapEvent.h; path = MetaWear/Classes/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschTapEvent.h; sourceTree = "<group>"; };
 		BBB053294C68B1A6318453B39B00F226 /* MBLAccelerometerBoschAxisReadyEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLAccelerometerBoschAxisReadyEvent.m; path = MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschAxisReadyEvent.m; sourceTree = "<group>"; };
 		BBEE2E9DDE0740370096AE4C593DDD7C /* LoggerHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LoggerHelper.swift; path = iOSDFULibrary/Classes/Utilities/Logging/LoggerHelper.swift; sourceTree = "<group>"; };
@@ -924,13 +924,13 @@
 		BE94477EBA28DB3FB5274D3405340655 /* MBLConversion.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLConversion.m; path = MetaWear/Internal/Core/MBLConversion.m; sourceTree = "<group>"; };
 		BEA58C694AAC44133FF2899177C36A1F /* LegacyDFUService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LegacyDFUService.swift; path = iOSDFULibrary/Classes/Implementation/LegacyDFU/Services/LegacyDFUService.swift; sourceTree = "<group>"; };
 		C0162F4B6702490EDF6BC6B691A7ACCA /* MBLMetaWear.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLMetaWear.m; path = MetaWear/Classes/Core/MBLMetaWear.m; sourceTree = "<group>"; };
-		C0CE332EAC2E3615CCFF935F8AF2081C /* QuickZip.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QuickZip.swift; path = Zip/QuickZip.swift; sourceTree = "<group>"; };
 		C1CE17B4F24CDCE0B3B0DBA1F7FA7AD1 /* MBLANCSEventData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLANCSEventData.h; path = MetaWear/Classes/Modules/ANCS/MBLANCSEventData.h; sourceTree = "<group>"; };
 		C1E7F932F10AAEAD9E7D1C8131A6E154 /* BFCancellationToken.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BFCancellationToken.m; path = Bolts/Common/BFCancellationToken.m; sourceTree = "<group>"; };
 		C1F1A9EA10F5094E57973EEBE00C5E45 /* MBLMagnetometerBMM150+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLMagnetometerBMM150+Private.h"; path = "MetaWear/Internal/Modules/Magnetometer/MagnetometerBMM150/MBLMagnetometerBMM150+Private.h"; sourceTree = "<group>"; };
 		C1FBDF6894317015B322C8215DA84CCF /* MBLMagnetometerData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLMagnetometerData.m; path = MetaWear/Classes/Modules/Magnetometer/MBLMagnetometerData.m; sourceTree = "<group>"; };
 		C235F8661663576EB1971342D951A7D8 /* MBLLoggingV0.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLLoggingV0.m; path = MetaWear/Internal/Modules/Logging/MBLLoggingV0.m; sourceTree = "<group>"; };
 		C26B7135F6CF95122B44FBC4232E5124 /* MBLRGBData+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLRGBData+Private.h"; path = "MetaWear/Internal/Modules/Photometer/MBLRGBData+Private.h"; sourceTree = "<group>"; };
+		C2870725D110B944B77A873D84D5A2F6 /* Zip-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Zip-umbrella.h"; sourceTree = "<group>"; };
 		C3C45D6C41D4FA4627CB1860B1BE2F9F /* BFTask+Exceptions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "BFTask+Exceptions.m"; path = "Bolts/Common/BFTask+Exceptions.m"; sourceTree = "<group>"; };
 		C4113B75BDEEBA57E2C0600C3EC88FE1 /* StaticDataTableViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "StaticDataTableViewController-prefix.pch"; sourceTree = "<group>"; };
 		C588C904306567BF22D625900E860362 /* MBLConversion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLConversion.h; path = MetaWear/Internal/Core/MBLConversion.h; sourceTree = "<group>"; };
@@ -979,6 +979,7 @@
 		DAD5A3119084AE0C848810A31309E286 /* MetaWear.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = MetaWear.modulemap; sourceTree = "<group>"; };
 		DAD5D31E0AA65FA3D7048154ACCFD358 /* DFUControlPoint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DFUControlPoint.swift; path = iOSDFULibrary/Classes/Implementation/LegacyDFU/Characteristics/DFUControlPoint.swift; sourceTree = "<group>"; };
 		DB83D172F2EDCA40E253538E1D665AC1 /* MBLGyroBMI160DataReadyEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLGyroBMI160DataReadyEvent.h; path = MetaWear/Internal/Modules/Gyro/GyroBMI160/MBLGyroBMI160DataReadyEvent.h; sourceTree = "<group>"; };
+		DBE1C02465D137AD6A94F99CD6A16AF7 /* ZipUtilities.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZipUtilities.swift; path = Zip/ZipUtilities.swift; sourceTree = "<group>"; };
 		DC52EF99BDC5EB59CA5CBCAF355D5A44 /* MBLAccelerometerBoschFlatData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBoschFlatData.h; path = MetaWear/Classes/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschFlatData.h; sourceTree = "<group>"; };
 		DC6FDE601D345E81A8E1A0210055C057 /* StaticDataTableViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = StaticDataTableViewController.m; sourceTree = "<group>"; };
 		DD3FE4FFF370C0AF0EA281B225DE0BBB /* MBLMechanicalSwitch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLMechanicalSwitch.h; path = MetaWear/Classes/Modules/MechanicalSwitch/MBLMechanicalSwitch.h; sourceTree = "<group>"; };
@@ -995,13 +996,13 @@
 		E2CFAB37F63715BDCBFCE12E1C4AC642 /* MBLRMSAccelerometerData+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLRMSAccelerometerData+Private.h"; path = "MetaWear/Internal/Modules/Accelerometer/MBLRMSAccelerometerData+Private.h"; sourceTree = "<group>"; };
 		E3E346152ABE2F07897088AC3CB386F8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E40DAA818A34C62527E85BBF57767F69 /* MBLLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLLogging.h; path = MetaWear/Internal/Modules/Logging/MBLLogging.h; sourceTree = "<group>"; };
-		E54AE284BD9E8374E5C6DB1F7F78C724 /* Zip.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Zip.modulemap; sourceTree = "<group>"; };
 		E629101A9BE4295798B287198EA1ECFA /* MBLEulerAngleData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLEulerAngleData.h; path = MetaWear/Classes/Modules/SensorFusion/MBLEulerAngleData.h; sourceTree = "<group>"; };
 		E63A17C55CDC7A38CB3573E8784D6F5A /* BFCancellationTokenSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BFCancellationTokenSource.h; path = Bolts/Common/BFCancellationTokenSource.h; sourceTree = "<group>"; };
 		E7089CFB9A2A79A598B676E5ACF7FA5F /* MBProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		E89F2FA132B011284B42A70C8D2598B5 /* BFTask+MBLPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "BFTask+MBLPrivate.h"; path = "MetaWear/Internal/Categories/BFTask+MBLPrivate.h"; sourceTree = "<group>"; };
 		E91D083298127726530A576F8D8A7F3B /* MBLBarometerBME280.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLBarometerBME280.h; path = MetaWear/Classes/Modules/Barometer/BarometerBosch/BarometerBME280/MBLBarometerBME280.h; sourceTree = "<group>"; };
 		E92D922380BF555C4F7DA65984AAC681 /* MBLI2C.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLI2C.h; path = MetaWear/Classes/Modules/I2C/MBLI2C.h; sourceTree = "<group>"; };
+		E974F08A50AA3D9233E2C6E21FCB1BFB /* QuickZip.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QuickZip.swift; path = Zip/QuickZip.swift; sourceTree = "<group>"; };
 		E9B0395B1DD72E135D9F689F93DDAE5D /* MBLOrientationData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLOrientationData.m; path = MetaWear/Classes/Modules/Accelerometer/MBLOrientationData.m; sourceTree = "<group>"; };
 		E9C6C05A16C31B8299437D023C45700A /* MBLFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLFilter.m; path = MetaWear/Classes/Core/MBLFilter.m; sourceTree = "<group>"; };
 		EA4C0FE513ED8E36173A9E23994782B7 /* BFExecutor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BFExecutor.m; path = Bolts/Common/BFExecutor.m; sourceTree = "<group>"; };
@@ -1031,7 +1032,6 @@
 		F5A788E53830F404C8768084DF6D7140 /* MBLiBeacon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLiBeacon.h; path = MetaWear/Classes/Modules/iBeacon/MBLiBeacon.h; sourceTree = "<group>"; };
 		F5AD1BB848E9ED5D358DB3094D457BCA /* MBLSensorFusion+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MBLSensorFusion+Private.h"; path = "MetaWear/Internal/Modules/SensorFusion/MBLSensorFusion+Private.h"; sourceTree = "<group>"; };
 		F67A3461BC977541EC7739ABC495C769 /* MBLAccelerometerBoschOrientationFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLAccelerometerBoschOrientationFormat.h; path = MetaWear/Internal/Modules/Accelerometer/AccelerometerBosch/MBLAccelerometerBoschOrientationFormat.h; sourceTree = "<group>"; };
-		F67E22526D84E2B28286349F993EDE5A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8620CAD58474B591857FCA494684F4D /* MBLOrientationData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MBLOrientationData.h; path = MetaWear/Classes/Modules/Accelerometer/MBLOrientationData.h; sourceTree = "<group>"; };
 		F8E74F3017761645F81BEEFCE91CFDBA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9086B5357CF542C19EB759C5B02B3E0 /* MBLExternalThermistor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MBLExternalThermistor.m; path = MetaWear/Classes/Modules/Temperature/MBLExternalThermistor.m; sourceTree = "<group>"; };
@@ -1157,26 +1157,6 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		1505C8FB54106A962D81FA21C4C8537B /* Zip */ = {
-			isa = PBXGroup;
-			children = (
-				0A18DDE684AD9C2B6A080A8DCF431C7E /* crypt.h */,
-				73E6F1A731F9FC9BA5BACE4F2C5C1692 /* ioapi.c */,
-				42FB5B63B3C3A8D598392C63A9A5D727 /* ioapi.h */,
-				C0CE332EAC2E3615CCFF935F8AF2081C /* QuickZip.swift */,
-				B5A9B359D1574C18EB2EA551F527821E /* unzip.c */,
-				044E266836AC2B22D9D3F6E01818C8B8 /* unzip.h */,
-				4EFC1E4EF4F5C7E454DFB27D834EA6CF /* zip.c */,
-				52102A8FD6D1764AE051ADC3686B6236 /* Zip.h */,
-				51075A2E98924509846238F0CAFAA90C /* zip.h */,
-				187F684205C37DDBE1C506317ED8B3C0 /* Zip.swift */,
-				5BAE2301D6A9C7FAF0C1A2CA4D6B6088 /* ZipUtilities.swift */,
-				230F0A19AE5B3EDEF66F31ADAD1A9426 /* Support Files */,
-			);
-			name = Zip;
-			path = Zip;
-			sourceTree = "<group>";
-		};
 		16B43A085A23BDCDA1E1CF436E8DEA0B /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -1187,20 +1167,6 @@
 				EF466EDBA9016357CE7ADE1C971D6F9A /* QuartzCore.framework */,
 			);
 			name = iOS;
-			sourceTree = "<group>";
-		};
-		230F0A19AE5B3EDEF66F31ADAD1A9426 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				F67E22526D84E2B28286349F993EDE5A /* Info.plist */,
-				E54AE284BD9E8374E5C6DB1F7F78C724 /* Zip.modulemap */,
-				1A6544CF13E34D4F2C4C635E7412D761 /* Zip.xcconfig */,
-				B6B7B45E5BD3253E3BED49C93023D2AC /* Zip-dummy.m */,
-				226A26CA3CC20369C0D30DDD4E0E2CAA /* Zip-prefix.pch */,
-				2FF5F3E1E09704D5FE0EA7231F70126E /* Zip-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Zip";
 			sourceTree = "<group>";
 		};
 		23C8D39666E89DFD48B285DCCAEF2727 /* Support Files */ = {
@@ -1281,6 +1247,26 @@
 			path = iOSDFULibrary;
 			sourceTree = "<group>";
 		};
+		51E84E8E3D37E5ED697F6AD5C3BC2645 /* Zip */ = {
+			isa = PBXGroup;
+			children = (
+				4107B34CDC321DD9823513DB24F8166A /* crypt.h */,
+				BB9C105066B10756D2067015EBE57A59 /* ioapi.c */,
+				3ABAFF002571963505836B97DAB2D246 /* ioapi.h */,
+				E974F08A50AA3D9233E2C6E21FCB1BFB /* QuickZip.swift */,
+				A8A4E8969C7E798DEB9065B76158E1C0 /* unzip.c */,
+				4012C26BDD4F73982C0331069F881763 /* unzip.h */,
+				19F41E11AF66038E42E4C1CE98929000 /* zip.c */,
+				80489E01A4B5417CE7AFCA1B41F0F130 /* zip.h */,
+				89E106F6E20AA6E0495BA527B6C0E9F8 /* Zip.h */,
+				5D4860E3D87A6F819CE1F94CF70C656C /* Zip.swift */,
+				DBE1C02465D137AD6A94F99CD6A16AF7 /* ZipUtilities.swift */,
+				AE37A0E187A91CD55683F0D4FD5F4EB4 /* Support Files */,
+			);
+			name = Zip;
+			path = Zip;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
@@ -1336,6 +1322,20 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/StaticDataTableViewController";
+			sourceTree = "<group>";
+		};
+		AE37A0E187A91CD55683F0D4FD5F4EB4 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B83B07992220DD9E67BEB8DF3E237BB2 /* Info.plist */,
+				27ACB5131BFAED755996005CCC294F3F /* Zip.modulemap */,
+				7190174CF748D7F9F6BC052C127952E8 /* Zip.xcconfig */,
+				9D8DEE9ABB385A53B029EAA35416A0DD /* Zip-dummy.m */,
+				1648EFBCFFF194FC40CC2491AF05ECA4 /* Zip-prefix.pch */,
+				C2870725D110B944B77A873D84D5A2F6 /* Zip-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Zip";
 			sourceTree = "<group>";
 		};
 		C4AC272CF73238AA39B31C85594F7E03 /* MBProgressHUD */ = {
@@ -1809,7 +1809,7 @@
 				C4AC272CF73238AA39B31C85594F7E03 /* MBProgressHUD */,
 				F22866EF77E48F4EA4837BA5F85A8814 /* MetaWear */,
 				3A04B5C61518CCBF01B69F096933DA86 /* StaticDataTableViewController */,
-				1505C8FB54106A962D81FA21C4C8537B /* Zip */,
+				51E84E8E3D37E5ED697F6AD5C3BC2645 /* Zip */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2068,16 +2068,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9E3B11EC54EA23BFBF3C6554161DCBE8 /* Headers */ = {
+		D7E5ACCD9439D9B4B93818039F858A33 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67B775CA7879DD54C05469989DF6CAA2 /* crypt.h in Headers */,
-				CC0AF1383226FC45CB3A3B7C1CC5C9DF /* ioapi.h in Headers */,
-				55BBC80EE019F2A32FB5A4B547FF57ED /* unzip.h in Headers */,
-				0946806167A04CDC73709FE86536BC1B /* Zip-umbrella.h in Headers */,
-				B7F73EF253E5BEECEB1AEA339C728489 /* zip.h in Headers */,
-				9193F47F8252B8BB75D248B49D888D78 /* Zip.h in Headers */,
+				7E5A8BA2A7944437068EE379EDD9DF11 /* crypt.h in Headers */,
+				0A8CC78B7D5522AFDB7660C919492110 /* ioapi.h in Headers */,
+				51E9BD655294E26BAC914FA7C601E7A0 /* unzip.h in Headers */,
+				58C632C23C48C8DFE9E53A2C5E4BAEC5 /* Zip-umbrella.h in Headers */,
+				BACB9922ECE93352DFA4E17C4BB93AD9 /* Zip.h in Headers */,
+				3D78A91C00E60807EE6B3B67D33A6E21 /* zip.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2169,7 +2169,7 @@
 			buildPhases = (
 				7F8BFA09A2CE47432F43BEFA34547EF6 /* Sources */,
 				65256EE91631C3389C32CF9A5C33BFE0 /* Frameworks */,
-				9E3B11EC54EA23BFBF3C6554161DCBE8 /* Headers */,
+				D7E5ACCD9439D9B4B93818039F858A33 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -2626,202 +2626,71 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		00630B843F474C97CCC98ABEBFB081CE /* Release */ = {
+		0366A118026CFCBA616D826902450952 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33CE622DADC58BC30C50D92E3AF5863A /* MetaWear.xcconfig */;
+			baseConfigurationReference = 41A95BE023C63F0A35B628F825AB3515 /* iOSDFULibrary.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MetaWear/MetaWear-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MetaWear/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/iOSDFULibrary/iOSDFULibrary-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/iOSDFULibrary/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MetaWear/MetaWear.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = MetaWear;
+				MODULEMAP_FILE = "Target Support Files/iOSDFULibrary/iOSDFULibrary.modulemap";
+				PRODUCT_NAME = iOSDFULibrary;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 3.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		18548A584428EC0474184CEB7686BA5E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 058B03A195D05F0A928D1332AB77365B /* MBProgressHUD.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MBProgressHUD/MBProgressHUD-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MBProgressHUD/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MBProgressHUD/MBProgressHUD.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = MBProgressHUD;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		1C7D17A37D091C98D2F0DD886C3A9320 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = NO;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_DEBUG=1",
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Debug;
-		};
-		34FE9531DA9AF2820790339988D5FF41 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		35C9BE91B901536B771F04F521D20EB7 /* Release */ = {
+		18BFE867157A8E74653767731CE892B0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AD900C98FF9CE124B57487B99E76DF04 /* FastCoding+tvOS.xcconfig */;
+			baseConfigurationReference = 7190174CF748D7F9F6BC052C127952E8 /* Zip.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/FastCoding+tvOS/FastCoding+tvOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FastCoding+tvOS/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Zip/Zip-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Zip/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/FastCoding+tvOS/FastCoding+tvOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = FastCoding_tvOS;
+				MODULEMAP_FILE = "Target Support Files/Zip/Zip.modulemap";
+				PRODUCT_NAME = Zip;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 3.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		3AC1C1EB73AE2F310C408C9363367CB9 /* Debug */ = {
+		22A6F07A5805220751A9154FCD011C46 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 33CE622DADC58BC30C50D92E3AF5863A /* MetaWear.xcconfig */;
 			buildSettings = {
@@ -2830,100 +2699,120 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/MetaWear/MetaWear-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MetaWear/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/MetaWear/MetaWear.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = MetaWear;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		4A5A5EA003231B592B3D70325C6C73AF /* Debug */ = {
+		3BE8221C496DB45D3C1EFF75CF25E580 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8BA655DB968E3317E17072F8A0E12EC9 /* StaticDataTableViewController.xcconfig */;
+			baseConfigurationReference = 41A95BE023C63F0A35B628F825AB3515 /* iOSDFULibrary.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/StaticDataTableViewController/StaticDataTableViewController-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/StaticDataTableViewController/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/iOSDFULibrary/iOSDFULibrary-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/iOSDFULibrary/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/StaticDataTableViewController/StaticDataTableViewController.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = StaticDataTableViewController;
+				MODULEMAP_FILE = "Target Support Files/iOSDFULibrary/iOSDFULibrary.modulemap";
+				PRODUCT_NAME = iOSDFULibrary;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 3.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		59EE66E9B409430AD058D3605315CD56 /* Release */ = {
+		430FFB3DA6DD6CED4A3246F9C4771870 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8BA655DB968E3317E17072F8A0E12EC9 /* StaticDataTableViewController.xcconfig */;
+			baseConfigurationReference = 33CE622DADC58BC30C50D92E3AF5863A /* MetaWear.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/StaticDataTableViewController/StaticDataTableViewController-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/StaticDataTableViewController/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/MetaWear/MetaWear-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MetaWear/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/StaticDataTableViewController/StaticDataTableViewController.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = StaticDataTableViewController;
+				MODULEMAP_FILE = "Target Support Files/MetaWear/MetaWear.modulemap";
+				PRODUCT_NAME = MetaWear;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		5BBF5835F9B29B2F0AA6192CFDED2D14 /* Release */ = {
+		59F2B778C893AF617C098A97BD43CF68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8BA655DB968E3317E17072F8A0E12EC9 /* StaticDataTableViewController.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/StaticDataTableViewController/StaticDataTableViewController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/StaticDataTableViewController/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/StaticDataTableViewController/StaticDataTableViewController.modulemap";
+				PRODUCT_NAME = StaticDataTableViewController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5C8BB6FEB8F68D3BB4EA8BB1FC422764 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B904B713233B9523CB846FAFF3652E01 /* Pods-MetaWearApiTest.release.xcconfig */;
 			buildSettings = {
@@ -2932,20 +2821,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-MetaWearApiTest/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-MetaWearApiTest/Pods-MetaWearApiTest.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -2954,14 +2839,45 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		61EF3FAACA79E51B75B18088ABCD722D /* Release */ = {
+		62B172E6B93A05E472567F03D4D4206D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 058B03A195D05F0A928D1332AB77365B /* MBProgressHUD.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/MBProgressHUD/MBProgressHUD-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MBProgressHUD/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MBProgressHUD/MBProgressHUD.modulemap";
+				PRODUCT_NAME = MBProgressHUD;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A1569E7DE2B11A27845192D310BBB299 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6D54AEE10AF604447B80BEF3247D67E1 /* Bolts.xcconfig */;
 			buildSettings = {
@@ -2970,102 +2886,114 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Bolts/Bolts-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Bolts/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Bolts/Bolts.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = Bolts;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		6588B5E406A473BEDF027009C6063DAB /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A6544CF13E34D4F2C4C635E7412D761 /* Zip.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Zip/Zip-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Zip/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Zip/Zip.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = Zip;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		937E281BB5AD04314A6E2264E8C51FD0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A6544CF13E34D4F2C4C635E7412D761 /* Zip.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Zip/Zip-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Zip/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Zip/Zip.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = Zip;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		AD13717F67675B8434A6B4E73D34C416 /* Debug */ = {
+		AAFD8B1F52E3C8E3F3090B4CAD7EAB19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8BA655DB968E3317E17072F8A0E12EC9 /* StaticDataTableViewController.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/StaticDataTableViewController/StaticDataTableViewController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/StaticDataTableViewController/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/StaticDataTableViewController/StaticDataTableViewController.modulemap";
+				PRODUCT_NAME = StaticDataTableViewController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B254DAA6CF0CE39F4A3D11B90A7E059A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		BA85FD391AC5332EEC2F1015DB9F1DA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DA4C7A0E9F4FA0219983F32BD26818BF /* Pods-MetaWearApiTest.debug.xcconfig */;
 			buildSettings = {
@@ -3074,20 +3002,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-MetaWearApiTest/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-MetaWearApiTest/Pods-MetaWearApiTest.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -3097,83 +3021,13 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		B7080A91FB8A628F90BFB8E4C211F907 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 41A95BE023C63F0A35B628F825AB3515 /* iOSDFULibrary.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/iOSDFULibrary/iOSDFULibrary-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/iOSDFULibrary/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/iOSDFULibrary/iOSDFULibrary.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = iOSDFULibrary;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		BC99321907D5091FE099FD97F9EE0E83 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 058B03A195D05F0A928D1332AB77365B /* MBProgressHUD.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MBProgressHUD/MBProgressHUD-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/MBProgressHUD/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/MBProgressHUD/MBProgressHUD.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = MBProgressHUD;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		D4ABDDC9C5BC0C96FCF810B35F5971EC /* Debug */ = {
+		D1C89A092DF543E89AE70A7FE8822125 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AD900C98FF9CE124B57487B99E76DF04 /* FastCoding+tvOS.xcconfig */;
 			buildSettings = {
@@ -3182,32 +3036,180 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/FastCoding+tvOS/FastCoding+tvOS-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/FastCoding+tvOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/FastCoding+tvOS/FastCoding+tvOS.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = FastCoding_tvOS;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D63C8F9EE0495623624CD1F818D0E302 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD900C98FF9CE124B57487B99E76DF04 /* FastCoding+tvOS.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FastCoding+tvOS/FastCoding+tvOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FastCoding+tvOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FastCoding+tvOS/FastCoding+tvOS.modulemap";
+				PRODUCT_NAME = FastCoding_tvOS;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		F252F4DC9F1F13351616B94E84958952 /* Debug */ = {
+		E3391FC91A26FB0B3C2E79B62D6FF818 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7190174CF748D7F9F6BC052C127952E8 /* Zip.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Zip/Zip-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Zip/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Zip/Zip.modulemap";
+				PRODUCT_NAME = Zip;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E4B68EE12B21C47CB798D9B1ECA6D7A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		EAF862DDCC91AD02A705F8BB1D31B68F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 058B03A195D05F0A928D1332AB77365B /* MBProgressHUD.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/MBProgressHUD/MBProgressHUD-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/MBProgressHUD/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/MBProgressHUD/MBProgressHUD.modulemap";
+				PRODUCT_NAME = MBProgressHUD;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F9786394D8C4E571242165E7A54E870F /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6D54AEE10AF604447B80BEF3247D67E1 /* Bolts.xcconfig */;
 			buildSettings = {
@@ -3216,65 +3218,27 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/Bolts/Bolts-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Bolts/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Bolts/Bolts.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = Bolts;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
-		};
-		F290B5ABBA5E6650800D4D4C2FBDC27D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 41A95BE023C63F0A35B628F825AB3515 /* iOSDFULibrary.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/iOSDFULibrary/iOSDFULibrary-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/iOSDFULibrary/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/iOSDFULibrary/iOSDFULibrary.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = iOSDFULibrary;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -3282,8 +3246,8 @@
 		2533ACEB75826519B6934739D2F0BB8C /* Build configuration list for PBXNativeTarget "StaticDataTableViewController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4A5A5EA003231B592B3D70325C6C73AF /* Debug */,
-				59EE66E9B409430AD058D3605315CD56 /* Release */,
+				59F2B778C893AF617C098A97BD43CF68 /* Debug */,
+				AAFD8B1F52E3C8E3F3090B4CAD7EAB19 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3291,8 +3255,8 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1C7D17A37D091C98D2F0DD886C3A9320 /* Debug */,
-				34FE9531DA9AF2820790339988D5FF41 /* Release */,
+				E4B68EE12B21C47CB798D9B1ECA6D7A7 /* Debug */,
+				B254DAA6CF0CE39F4A3D11B90A7E059A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3300,8 +3264,8 @@
 		33C0EC7FC0A1C065B00CDC72A533BEED /* Build configuration list for PBXNativeTarget "MetaWear" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3AC1C1EB73AE2F310C408C9363367CB9 /* Debug */,
-				00630B843F474C97CCC98ABEBFB081CE /* Release */,
+				22A6F07A5805220751A9154FCD011C46 /* Debug */,
+				430FFB3DA6DD6CED4A3246F9C4771870 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3309,8 +3273,8 @@
 		46EC2299A313886B883737DA453B9A83 /* Build configuration list for PBXNativeTarget "iOSDFULibrary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F290B5ABBA5E6650800D4D4C2FBDC27D /* Debug */,
-				B7080A91FB8A628F90BFB8E4C211F907 /* Release */,
+				3BE8221C496DB45D3C1EFF75CF25E580 /* Debug */,
+				0366A118026CFCBA616D826902450952 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3318,8 +3282,8 @@
 		A9D29C9A0296183A72406337A608A484 /* Build configuration list for PBXNativeTarget "Zip" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				937E281BB5AD04314A6E2264E8C51FD0 /* Debug */,
-				6588B5E406A473BEDF027009C6063DAB /* Release */,
+				E3391FC91A26FB0B3C2E79B62D6FF818 /* Debug */,
+				18BFE867157A8E74653767731CE892B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3327,8 +3291,8 @@
 		BDF2C972291E44C97982653B7B9CD010 /* Build configuration list for PBXNativeTarget "Bolts" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F252F4DC9F1F13351616B94E84958952 /* Debug */,
-				61EF3FAACA79E51B75B18088ABCD722D /* Release */,
+				A1569E7DE2B11A27845192D310BBB299 /* Debug */,
+				F9786394D8C4E571242165E7A54E870F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3336,8 +3300,8 @@
 		CC1874913BA1F82C4953C3C7F551AB22 /* Build configuration list for PBXNativeTarget "MBProgressHUD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				18548A584428EC0474184CEB7686BA5E /* Debug */,
-				BC99321907D5091FE099FD97F9EE0E83 /* Release */,
+				EAF862DDCC91AD02A705F8BB1D31B68F /* Debug */,
+				62B172E6B93A05E472567F03D4D4206D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3345,8 +3309,8 @@
 		D7834730E6282B901CD16B1DFFB18BA3 /* Build configuration list for PBXNativeTarget "Pods-MetaWearApiTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AD13717F67675B8434A6B4E73D34C416 /* Debug */,
-				5BBF5835F9B29B2F0AA6192CFDED2D14 /* Release */,
+				BA85FD391AC5332EEC2F1015DB9F1DA6 /* Debug */,
+				5C8BB6FEB8F68D3BB4EA8BB1FC422764 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -3354,8 +3318,8 @@
 		E27544E2B08D4BEF4DD3E1D75C00F1DB /* Build configuration list for PBXNativeTarget "FastCoding+tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D4ABDDC9C5BC0C96FCF810B35F5971EC /* Debug */,
-				35C9BE91B901536B771F04F521D20EB7 /* Release */,
+				D63C8F9EE0495623624CD1F818D0E302 /* Debug */,
+				D1C89A092DF543E89AE70A7FE8822125 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

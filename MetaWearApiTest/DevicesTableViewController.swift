@@ -210,8 +210,7 @@ class DevicesTableViewController: UITableViewController, DFUServiceDelegate, DFU
             print("\(level): \(message)")
         }
     }
-    
-    func select(_ peripheral:CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) -> Bool {
+    func select(_ peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber, hint name: String?) -> Bool {
         return peripheral.identifier == selected?.identifier
     }
     

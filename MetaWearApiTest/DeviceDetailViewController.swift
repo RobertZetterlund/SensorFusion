@@ -2435,7 +2435,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         }
     }
     
-    func select(_ peripheral:CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) -> Bool {
+    func select(_ peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber, hint name: String?) -> Bool {
         return peripheral.identifier == device.identifier
     }
     
