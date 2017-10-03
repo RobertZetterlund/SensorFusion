@@ -18,7 +18,7 @@ extension String {
     var drop0xPrefix:          String { return hasPrefix("0x") ? String(characters.dropFirst(2)) : self }
 }
 
-class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDelegate, DFUProgressDelegate, LoggerDelegate, DFUPeripheralSelectorDelegate {
+class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDelegate, DFUProgressDelegate, LoggerDelegate, DFUPeripheralSelectorDelegate, UITextFieldDelegate {
     var device: MBLMetaWear!
     
     @IBOutlet weak var connectionSwitch: UISwitch!
@@ -299,6 +299,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         reloadData(animated: false)
         // Write in the 2 fields we know at time zero
         connectionStateLabel.text! = nameForState()
+        nameTextField.delegate = self
         nameTextField.text = self.device.name
         // Listen for state changes
         isObserving = true
