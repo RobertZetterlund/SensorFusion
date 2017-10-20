@@ -4,7 +4,7 @@ PODS:
   - iOSDFULibrary (4.0.2):
     - Zip (~> 1.0)
   - MBProgressHUD (1.0.0)
-  - MetaWear (2.9.0):
+  - MetaWear (2.10.0):
     - Bolts/Tasks (~> 1.8.4)
     - FastCoding+tvOS (~> 3.2.1)
   - StaticDataTableViewController (2.0.5)
@@ -21,7 +21,7 @@ SPEC CHECKSUMS:
   FastCoding+tvOS: d314b6daa8389ec790ab362f973f53a5657292bd
   iOSDFULibrary: 739d3b5f2c99120b4e9b93ca165d9e451e3c8dec
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  MetaWear: 4a90744cedfe235b3f13fa296391f13599747813
+  MetaWear: 528d707564a96c850b9fe875e46765c96c24f99d
   StaticDataTableViewController: 7ea8d7bc8c7f0a4e9255a320224462c7346c1d4a
   Zip: 115a122433829a1bbf33f5575fa84047438dcc12
 

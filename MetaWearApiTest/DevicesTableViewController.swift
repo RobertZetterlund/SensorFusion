@@ -83,7 +83,7 @@ class DevicesTableViewController: UITableViewController, DFUServiceDelegate, DFU
         let cur = devices![indexPath.row]
         
         let uuid = cell.viewWithTag(1) as! UILabel
-        uuid.text = cur.identifier.uuidString
+        uuid.text = cur.mac ?? "Connect for MAC"
         
         let rssi = cell.viewWithTag(2) as! UILabel
         rssi.text = cur.discoveryTimeRSSI?.stringValue

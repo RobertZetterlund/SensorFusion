@@ -83,7 +83,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet weak var startOrientation: UIButton!
     @IBOutlet weak var stopOrientation: UIButton!
     @IBOutlet weak var orientationLabel: UILabel!
-    var accelerometerDataArray = [MBLAccelerometerData]()
+    var accelerometerDataArray: [MBLAccelerometerData] = []
     
     @IBOutlet weak var accelerometerBMI160Cell: UITableViewCell!
     @IBOutlet weak var accelerometerBMI160Scale: UISegmentedControl!
@@ -108,7 +108,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet weak var accelerometerBMI160StopStep: UIButton!
     @IBOutlet weak var accelerometerBMI160StepLabel: UILabel!
     var accelerometerBMI160StepCount = 0
-    var accelerometerBMI160Data = [MBLAccelerometerData]()
+    var accelerometerBMI160Data: [MBLAccelerometerData] = []
     
     @IBOutlet weak var accelerometerBMA255Cell: UITableViewCell!
     @IBOutlet weak var accelerometerBMA255Scale: UISegmentedControl!
@@ -129,7 +129,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet weak var accelerometerBMA255StartOrient: UIButton!
     @IBOutlet weak var accelerometerBMA255StopOrient: UIButton!
     @IBOutlet weak var accelerometerBMA255OrientLabel: UILabel!
-    var accelerometerBMA255Data = [MBLAccelerometerData]()
+    var accelerometerBMA255Data: [MBLAccelerometerData] = []
     
     @IBOutlet weak var gyroBMI160Cell: UITableViewCell!
     @IBOutlet weak var gyroBMI160Scale: UISegmentedControl!
@@ -139,7 +139,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet weak var gyroBMI160StartLog: UIButton!
     @IBOutlet weak var gyroBMI160StopLog: UIButton!
     @IBOutlet weak var gyroBMI160Graph: APLGraphView!
-    var gyroBMI160Data = [MBLGyroData]()
+    var gyroBMI160Data: [MBLGyroData] = []
     
     @IBOutlet weak var magnetometerBMM150Cell: UITableViewCell!
     @IBOutlet weak var magnetometerBMM150StartStream: UIButton!
@@ -147,7 +147,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet weak var magnetometerBMM150StartLog: UIButton!
     @IBOutlet weak var magnetometerBMM150StopLog: UIButton!
     @IBOutlet weak var magnetometerBMM150Graph: APLGraphView!
-    var magnetometerBMM150Data = [MBLMagnetometerData]()
+    var magnetometerBMM150Data: [MBLMagnetometerData] = []
     
     @IBOutlet weak var gpioCell: UITableViewCell!
     @IBOutlet weak var gpioPinSelector: UISegmentedControl!
@@ -374,13 +374,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     func deviceConnected() {
         connectionSwitch.setOn(true, animated: true)
         // Perform all device specific setup
-        if let mac = device.settings?.macAddress {
-            mac.readAsync().success { result in
-                print("ID: \(self.device.identifier.uuidString) MAC: \(result.value)")
-            }
-        } else {
-            print("ID: \(device.identifier.uuidString)")
-        }
+        print("ID: \(self.device.identifier.uuidString) MAC: \(self.device.mac ?? "N/A")")
+
         // We always have the info and state features
         cells(self.infoAndStateCells, setHidden: false)
         mfgNameLabel.text = device.deviceInfo?.manufacturerName ?? "N/A"
@@ -752,6 +747,15 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         device.setConfigurationAsync(nil)
     }
     
+    @IBAction func putToSleepPressed(_ sender: Any) {
+        // Sleep causes a disconnection
+        deviceDisconnected()
+        // Set it to sleep after the next reset
+        device.sleepModeOnReset()
+        // Preform the soft reset
+        device.resetDevice()
+    }
+    
     @IBAction func readSwitchPressed(_ sender: Any) {
         device.mechanicalSwitch?.switchValue.readAsync().success { result in
             self.mechanicalSwitchLabel.text = result.value.boolValue ? "Down" : "Up"
@@ -869,15 +873,13 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         startLog.isEnabled = false
         stopLog.isEnabled = false
         updateAccelerometerSettings()
-        // These variables are used for data recording
-        var array = [MBLAccelerometerData]() /* capacity: 1000 */
-        accelerometerDataArray = array
+        accelerometerDataArray.removeAll()
         streamingEvents.insert(device.accelerometer!.dataReadyEvent)
         device.accelerometer!.dataReadyEvent.startNotificationsAsync { (acceleration, error) in
             if let acceleration = acceleration {
                 self.accelerometerGraph.addX(acceleration.x, y: acceleration.y, z: acceleration.z)
                 // Add data to data array for saving
-                array.append(acceleration)
+                self.accelerometerDataArray.append(acceleration)
             }
         }
     }
@@ -1062,13 +1064,12 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMI160StartLog.isEnabled = false
         accelerometerBMI160StopLog.isEnabled = false
         updateAccelerometerBMI160Settings()
-        var array = [MBLAccelerometerData]() /* capacity: 1000 */
-        accelerometerBMI160Data = array
+        accelerometerBMI160Data.removeAll()
         streamingEvents.insert(device.accelerometer!.dataReadyEvent)
         device.accelerometer!.dataReadyEvent.startNotificationsAsync { (obj, error) in
             if let obj = obj {
                 self.accelerometerBMI160Graph.addX(obj.x, y: obj.y, z: obj.z)
-                array.append(obj)
+                self.accelerometerBMI160Data.append(obj)
             }
         }
     }
@@ -1256,13 +1257,12 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerBMA255StartLog.isEnabled = false
         accelerometerBMA255StopLog.isEnabled = false
         updateAccelerometerBMA255Settings()
-        var array = [MBLAccelerometerData]() /* capacity: 1000 */
-        accelerometerBMA255Data = array
+        accelerometerBMA255Data.removeAll()
         streamingEvents.insert(device.accelerometer!.dataReadyEvent)
         device.accelerometer!.dataReadyEvent.startNotificationsAsync { (obj, error) in
             if let obj = obj {
                 self.accelerometerBMA255Graph.addX(obj.x, y: obj.y, z: obj.z)
-                array.append(obj)
+                self.accelerometerBMA255Data.append(obj)
             }
         }
     }
@@ -1428,15 +1428,14 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         gyroBMI160StartLog.isEnabled = false
         gyroBMI160StopLog.isEnabled = false
         updateGyroBMI160Settings()
-        var array = [MBLGyroData]() /* capacity: 1000 */
-        gyroBMI160Data = array
+        gyroBMI160Data.removeAll()
         streamingEvents.insert(device.gyro!.dataReadyEvent)
         device.gyro!.dataReadyEvent.startNotificationsAsync { (obj, error) in
             if let obj = obj {
                 // TODO: Come up with a better graph interface, we need to scale value
                 // to show up right
                 self.gyroBMI160Graph.addX(obj.x * 0.008, y: obj.y * 0.008, z: obj.z * 0.008)
-                array.append(obj)
+                self.gyroBMI160Data.append(obj)
             }
         }
     }
@@ -1499,8 +1498,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         magnetometerBMM150StopStream.isEnabled = true
         magnetometerBMM150StartLog.isEnabled = false
         magnetometerBMM150StopLog.isEnabled = false
-        var array = [MBLMagnetometerData]() /* capacity: 1000 */
-        magnetometerBMM150Data = array
+        magnetometerBMM150Data.removeAll()
         magnetometerBMM150Graph.fullScale = 4
         let magnetometerBMM150 = device.magnetometer as! MBLMagnetometerBMM150
         streamingEvents.insert(magnetometerBMM150.periodicMagneticField)
@@ -1509,7 +1507,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                 // TODO: Come up with a better graph interface, we need to scale value
                 // to show up right
                 self.magnetometerBMM150Graph.addX(obj.x * 20000.0, y: obj.y * 20000.0, z: obj.z * 20000.0)
-                array.append(obj)
+                self.magnetometerBMM150Data.append(obj)
             }
         }
     }
