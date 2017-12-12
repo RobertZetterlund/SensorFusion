@@ -103,18 +103,18 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/FastCoding+tvOS/FastCoding_tvOS.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/FastCoding/FastCoding.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/MetaWear/MetaWear.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/MetaWearPrivate/MetaWear.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/StaticDataTableViewController/StaticDataTableViewController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Zip/Zip.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/iOSDFULibrary/iOSDFULibrary.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/FastCoding+tvOS/FastCoding_tvOS.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/FastCoding/FastCoding.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/MetaWear/MetaWear.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/MetaWearPrivate/MetaWear.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/StaticDataTableViewController/StaticDataTableViewController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Zip/Zip.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/iOSDFULibrary/iOSDFULibrary.framework"

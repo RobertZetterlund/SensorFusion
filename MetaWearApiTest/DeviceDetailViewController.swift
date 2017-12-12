@@ -15,7 +15,9 @@ import MBProgressHUD
 import iOSDFULibrary
 
 extension String {
-    var drop0xPrefix:          String { return hasPrefix("0x") ? String(characters.dropFirst(2)) : self }
+    var drop0xPrefix: String {
+        return hasPrefix("0x") ? String(dropFirst(2)) : self
+    }
 }
 
 class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDelegate, DFUProgressDelegate, LoggerDelegate, DFUPeripheralSelectorDelegate, UITextFieldDelegate {
@@ -391,8 +393,9 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         device.readRSSIAsync().success { result in
             self.rssiLevelLabel.text = result.stringValue
         }
-        device.checkForFirmwareUpdateAsync().success { result in
-            self.firmwareUpdateLabel.text = result.boolValue ? "AVAILABLE!" : "Up To Date"
+        device.checkForFirmwareUpdateAsync().continueOnDispatch { t in
+            self.firmwareUpdateLabel.text = t.result != nil ? "\(t.result!) AVAILABLE!" : "Up To Date"
+            return t
         }
         
         if device.led != nil {
@@ -657,11 +660,11 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         // return NO to not change text
         self.setNameButton.isEnabled = true
         // Prevent Undo crashing bug
-        if range.length + range.location > textField.text!.characters.count {
+        if range.length + range.location > textField.text!.count {
             return false
         }
         // Make sure it's no longer than 8 characters
-        let newLength = textField.text!.characters.count + string.characters.count - range.length
+        let newLength = textField.text!.count + string.count - range.length
         if newLength > 8 {
             return false
         }
@@ -696,10 +699,13 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     }
     
     @IBAction func checkForFirmwareUpdatesPressed(_ sender: Any) {
-        device.checkForFirmwareUpdateAsync().success { result in
-            self.firmwareUpdateLabel.text = result.boolValue ? "AVAILABLE!" : "Up To Date"
-        }.failure { error in
-            self.showAlertTitle("Error", message: error.localizedDescription)
+        device.checkForFirmwareUpdateAsync().continueOnDispatch { t in
+            guard t.error == nil else {
+                self.showAlertTitle("Error", message: t.error!.localizedDescription)
+                return t
+            }
+            self.firmwareUpdateLabel.text = t.result != nil ? "\(t.result!) AVAILABLE!" : "Up To Date"
+            return t
         }
     }
     
@@ -1056,6 +1062,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         
         accelerometerBMI160.sampleFrequency = Double(self.accelerometerBMI160Frequency.titleForSegment(at: self.accelerometerBMI160Frequency.selectedSegmentIndex)!)!
         accelerometerBMI160.tapEvent.type = MBLAccelerometerTapType(rawValue: UInt8(self.tapDetectionType.selectedSegmentIndex))!
+        accelerometerBMI160.filterMode = .normal
     }
     
     @IBAction func accelerometerBMI160StartStreamPressed(_ sender: Any) {
@@ -1420,6 +1427,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         }
         
         gyroBMI160.sampleFrequency = Double(self.gyroBMI160Frequency.titleForSegment(at: self.gyroBMI160Frequency.selectedSegmentIndex)!)!
+        gyroBMI160.filterMode = .normal
     }
     
     @IBAction func gyroBMI160StartStreamPressed(_ sender: Any) {
@@ -2076,7 +2084,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                 }
                 let reg = device.serial!.data(atDeviceAddress: deviceAddress, registerAddress: registerAddress, length: length)
                 reg.readAsync().success { result in
-                    self.i2cReadByteLabel.text = result.data?.description
+                    self.i2cReadByteLabel.text = result.data.description
                 }
             } else {
                 i2cRegisterAddress.text = ""
