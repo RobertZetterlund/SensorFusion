@@ -301,8 +301,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         reloadData(animated: false)
         // Write in the 2 fields we know at time zero
         connectionStateLabel.text! = nameForState()
-        nameTextField.delegate = self
-        nameTextField.text = self.device.name
+        nameTextField?.delegate = self
+        nameTextField?.text = self.device.name
         // Listen for state changes
         isObserving = true
         // Start off the connection flow
@@ -849,9 +849,11 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             self.tempratureLabel.text = result.value.stringValue.appending("°C")
         }
     }
-    
+    // RZCOM - Called by accelerometer init function.
     func updateAccelerometerSettings() {
+        // selects accelerometer
         let accelerometerMMA8452Q = device.accelerometer as! MBLAccelerometerMMA8452Q
+        
         if accelerometerScale.selectedSegmentIndex == 0 {
             accelerometerGraph.fullScale = 2
         } else if accelerometerScale.selectedSegmentIndex == 1 {
@@ -873,16 +875,32 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         accelerometerMMA8452Q.tapType = MBLAccelerometerTapType(rawValue: UInt8(tapDetectionType.selectedSegmentIndex))!
     }
     
+    
+    // RZCOM - Start of accelerometer..
     @IBAction func startAccelerationPressed(_ sender: Any) {
+        // visually fixes buttons
         startAccelerometer.isEnabled = false
         stopAccelerometer.isEnabled = true
+        
+        // disables option to log data
         startLog.isEnabled = false
         stopLog.isEnabled = false
+        
+        
+        // important, todo: define
         updateAccelerometerSettings()
+        
+        // removes previous data in sampleArr
         accelerometerDataArray.removeAll()
+        
+        // todo: find
         streamingEvents.insert(device.accelerometer!.dataReadyEvent)
+        
+        
+        
         device.accelerometer!.dataReadyEvent.startNotificationsAsync { (acceleration, error) in
             if let acceleration = acceleration {
+                // used for graphing
                 self.accelerometerGraph.addX(acceleration.x, y: acceleration.y, z: acceleration.z)
                 // Add data to data array for saving
                 self.accelerometerDataArray.append(acceleration)
@@ -903,6 +921,9 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         stopLog.isEnabled = true
         startAccelerometer.isEnabled = false
         stopAccelerometer.isEnabled = false
+        
+        
+        
         updateAccelerometerSettings()
         device.accelerometer!.dataReadyEvent.startLoggingAsync()
     }
@@ -911,13 +932,16 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         stopLog.isEnabled = false
         startLog.isEnabled = true
         startAccelerometer.isEnabled = true
+        // hud is popup showing text
         let hud = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
         hud.mode = .determinateHorizontalBar
         hud.label.text = "Downloading..."
         device.accelerometer!.dataReadyEvent.downloadLogAndStopLoggingAsync(true) { number in
             hud.progress = number
         }.success { array in
+            // use what's stored in memory to add to array.
             self.accelerometerDataArray = array as! [MBLAccelerometerData]
+            // add all the data to graph
             for acceleration in self.accelerometerDataArray {
                 self.accelerometerGraph.addX(acceleration.x, y: acceleration.y, z: acceleration.z)
             }
@@ -937,16 +961,20 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     
     @IBAction func sendDataPressed(_ sender: Any) {
         var accelerometerData = Data()
+        // RZCOM
+        // for each dE in array, add the time and x,y,z.
         for dataElement in accelerometerDataArray {
-            accelerometerData.append("\(dataElement.timestamp.timeIntervalSince1970),\(dataElement.x),\(dataElement.y),\(dataElement.z)\n".data(using: String.Encoding.utf8)!)
+            /* TODO: currently poor timestamp, shows number with decimals, should show timestamp. */ accelerometerData.append("\(dataElement.timestamp.timeIntervalSince1970),\(dataElement.x),\(dataElement.y),\(dataElement.z)\n".data(using: String.Encoding.utf8)!)
         }
+        
         send(accelerometerData, title: "AccData")
     }
     
     func send(_ data: Data, title: String) {
         // Get current Time/Date
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM_dd_yyyy-HH_mm_ss"
+        // set swedish format
+        dateFormatter.dateFormat = "dd_MM_yyyy-HH_mm_ss"
         let dateString = dateFormatter.string(from: Date())
         let name = "\(title)_\(dateString).csv"
         let fileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(name)
