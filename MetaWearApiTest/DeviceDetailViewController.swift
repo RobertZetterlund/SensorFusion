@@ -225,25 +225,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet weak var hygrometerBME280Humidity: UILabel!
     var hygrometerBME280Event: MBLEvent<MBLNumericData>!
     
-    @IBOutlet weak var i2cCell: UITableViewCell!
-    @IBOutlet weak var i2cSizeSelector: UISegmentedControl!
-    @IBOutlet weak var i2cDeviceAddress: UITextField!
-    @IBOutlet weak var i2cRegisterAddress: UITextField!
-    @IBOutlet weak var i2cReadByteLabel: UILabel!
-    @IBOutlet weak var i2cWriteByteField: UITextField!
-    
-    @IBOutlet weak var conductanceCell: UITableViewCell!
-    @IBOutlet weak var conductanceGain: UISegmentedControl!
-    @IBOutlet weak var conductanceVoltage: UISegmentedControl!
-    @IBOutlet weak var conductanceRange: UISegmentedControl!
-    @IBOutlet weak var conductanceChannelStepper: UIStepper!
-    @IBOutlet weak var conductanceChannelLabel: UILabel!
-    @IBOutlet weak var conductanceStartStream: UIButton!
-    @IBOutlet weak var conductanceStopStream: UIButton!
-    @IBOutlet weak var conductanceLabel: UILabel!
-    var conductanceEvent: MBLEvent<MBLNumericData>!
 
-    
     @IBOutlet weak var sensorFusionCell: UITableViewCell!
     @IBOutlet weak var sensorFusionMode: UISegmentedControl!
     @IBOutlet weak var sensorFusionOutput: UISegmentedControl!
@@ -531,14 +513,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             cell(hygrometerBME280Cell, setHidden: false)
         }
         
-        if device.serial != nil {
-            cell(i2cCell, setHidden: false)
-        }
-        
-        if device.conductance != nil {
-            conductanceChannelStepper.maximumValue = Double(device.conductance!.channels.count - 1)
-            cell(conductanceCell, setHidden: false)
-        }
         
         if let sensorFusion = device.sensorFusion {
             cell(sensorFusionCell, setHidden: false)
@@ -2039,88 +2013,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         hygrometerBME280Event.stopNotificationsAsync()
         hygrometerBME280Humidity.text = "XX.XX"
     }
-    
-    
-    @IBAction func conductanceStartStreamPressed(_ sender: Any) {
-        conductanceStartStream.isEnabled = false
-        conductanceStopStream.isEnabled = true
-        conductanceGain.isEnabled = false
-        conductanceVoltage.isEnabled = false
-        conductanceRange.isEnabled = false
-        conductanceChannelStepper.isEnabled = false
-        device.conductance!.gain = MBLConductanceGain(rawValue: UInt8(conductanceGain.selectedSegmentIndex))!
-        device.conductance!.voltage = MBLConductanceVoltage(rawValue: UInt8(conductanceVoltage.selectedSegmentIndex))!
-        device.conductance!.range = MBLConductanceRange(rawValue: UInt8(conductanceRange.selectedSegmentIndex))!
-        let channel = Int(round(conductanceChannelStepper.value))
-        device.conductance!.calibrateAsync()
-        conductanceEvent = device.conductance!.channels[channel].periodicRead(withPeriod: 500)
-        streamingEvents.insert(conductanceEvent)
-        conductanceEvent.startNotificationsAsync { (obj, error) in
-            if let obj = obj {
-                self.conductanceLabel.text = obj.value.stringValue
-            }
-        }
-    }
-    
-    @IBAction func conductanceStopStreamPressed(_ sender: Any) {
-        conductanceStartStream.isEnabled = true
-        conductanceStopStream.isEnabled = false
-        conductanceGain.isEnabled = true
-        conductanceVoltage.isEnabled = true
-        conductanceRange.isEnabled = true
-        conductanceChannelStepper.isEnabled = true
-        streamingEvents.remove(conductanceEvent)
-        conductanceEvent.stopNotificationsAsync()
-        conductanceLabel.text = "XXXX"
-    }
-    
-    @IBAction func conductanceChannelChanged(_ sender: Any) {
-        conductanceChannelLabel.text = "\(Int(round(conductanceChannelStepper.value)))"
-    }
-    
-    @IBAction func i2cReadBytesPressed(_ sender: Any) {
-        if let deviceAddress = UInt8(i2cDeviceAddress.text!.drop0xPrefix, radix: 16) {
-            if let registerAddress = UInt8(i2cRegisterAddress.text!.drop0xPrefix, radix: 16) {
-                var length: UInt8 = 1
-                if i2cSizeSelector.selectedSegmentIndex == 1 {
-                    length = 2
-                } else if i2cSizeSelector.selectedSegmentIndex == 2 {
-                    length = 4
-                }
-                let reg = device.serial!.data(atDeviceAddress: deviceAddress, registerAddress: registerAddress, length: length)
-                reg.readAsync().success { result in
-                    self.i2cReadByteLabel.text = result.data.description
-                }
-            } else {
-                i2cRegisterAddress.text = ""
-            }
-        } else {
-            i2cDeviceAddress.text = ""
-        }
-    }
-    
-    @IBAction func i2cWriteBytesPressed(_ sender: Any) {
-        if let deviceAddress = UInt8(i2cDeviceAddress.text!.drop0xPrefix, radix: 16) {
-            if let registerAddress = UInt8(i2cRegisterAddress.text!.drop0xPrefix, radix: 16) {
-                if var writeData = Int32(i2cWriteByteField.text!.drop0xPrefix, radix: 16) {
-                    var length: UInt8 = 1
-                    if i2cSizeSelector.selectedSegmentIndex == 1 {
-                        length = 2
-                    } else if i2cSizeSelector.selectedSegmentIndex == 2 {
-                        length = 4
-                    }
-                    let reg = device.serial!.data(atDeviceAddress: deviceAddress, registerAddress: registerAddress, length: length)
-                    reg.writeAsync(Data(bytes: &writeData, count: Int(length)))
-                }
-                i2cWriteByteField.text = ""
-            } else {
-                i2cRegisterAddress.text = ""
-            }
-        } else {
-            i2cDeviceAddress.text = ""
-        }
-    }
-
     
     func updateSensorFusionSettings() {
         
