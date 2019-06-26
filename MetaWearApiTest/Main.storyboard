@@ -2616,71 +2616,6 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Hygrometer BME280" id="iN1-yS-2b0">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="159" id="sUT-nh-l7m">
-                                        <rect key="frame" x="0.0" y="8248.5" width="320" height="159"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sUT-nh-l7m" id="Mkt-Pe-hHc">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="158.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Oversampling:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqT-7V-qcj">
-                                                    <rect key="frame" x="14" y="8" width="93" height="17"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yUx-wM-Dfy">
-                                                    <rect key="frame" x="14" y="27" width="292" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <segments>
-                                                        <segment title="1X"/>
-                                                        <segment title="2X"/>
-                                                        <segment title="4X"/>
-                                                        <segment title="8X"/>
-                                                        <segment title="16X"/>
-                                                    </segments>
-                                                </segmentedControl>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHv-TG-0ng">
-                                                    <rect key="frame" x="14" y="75" width="108" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Start Streaming">
-                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="hygrometerBME280StartStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="K9E-0O-NOE"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yNi-jk-cqa">
-                                                    <rect key="frame" x="199" y="75" width="107" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Stop Streaming">
-                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="hygrometerBME280StopStreamPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="0A8-Pr-23Q"/>
-                                                    </connections>
-                                                </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="XX.XX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWm-vq-Hlq">
-                                                    <rect key="frame" x="199" y="113" width="107" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Humidity (%)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bH-UT-5ff">
-                                                    <rect key="frame" x="14" y="113" width="98" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="and-78-Gqu" id="bbU-lc-BcB"/>
@@ -2790,11 +2725,6 @@
                         <outlet property="highPassFilterSwitch" destination="ikj-FS-Tf3" id="U0E-uj-qyM"/>
                         <outlet property="hpfCutoffFreq" destination="2Dz-V6-osR" id="eYT-Jo-Dbd"/>
                         <outlet property="hwRevLabel" destination="g4V-0N-UnL" id="zMx-Nu-bxj"/>
-                        <outlet property="hygrometerBME280Cell" destination="sUT-nh-l7m" id="p0v-Dy-r0z"/>
-                        <outlet property="hygrometerBME280Humidity" destination="JWm-vq-Hlq" id="BTi-3g-PT1"/>
-                        <outlet property="hygrometerBME280Oversample" destination="yUx-wM-Dfy" id="8OK-0E-7dc"/>
-                        <outlet property="hygrometerBME280StartStream" destination="rHv-TG-0ng" id="9J4-mj-xfc"/>
-                        <outlet property="hygrometerBME280StopStream" destination="yNi-jk-cqa" id="fId-B9-bvA"/>
                         <outlet property="iBeaconCell" destination="6NG-WJ-AbP" id="JT2-qC-kdh"/>
                         <outlet property="ledCell" destination="Nhr-ih-E25" id="hFa-he-xO8"/>
                         <outlet property="lowNoiseSwitch" destination="z7L-Af-YBm" id="9PX-qA-KxZ"/>
@@ -2887,7 +2817,6 @@
                         <outletCollection property="allCells" destination="Odj-7N-3bc" collectionClass="NSMutableArray" id="gjV-eo-KKd"/>
                         <outletCollection property="allCells" destination="rz8-cd-Ntj" collectionClass="NSMutableArray" id="5OG-n1-fVS"/>
                         <outletCollection property="allCells" destination="Mxu-9y-Vis" collectionClass="NSMutableArray" id="j22-tG-2CQ"/>
-                        <outletCollection property="allCells" destination="sUT-nh-l7m" collectionClass="NSMutableArray" id="MLK-mw-mBG"/>
                         <outletCollection property="allCells" destination="9wS-jo-zb2" collectionClass="NSMutableArray" id="KpP-u3-aRE"/>
                         <outletCollection property="allCells" destination="MKr-zp-JDf" collectionClass="NSMutableArray" id="shI-ee-dsB"/>
                     </connections>

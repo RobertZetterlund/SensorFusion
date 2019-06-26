@@ -218,13 +218,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet weak var photometerTCS3472ClearColor: UILabel!
     var photometerTCS3472Event: MBLEvent<MBLRGBData>!
     
-    @IBOutlet weak var hygrometerBME280Cell: UITableViewCell!
-    @IBOutlet weak var hygrometerBME280Oversample: UISegmentedControl!
-    @IBOutlet weak var hygrometerBME280StartStream: UIButton!
-    @IBOutlet weak var hygrometerBME280StopStream: UIButton!
-    @IBOutlet weak var hygrometerBME280Humidity: UILabel!
-    var hygrometerBME280Event: MBLEvent<MBLNumericData>!
-    
 
     @IBOutlet weak var sensorFusionCell: UITableViewCell!
     @IBOutlet weak var sensorFusionMode: UISegmentedControl!
@@ -507,10 +500,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         
         if device.photometer is MBLPhotometerTCS3472 {
             cell(photometerTCS3472Cell, setHidden: false)
-        }
-        
-        if device.hygrometer is MBLHygrometerBME280 {
-            cell(hygrometerBME280Cell, setHidden: false)
         }
         
         
@@ -1978,41 +1967,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         photometerTCS3472ClearColor.text = "XXXX"
     }
     
-    @IBAction func hygrometerBME280StartStreamPressed(_ sender: Any) {
-        hygrometerBME280StartStream.isEnabled = false
-        hygrometerBME280StopStream.isEnabled = true
-        hygrometerBME280Oversample.isEnabled = false
-        let hygrometerBME280 = device.hygrometer as! MBLHygrometerBME280
-        switch hygrometerBME280Oversample.selectedSegmentIndex {
-        case 0:
-            hygrometerBME280.humidityOversampling = .oversample1X
-        case 1:
-            hygrometerBME280.humidityOversampling = .oversample2X
-        case 2:
-            hygrometerBME280.humidityOversampling = .oversample4X
-        case 3:
-            hygrometerBME280.humidityOversampling = .oversample8X
-        default:
-            hygrometerBME280.humidityOversampling = .oversample16X
-        }
-        
-        hygrometerBME280Event = device.hygrometer!.humidity!.periodicRead(withPeriod: 700)
-        streamingEvents.insert(hygrometerBME280Event)
-        hygrometerBME280Event.startNotificationsAsync { (obj, error) in
-            if let obj = obj {
-                self.hygrometerBME280Humidity.text = String(format: "%.2f", obj.value.doubleValue)
-            }
-        }
-    }
-    
-    @IBAction func hygrometerBME280StopStreamPressed(_ sender: Any) {
-        hygrometerBME280StartStream.isEnabled = true
-        hygrometerBME280StopStream.isEnabled = false
-        hygrometerBME280Oversample.isEnabled = true
-        streamingEvents.remove(hygrometerBME280Event)
-        hygrometerBME280Event.stopNotificationsAsync()
-        hygrometerBME280Humidity.text = "XX.XX"
-    }
     
     func updateSensorFusionSettings() {
         
