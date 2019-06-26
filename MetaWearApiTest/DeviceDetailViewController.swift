@@ -242,22 +242,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet weak var conductanceStopStream: UIButton!
     @IBOutlet weak var conductanceLabel: UILabel!
     var conductanceEvent: MBLEvent<MBLNumericData>!
-    
-    @IBOutlet weak var neopixelCell: UITableViewCell!
-    @IBOutlet weak var neopixelColor: UISegmentedControl!
-    @IBOutlet weak var neopixelSpeed: UISegmentedControl!
-    @IBOutlet weak var neopixelPin: UISegmentedControl!
-    @IBOutlet weak var neopixelLengthStepper: UIStepper!
-    @IBOutlet weak var neopixelLengthLabel: UILabel!
-    @IBOutlet weak var neopixelSetRed: UIButton!
-    @IBOutlet weak var neopixelSetGreen: UIButton!
-    @IBOutlet weak var neopixelSetBlue: UIButton!
-    @IBOutlet weak var neopixelSetRainbow: UIButton!
-    @IBOutlet weak var neopixelRotateRight: UIButton!
-    @IBOutlet weak var neopixelRotateLeft: UIButton!
-    @IBOutlet weak var neopixelTurnOff: UIButton!
-    var neopixelStrand: MBLNeopixelStrand!
-    var neopixelStrandInitTask: BFTask<AnyObject>!
+
     
     @IBOutlet weak var sensorFusionCell: UITableViewCell!
     @IBOutlet weak var sensorFusionMode: UISegmentedControl!
@@ -267,6 +252,9 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet weak var sensorFusionStartLog: UIButton!
     @IBOutlet weak var sensorFusionStopLog: UIButton!
     @IBOutlet weak var sensorFusionGraph: APLGraphView!
+    
+    // define a data object used to store data
+    
     var sensorFusionData = Data()
     
     var streamingEvents: Set<NSObject> = [] // Can't use proper type due to compiler seg fault
@@ -550,17 +538,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         if device.conductance != nil {
             conductanceChannelStepper.maximumValue = Double(device.conductance!.channels.count - 1)
             cell(conductanceCell, setHidden: false)
-        }
-        
-        if device.neopixel != nil {
-            cell(neopixelCell, setHidden: false)
-            // The number of pins is variable
-            neopixelPin.removeAllSegments()
-            for i in 0..<device.gpio!.pins.count {
-                neopixelPin.insertSegment(withTitle: "\(i)", at: i, animated: false)
-            }
-            neopixelPin.selectedSegmentIndex = 0
-            gpioPinSelectorPressed(self.gpioPinSelector)
         }
         
         if let sensorFusion = device.sensorFusion {
@@ -2143,102 +2120,24 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             i2cDeviceAddress.text = ""
         }
     }
-    
-    @IBAction func neopixelLengthChanged(_ sender: Any) {
-        neopixelLengthLabel.text = "\(Int(round(neopixelLengthStepper.value)))"
-    }
-    
-    func neopixelInitStrand() -> BFTask<AnyObject> {
-        if neopixelStrand == nil {
-            neopixelStrand = device.neopixel!.strand(withColor: MBLColorOrdering(rawValue: UInt8(neopixelColor.selectedSegmentIndex))!,
-                                                     speed: MBLStrandSpeed(rawValue: UInt8(neopixelSpeed.selectedSegmentIndex))!,
-                                                     pin: UInt8(neopixelPin.selectedSegmentIndex),
-                                                     length: UInt8(round(neopixelLengthStepper.value)))
-            neopixelStrandInitTask = neopixelStrand.initializeAsync()
-            neopixelColor.isEnabled = false
-            neopixelSpeed.isEnabled = false
-            neopixelPin.isEnabled = false
-            neopixelLengthStepper.isEnabled = false
-        }
-        return neopixelStrandInitTask
-    }
-    
-    func neopixelSetColor(_ color: UIColor) {
-        let max = UInt8(round(neopixelLengthStepper.value))
-        for i in 0..<max {
-            neopixelStrand.setPixelAsync(i, color: color)
-        }
-    }
-    
-    @IBAction func neopixelSetRedPressed(_ sender: Any) {
-        neopixelInitStrand().success { result in
-            self.neopixelSetColor(UIColor.red)
-        }
-    }
-    
-    @IBAction func neopixelSetGreenPressed(_ sender: Any) {
-        neopixelInitStrand().success { result in
-            self.neopixelSetColor(UIColor.green)
-        }
-    }
-    
-    @IBAction func neopixelSetBluePressed(_ sender: Any) {
-        neopixelInitStrand().success { result in
-            self.neopixelSetColor(UIColor.blue)
-        }
-    }
-    
-    @IBAction func neopixelSetRainbowPressed(_ sender: Any) {
-        neopixelInitStrand().success { result in
-            self.neopixelStrand.setRainbowWithHoldAsync(false)
-        }
-    }
-    
-    @IBAction func neopixelRotateLeftPressed(_ sender: Any) {
-        neopixelInitStrand().success { result in
-            self.neopixelStrand.rotateStrand(withDirectionAsync: .towardsBoard, repetitions: 0xFF, period: 100)
-        }
-    }
-    
-    @IBAction func neopixelRotateRightPressed(_ sender: Any) {
-        neopixelInitStrand().success { result in
-            self.neopixelStrand.rotateStrand(withDirectionAsync: .awayFromBoard, repetitions: 0xFF, period: 100)
-        }
-    }
-    
-    @IBAction func neopixelTurnOffPressed(_ sender: Any) {
-        neopixelInitStrand().success { result in
-            self.neopixelStrand.clearAllPixelsAsync()
-        }
-        neopixelSetRed.isEnabled = false
-        neopixelSetGreen.isEnabled = false
-        neopixelSetBlue.isEnabled = false
-        neopixelSetRainbow.isEnabled = false
-        neopixelRotateRight.isEnabled = false
-        neopixelRotateLeft.isEnabled = false
-        neopixelTurnOff.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-            self.neopixelStrand.deinitializeAsync()
-            self.neopixelStrand = nil
-            self.neopixelColor.isEnabled = true
-            self.neopixelSpeed.isEnabled = true
-            self.neopixelPin.isEnabled = true
-            self.neopixelLengthStepper.isEnabled = true
-            self.neopixelSetRed.isEnabled = true
-            self.neopixelSetGreen.isEnabled = true
-            self.neopixelSetBlue.isEnabled = true
-            self.neopixelSetRainbow.isEnabled = true
-            self.neopixelRotateRight.isEnabled = true
-            self.neopixelRotateLeft.isEnabled = true
-            self.neopixelTurnOff.isEnabled = true
-        }
-    }
+
     
     func updateSensorFusionSettings() {
+        
+        // depending on which button toggled, vary the loggin setting, set the mode to index+1.
         device.sensorFusion!.mode = MBLSensorFusionMode(rawValue: UInt8(sensorFusionMode.selectedSegmentIndex) + 1)!
+        
+        
+        // buttons, do not allow user to change how to collect data.
         sensorFusionMode.isEnabled = false
         sensorFusionOutput.isEnabled = false
+        
+        
+        // initilize the data object.
         sensorFusionData = Data()
+        
+        
+        // init the graph
         sensorFusionGraph.fullScale = 8
     }
     
@@ -2251,6 +2150,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         
         var task: BFTask<AnyObject>?
         switch sensorFusionOutput.selectedSegmentIndex {
+            
+            // eulerAngle
         case 0:
             streamingEvents.insert(device.sensorFusion!.eulerAngle)
             sensorFusionGraph.hasW = true
@@ -2260,6 +2161,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.p),\(obj.r),\(obj.y),\(obj.h)\n".data(using: String.Encoding.utf8)!)
                 }
             }
+            
+            // quaternion
         case 1:
             streamingEvents.insert(device.sensorFusion!.quaternion)
             sensorFusionGraph.hasW = true
@@ -2269,6 +2172,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.w),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
                 }
             }
+            // Gravity
         case 2:
             streamingEvents.insert(device.sensorFusion!.gravity)
             sensorFusionGraph.hasW = false
@@ -2278,6 +2182,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
                 }
             }
+            // Linear Acceleration
+            
         case 3:
             streamingEvents.insert(device.sensorFusion!.linearAcceleration)
             switch (device.accelerometer as! MBLAccelerometerBosch).fullScaleRange {
@@ -2337,12 +2243,19 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     }
     
     @IBAction func sensorFusionStartLogPressed(_ sender: Any) {
+        
+        // disable visual buttons
+        
         sensorFusionStartLog.isEnabled = false
         sensorFusionStopLog.isEnabled = true
         sensorFusionStartStream.isEnabled = false
         sensorFusionStopStream.isEnabled = false
+        
+        // actually begin, based on button settings, prepare the session.
         updateSensorFusionSettings()
 
+        
+        
         switch sensorFusionOutput.selectedSegmentIndex {
         case 0:
             device.sensorFusion!.eulerAngle.startLoggingAsync()
@@ -2368,11 +2281,15 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     }
 
     @IBAction func sensorFusionStopLogPressed(_ sender: Any) {
+        
+        // buttons
         sensorFusionStartLog.isEnabled = true
         sensorFusionStopLog.isEnabled = false
         sensorFusionStartStream.isEnabled = true
         sensorFusionMode.isEnabled = true
         sensorFusionOutput.isEnabled = true
+        
+        
         
         let hud = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
         hud.mode = .determinateHorizontalBar
@@ -2384,6 +2301,9 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         }
         
         switch sensorFusionOutput.selectedSegmentIndex {
+            
+            // Euler
+            
         case 0:
             sensorFusionGraph.hasW = true
             task = device.sensorFusion!.eulerAngle.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
@@ -2392,6 +2312,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.p),\(obj.r),\(obj.y),\(obj.h)\n".data(using: String.Encoding.utf8)!)
                 }
             }
+            
+            // Quaternion
         case 1:
             sensorFusionGraph.hasW = true
             task = device.sensorFusion!.quaternion.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
@@ -2400,6 +2322,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.w),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
                 }
             }
+            // Gravity
         case 2:
             sensorFusionGraph.hasW = false
             task = device.sensorFusion!.gravity.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
@@ -2408,6 +2331,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
                 }
             }
+            // Linear Acceleration
         case 3:
             sensorFusionGraph.hasW = false
             task = device.sensorFusion!.linearAcceleration.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
@@ -2434,7 +2358,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             hud.hide(animated: true)
         }
     }
-    
+    // Calls the function that manages sending Data.
     @IBAction func sensorFusionSendDataPressed(_ sender: Any) {
         send(sensorFusionData, title: "SensorFusion")
     }

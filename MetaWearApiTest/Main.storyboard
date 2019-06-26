@@ -2881,160 +2881,6 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="NeoPixel" id="EeS-h0-zwc">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="394" id="vdT-aN-DGo">
-                                        <rect key="frame" x="0.0" y="9126.5" width="320" height="394"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vdT-aN-DGo" id="AQq-g5-d6Z">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="393.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Color Ordering:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kie-6d-6UA">
-                                                    <rect key="frame" x="14" y="8" width="100" height="17"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Driver Speed:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dU3-8s-awz">
-                                                    <rect key="frame" x="14" y="68" width="88" height="17"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GR3-gt-QwL">
-                                                    <rect key="frame" x="14" y="88" width="292" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <segments>
-                                                        <segment title="Slow"/>
-                                                        <segment title="Fast"/>
-                                                    </segments>
-                                                </segmentedControl>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GPIO Pin:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="By1-l1-jym">
-                                                    <rect key="frame" x="14" y="126" width="62" height="17"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjk-U6-kEd">
-                                                    <rect key="frame" x="14" y="239" width="54" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Set Red">
-                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="neopixelSetRedPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="H68-ib-Y6P"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ES9-LH-InT">
-                                                    <rect key="frame" x="14" y="277" width="57" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Set Blue">
-                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="neopixelSetBluePressed:" destination="and-78-Gqu" eventType="touchUpInside" id="QZl-OO-B2h"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hk8-XT-INu">
-                                                    <rect key="frame" x="132" y="347" width="57" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Turn Off">
-                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="neopixelTurnOffPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="Xm9-mn-x8j"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NG8-yE-zt3">
-                                                    <rect key="frame" x="220" y="277" width="86" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Set Rainbow">
-                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="neopixelSetRainbowPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="b78-ii-Px9"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tiR-eA-Rxb">
-                                                    <rect key="frame" x="221" y="315" width="85" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Rotate Right">
-                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="neopixelRotateRightPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="C2p-J6-RrH"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAo-GB-rxK">
-                                                    <rect key="frame" x="237" y="239" width="69" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Set Green">
-                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="neopixelSetGreenPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="cZI-5b-mw3"/>
-                                                    </connections>
-                                                </button>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Strand Length:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43L-Je-PZJ">
-                                                    <rect key="frame" x="14" y="199" width="96" height="17"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" wraps="YES" value="10" maximumValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="BMF-Rn-mfE">
-                                                    <rect key="frame" x="212" y="193" width="94" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="neopixelLengthChanged:" destination="and-78-Gqu" eventType="valueChanged" id="axV-LY-xq3"/>
-                                                    </connections>
-                                                </stepper>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJc-1v-jHl">
-                                                    <rect key="frame" x="140" y="197" width="36" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0YC-Z6-0u2">
-                                                    <rect key="frame" x="14" y="27" width="292" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <segments>
-                                                        <segment title="RGB"/>
-                                                        <segment title="RBG"/>
-                                                        <segment title="GRB"/>
-                                                        <segment title="GBR"/>
-                                                    </segments>
-                                                </segmentedControl>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5ev-ql-FQE">
-                                                    <rect key="frame" x="14" y="145" width="292" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <segments>
-                                                        <segment title="0"/>
-                                                        <segment title="1"/>
-                                                        <segment title="2"/>
-                                                        <segment title="3"/>
-                                                        <segment title="4"/>
-                                                        <segment title="5"/>
-                                                        <segment title="6"/>
-                                                        <segment title="7"/>
-                                                    </segments>
-                                                </segmentedControl>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKC-N3-W7i">
-                                                    <rect key="frame" x="14" y="315" width="76" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Rotate Left">
-                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="neopixelRotateLeftPressed:" destination="and-78-Gqu" eventType="touchUpInside" id="mAz-2y-InH"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="and-78-Gqu" id="bbU-lc-BcB"/>
@@ -3178,19 +3024,6 @@
                         <outlet property="mfgNameLabel" destination="ffW-eA-i2N" id="spr-Cc-mCh"/>
                         <outlet property="modelNumberLabel" destination="9Ta-UP-pE8" id="FNW-1n-tsi"/>
                         <outlet property="nameTextField" destination="dDV-8p-kI8" id="ssO-2o-OMZ"/>
-                        <outlet property="neopixelCell" destination="vdT-aN-DGo" id="76D-8F-0dI"/>
-                        <outlet property="neopixelColor" destination="0YC-Z6-0u2" id="wx6-sE-zyk"/>
-                        <outlet property="neopixelLengthLabel" destination="nJc-1v-jHl" id="wkm-Ff-dHC"/>
-                        <outlet property="neopixelLengthStepper" destination="BMF-Rn-mfE" id="pqt-V3-qBR"/>
-                        <outlet property="neopixelPin" destination="5ev-ql-FQE" id="UNq-gq-4Rd"/>
-                        <outlet property="neopixelRotateLeft" destination="rKC-N3-W7i" id="Hka-J7-yq4"/>
-                        <outlet property="neopixelRotateRight" destination="tiR-eA-Rxb" id="Z7v-2V-KHU"/>
-                        <outlet property="neopixelSetBlue" destination="ES9-LH-InT" id="5wc-0n-xwT"/>
-                        <outlet property="neopixelSetGreen" destination="AAo-GB-rxK" id="5yR-wB-5cd"/>
-                        <outlet property="neopixelSetRainbow" destination="NG8-yE-zt3" id="7Ql-xg-Rgj"/>
-                        <outlet property="neopixelSetRed" destination="rjk-U6-kEd" id="5uP-xe-fwX"/>
-                        <outlet property="neopixelSpeed" destination="GR3-gt-QwL" id="rgv-Xf-9Mg"/>
-                        <outlet property="neopixelTurnOff" destination="Hk8-XT-INu" id="bG6-Pw-F0A"/>
                         <outlet property="orientationLabel" destination="k5E-c8-4HS" id="b6J-ed-HOU"/>
                         <outlet property="photometerTCS3472BlueColor" destination="jOi-zJ-aCs" id="Gf2-Ng-XEm"/>
                         <outlet property="photometerTCS3472Cell" destination="Mxu-9y-Vis" id="rOn-bA-fo6"/>
@@ -3273,7 +3106,6 @@
                         <outletCollection property="allCells" destination="9wS-jo-zb2" collectionClass="NSMutableArray" id="KpP-u3-aRE"/>
                         <outletCollection property="allCells" destination="ylv-JV-I3f" collectionClass="NSMutableArray" id="95I-I8-7t9"/>
                         <outletCollection property="allCells" destination="New-1L-S1s" collectionClass="NSMutableArray" id="Bc4-GH-DPZ"/>
-                        <outletCollection property="allCells" destination="vdT-aN-DGo" collectionClass="NSMutableArray" id="m66-8d-IJ9"/>
                         <outletCollection property="allCells" destination="MKr-zp-JDf" collectionClass="NSMutableArray" id="shI-ee-dsB"/>
                     </connections>
                 </tableViewController>
