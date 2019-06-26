@@ -41,21 +41,9 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet weak var txPowerSelector: UISegmentedControl!
     @IBOutlet weak var firmwareUpdateLabel: UILabel!
     
-    @IBOutlet weak var mechanicalSwitchCell: UITableViewCell!
-    @IBOutlet weak var mechanicalSwitchLabel: UILabel!
-    @IBOutlet weak var startSwitch: UIButton!
-    @IBOutlet weak var stopSwitch: UIButton!
+   
     
-    @IBOutlet weak var ledCell: UITableViewCell!
     
-    @IBOutlet weak var tempCell: UITableViewCell!
-    @IBOutlet weak var tempChannelSelector: UISegmentedControl!
-    @IBOutlet weak var channelTypeLabel: UILabel!
-    @IBOutlet weak var tempratureLabel: UILabel!
-    @IBOutlet weak var readPinLabel: UILabel!
-    @IBOutlet weak var readPinTextField: UITextField!
-    @IBOutlet weak var enablePinLabel: UILabel!
-    @IBOutlet weak var enablePinTextField: UITextField!
     
    
 
@@ -205,9 +193,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             return t
         }
         
-        if device.led != nil {
-            cell(ledCell, setHidden: false)
-        }
+
         
         // Only allow LED module if the device is in use by other app
         if device.programedByOtherApp {
@@ -220,20 +206,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             return
         }
         
-        // Go through each module and enable the correct cell for the modules on this particular MetaWear
-        if device.mechanicalSwitch != nil {
-            cell(mechanicalSwitchCell, setHidden: false)
-        }
-        if device.temperature != nil {
-            cell(tempCell, setHidden: false)
-            // The number of channels is variable
-            tempChannelSelector.removeAllSegments()
-            for i in 0..<device.temperature!.channels.count {
-                tempChannelSelector.insertSegment(withTitle: "\(i)", at: i, animated: false)
-            }
-            tempChannelSelector.selectedSegmentIndex = 0
-            tempChannelSelectorPressed(tempChannelSelector)
-        }
+        
         
        
         
@@ -451,94 +424,13 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         device.resetDevice()
     }
     
-    @IBAction func readSwitchPressed(_ sender: Any) {
-        device.mechanicalSwitch?.switchValue.readAsync().success { result in
-            self.mechanicalSwitchLabel.text = result.value.boolValue ? "Down" : "Up"
-        }
-    }
     
-    @IBAction func startSwitchNotifyPressed(_ sender: Any) {
-        startSwitch.isEnabled = false
-        stopSwitch.isEnabled = true
-        streamingEvents.insert(device.mechanicalSwitch!.switchUpdateEvent)
-        device.mechanicalSwitch!.switchUpdateEvent.startNotificationsAsync { (obj, error) in
-            if let obj = obj {
-                self.mechanicalSwitchLabel.text = obj.value.boolValue ? "Down" : "Up"
-            }
-        }
-    }
     
-    @IBAction func stopSwitchNotifyPressed(_ sender: Any) {
-        startSwitch.isEnabled = true
-        stopSwitch.isEnabled = false
-        streamingEvents.remove(device.mechanicalSwitch!.switchUpdateEvent)
-        device.mechanicalSwitch!.switchUpdateEvent.stopNotificationsAsync()
-    }
     
-    @IBAction func turn(onGreenLEDPressed sender: Any) {
-        device.led?.setLEDColorAsync(UIColor.green, withIntensity: 1.0)
-    }
     
-    @IBAction func flashGreenLEDPressed(_ sender: Any) {
-        device.led?.flashColorAsync(UIColor.green, withIntensity: 1.0)
-    }
     
-    @IBAction func turn(onRedLEDPressed sender: Any) {
-        device.led?.setLEDColorAsync(UIColor.red, withIntensity: 1.0)
-    }
     
-    @IBAction func flashRedLEDPressed(_ sender: Any) {
-        device.led?.flashColorAsync(UIColor.red, withIntensity: 1.0)
-    }
     
-    @IBAction func turn(onBlueLEDPressed sender: Any) {
-        device.led?.setLEDColorAsync(UIColor.blue, withIntensity: 1.0)
-    }
-    
-    @IBAction func flashBlueLEDPressed(_ sender: Any) {
-        device.led?.flashColorAsync(UIColor.blue, withIntensity: 1.0)
-    }
-    
-    @IBAction func turnOffLEDPressed(_ sender: Any) {
-        device.led?.setLEDOnAsync(false, withOptions: 1)
-    }
-    
-    @IBAction func tempChannelSelectorPressed(_ sender: Any) {
-        let selected = device.temperature!.channels[tempChannelSelector.selectedSegmentIndex]
-        if selected == device.temperature!.onDieThermistor {
-            channelTypeLabel.text = "On-Die"
-        } else if selected == device.temperature!.onboardThermistor {
-            channelTypeLabel.text = "On-Board"
-        } else if selected == device.temperature!.externalThermistor {
-            channelTypeLabel.text = "External"
-        } else {
-            channelTypeLabel.text = "Custom"
-        }
-        
-        if selected is MBLExternalThermistor {
-            self.readPinLabel.isHidden = false
-            self.readPinTextField.isHidden = false
-            self.enablePinLabel.isHidden = false
-            self.enablePinTextField.isHidden = false
-        } else {
-            self.readPinLabel.isHidden = true
-            self.readPinTextField.isHidden = true
-            self.enablePinLabel.isHidden = true
-            self.enablePinTextField.isHidden = true
-        }
-    }
-    
-    @IBAction func readTempraturePressed(_ sender: Any) {
-        let selected = device.temperature!.channels[tempChannelSelector.selectedSegmentIndex]
-        if let selected = selected as? MBLExternalThermistor {
-            selected.readPin = UInt8(readPinTextField.text!) ?? 0
-            selected.enablePin = UInt8(enablePinTextField.text!) ?? 0
-        }
-        selected.readAsync().success { result in
-            self.tempratureLabel.text = result.value.stringValue.appending("°C")
-        }
-    }
-
 
     
    
