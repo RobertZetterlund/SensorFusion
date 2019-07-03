@@ -41,12 +41,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet weak var txPowerSelector: UISegmentedControl!
     @IBOutlet weak var firmwareUpdateLabel: UILabel!
     
-   
-    
-    
-    
-   
-
     
     @IBOutlet weak var sensorFusionCell: UITableViewCell!
     @IBOutlet weak var sensorFusionMode: UISegmentedControl!
@@ -193,8 +187,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             return t
         }
         
-
-        
         // Only allow LED module if the device is in use by other app
         if device.programedByOtherApp {
             if UserDefaults.standard.object(forKey: "ihaveseenprogramedByOtherAppmessage") == nil {
@@ -205,24 +197,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             reloadData(animated: true)
             return
         }
-        
-        
-        
-       
-        
-       
-       
-        
-      
-        
-
-        
-
-        
-       
-        
-       
-        
         
         
         if let sensorFusion = device.sensorFusion {
@@ -424,28 +398,21 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         device.resetDevice()
     }
     
-    
-    
-    
-    
-    
-    
-    
-
-    
+  
    
     func updateSensorFusionSettings() {
         
         // depending on which button toggled, vary the loggin setting, set the mode to index+1.
+        // see line 202
         device.sensorFusion!.mode = MBLSensorFusionMode(rawValue: UInt8(sensorFusionMode.selectedSegmentIndex) + 1)!
         
         
-        // buttons, do not allow user to change how to collect data.
+        // toggle buttons, do not allow user to change how to collect data.
         sensorFusionMode.isEnabled = false
         sensorFusionOutput.isEnabled = false
         
         
-        // initilize the data object.
+        // empty the data object.
         sensorFusionData = Data()
         
         
@@ -458,6 +425,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         sensorFusionStopStream.isEnabled = true
         sensorFusionStartLog.isEnabled = false
         sensorFusionStopLog.isEnabled = false
+        
+        // calls above function to prepare for new log
         updateSensorFusionSettings()
         
         var task: BFTask<AnyObject>?
@@ -612,6 +581,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             hud.progress = number
         }
         
+        // depending on how the button is toggled.
         switch sensorFusionOutput.selectedSegmentIndex {
             
             // Euler
@@ -623,6 +593,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.p, min: -180, max: 180), y: self.sensorFusionGraph.scale(obj.r, min: -90, max: 90), z: self.sensorFusionGraph.scale(obj.y, min: 0, max: 360), w: self.sensorFusionGraph.scale(obj.h, min: 0, max: 360))
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.p),\(obj.r),\(obj.y),\(obj.h)\n".data(using: String.Encoding.utf8)!)
                 }
+                print(self.sensorFusionData)
             }
             
             // Quaternion
@@ -633,7 +604,9 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0), w: self.sensorFusionGraph.scale(obj.w, min: -1.0, max: 1.0))
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.w),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
                 }
+                print(self.sensorFusionData)
             }
+
             // Gravity
         case 2:
             sensorFusionGraph.hasW = false
@@ -643,6 +616,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
                 }
             }
+            print(self.sensorFusionData)
+
             // Linear Acceleration
         case 3:
             sensorFusionGraph.hasW = false
@@ -651,10 +626,16 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     self.sensorFusionGraph.addX(obj.x, y: obj.y, z: obj.z)
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
                 }
+                print(self.sensorFusionData)
+
             }
+
         default:
             assert(false, "Added a new sensor fusion output?")
         }
+        
+        print("WHAT IS GOING ON")
+        
         
         task?.success { array in
             hud.mode = .indeterminate
@@ -663,6 +644,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                 hud.hide(animated: true)
                 if error != nil {
                     self.connectDevice(false)
+                    print(self.sensorFusionData)
+
                 }
             }
         }.failure { error in
