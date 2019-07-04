@@ -54,7 +54,24 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     // define a data object used to store data
     
     var sensorFusionData = Data()
+    var sensorFusionArr : [eulerData] = []
     
+    
+    
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var pAngleLabel: UILabel!
+    @IBOutlet weak var rAngleLabel: UILabel!
+    @IBOutlet weak var yAngleLabel: UILabel!
+    @IBOutlet weak var hAngleLabel: UILabel!
+    
+    
+    
+    struct eulerData {
+        var p = 0.0
+        var r = 0.0
+        var y = 0.0
+        var h = 0.0
+    }
     
     
     
@@ -440,6 +457,10 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                 if let obj = obj {
                     self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.p, min: -180, max: 180), y: self.sensorFusionGraph.scale(obj.r, min: -90, max: 90), z: self.sensorFusionGraph.scale(obj.y, min: 0, max: 360), w: self.sensorFusionGraph.scale(obj.h, min: 0, max: 360))
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.p),\(obj.r),\(obj.y),\(obj.h)\n".data(using: String.Encoding.utf8)!)
+                   
+                    
+                   // here is the arr
+                    self.sensorFusionArr.append(eulerData(p :obj.p, r: obj.r, y: obj.y, h: obj.h))
                 }
             }
             
@@ -521,6 +542,30 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         default:
             assert(false, "Added a new sensor fusion output?")
         }
+        
+       /*
+        for obj in self.sensorFusionData {
+            print(obj)
+        }*/
+        
+        let maxP = self.sensorFusionArr.max {a, b in a.p < b.p}
+        
+        
+        let date = Date()
+        let formatter = DateFormatter()
+
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let result = formatter.string(from: date)
+
+        
+        print(self.sensorFusionArr)
+        self.timeLabel.text = result
+        self.pAngleLabel.text = "\(String(describing: maxP!.p))"
+        self.rAngleLabel.text = "\(String(describing: maxP!.r))"
+        self.yAngleLabel.text = "\(String(describing: maxP!.y))"
+        self.hAngleLabel.text = "\(String(describing: maxP!.h))"
+        
+        
     }
     
     @IBAction func sensorFusionStartLogPressed(_ sender: Any) {
@@ -634,7 +679,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             assert(false, "Added a new sensor fusion output?")
         }
         
-        print("WHAT IS GOING ON")
         
         
         task?.success { array in
