@@ -177,6 +177,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     
     func deviceDisconnected() {
         connectionSwitch.setOn(false, animated: true)
+        eulerDataCell.isHidden = true
         cells(self.allCells, setHidden: true)
         reloadData(animated: true)
     }
