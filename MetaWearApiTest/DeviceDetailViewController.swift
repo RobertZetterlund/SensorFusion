@@ -57,14 +57,15 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     var sensorFusionArr : [eulerData] = []
     
     
+    // euler stuff
     @IBOutlet weak var eulerDataCell: UIView!
-    
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var pAngleLabel: UILabel!
     @IBOutlet weak var rAngleLabel: UILabel!
     @IBOutlet weak var yAngleLabel: UILabel!
     @IBOutlet weak var hAngleLabel: UILabel!
     
+    //
     
     
     struct eulerData {
@@ -74,7 +75,12 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         var h = 0.0
     }
     
-    
+    struct quatData {
+        var w = 0.0
+        var x = 0.0
+        var y = 0.0
+        var z = 0.0
+    }
     
     var streamingEvents: Set<NSObject> = [] // Can't use proper type due to compiler seg fault
     var isObserving = false {
@@ -447,8 +453,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         sensorFusionStopLog.isEnabled = false
         
         // hides data
-        eulerDataCell.isHidden = true
-        
+        eulerDataCell.isHidden = false
+
         // calls above function to prepare for new log
         updateSensorFusionSettings()
         
@@ -456,11 +462,17 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         //empties array
         self.sensorFusionArr = []
 
+        let date = Date()
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let result = formatter.string(from: date)
         
         
         var task: BFTask<AnyObject>?
         switch sensorFusionOutput.selectedSegmentIndex {
             
+
             // eulerAngle
         case 0:
             streamingEvents.insert(device.sensorFusion!.eulerAngle)
@@ -473,6 +485,13 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     
                    // here is the arr
                     self.sensorFusionArr.append(eulerData(p :obj.p, r: obj.r, y: obj.y, h: obj.h))
+                    
+                    self.timeLabel.text = result
+                    self.pAngleLabel.text = "\(String(describing: obj.p))"
+                    self.rAngleLabel.text = "\(String(describing: obj.r))"
+                    self.yAngleLabel.text = "\(String(describing: obj.y))"
+                    self.hAngleLabel.text = "\(String(describing: obj.h))"
+                    
                 }
             }
             
@@ -581,7 +600,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         
         
         // shows data
-        eulerDataCell.isHidden = false
+        eulerDataCell.isHidden = true
         
     }
     
