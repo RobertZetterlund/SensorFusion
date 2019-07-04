@@ -446,6 +446,12 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         // calls above function to prepare for new log
         updateSensorFusionSettings()
         
+        
+        //empties array
+        self.sensorFusionArr = []
+
+        
+        
         var task: BFTask<AnyObject>?
         switch sensorFusionOutput.selectedSegmentIndex {
             
