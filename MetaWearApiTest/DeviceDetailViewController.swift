@@ -35,7 +35,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     
     @IBOutlet var infoAndStateCells: [UITableViewCell]!
     @IBOutlet weak var batteryLevelLabel: UILabel!
-    @IBOutlet weak var rssiLevelLabel: UILabel!
     @IBOutlet weak var firmwareUpdateLabel: UILabel!
     
     
@@ -199,9 +198,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         device.readBatteryLifeAsync().success { result in
             self.batteryLevelLabel.text = result.stringValue
         }
-        device.readRSSIAsync().success { result in
-            self.rssiLevelLabel.text = result.stringValue
-        }
+
         device.checkForFirmwareUpdateAsync().continueOnDispatch { t in
             self.firmwareUpdateLabel.text = t.result != nil ? "\(t.result!) AVAILABLE!" : "Up To Date"
             return t
@@ -341,15 +338,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             self.showAlertTitle("Error", message: error.localizedDescription)
         }
     }
-    
-    @IBAction func readRSSIPressed(_ sender: Any) {
-        device.readRSSIAsync().success { result in
-            self.rssiLevelLabel.text = result.stringValue
-        }.failure { error in
-            self.showAlertTitle("Error", message: error.localizedDescription)
-        }
-    }
-    
     
     @IBAction func checkForFirmwareUpdatesPressed(_ sender: Any) {
         device.checkForFirmwareUpdateAsync().continueOnDispatch { t in
