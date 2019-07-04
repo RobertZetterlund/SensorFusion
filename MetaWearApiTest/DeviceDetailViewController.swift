@@ -20,8 +20,11 @@ extension String {
     }
 }
 
+
+
 class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDelegate, DFUProgressDelegate, LoggerDelegate, DFUPeripheralSelectorDelegate, UITextFieldDelegate {
     var device: MBLMetaWear!
+    
     
     @IBOutlet weak var connectionSwitch: UISwitch!
     @IBOutlet weak var connectionStateLabel: UILabel!
@@ -31,14 +34,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet var allCells: [UITableViewCell]!
     
     @IBOutlet var infoAndStateCells: [UITableViewCell]!
-    @IBOutlet weak var mfgNameLabel: UILabel!
-    @IBOutlet weak var serialNumLabel: UILabel!
-    @IBOutlet weak var hwRevLabel: UILabel!
-    @IBOutlet weak var fwRevLabel: UILabel!
-    @IBOutlet weak var modelNumberLabel: UILabel!
     @IBOutlet weak var batteryLevelLabel: UILabel!
     @IBOutlet weak var rssiLevelLabel: UILabel!
-    @IBOutlet weak var txPowerSelector: UISegmentedControl!
     @IBOutlet weak var firmwareUpdateLabel: UILabel!
     
     
@@ -54,7 +51,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     // define a data object used to store data
     
     var sensorFusionData = Data()
-    var sensorFusionArr : [eulerData] = []
+    var eulerDataArr : [eulerData] = []
     
     
     // euler stuff
@@ -64,16 +61,19 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet weak var rAngleLabel: UILabel!
     @IBOutlet weak var yAngleLabel: UILabel!
     @IBOutlet weak var hAngleLabel: UILabel!
-    
-    //
-    
-    
+   
     struct eulerData {
         var p = 0.0
         var r = 0.0
         var y = 0.0
         var h = 0.0
     }
+    
+    // quat stuff
+
+    var quatDataArr : [quatData] = []
+
+    
     
     struct quatData {
         var w = 0.0
@@ -195,12 +195,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
 
         // We always have the info and state features
         cells(self.infoAndStateCells, setHidden: false)
-        mfgNameLabel.text = device.deviceInfo?.manufacturerName ?? "N/A"
-        serialNumLabel.text = device.deviceInfo?.serialNumber ?? "N/A"
-        hwRevLabel.text = device.deviceInfo?.hardwareRevision ?? "N/A"
-        fwRevLabel.text = device.deviceInfo?.firmwareRevision ?? "N/A"
-        modelNumberLabel.text = "\(device.deviceInfo?.modelNumber ?? "N/A") (\(MBLModelString(device.model)))"
-        txPowerSelector.selectedSegmentIndex = Int(device.settings!.transmitPower.rawValue)
         // Automaticaly send off some reads
         device.readBatteryLifeAsync().success { result in
             self.batteryLevelLabel.text = result.stringValue
@@ -356,9 +350,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         }
     }
     
-    @IBAction func txPowerChanged(_ sender: Any) {
-        device.settings?.transmitPower = MBLTransmitPower(rawValue: UInt8(txPowerSelector.selectedSegmentIndex))!
-    }
     
     @IBAction func checkForFirmwareUpdatesPressed(_ sender: Any) {
         device.checkForFirmwareUpdateAsync().continueOnDispatch { t in
@@ -460,13 +451,15 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         
         
         //empties array
-        self.sensorFusionArr = []
+        self.eulerDataArr = []
+        self.quatDataArr = []
 
         let date = Date()
         let formatter = DateFormatter()
         
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let result = formatter.string(from: date)
+        
         
         
         var task: BFTask<AnyObject>?
@@ -484,7 +477,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                    
                     
                    // here is the arr
-                    self.sensorFusionArr.append(eulerData(p :obj.p, r: obj.r, y: obj.y, h: obj.h))
+                    self.eulerDataArr.append(eulerData(p :obj.p, r: obj.r, y: obj.y, h: obj.h))
                     
                     self.timeLabel.text = result
                     self.pAngleLabel.text = "\(String(describing: obj.p))"
@@ -497,12 +490,49 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             
             // quaternion
         case 1:
+            
             streamingEvents.insert(device.sensorFusion!.quaternion)
             sensorFusionGraph.hasW = true
             task = device.sensorFusion!.quaternion.startNotificationsAsync { (obj, error) in
                 if let obj = obj {
                     self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0), w: self.sensorFusionGraph.scale(obj.w, min: -1.0, max: 1.0))
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.w),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
+                    
+                    
+                    let x = obj.x
+                    let y = obj.y
+                    let z = obj.z
+                    let w = obj.w
+                    
+                    let sqx = x*x
+                    let sqy = y*y
+                    let sqw = w*w
+                    let sqz = z*z
+                    
+                    let unit = sqx + sqy + sqw + sqz
+                    
+                    let test = x * y + z * w
+                    
+                    
+                    let roll = atan2(2*y * w - 2*x * z, sqx - sqy - sqz + sqw)
+                    let pitch = asin(2*test / unit)
+                    let yaw = atan2(2*x*w - 2*y*z, -sqx + sqy - sqz + sqw)
+
+                    let adjRoll = roll * 180 * Double.pi
+                    let adjPitch = pitch * 180 * Double.pi
+                    let adjYaw = yaw * 180 * Double.pi
+                    
+                    
+                    
+                    print("roll \(adjRoll)")
+                    print("pitch \(adjPitch)")
+                    print("yaw \(adjYaw)")
+                    
+
+                    
+                    
+                    self.quatDataArr.append(quatData(w: obj.w, x: obj.x, y: obj.y, z: obj.z))
+                    
                 }
             }
             // Gravity
@@ -581,7 +611,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             print(obj)
         }*/
         
-        let maxP = self.sensorFusionArr.max {a, b in a.p < b.p}
+       /* let maxP = self.eulerDataArr.max {a, b in a.p < b.p}*/
         
         
         let date = Date()
@@ -591,16 +621,9 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         let result = formatter.string(from: date)
 
         
-        print(self.sensorFusionArr)
+        print(self.eulerDataArr)
         self.timeLabel.text = result
-        self.pAngleLabel.text = "\(String(describing: maxP!.p))"
-        self.rAngleLabel.text = "\(String(describing: maxP!.r))"
-        self.yAngleLabel.text = "\(String(describing: maxP!.y))"
-        self.hAngleLabel.text = "\(String(describing: maxP!.h))"
-        
-        
-        // shows data
-        eulerDataCell.isHidden = true
+       
         
     }
     
