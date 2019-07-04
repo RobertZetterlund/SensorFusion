@@ -208,7 +208,7 @@
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="hu3-RA-53G">
+                        <view key="tableFooterView" hidden="YES" contentMode="scaleToFill" misplaced="YES" id="hu3-RA-53G" userLabel="EulerData">
                             <rect key="frame" x="0.0" y="1186.5" width="320" height="279"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -635,6 +635,7 @@
                         <outlet property="batteryLevelLabel" destination="oE7-JQ-NKK" id="rYb-GF-8xD"/>
                         <outlet property="connectionStateLabel" destination="CLU-aI-rU0" id="s61-NF-ulO"/>
                         <outlet property="connectionSwitch" destination="4qP-3s-tgB" id="LRu-bF-eO5"/>
+                        <outlet property="eulerDataCell" destination="hu3-RA-53G" id="o4d-xw-dED"/>
                         <outlet property="firmwareUpdateLabel" destination="0WJ-XI-TGM" id="FGd-tL-q5o"/>
                         <outlet property="fwRevLabel" destination="bQc-cQ-4dZ" id="KoF-Gh-Q6W"/>
                         <outlet property="hAngleLabel" destination="3ky-B9-eC0" id="lgp-Kw-kyq"/>

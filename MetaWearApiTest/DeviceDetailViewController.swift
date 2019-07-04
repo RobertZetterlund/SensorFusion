@@ -57,6 +57,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     var sensorFusionArr : [eulerData] = []
     
     
+    @IBOutlet weak var eulerDataCell: UIView!
     
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var pAngleLabel: UILabel!
@@ -104,6 +105,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         // Hide every section in the beginning
         hideSectionsWithHiddenRows = true
         cells(self.allCells, setHidden: true)
+        
         reloadData(animated: false)
         // Write in the 2 fields we know at time zero
         connectionStateLabel.text! = nameForState()
@@ -443,6 +445,9 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         sensorFusionStartLog.isEnabled = false
         sensorFusionStopLog.isEnabled = false
         
+        // hides data
+        eulerDataCell.isHidden = true
+        
         // calls above function to prepare for new log
         updateSensorFusionSettings()
         
@@ -526,6 +531,8 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     }
     
     @IBAction func sensorFusionStopStreamPressed(_ sender: Any) {
+        
+
         sensorFusionStartStream.isEnabled = true
         sensorFusionStopStream.isEnabled = false
         sensorFusionStartLog.isEnabled = true
@@ -571,6 +578,9 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         self.yAngleLabel.text = "\(String(describing: maxP!.y))"
         self.hAngleLabel.text = "\(String(describing: maxP!.h))"
         
+        
+        // shows data
+        eulerDataCell.isHidden = false
         
     }
     
