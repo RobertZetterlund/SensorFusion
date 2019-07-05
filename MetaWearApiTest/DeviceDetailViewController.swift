@@ -39,8 +39,14 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     @IBOutlet weak var sensorFusionStopLog: UIButton!
     @IBOutlet weak var sensorFusionGraph: APLGraphView!
     
-    // define a data object used to store data
     
+    @IBOutlet weak var Pitch_X_label: UILabel!
+    @IBOutlet weak var Heave_W_label: UILabel!
+    @IBOutlet weak var Yaw_Z_label: UILabel!
+    @IBOutlet weak var Roll_Y_label: UILabel!
+    @IBOutlet weak var Data_label: UILabel!
+    
+    // define a data object used to store data
     var sensorFusionData = Data()
     var eulerDataArr : [eulerData] = []
     
@@ -134,15 +140,15 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     func nameForState() -> String {
         switch device.state {
         case .connected:
-            return device.programedByOtherApp ? "Connected (LIMITED)" : "Connected"
+            return device.programedByOtherApp ? "Ansluten (LIMITED)" : "Ansluten"
         case .connecting:
-            return "Connecting"
+            return "Ansluter"
         case .disconnected:
-            return "Disconnected"
+            return "Avbryten"
         case .disconnecting:
-            return "Disconnecting"
+            return "Avbryter"
         case .discovery:
-            return "Discovery"
+            return "Söker"
         }
     }
     
@@ -239,7 +245,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     func connectDevice(_ on: Bool) {
         let hud = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
         if on {
-            hud.label.text = "Connecting..."
+            hud.label.text = "Ansluter..."
             device.connect(withTimeoutAsync: 15).continueOnDispatch { t in
                 if (t.error?._domain == kMBLErrorDomain) && (t.error?._code == kMBLErrorOutdatedFirmware) {
                     hud.hide(animated: true)
@@ -260,7 +266,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                 return nil
             }
         } else {
-            hud.label.text = "Disconnecting..."
+            hud.label.text = "Avbryter..."
             device.disconnectAsync().continueOnDispatch { t in
                 self.deviceDisconnected()
                 hud.mode = .text
@@ -447,6 +453,12 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.p),\(obj.r),\(obj.y),\(obj.h)\n".data(using: String.Encoding.utf8)!)
                    
                     
+                    self.Pitch_X_label.text = "Pitch"
+                    self.Roll_Y_label.text = "Roll"
+                    self.Yaw_Z_label.text = "Yaw"
+                    self.Heave_W_label.text = "Heave"
+                    self.Data_label.text = "Eulermätning"
+                    
                    // here is the arr
                     self.eulerDataArr.append(eulerData(p :obj.p, r: obj.r, y: obj.y, h: obj.h))
                     
@@ -461,7 +473,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             
             // quaternion
         case 1:
-            
             streamingEvents.insert(device.sensorFusion!.quaternion)
             sensorFusionGraph.hasW = true
             task = device.sensorFusion!.quaternion.startNotificationsAsync { (obj, error) in
@@ -469,7 +480,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0), w: self.sensorFusionGraph.scale(obj.w, min: -1.0, max: 1.0))
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.w),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
                     
-                    let x = obj.x
+                    /*let x = obj.x
                     let y = obj.y
                     let z = obj.z
                     let w = obj.w
@@ -495,6 +506,20 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     print("roll \(adjRoll)")
                     print("pitch \(adjPitch)")
                     print("yaw \(adjYaw)")
+                    */
+                    
+                    self.Pitch_X_label.text = "X"
+                    self.Roll_Y_label.text = "Y"
+                    self.Yaw_Z_label.text = "Z"
+                    self.Heave_W_label.text = "W"
+                    self.Data_label.text = "KvaternionMätning"
+
+                    
+                    self.pAngleLabel.text = "\(String(describing: obj.x))"
+                    self.rAngleLabel.text = "\(String(describing: obj.y))"
+                    self.yAngleLabel.text = "\(String(describing: obj.z))"
+                    self.hAngleLabel.text = "\(String(describing: obj.w))"
+                    
                     
                     self.quatDataArr.append(quatData(w: obj.w, x: obj.x, y: obj.y, z: obj.z))
                 }
@@ -689,5 +714,3 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         return nil
     }
 }
-
-
