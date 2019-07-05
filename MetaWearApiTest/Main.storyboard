@@ -298,8 +298,6 @@
                                                     <segments>
                                                         <segment title="NDoF"/>
                                                         <segment title="IMUPlus"/>
-                                                        <segment title="Compass"/>
-                                                        <segment title="M4G"/>
                                                     </segments>
                                                 </segmentedControl>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="g7G-o4-mk6">
@@ -308,8 +306,6 @@
                                                     <segments>
                                                         <segment title="Euler"/>
                                                         <segment title="Quat"/>
-                                                        <segment title="Gravity"/>
-                                                        <segment title="Lin-accel"/>
                                                     </segments>
                                                 </segmentedControl>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyX-O7-jVq">

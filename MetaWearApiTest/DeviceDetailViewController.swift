@@ -223,10 +223,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                 sensorFusionMode.selectedSegmentIndex = 0
             } else if sensorFusion.quaternion.isLogging() {
                 sensorFusionMode.selectedSegmentIndex = 1
-            } else if sensorFusion.gravity.isLogging() {
-                sensorFusionMode.selectedSegmentIndex = 2
-            } else if sensorFusion.linearAcceleration.isLogging() {
-                sensorFusionMode.selectedSegmentIndex = 3
             } else {
                 isLogging = false
             }
@@ -523,37 +519,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     
                 }
             }
-            // Gravity
-        case 2:
-            streamingEvents.insert(device.sensorFusion!.gravity)
-            sensorFusionGraph.hasW = false
-            task = device.sensorFusion!.gravity.startNotificationsAsync { (obj, error) in
-                if let obj = obj {
-                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0))
-                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
-                }
-            }
-            // Linear Acceleration
-            
-        case 3:
-            streamingEvents.insert(device.sensorFusion!.linearAcceleration)
-            switch (device.accelerometer as! MBLAccelerometerBosch).fullScaleRange {
-            case .range2G:
-                sensorFusionGraph.fullScale = 2.0
-            case .range4G:
-                sensorFusionGraph.fullScale = 4.0
-            case .range8G:
-                sensorFusionGraph.fullScale = 8.0
-            case.range16G:
-                sensorFusionGraph.fullScale = 16.0
-            }
-            sensorFusionGraph.hasW = false
-            task = device.sensorFusion!.linearAcceleration.startNotificationsAsync { (obj, error) in
-                if let obj = obj {
-                    self.sensorFusionGraph.addX(obj.x, y: obj.y, z: obj.z)
-                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
-                }
-            }
         default:
             assert(false, "Added a new sensor fusion output?")
         }
@@ -569,7 +534,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     }
     
     @IBAction func sensorFusionStopStreamPressed(_ sender: Any) {
-        
 
         sensorFusionStartStream.isEnabled = true
         sensorFusionStopStream.isEnabled = false
@@ -584,12 +548,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         case 1:
             streamingEvents.remove(device.sensorFusion!.quaternion)
             device.sensorFusion!.quaternion.stopNotificationsAsync()
-        case 2:
-            streamingEvents.remove(device.sensorFusion!.gravity)
-            device.sensorFusion!.gravity.stopNotificationsAsync()
-        case 3:
-            streamingEvents.remove(device.sensorFusion!.linearAcceleration)
-            device.sensorFusion!.linearAcceleration.stopNotificationsAsync()
         default:
             assert(false, "Added a new sensor fusion output?")
         }
@@ -634,20 +592,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             device.sensorFusion!.eulerAngle.startLoggingAsync()
         case 1:
             device.sensorFusion!.quaternion.startLoggingAsync()
-        case 2:
-            device.sensorFusion!.gravity.startLoggingAsync()
-        case 3:
-            switch (device.accelerometer as! MBLAccelerometerBosch).fullScaleRange {
-            case .range2G:
-                sensorFusionGraph.fullScale = 2.0
-            case .range4G:
-                sensorFusionGraph.fullScale = 4.0
-            case .range8G:
-                sensorFusionGraph.fullScale = 8.0
-            case.range16G:
-                sensorFusionGraph.fullScale = 16.0
-            }
-            device.sensorFusion!.linearAcceleration.startLoggingAsync()
+       
         default:
             assert(false, "Added a new sensor fusion output?")
         }
@@ -698,30 +643,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                 }
                 print(self.sensorFusionData)
             }
-
-            // Gravity
-        case 2:
-            sensorFusionGraph.hasW = false
-            task = device.sensorFusion!.gravity.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
-                for obj in array as! [MBLAccelerometerData] {
-                    self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0))
-                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
-                }
-            }
-            print(self.sensorFusionData)
-
-            // Linear Acceleration
-        case 3:
-            sensorFusionGraph.hasW = false
-            task = device.sensorFusion!.linearAcceleration.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
-                for obj in array as! [MBLAccelerometerData] {
-                    self.sensorFusionGraph.addX(obj.x, y: obj.y, z: obj.z)
-                    self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
-                }
-                print(self.sensorFusionData)
-
-            }
-
         default:
             assert(false, "Added a new sensor fusion output?")
         }
