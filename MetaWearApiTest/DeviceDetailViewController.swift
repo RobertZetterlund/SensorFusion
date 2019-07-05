@@ -1,11 +1,3 @@
-//
-//  DeviceDetailViewController.swift
-//  MetaWearApiTest
-//
-//  Created by Stephen Schiffli on 11/3/16.
-//  Copyright © 2016 MbientLab. All rights reserved.
-//
-
 import UIKit
 import StaticDataTableViewController
 import MetaWear
@@ -69,11 +61,7 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
     }
     
     // quat stuff
-
     var quatDataArr : [quatData] = []
-
-    
-    
     struct quatData {
         var w = 0.0
         var x = 0.0
@@ -214,7 +202,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             reloadData(animated: true)
             return
         }
-        
         
         if let sensorFusion = device.sensorFusion {
             cell(sensorFusionCell, setHidden: false)
@@ -482,7 +469,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     self.sensorFusionGraph.addX(self.sensorFusionGraph.scale(obj.x, min: -1.0, max: 1.0), y: self.sensorFusionGraph.scale(obj.y, min: -1.0, max: 1.0), z: self.sensorFusionGraph.scale(obj.z, min: -1.0, max: 1.0), w: self.sensorFusionGraph.scale(obj.w, min: -1.0, max: 1.0))
                     self.sensorFusionData.append("\(obj.timestamp.timeIntervalSince1970),\(obj.w),\(obj.x),\(obj.y),\(obj.z)\n".data(using: String.Encoding.utf8)!)
                     
-                    
                     let x = obj.x
                     let y = obj.y
                     let z = obj.z
@@ -505,18 +491,12 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                     let adjRoll = roll * 180 * Double.pi
                     let adjPitch = pitch * 180 * Double.pi
                     let adjYaw = yaw * 180 * Double.pi
-                    
-                    
-                    
+        
                     print("roll \(adjRoll)")
                     print("pitch \(adjPitch)")
                     print("yaw \(adjYaw)")
                     
-
-                    
-                    
                     self.quatDataArr.append(quatData(w: obj.w, x: obj.x, y: obj.y, z: obj.z))
-                    
                 }
             }
         default:
@@ -552,31 +532,19 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
             assert(false, "Added a new sensor fusion output?")
         }
         
-       /*
-        for obj in self.sensorFusionData {
-            print(obj)
-        }*/
-        
-       /* let maxP = self.eulerDataArr.max {a, b in a.p < b.p}*/
-        
-        
         let date = Date()
         let formatter = DateFormatter()
 
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let result = formatter.string(from: date)
 
-        
         print(self.eulerDataArr)
         self.timeLabel.text = result
-       
-        
     }
     
     @IBAction func sensorFusionStartLogPressed(_ sender: Any) {
         
         // disable visual buttons
-        
         sensorFusionStartLog.isEnabled = false
         sensorFusionStopLog.isEnabled = true
         sensorFusionStartStream.isEnabled = false
@@ -585,8 +553,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         // actually begin, based on button settings, prepare the session.
         updateSensorFusionSettings()
 
-        
-        
         switch sensorFusionOutput.selectedSegmentIndex {
         case 0:
             device.sensorFusion!.eulerAngle.startLoggingAsync()
@@ -607,8 +573,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         sensorFusionMode.isEnabled = true
         sensorFusionOutput.isEnabled = true
         
-        
-        
         let hud = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
         hud.mode = .determinateHorizontalBar
         hud.label.text = "Downloading..."
@@ -622,7 +586,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         switch sensorFusionOutput.selectedSegmentIndex {
             
             // Euler
-            
         case 0:
             sensorFusionGraph.hasW = true
             task = device.sensorFusion!.eulerAngle.downloadLogAndStopLoggingAsync(true, progressHandler: hudProgress).success { array in
@@ -632,7 +595,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
                 }
                 print(self.sensorFusionData)
             }
-            
             // Quaternion
         case 1:
             sensorFusionGraph.hasW = true
@@ -646,8 +608,6 @@ class DeviceDetailViewController: StaticDataTableViewController, DFUServiceDeleg
         default:
             assert(false, "Added a new sensor fusion output?")
         }
-        
-        
         
         task?.success { array in
             hud.mode = .indeterminate
